@@ -103,15 +103,12 @@
 		2E39DF41227B65CA00EA1C84 /* Maze-Snake */ = {
 			isa = PBXGroup;
 			children = (
-				2E39DF42227B65CA00EA1C84 /* AppDelegate.swift */,
-				2E39DF44227B65CA00EA1C84 /* GameScene.sks */,
-				2E39DF46227B65CA00EA1C84 /* Actions.sks */,
-				2E39DF48227B65CA00EA1C84 /* GameScene.swift */,
-				2E39DF4A227B65CA00EA1C84 /* GameViewController.swift */,
-				2E39DF4C227B65CA00EA1C84 /* Main.storyboard */,
-				2E39DF4F227B65CA00EA1C84 /* Assets.xcassets */,
-				2E39DF51227B65CA00EA1C84 /* LaunchScreen.storyboard */,
 				2E39DF54227B65CA00EA1C84 /* Info.plist */,
+				2E39DF42227B65CA00EA1C84 /* AppDelegate.swift */,
+				2E39DF4F227B65CA00EA1C84 /* Assets.xcassets */,
+				2E39DF76227B665800EA1C84 /* Main Screen */,
+				2E39DF77227B66A000EA1C84 /* Game Screen */,
+				2E39DF78227B67D400EA1C84 /* Storyboards */,
 			);
 			path = "Maze-Snake";
 			sourceTree = "<group>";
@@ -132,6 +129,33 @@
 				2E39DF6A227B65CA00EA1C84 /* Info.plist */,
 			);
 			path = "Maze-SnakeUITests";
+			sourceTree = "<group>";
+		};
+		2E39DF76227B665800EA1C84 /* Main Screen */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Main Screen";
+			sourceTree = "<group>";
+		};
+		2E39DF77227B66A000EA1C84 /* Game Screen */ = {
+			isa = PBXGroup;
+			children = (
+				2E39DF46227B65CA00EA1C84 /* Actions.sks */,
+				2E39DF44227B65CA00EA1C84 /* GameScene.sks */,
+				2E39DF48227B65CA00EA1C84 /* GameScene.swift */,
+				2E39DF4A227B65CA00EA1C84 /* GameViewController.swift */,
+			);
+			path = "Game Screen";
+			sourceTree = "<group>";
+		};
+		2E39DF78227B67D400EA1C84 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				2E39DF51227B65CA00EA1C84 /* LaunchScreen.storyboard */,
+				2E39DF4C227B65CA00EA1C84 /* Main.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
