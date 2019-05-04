@@ -18,6 +18,10 @@
 		2E39DF69227B65CA00EA1C84 /* Maze_SnakeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E39DF68227B65CA00EA1C84 /* Maze_SnakeUITests.swift */; };
 		61163AEE227CECDB001F49E1 /* Tiles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 61163AEC227CECDB001F49E1 /* Tiles.sks */; };
 		61163AEF227CECDB001F49E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61163AED227CECDB001F49E1 /* Assets.xcassets */; };
+		61930BD6227D19C200550DD0 /* TileNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61930BD5227D19C200550DD0 /* TileNode.swift */; };
+		61930BD8227D1B0700550DD0 /* TileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61930BD7227D1B0700550DD0 /* TileController.swift */; };
+		61930BDA227DD12200550DD0 /* TestTIles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 61930BD9227DD12200550DD0 /* TestTIles.sks */; };
+		61930BDC227DE7BF00550DD0 /* Maze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61930BDB227DE7BF00550DD0 /* Maze.swift */; };
 		61DAA85A227CFBD1000FE4D0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DAA859227CFBD1000FE4D0 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +60,10 @@
 		2E39DF6A227B65CA00EA1C84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61163AEC227CECDB001F49E1 /* Tiles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Tiles.sks; sourceTree = "<group>"; };
 		61163AED227CECDB001F49E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		61930BD5227D19C200550DD0 /* TileNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileNode.swift; sourceTree = "<group>"; };
+		61930BD7227D1B0700550DD0 /* TileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileController.swift; sourceTree = "<group>"; };
+		61930BD9227DD12200550DD0 /* TestTIles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TestTIles.sks; sourceTree = "<group>"; };
+		61930BDB227DE7BF00550DD0 /* Maze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maze.swift; sourceTree = "<group>"; };
 		61DAA859227CFBD1000FE4D0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,9 +118,11 @@
 				2E39DF54227B65CA00EA1C84 /* Info.plist */,
 				2E39DF42227B65CA00EA1C84 /* AppDelegate.swift */,
 				61163AED227CECDB001F49E1 /* Assets.xcassets */,
+				2E39DF78227B67D400EA1C84 /* Storyboards */,
 				61DAA858227CFBBC000FE4D0 /* Main Screen */,
 				2E39DF77227B66A000EA1C84 /* Game Screen */,
-				2E39DF78227B67D400EA1C84 /* Storyboards */,
+				61930BDD227DE97500550DD0 /* Tile Manager */,
+				61930BDE227DE99100550DD0 /* Maze Generation */,
 			);
 			path = "Maze-Snake";
 			sourceTree = "<group>";
@@ -154,11 +164,29 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		61930BDD227DE97500550DD0 /* Tile Manager */ = {
+			isa = PBXGroup;
+			children = (
+				61930BD7227D1B0700550DD0 /* TileController.swift */,
+				61930BD5227D19C200550DD0 /* TileNode.swift */,
+			);
+			path = "Tile Manager";
+			sourceTree = "<group>";
+		};
+		61930BDE227DE99100550DD0 /* Maze Generation */ = {
+			isa = PBXGroup;
+			children = (
+				61930BDB227DE7BF00550DD0 /* Maze.swift */,
+			);
+			path = "Maze Generation";
+			sourceTree = "<group>";
+		};
 		61DAA853227CFAB8000FE4D0 /* Resource SKS */ = {
 			isa = PBXGroup;
 			children = (
 				2E39DF46227B65CA00EA1C84 /* Actions.sks */,
 				61163AEC227CECDB001F49E1 /* Tiles.sks */,
+				61930BD9227DD12200550DD0 /* TestTIles.sks */,
 			);
 			path = "Resource SKS";
 			sourceTree = "<group>";
@@ -296,6 +324,7 @@
 				2E39DF45227B65CA00EA1C84 /* GameScene.sks in Resources */,
 				61163AEE227CECDB001F49E1 /* Tiles.sks in Resources */,
 				2E39DF53227B65CA00EA1C84 /* LaunchScreen.storyboard in Resources */,
+				61930BDA227DD12200550DD0 /* TestTIles.sks in Resources */,
 				61163AEF227CECDB001F49E1 /* Assets.xcassets in Resources */,
 				2E39DF47227B65CA00EA1C84 /* Actions.sks in Resources */,
 			);
@@ -323,7 +352,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E39DF49227B65CA00EA1C84 /* GameScene.swift in Sources */,
+				61930BD8227D1B0700550DD0 /* TileController.swift in Sources */,
 				2E39DF4B227B65CA00EA1C84 /* GameViewController.swift in Sources */,
+				61930BD6227D19C200550DD0 /* TileNode.swift in Sources */,
+				61930BDC227DE7BF00550DD0 /* Maze.swift in Sources */,
 				2E39DF43227B65CA00EA1C84 /* AppDelegate.swift in Sources */,
 				61DAA85A227CFBD1000FE4D0 /* MainViewController.swift in Sources */,
 			);
