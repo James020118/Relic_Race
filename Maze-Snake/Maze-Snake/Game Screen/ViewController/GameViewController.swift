@@ -25,7 +25,7 @@ class GameViewController: UIViewController {
             //TODO: CREATE MAZES AND FORM GRAPHS i.e.
             /*
                  let maze = Maze()
-                 sceneNode.graphs = [maze.graph]
+                 sceneNode.graphs = [Maze.KEY : maze.graph]
             */
                 
                 

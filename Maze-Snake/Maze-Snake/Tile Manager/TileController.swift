@@ -10,6 +10,11 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
+struct GridPosition {
+    let row: Int
+    let column: Int
+}
+
 class TileController {
     var tiles = [[TileNode]]()
     let graph: GKGridGraph<GKGridGraphNode>
@@ -17,6 +22,8 @@ class TileController {
     init(from graph: GKGridGraph<GKGridGraphNode>) {
         self.graph = graph
         let nodes = graph.nodes as? [GKGridGraphNode] ?? []
+        
+        if nodes.isEmpty { return }
         
         var counter = 0
         for i in 0...Maze.MAX_COLUMNS {
@@ -38,7 +45,7 @@ class TileController {
         }
     }
     
-    func indexFrom(position: CGPoint) -> (Int, Int) {
+    func positionFrom(position: CGPoint) -> GridPosition {
         var row = -1
         var column = -1
         
@@ -51,7 +58,15 @@ class TileController {
             }
         }
         
-        return (row, column)
+        return GridPosition(row: row, column: column)
+    }
+    
+    func getTile(row: Int, column: Int) -> TileNode {
+        return tiles[column][row]
+    }
+    
+    func path(from tile1: TileNode, to tile2: TileNode) {
+        graph.findPath(from: tile1.node, to: tile2.node)
     }
     
 }

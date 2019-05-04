@@ -150,7 +150,7 @@
 			children = (
 				61DAA855227CFAE2000FE4D0 /* ViewController */,
 				61DAA854227CFAD6000FE4D0 /* Scene */,
-				61DAA853227CFAB8000FE4D0 /* Resource SKS */,
+				61DAA853227CFAB8000FE4D0 /* SKS Resources */,
 			);
 			path = "Game Screen";
 			sourceTree = "<group>";
@@ -181,14 +181,14 @@
 			path = "Maze Generation";
 			sourceTree = "<group>";
 		};
-		61DAA853227CFAB8000FE4D0 /* Resource SKS */ = {
+		61DAA853227CFAB8000FE4D0 /* SKS Resources */ = {
 			isa = PBXGroup;
 			children = (
 				2E39DF46227B65CA00EA1C84 /* Actions.sks */,
 				61163AEC227CECDB001F49E1 /* Tiles.sks */,
 				61930BD9227DD12200550DD0 /* TestTIles.sks */,
 			);
-			path = "Resource SKS";
+			path = "SKS Resources";
 			sourceTree = "<group>";
 		};
 		61DAA854227CFAD6000FE4D0 /* Scene */ = {
