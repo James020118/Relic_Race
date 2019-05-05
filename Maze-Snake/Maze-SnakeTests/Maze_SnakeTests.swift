@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import Maze_Snake
+import GameplayKit
 
 class Maze_SnakeTests: XCTestCase {
 
@@ -19,9 +20,24 @@ class Maze_SnakeTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testTileManager() {
+        var Multiarray = [[GKGridGraphNode]]()
+        for i in 0...Maze.MAX_COLUMNS {
+            var subArray = [GKGridGraphNode]()
+            for j in 0...Maze.MAX_ROWS {
+                subArray.append(GKGridGraphNode(gridPosition: simd_int2(x: Int32(i), y: Int32(j))))
+            }
+            Multiarray.append(subArray)
+        }
+        
+        var array = [GKGridGraphNode]()
+        for i in 0...Maze.MAX_COLUMNS {
+            for j in 0...Maze.MAX_ROWS {
+                array.append(Multiarray[i][j])
+            }
+        }
+        
+        let graph: GKGridGraph<GKGridGraphNode> = GKGridGraph(array)
     }
 
     func testPerformanceExample() {

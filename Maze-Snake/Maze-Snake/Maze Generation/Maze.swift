@@ -12,8 +12,8 @@ import GameplayKit
 
 class Maze {
     
-    static let MAX_ROWS = 32
-    static let MAX_COLUMNS = 24
+    static let MAX_ROWS = 24
+    static let MAX_COLUMNS = 32
     static let KEY = "gamma"
     
     init() {

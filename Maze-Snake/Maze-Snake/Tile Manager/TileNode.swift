@@ -25,7 +25,7 @@ class TileNode: SKSpriteNode {
         self.node = node
         //TODO: Create texture based on direction of edges
         
-        super.init(texture: nil, color: .black, size: CGSize(width: 0, height: 0))
+        super.init(texture: SKTexture(imageNamed: "Grass_Grid_Center"), color: .clear, size: CGSize(width: 10, height: 10))
         let pos = node.gridPosition
         row = Int(pos.x)
         column = Int(pos.y)
@@ -35,12 +35,21 @@ class TileNode: SKSpriteNode {
         let WIDTH = scene.frame.width
         let HEIGHT = scene.frame.height
         
-        let ufX = CGFloat(row) / CGFloat(Maze.MAX_ROWS) * WIDTH
-        let xPos = ufX - WIDTH/2
-        let ufY = CGFloat(column) / CGFloat(Maze.MAX_ROWS) * HEIGHT
-        let yPos = ufY - HEIGHT/2
+        size = CGSize(width: WIDTH/CGFloat(Maze.MAX_COLUMNS), height: HEIGHT/CGFloat(Maze.MAX_ROWS))
+        
+        let NODE_X = size.width/2
+        let NODE_Y = size.height/2
+        
+        let ufX = CGFloat(column) / CGFloat(Maze.MAX_COLUMNS)  * WIDTH
+        let xPos = ufX - WIDTH/2 + NODE_X
+        let ufY = CGFloat(row) / CGFloat(Maze.MAX_ROWS)  * HEIGHT
+        let yPos = ufY - HEIGHT/2 + NODE_Y
+        
+        
         
         position = CGPoint(x: xPos, y: yPos)
+        
+        
     }
     
 }

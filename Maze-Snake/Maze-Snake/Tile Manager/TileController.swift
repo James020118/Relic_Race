@@ -26,9 +26,9 @@ class TileController {
         if nodes.isEmpty { return }
         
         var counter = 0
-        for i in 0...Maze.MAX_COLUMNS {
+        for i in 0..<Maze.MAX_ROWS {
             tiles.append([])
-            for _ in 0...Maze.MAX_ROWS {
+            for _ in 0..<Maze.MAX_COLUMNS {
                 tiles[i].append(TileNode(node: nodes[counter]))
                 counter += 1
             }
@@ -46,14 +46,14 @@ class TileController {
     }
     
     func positionFrom(position: CGPoint) -> GridPosition {
-        var row = -1
-        var column = -1
+        var row = 0
+        var column = 0
         
         for i in 0..<tiles.count {
-            for j in 0..<tiles.count {
+            for j in 0..<tiles[i].count {
                 if tiles[i][j].contains(position) {
-                    row = i
-                    column = j
+                    column = i
+                    row = j
                 }
             }
         }
