@@ -23,9 +23,19 @@ class TileNode: SKSpriteNode {
     
     init(node: GKGridGraphNode) {
         self.node = node
-        //TODO: Create texture based on direction of edges
         
-        super.init(texture: SKTexture(imageNamed: "Grass_Grid_Center"), color: .clear, size: CGSize(width: 10, height: 10))
+        let directions = node.nodeDirections()
+        
+        var textureName = ""
+        //TODO: Create texture based on direction of edges by making exhaustive switch-case
+        switch directions {
+        case [.up]:
+            textureName = "Grass_Grid_Center"
+        default:
+            textureName = ""
+        }
+        
+        super.init(texture: SKTexture(imageNamed: textureName), color: .clear, size: CGSize(width: 10, height: 10))
         let pos = node.gridPosition
         row = Int(pos.x)
         column = Int(pos.y)

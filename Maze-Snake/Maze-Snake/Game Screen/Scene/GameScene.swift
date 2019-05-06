@@ -55,6 +55,8 @@ class GameScene: SKScene {
         
         let location = touch.location(in: self)
         
+        print(tileManager.positionFrom(position: location))
+        
         //let pos = tileManager.positionFrom(position: location)
     }
     
