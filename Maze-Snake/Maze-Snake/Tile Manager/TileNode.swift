@@ -29,7 +29,7 @@ class TileNode: SKSpriteNode {
         var textureName = ""
         //TODO: Create texture based on direction of edges by making exhaustive switch-case
         switch directions {
-        case [.up]:
+        case [.up, .down]:
             textureName = "Grass_Grid_Center"
         default:
             textureName = ""
