@@ -220,7 +220,7 @@ class Maze {
     
 }
 
-let maze = Maze(width: 32, height: 24)
-maze.show()
+//let maze = Maze(width: 32, height: 24)
+//maze.show()
 
 
