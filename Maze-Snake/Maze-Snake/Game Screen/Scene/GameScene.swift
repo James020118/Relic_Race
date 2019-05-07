@@ -13,7 +13,7 @@ class GameScene: SKScene {
     
     var mazeGraph: GKGridGraph<GKGridGraphNode>?
     
-    var tileManager: TileController!
+    var tileManager: TileManager!
     
     private var lastUpdateTime : TimeInterval = 0
     private var tileMap: SKTileMapNode!
@@ -29,7 +29,7 @@ class GameScene: SKScene {
         
         let graph = mazeGraph ?? blankGraph()
         
-        tileManager = TileController(from: graph)
+        tileManager = TileManager(from: graph)
         tileManager.addTilesTo(scene: self)
         
         self.lastUpdateTime = 0
@@ -41,7 +41,7 @@ class GameScene: SKScene {
         
         let location = touch.location(in: self)
         
-        print(tileManager.positionFrom(position: location))
+        print(tileManager.indexFrom(position: location))
         
         //let pos = tileManager.positionFrom(position: location)
     }

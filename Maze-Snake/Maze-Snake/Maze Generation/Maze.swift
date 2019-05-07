@@ -27,8 +27,8 @@ class MazeTile {
 
 class Maze {
     
-    static let MAX_ROWS = 25
-    static let MAX_COLUMNS = 33
+    static let MAX_ROWS = 35
+    static let MAX_COLUMNS = 45
     static let KEY = "gamma"
     
     var graph: GKGridGraph<GKGridGraphNode>
@@ -51,10 +51,10 @@ class Maze {
         }
         
         // create blank map
-        for i in 0..<height {
+        for y in 0..<height {
             var subArray = [MazeTile]()
-            for j in 0..<width {
-                let node = GKGridGraphNode(gridPosition: simd_int2(x: Int32(j), y: Int32(i)))
+            for x in 0..<width {
+                let node = GKGridGraphNode(gridPosition: simd_int2(x: Int32(x), y: Int32(y)))
                 subArray.append(MazeTile(node: node, cellType: .Wall))
             }
             data.append(subArray)

@@ -36,8 +36,8 @@ class TileNode: SKSpriteNode {
         
         super.init(texture: SKTexture(imageNamed: textureName), color: .clear, size: CGSize(width: 10, height: 10))
         let pos = node.gridPosition
-        row = Int(pos.y)
         column = Int(pos.x)
+        row = Int(pos.y)
     }
     
     func setPosition(in scene: GameScene) {
