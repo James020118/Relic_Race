@@ -24,14 +24,13 @@ class TileNode: SKSpriteNode {
     init(node: GKGridGraphNode) {
         self.node = node
         
-        let directions = node.nodeDirections()
+        var textureName = "Grass_Grid_Center"
         
-        var textureName = ""
-        //TODO: Create texture based on direction of edges by making exhaustive switch-case
-        switch directions {
-        case [.up, .down]:
-            textureName = "Grass_Grid_Center"
-        default:
+        if node.connectedNodes.count > 0 {
+            //Wall
+            textureName = "Cobblestone_Grid_Center"
+        }else {
+            //Floor
             textureName = "Grass_Grid_Center"
         }
         

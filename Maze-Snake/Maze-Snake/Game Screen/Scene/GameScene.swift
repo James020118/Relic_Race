@@ -11,8 +11,7 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    var entities = [GKEntity]()
-    var graphs = [String : GKGraph]()
+    var mazeGraph: GKGridGraph<GKGridGraphNode>?
     
     var tileManager: TileController!
     
@@ -25,9 +24,12 @@ class GameScene: SKScene {
         tileMap = childNode(withName: "tileMap") as? SKTileMapNode ?? SKTileMapNode()
         tileMap.isHidden = true
         
-        let graph = blankGraph()
+        let maze = Maze(width: Maze.MAX_COLUMNS, height: Maze.MAX_ROWS)
+        mazeGraph = maze.graph
         
-        tileManager = TileController(from: graph)//TileController(from: graphs["maze"] as? GKGridGraph<GKGridGraphNode> ?? GKGridGraph())
+        let graph = mazeGraph ?? blankGraph()
+        
+        tileManager = TileController(from: graph)
         tileManager.addTilesTo(scene: self)
         
         self.lastUpdateTime = 0
@@ -55,11 +57,6 @@ class GameScene: SKScene {
         
         // Calculate time since last update
         let dt = currentTime - self.lastUpdateTime
-        
-        // Update entities
-        for entity in self.entities {
-            entity.update(deltaTime: dt)
-        }
         
         self.lastUpdateTime = currentTime
     }

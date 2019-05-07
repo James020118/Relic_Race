@@ -26,11 +26,15 @@ class TileController {
         if nodes.isEmpty { return }
         
         var counter = 0
-        for i in 0..<Maze.MAX_COLUMNS {
+        for i in 0..<Maze.MAX_ROWS {
             tiles.append([])
-            for _ in 0..<Maze.MAX_ROWS {
+            for _ in 0..<Maze.MAX_COLUMNS {
+//                print(nodes[counter].gridPosition)
+//                print(nodes[counter].connectedNodes)
+//                print("")
                 tiles[i].append(TileNode(node: nodes[counter]))
                 counter += 1
+                
             }
         }
         

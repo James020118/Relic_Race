@@ -10,30 +10,20 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-struct Stack<Element> {
-    var isEmpty: Bool {
-        return array.isEmpty
-    }
-    
-    var count: Int {
-        return array.count
-    }
-    
-    fileprivate var array: [Element] = []
-    
-    mutating func push(_ element: Element) {
-        array.append(element)
-    }
-    
-    mutating func pop() -> Element? {
-        return array.popLast()
-    }
-    
-    func peek() -> Element? {
-        return array.last
-    }
+enum Cell {
+    case Space, Wall
 }
 
+class mazeTile {
+    var node: GKGridGraphNode
+    var cellType: Cell
+    
+    init(node: GKGridGraphNode, cellType: Cell) {
+        self.node = node
+        self.cellType = cellType
+    }
+    
+}
 
 class Maze {
     
@@ -43,33 +33,34 @@ class Maze {
     
     var graph: GKGridGraph<GKGridGraphNode>
     
-    enum Cell {
-        case Space, Wall
-    }
-    
     var mazeWidth: Int
     var mazeHeight: Int
     
-    var data: [[Cell]] = []
+    var data: [[mazeTile]] = []
     var visitedMap: [[Bool]] = []
     var mazeStack = Stack<[Int]>()
     
     // Generate a random maze.
     init(width: Int, height: Int) {
-        
         graph = GKGridGraph()
-        
         mazeWidth = width
         mazeHeight = height
         
-        let node1 = GKGridGraphNode(gridPosition: simd_int2(x: 0, y: 0))
-        let node2 = GKGridGraphNode(gridPosition: simd_int2(x: 0, y: 1))
-        node1.addConnections(to: [node2], bidirectional: true)
-        
         for _ in 0..<height {
-            data.append([Cell](repeating: Cell.Wall, count: width))
             visitedMap.append([Bool](repeating: false, count: width))
         }
+        
+        // create blank map
+        for i in 0..<height {
+            var subArray = [mazeTile]()
+            for j in 0..<width {
+                let node = GKGridGraphNode(gridPosition: simd_int2(x: Int32(i), y: Int32(j)))
+                subArray.append(mazeTile(node: node, cellType: .Wall))
+            }
+            data.append(subArray)
+        }
+        
+        // mark all outer walls visited
         for index in 0..<width {
             visitedMap[0][index] = true
             visitedMap[height - 1][index] = true
@@ -78,13 +69,25 @@ class Maze {
             visitedMap[index][0] = true
             visitedMap[index][width - 1] = true
         }
+        
+        // start carving position
         let startX = 1
         let startY = 1
         
-        data[startX][startY] = Cell.Space
+        // change the starting position to a space
+        data[startX][startY].cellType = Cell.Space
+        // push the starting
         mazeStack.push([startX, startY])
         markVisited(x: startX, y: startY)
         carve(x: startX, y: startY)
+        
+        var nodes = [GKGridGraphNode]()
+        for column in data {
+            for tile in column {
+                nodes.append(tile.node)
+            }
+        }
+        graph = GKGridGraph(nodes)
     }
     
     func markVisited(x: Int, y: Int) {
@@ -139,23 +142,20 @@ class Maze {
     
     func carve(x: Int, y: Int) {
         while checkVisited() != true {
+            /* Create list of neighbours */
             var neighbors: [Int] = []
-            
             // south neighbor
             if mazeStack.peek()!.first! < mazeHeight - 3 && visitedMap[mazeStack.peek()!.first! + 2][mazeStack.peek()![1]] == false {
                 neighbors.append(0)
             }
-            
             // east neighbor
             if mazeStack.peek()!.last! < mazeWidth - 3 && visitedMap[mazeStack.peek()!.first!][mazeStack.peek()![1] + 2] == false {
                 neighbors.append(1)
             }
-            
             // north neighbor
             if mazeStack.peek()!.first! > 2 && visitedMap[mazeStack.peek()!.first! - 2][mazeStack.peek()![1]] == false {
                 neighbors.append(2)
             }
-            
             // west neighbor
             if mazeStack.peek()!.last! > 2 && visitedMap[mazeStack.peek()!.first!][mazeStack.peek()![1] - 2] == false {
                 neighbors.append(3)
@@ -165,6 +165,7 @@ class Maze {
                 
                 let next_Direction = neighbors[Int.random(in: 0..<neighbors.count)]
                 let current_Coordinates: [Int] = mazeStack.peek()!
+                let top = data[current_Coordinates[0]][current_Coordinates[1]]
                 
                 // 0: South
                 // 1: East
@@ -177,23 +178,45 @@ class Maze {
                     // mark the cell and all surrounding cell visited
                     markVisited(x: current_Coordinates[0] + 2, y: current_Coordinates[1])
                     // change wall into space for both the cell and the path
-                    data[current_Coordinates[0] + 1][current_Coordinates[1]] = Cell.Space
-                    data[current_Coordinates[0] + 2][current_Coordinates[1]] = Cell.Space
+                    var firstTile = data[current_Coordinates[0] + 1][current_Coordinates[1]]
+                    var secondTile = data[current_Coordinates[0] + 2][current_Coordinates[1]]
+                    firstTile.cellType = Cell.Space
+                    top.node.addConnections(to: [firstTile.node], bidirectional: true)
+                    secondTile.cellType = Cell.Space
+                    firstTile.node.addConnections(to: [secondTile.node], bidirectional: true)
                 case 1:
                     mazeStack.push([current_Coordinates[0], current_Coordinates[1] + 2])
                     markVisited(x: current_Coordinates[0], y: current_Coordinates[1] + 2)
-                    data[current_Coordinates[0]][current_Coordinates[1] + 1] = Cell.Space
-                    data[current_Coordinates[0]][current_Coordinates[1] + 2] = Cell.Space
+                    
+                    var firstTile = data[current_Coordinates[0]][current_Coordinates[1] + 1]
+                    var secondTile = data[current_Coordinates[0]][current_Coordinates[1] + 2]
+                    
+                    firstTile.cellType = Cell.Space
+                    top.node.addConnections(to: [firstTile.node], bidirectional: true)
+                    secondTile.cellType = Cell.Space
+                    firstTile.node.addConnections(to: [secondTile.node], bidirectional: true)
                 case 2:
                     mazeStack.push([current_Coordinates[0] - 2, current_Coordinates[1]])
                     markVisited(x: current_Coordinates[0] - 2, y: current_Coordinates[1])
-                    data[current_Coordinates[0] - 1][current_Coordinates[1]] = Cell.Space
-                    data[current_Coordinates[0] - 2][current_Coordinates[1]] = Cell.Space
+                    
+                    var firstTile = data[current_Coordinates[0] - 1][current_Coordinates[1]]
+                    var secondTile = data[current_Coordinates[0] - 2][current_Coordinates[1]]
+                    
+                    firstTile.cellType = Cell.Space
+                    top.node.addConnections(to: [firstTile.node], bidirectional: true)
+                    secondTile.cellType = Cell.Space
+                    firstTile.node.addConnections(to: [secondTile.node], bidirectional: true)
                 case 3:
                     mazeStack.push([current_Coordinates[0], current_Coordinates[1] - 2])
                     markVisited(x: current_Coordinates[0], y: current_Coordinates[1] - 2)
-                    data[current_Coordinates[0]][current_Coordinates[1] - 1] = Cell.Space
-                    data[current_Coordinates[0]][current_Coordinates[1] - 2] = Cell.Space
+                    
+                    var firstTile = data[current_Coordinates[0]][current_Coordinates[1] - 1]
+                    var secondTile = data[current_Coordinates[0]][current_Coordinates[1] - 2]
+                    
+                    firstTile.cellType = Cell.Space
+                    top.node.addConnections(to: [firstTile.node], bidirectional: true)
+                    secondTile.cellType = Cell.Space
+                    firstTile.node.addConnections(to: [secondTile.node], bidirectional: true)
                 default:
                     print("")
                 }
@@ -204,23 +227,4 @@ class Maze {
         }
     }
     
-    // Show the maze.
-    func show() {
-        for row in data {
-            for cell in row {
-                if cell == Cell.Space {
-                    print("  ", separator: "", terminator: "")
-                } else {
-                    print("[]", separator: "", terminator: "")
-                }
-            }
-            print("")
-        }
-    }
-    
 }
-
-//let maze = Maze(width: 32, height: 24)
-//maze.show()
-
-
