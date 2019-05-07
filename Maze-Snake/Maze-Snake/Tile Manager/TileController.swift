@@ -29,9 +29,6 @@ class TileController {
         for i in 0..<Maze.MAX_ROWS {
             tiles.append([])
             for _ in 0..<Maze.MAX_COLUMNS {
-//                print(nodes[counter].gridPosition)
-//                print(nodes[counter].connectedNodes)
-//                print("")
                 tiles[i].append(TileNode(node: nodes[counter]))
                 counter += 1
                 

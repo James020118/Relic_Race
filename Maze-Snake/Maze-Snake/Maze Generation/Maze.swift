@@ -14,7 +14,7 @@ enum Cell {
     case Space, Wall
 }
 
-class mazeTile {
+class MazeTile {
     var node: GKGridGraphNode
     var cellType: Cell
     
@@ -36,7 +36,7 @@ class Maze {
     var mazeWidth: Int
     var mazeHeight: Int
     
-    var data: [[mazeTile]] = []
+    var data: [[MazeTile]] = []
     var visitedMap: [[Bool]] = []
     var mazeStack = Stack<[Int]>()
     
@@ -52,10 +52,10 @@ class Maze {
         
         // create blank map
         for i in 0..<height {
-            var subArray = [mazeTile]()
+            var subArray = [MazeTile]()
             for j in 0..<width {
-                let node = GKGridGraphNode(gridPosition: simd_int2(x: Int32(i), y: Int32(j)))
-                subArray.append(mazeTile(node: node, cellType: .Wall))
+                let node = GKGridGraphNode(gridPosition: simd_int2(x: Int32(j), y: Int32(i)))
+                subArray.append(MazeTile(node: node, cellType: .Wall))
             }
             data.append(subArray)
         }
