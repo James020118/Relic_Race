@@ -27,16 +27,16 @@ class GameScene: SKScene {
         
         /////////////// TEST /////////////////////
         var Multiarray = [[GKGridGraphNode]]()
-        for i in 0..<Maze.MAX_ROWS {
+        for i in 0..<Maze.MAX_COLUMNS {
             var subArray = [GKGridGraphNode]()
-            for j in 0..<Maze.MAX_COLUMNS {
+            for j in 0..<Maze.MAX_ROWS {
                 subArray.append(GKGridGraphNode(gridPosition: simd_int2(x: Int32(i), y: Int32(j))))
             }
             Multiarray.append(subArray)
         }
         var array = [GKGridGraphNode]()
-        for i in 0..<Maze.MAX_ROWS {
-            for j in 0..<Maze.MAX_COLUMNS {
+        for i in 0..<Maze.MAX_COLUMNS {
+            for j in 0..<Maze.MAX_ROWS {
                 array.append(Multiarray[i][j])
             }
         }

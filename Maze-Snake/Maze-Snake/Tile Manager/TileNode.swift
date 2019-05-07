@@ -32,13 +32,13 @@ class TileNode: SKSpriteNode {
         case [.up]:
             textureName = "Grass_Grid_Center"
         default:
-            textureName = ""
+            textureName = "Grass_Grid_Center"
         }
         
         super.init(texture: SKTexture(imageNamed: textureName), color: .clear, size: CGSize(width: 10, height: 10))
         let pos = node.gridPosition
-        row = Int(pos.x)
-        column = Int(pos.y)
+        row = Int(pos.y)
+        column = Int(pos.x)
     }
     
     func setPosition(in scene: GameScene) {
@@ -54,11 +54,8 @@ class TileNode: SKSpriteNode {
         let xPos = ufX - WIDTH/2 + NODE_X
         let ufY = CGFloat(row) / CGFloat(Maze.MAX_ROWS)  * HEIGHT
         let yPos = ufY - HEIGHT/2 + NODE_Y
-        
-        
-        
+
         position = CGPoint(x: xPos, y: yPos)
-        
         
     }
     
