@@ -25,23 +25,7 @@ class GameScene: SKScene {
         tileMap = childNode(withName: "tileMap") as? SKTileMapNode ?? SKTileMapNode()
         tileMap.isHidden = true
         
-        /////////////// TEST /////////////////////
-        var Multiarray = [[GKGridGraphNode]]()
-        for i in 0..<Maze.MAX_ROWS {
-            var subArray = [GKGridGraphNode]()
-            for j in 0..<Maze.MAX_COLUMNS {
-                subArray.append(GKGridGraphNode(gridPosition: simd_int2(x: Int32(i), y: Int32(j))))
-            }
-            Multiarray.append(subArray)
-        }
-        var array = [GKGridGraphNode]()
-        for i in 0..<Maze.MAX_ROWS {
-            for j in 0..<Maze.MAX_COLUMNS {
-                array.append(Multiarray[i][j])
-            }
-        }
-        let graph: GKGridGraph<GKGridGraphNode> = GKGridGraph(array)
-        /////////////////////////////////////////////
+        let graph = blankGraph()
         
         tileManager = TileController(from: graph)//TileController(from: graphs["maze"] as? GKGridGraph<GKGridGraphNode> ?? GKGridGraph())
         tileManager.addTilesTo(scene: self)

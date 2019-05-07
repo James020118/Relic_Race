@@ -24,6 +24,7 @@
 		61930BDA227DD12200550DD0 /* TestTIles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 61930BD9227DD12200550DD0 /* TestTIles.sks */; };
 		61930BDC227DE7BF00550DD0 /* Maze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61930BDB227DE7BF00550DD0 /* Maze.swift */; };
 		61DAA85A227CFBD1000FE4D0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DAA859227CFBD1000FE4D0 /* MainViewController.swift */; };
+		61E0D1FB228110B700A6DE5C /* GraphCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E0D1FA228110B700A6DE5C /* GraphCreation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		61930BD9227DD12200550DD0 /* TestTIles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TestTIles.sks; sourceTree = "<group>"; };
 		61930BDB227DE7BF00550DD0 /* Maze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maze.swift; sourceTree = "<group>"; };
 		61DAA859227CFBD1000FE4D0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		61E0D1FA228110B700A6DE5C /* GraphCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCreation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				2EDD7A962280B6C4002B7783 /* NodeToDir.swift */,
+				61E0D1FA228110B700A6DE5C /* GraphCreation.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61E0D1FB228110B700A6DE5C /* GraphCreation.swift in Sources */,
 				2E39DF49227B65CA00EA1C84 /* GameScene.swift in Sources */,
 				2EDD7A972280B6C4002B7783 /* NodeToDir.swift in Sources */,
 				61930BD8227D1B0700550DD0 /* TileController.swift in Sources */,

@@ -15,6 +15,7 @@ enum Direction {
 }
 
 extension GKGridGraphNode {
+    
     func nodeDirections() -> [Direction] {
         var attachments = [Direction]()
         
@@ -36,4 +37,5 @@ extension GKGridGraphNode {
         
         return attachments
     }
+    
 }
