@@ -55,7 +55,7 @@ class TileNode: SKSpriteNode {
         let yPos = ufY - HEIGHT/2 + NODE_Y
 
         position = CGPoint(x: xPos, y: yPos)
-        
+        print(size)
     }
     
 }
