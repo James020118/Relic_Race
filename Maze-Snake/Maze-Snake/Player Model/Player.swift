@@ -12,7 +12,7 @@ import SpriteKit
 class Player: Actor {
     var camera: SKCameraNode
     
-    override init(texture: SKTexture?, parent: GameScene, pos: CGPoint) {
+    override init(texture: SKTexture?, parent: GameScene, pos: GridPosition) {
         camera = SKCameraNode()
         super.init(texture: texture, parent: parent, pos: pos)
     }
