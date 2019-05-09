@@ -28,7 +28,7 @@ class MazeTile {
 class Maze {
     
     static let MAX_ROWS = 21
-    static let MAX_COLUMNS = 33
+    static let MAX_COLUMNS = 37
     static let KEY = "gamma"
     
     var graph: GKGridGraph<GKGridGraphNode>
