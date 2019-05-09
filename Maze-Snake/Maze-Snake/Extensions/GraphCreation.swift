@@ -28,15 +28,3 @@ func blankGraph() -> GKGridGraph<GKGridGraphNode> {
     
     return graph
 }
-
-
-func removeDeadEnd(from graph: inout GKGridGraph<GKGridGraphNode>) {
-    let nodes = graph.nodes ?? []
-    
-    for node in nodes {
-        if node.connectedNodes.count >= 3 {
-            //TODO: Add fourth missing connection
-        }
-    }
-    
-}
