@@ -69,4 +69,11 @@ class TileManager {
         graph.findPath(from: tile1.node, to: tile2.node)
     }
     
+    func isWall(row: Int, column: Int) -> Bool {
+        let tile = getTile(row: row, column: column)
+        let node = tile.node
+        let connections = node.connectedNodes.count
+        return connections <= 0
+    }
+    
 }
