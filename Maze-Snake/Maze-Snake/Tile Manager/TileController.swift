@@ -10,10 +10,6 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-struct GridPosition {
-    let column: Int
-    let row: Int
-}
 
 class TileManager {
     var tiles = [[TileNode]]()

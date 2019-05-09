@@ -10,10 +10,6 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-enum Direction {
-    case left, right, up, down
-}
-
 extension GKGridGraphNode {
     
     func nodeDirections() -> [Direction] {

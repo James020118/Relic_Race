@@ -20,6 +20,9 @@
 		2EDD7A972280B6C4002B7783 /* NodeToDir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDD7A962280B6C4002B7783 /* NodeToDir.swift */; };
 		61163AEE227CECDB001F49E1 /* Tiles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 61163AEC227CECDB001F49E1 /* Tiles.sks */; };
 		61163AEF227CECDB001F49E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61163AED227CECDB001F49E1 /* Assets.xcassets */; };
+		615D67FC2283BD0A00D0100A /* AI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615D67FB2283BD0A00D0100A /* AI.swift */; };
+		615D67FE2283C0D100D0100A /* GridPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615D67FD2283C0D100D0100A /* GridPosition.swift */; };
+		615D68002283C32500D0100A /* Directions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615D67FF2283C32500D0100A /* Directions.swift */; };
 		61930BD6227D19C200550DD0 /* TileNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61930BD5227D19C200550DD0 /* TileNode.swift */; };
 		61930BD8227D1B0700550DD0 /* TileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61930BD7227D1B0700550DD0 /* TileController.swift */; };
 		61930BDA227DD12200550DD0 /* TestTIles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 61930BD9227DD12200550DD0 /* TestTIles.sks */; };
@@ -67,6 +70,9 @@
 		2EDD7A962280B6C4002B7783 /* NodeToDir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeToDir.swift; sourceTree = "<group>"; };
 		61163AEC227CECDB001F49E1 /* Tiles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Tiles.sks; sourceTree = "<group>"; };
 		61163AED227CECDB001F49E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		615D67FB2283BD0A00D0100A /* AI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AI.swift; sourceTree = "<group>"; };
+		615D67FD2283C0D100D0100A /* GridPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPosition.swift; sourceTree = "<group>"; };
+		615D67FF2283C32500D0100A /* Directions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directions.swift; sourceTree = "<group>"; };
 		61930BD5227D19C200550DD0 /* TileNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileNode.swift; sourceTree = "<group>"; };
 		61930BD7227D1B0700550DD0 /* TileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileController.swift; sourceTree = "<group>"; };
 		61930BD9227DD12200550DD0 /* TestTIles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TestTIles.sks; sourceTree = "<group>"; };
@@ -181,6 +187,8 @@
 			isa = PBXGroup;
 			children = (
 				2E7870EA228205C900FB1303 /* Stack.swift */,
+				615D67FD2283C0D100D0100A /* GridPosition.swift */,
+				615D67FF2283C32500D0100A /* Directions.swift */,
 			);
 			path = "Data Structures";
 			sourceTree = "<group>";
@@ -216,6 +224,7 @@
 			children = (
 				61B48312228397AF0045BF3A /* Actor.swift */,
 				61B48314228397EB0045BF3A /* Player.swift */,
+				615D67FB2283BD0A00D0100A /* AI.swift */,
 			);
 			path = "Player Model";
 			sourceTree = "<group>";
@@ -394,9 +403,12 @@
 				2E39DF49227B65CA00EA1C84 /* GameScene.swift in Sources */,
 				2EDD7A972280B6C4002B7783 /* NodeToDir.swift in Sources */,
 				61930BD8227D1B0700550DD0 /* TileController.swift in Sources */,
+				615D68002283C32500D0100A /* Directions.swift in Sources */,
 				61B48315228397EB0045BF3A /* Player.swift in Sources */,
+				615D67FC2283BD0A00D0100A /* AI.swift in Sources */,
 				61B48313228397AF0045BF3A /* Actor.swift in Sources */,
 				2E39DF4B227B65CA00EA1C84 /* GameViewController.swift in Sources */,
+				615D67FE2283C0D100D0100A /* GridPosition.swift in Sources */,
 				61930BD6227D19C200550DD0 /* TileNode.swift in Sources */,
 				2E7870EB228205C900FB1303 /* Stack.swift in Sources */,
 				61930BDC227DE7BF00550DD0 /* Maze.swift in Sources */,
