@@ -15,6 +15,8 @@ class TileManager {
     var tiles = [[TileNode]]()
     let graph: GKGridGraph<GKGridGraphNode>
     
+    let ZOOM_CONSTANT: CGFloat = 0.125
+    
     init(from graph: GKGridGraph<GKGridGraphNode>) {
         self.graph = graph
         let nodes = graph.nodes as? [GKGridGraphNode] ?? []
@@ -32,7 +34,11 @@ class TileManager {
         
     }
     
+    
+    
     func addTilesTo(scene: GameScene) {
+        addWallCollisions()
+        
         for row in tiles {
             for tile in row {
                 scene.addChild(tile)
@@ -40,6 +46,8 @@ class TileManager {
             }
         }
     }
+    
+    
     
     func indexFrom(position: CGPoint) -> GridPosition {
         var row = 0
@@ -57,19 +65,32 @@ class TileManager {
         return GridPosition(column: column, row: row)
     }
     
+    
+    
+    private func addWallCollisions() {
+        // give boundary to each tile in the tile sets
+        for rows in tiles {
+            for tiles in rows {
+                if tiles.typeName == "wall" {
+                    tiles.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: tiles.size.width / ZOOM_CONSTANT, height: tiles.size.height / ZOOM_CONSTANT))
+                    tiles.physicsBody?.isDynamic = false
+                }
+            }
+        }
+    }
+    
+    
+    
+    
     func getTile(row: Int, column: Int) -> TileNode {
         return tiles[column][row]
     }
     
+    
+    
+    
     func path(from tile1: TileNode, to tile2: TileNode) {
         graph.findPath(from: tile1.node, to: tile2.node)
-    }
-    
-    func isWall(row: Int, column: Int) -> Bool {
-        let tile = getTile(row: row, column: column)
-        let node = tile.node
-        let connections = node.connectedNodes.count
-        return connections <= 0
     }
     
 }

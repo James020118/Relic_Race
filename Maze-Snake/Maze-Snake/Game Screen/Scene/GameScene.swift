@@ -9,41 +9,40 @@
 import SpriteKit
 import GameplayKit
 
+let velocityMultiplier: CGFloat = 0.13
+let cameraScaleConstant: CGFloat = 0.3
+
 class GameScene: SKScene {
     
     var mazeGraph: GKGridGraph<GKGridGraphNode>?
     
     var tileManager: TileManager!
     
+    var joystick = AnalogJoystick(diameter: 150)
+    var player1: Player!
+    
     private var lastUpdateTime : TimeInterval = 0
-    private var tileMap: SKTileMapNode!
     
     override func sceneDidLoad() {
         super.sceneDidLoad()
         
-        tileMap = childNode(withName: "tileMap") as? SKTileMapNode ?? SKTileMapNode()
-        tileMap.isHidden = true
-        
         let maze = Maze(width: Maze.MAX_COLUMNS, height: Maze.MAX_ROWS)
         mazeGraph = maze.graph
-        
         let graph = mazeGraph ?? blankGraph()
-        
         tileManager = TileManager(from: graph)
         tileManager.addTilesTo(scene: self)
         
         self.lastUpdateTime = 0
         
+        player1 = Player(texture: SKTexture(imageNamed: "stick"), parent: self)
+        spawnJoystick()
+        player1.spawnCamera()
     }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
-        
         let location = touch.location(in: self)
-        
-        print(tileManager.indexFrom(position: location))
-        
-        //let pos = tileManager.positionFrom(position: location)
     }
     
     
@@ -60,4 +59,27 @@ class GameScene: SKScene {
         
         self.lastUpdateTime = currentTime
     }
+    
+    
+    
+    let JOYSTICK_X_OFFSET : CGFloat = 370
+    let JOYSTICK_Y_OFFSET : CGFloat = 270
+    func spawnJoystick() {
+        // initialize joystick
+        joystick.stick.image = UIImage(named: "stick")
+        joystick.substrate.image = UIImage(named: "substrate")
+        joystick.position = CGPoint(x: player1.position.x - JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
+        joystick.zPosition = 1
+        addChild(joystick)
+        
+        joystick.trackingHandler = { [unowned self] data in
+            // track positions
+            self.player1.position = CGPoint(x: self.player1.position.x + (data.velocity.x * velocityMultiplier), y: self.player1.position.y + (data.velocity.y * velocityMultiplier))
+            self.player1.updateZoom()
+            self.joystick.position = CGPoint(x: self.player1.position.x - self.JOYSTICK_X_OFFSET, y: self.player1.position.y - self.JOYSTICK_Y_OFFSET)
+        }
+    }
+    
+    
+    
 }

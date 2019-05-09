@@ -15,6 +15,8 @@ class TileNode: SKSpriteNode {
     var row: Int = 0
     var column: Int = 0
     
+    var typeName: String = ""
+    
     var node: GKGridGraphNode
     
     required init?(coder aDecoder: NSCoder) {
@@ -28,10 +30,12 @@ class TileNode: SKSpriteNode {
         
         if node.connectedNodes.count > 0 {
             //Wall
-            textureName = "Cobblestone_Grid_Center"
+            textureName = "Grass_Grid_Center"
+            typeName = "space"
         }else {
             //Floor
-            textureName = "Grass_Grid_Center"
+            textureName = "Cobblestone_Grid_Center"
+            typeName = "wall"
         }
         
         super.init(texture: SKTexture(imageNamed: textureName), color: .clear, size: CGSize(width: 10, height: 10))
@@ -39,6 +43,7 @@ class TileNode: SKSpriteNode {
         column = Int(pos.x)
         row = Int(pos.y)
     }
+    
     
     func setPosition(in scene: GameScene) {
         let WIDTH = scene.frame.width
@@ -53,8 +58,9 @@ class TileNode: SKSpriteNode {
         let xPos = ufX - WIDTH/2 + NODE_X
         let ufY = CGFloat(row) / CGFloat(Maze.MAX_ROWS)  * HEIGHT
         let yPos = ufY - HEIGHT/2 + NODE_Y
-
+        
         position = CGPoint(x: xPos, y: yPos)
+        print(size)
     }
     
 }
