@@ -24,6 +24,8 @@
 		61930BD8227D1B0700550DD0 /* TileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61930BD7227D1B0700550DD0 /* TileController.swift */; };
 		61930BDA227DD12200550DD0 /* TestTIles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 61930BD9227DD12200550DD0 /* TestTIles.sks */; };
 		61930BDC227DE7BF00550DD0 /* Maze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61930BDB227DE7BF00550DD0 /* Maze.swift */; };
+		61B48313228397AF0045BF3A /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B48312228397AF0045BF3A /* Actor.swift */; };
+		61B48315228397EB0045BF3A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B48314228397EB0045BF3A /* Player.swift */; };
 		61DAA85A227CFBD1000FE4D0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DAA859227CFBD1000FE4D0 /* MainViewController.swift */; };
 		61E0D1FB228110B700A6DE5C /* GraphCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E0D1FA228110B700A6DE5C /* GraphCreation.swift */; };
 /* End PBXBuildFile section */
@@ -69,6 +71,8 @@
 		61930BD7227D1B0700550DD0 /* TileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileController.swift; sourceTree = "<group>"; };
 		61930BD9227DD12200550DD0 /* TestTIles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TestTIles.sks; sourceTree = "<group>"; };
 		61930BDB227DE7BF00550DD0 /* Maze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maze.swift; sourceTree = "<group>"; };
+		61B48312228397AF0045BF3A /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
+		61B48314228397EB0045BF3A /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		61DAA859227CFBD1000FE4D0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		61E0D1FA228110B700A6DE5C /* GraphCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCreation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,13 +128,14 @@
 				2E39DF54227B65CA00EA1C84 /* Info.plist */,
 				2E39DF42227B65CA00EA1C84 /* AppDelegate.swift */,
 				61163AED227CECDB001F49E1 /* Assets.xcassets */,
-				2E7870E92282055D00FB1303 /* structs */,
+				2E7870E92282055D00FB1303 /* Data Structures */,
 				2EDD7A952280B68A002B7783 /* Extensions */,
 				2E39DF78227B67D400EA1C84 /* Storyboards */,
 				61DAA858227CFBBC000FE4D0 /* Main Screen */,
 				2E39DF77227B66A000EA1C84 /* Game Screen */,
 				61930BDD227DE97500550DD0 /* Tile Manager */,
 				61930BDE227DE99100550DD0 /* Maze Generation */,
+				61B483112283976B0045BF3A /* Player Model */,
 			);
 			path = "Maze-Snake";
 			sourceTree = "<group>";
@@ -172,12 +177,12 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		2E7870E92282055D00FB1303 /* structs */ = {
+		2E7870E92282055D00FB1303 /* Data Structures */ = {
 			isa = PBXGroup;
 			children = (
 				2E7870EA228205C900FB1303 /* Stack.swift */,
 			);
-			path = structs;
+			path = "Data Structures";
 			sourceTree = "<group>";
 		};
 		2EDD7A952280B68A002B7783 /* Extensions */ = {
@@ -204,6 +209,15 @@
 				61930BDB227DE7BF00550DD0 /* Maze.swift */,
 			);
 			path = "Maze Generation";
+			sourceTree = "<group>";
+		};
+		61B483112283976B0045BF3A /* Player Model */ = {
+			isa = PBXGroup;
+			children = (
+				61B48312228397AF0045BF3A /* Actor.swift */,
+				61B48314228397EB0045BF3A /* Player.swift */,
+			);
+			path = "Player Model";
 			sourceTree = "<group>";
 		};
 		61DAA853227CFAB8000FE4D0 /* SKS Resources */ = {
@@ -380,6 +394,8 @@
 				2E39DF49227B65CA00EA1C84 /* GameScene.swift in Sources */,
 				2EDD7A972280B6C4002B7783 /* NodeToDir.swift in Sources */,
 				61930BD8227D1B0700550DD0 /* TileController.swift in Sources */,
+				61B48315228397EB0045BF3A /* Player.swift in Sources */,
+				61B48313228397AF0045BF3A /* Actor.swift in Sources */,
 				2E39DF4B227B65CA00EA1C84 /* GameViewController.swift in Sources */,
 				61930BD6227D19C200550DD0 /* TileNode.swift in Sources */,
 				2E7870EB228205C900FB1303 /* Stack.swift in Sources */,
