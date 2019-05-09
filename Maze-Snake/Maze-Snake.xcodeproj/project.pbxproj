@@ -19,6 +19,7 @@
 		2E7870EB228205C900FB1303 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7870EA228205C900FB1303 /* Stack.swift */; };
 		2E9C4D022284AF4A009C9BFA /* AnalogStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C4D012284AF4A009C9BFA /* AnalogStick.swift */; };
 		2EDD7A972280B6C4002B7783 /* NodeToDir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDD7A962280B6C4002B7783 /* NodeToDir.swift */; };
+		6111961F2284C4300075EEC9 /* MiniMapNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6111961E2284C4300075EEC9 /* MiniMapNode.swift */; };
 		61163AEE227CECDB001F49E1 /* Tiles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 61163AEC227CECDB001F49E1 /* Tiles.sks */; };
 		61163AEF227CECDB001F49E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61163AED227CECDB001F49E1 /* Assets.xcassets */; };
 		615D67FC2283BD0A00D0100A /* AI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615D67FB2283BD0A00D0100A /* AI.swift */; };
@@ -70,6 +71,7 @@
 		2E7870EA228205C900FB1303 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		2E9C4D012284AF4A009C9BFA /* AnalogStick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogStick.swift; sourceTree = "<group>"; };
 		2EDD7A962280B6C4002B7783 /* NodeToDir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeToDir.swift; sourceTree = "<group>"; };
+		6111961E2284C4300075EEC9 /* MiniMapNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniMapNode.swift; sourceTree = "<group>"; };
 		61163AEC227CECDB001F49E1 /* Tiles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Tiles.sks; sourceTree = "<group>"; };
 		61163AED227CECDB001F49E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		615D67FB2283BD0A00D0100A /* AI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AI.swift; sourceTree = "<group>"; };
@@ -137,11 +139,11 @@
 				2E39DF42227B65CA00EA1C84 /* AppDelegate.swift */,
 				61163AED227CECDB001F49E1 /* Assets.xcassets */,
 				2E7870E92282055D00FB1303 /* Data Structures */,
+				611196202284DC070075EEC9 /* Utility */,
 				2EDD7A952280B68A002B7783 /* Extensions */,
 				2E39DF78227B67D400EA1C84 /* Storyboards */,
 				61DAA858227CFBBC000FE4D0 /* Main Screen */,
 				2E39DF77227B66A000EA1C84 /* Game Screen */,
-				61930BDD227DE97500550DD0 /* Tile Manager */,
 				61930BDE227DE99100550DD0 /* Maze Generation */,
 				61B483112283976B0045BF3A /* Player Model */,
 			);
@@ -200,9 +202,18 @@
 			children = (
 				2EDD7A962280B6C4002B7783 /* NodeToDir.swift */,
 				61E0D1FA228110B700A6DE5C /* GraphCreation.swift */,
-				2E9C4D012284AF4A009C9BFA /* AnalogStick.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		611196202284DC070075EEC9 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				2E9C4D012284AF4A009C9BFA /* AnalogStick.swift */,
+				6111961E2284C4300075EEC9 /* MiniMapNode.swift */,
+				61930BDD227DE97500550DD0 /* Tile Manager */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		61930BDD227DE97500550DD0 /* Tile Manager */ = {
@@ -408,6 +419,7 @@
 				61930BD8227D1B0700550DD0 /* TileController.swift in Sources */,
 				615D68002283C32500D0100A /* Directions.swift in Sources */,
 				61B48315228397EB0045BF3A /* Player.swift in Sources */,
+				6111961F2284C4300075EEC9 /* MiniMapNode.swift in Sources */,
 				615D67FC2283BD0A00D0100A /* AI.swift in Sources */,
 				61B48313228397AF0045BF3A /* Actor.swift in Sources */,
 				2E39DF4B227B65CA00EA1C84 /* GameViewController.swift in Sources */,

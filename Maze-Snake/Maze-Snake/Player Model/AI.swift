@@ -27,7 +27,7 @@ class AI: Actor {
             return []
         }
         
-        let tm = gameScene.tileManager ?? TileManager(from: blankGraph())
+        let tm = gameScene.tileManager ?? TileManager(from: blankGraph(), minimap: false)
         
         let node1 = tm.getTile(row: gridPos.row, column: gridPos.column).node
         let node2 = tm.getTile(row: point.row, column: point.column).node

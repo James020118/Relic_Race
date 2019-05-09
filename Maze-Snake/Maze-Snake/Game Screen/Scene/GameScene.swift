@@ -21,6 +21,8 @@ class GameScene: SKScene {
     var joystick = AnalogJoystick(diameter: 150)
     var player1: Player!
     
+    var minimap: MiniMapNode!
+    
     private var lastUpdateTime : TimeInterval = 0
     
     override func sceneDidLoad() {
@@ -29,12 +31,13 @@ class GameScene: SKScene {
         let maze = Maze(width: Maze.MAX_COLUMNS, height: Maze.MAX_ROWS)
         mazeGraph = maze.graph
         let graph = mazeGraph ?? blankGraph()
-        tileManager = TileManager(from: graph)
+        tileManager = TileManager(from: graph, minimap: false)
         tileManager.addTilesTo(scene: self)
         
         self.lastUpdateTime = 0
         
         player1 = Player(texture: SKTexture(imageNamed: "stick"), parent: self)
+        spawnMinimap(graph: graph)
         spawnJoystick()
         player1.spawnCamera()
     }
@@ -77,7 +80,16 @@ class GameScene: SKScene {
             self.player1.position = CGPoint(x: self.player1.position.x + (data.velocity.x * velocityMultiplier), y: self.player1.position.y + (data.velocity.y * velocityMultiplier))
             self.player1.updateZoom()
             self.joystick.position = CGPoint(x: self.player1.position.x - self.JOYSTICK_X_OFFSET, y: self.player1.position.y - self.JOYSTICK_Y_OFFSET)
+            self.minimap.position = CGPoint(x: self.player1.position.x + self.MINIMAP_OFFSET_X, y: self.player1.position.y + self.MINIMAP_OFFSET_Y)
+            self.minimap.updatePlayer(position: self.player1.position)
         }
+    }
+    
+    let MINIMAP_OFFSET_X : CGFloat = 450
+    let MINIMAP_OFFSET_Y : CGFloat = 250
+    func spawnMinimap(graph: GKGridGraph<GKGridGraphNode>) {
+        minimap = MiniMapNode(maze: graph, self)
+        minimap.position = CGPoint(x: player1.position.x + MINIMAP_OFFSET_X, y: player1.position.y + MINIMAP_OFFSET_Y)
     }
     
     

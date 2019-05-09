@@ -23,18 +23,25 @@ class TileNode: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(node: GKGridGraphNode) {
+    init(node: GKGridGraphNode, minimap: Bool) {
         self.node = node
         
         var textureName = "Grass_Grid_Center"
-        
         if node.connectedNodes.count > 0 {
             //Wall
-            textureName = "Grass_Grid_Center"
+            if !minimap {
+                textureName = "Grass_Grid_Center"
+            }else {
+                textureName = "Sand_Grid_Center"
+            }
             typeName = "space"
         }else {
             //Floor
-            textureName = "Cobblestone_Grid_Center"
+            if !minimap {
+                textureName = "Cobblestone_Grid_Center"
+            }else {
+                textureName = "Water_Grid_Center"
+            }
             typeName = "wall"
         }
         
@@ -45,7 +52,7 @@ class TileNode: SKSpriteNode {
     }
     
     
-    func setPosition(in scene: GameScene) {
+    func setPosition(in scene: SKNode) {
         let WIDTH = scene.frame.width
         let HEIGHT = scene.frame.height
         
@@ -60,7 +67,6 @@ class TileNode: SKSpriteNode {
         let yPos = ufY - HEIGHT/2 + NODE_Y
         
         position = CGPoint(x: xPos, y: yPos)
-        print(size)
     }
     
 }
