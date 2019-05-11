@@ -37,7 +37,7 @@ class TileManager {
     
     
     func addTilesTo(scene: SKNode) {
-        if let scene = scene as? GameScene {
+        if scene as? GameScene != nil {
             addWallCollisions()
         }
         

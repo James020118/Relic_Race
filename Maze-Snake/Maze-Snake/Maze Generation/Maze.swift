@@ -172,6 +172,8 @@ class Maze {
                 // 1: East
                 // 2: North
                 // 3: West
+                var firstTile: MazeTile!
+                var secondTile: MazeTile!
                 switch next_Direction {
                 case 0:
                     // push neighbor cell into stack
@@ -179,48 +181,31 @@ class Maze {
                     // mark the cell and all surrounding cell visited
                     markVisited(x: current_Coordinates[0] + 2, y: current_Coordinates[1])
                     // change wall into space for both the cell and the path
-                    var firstTile = data[current_Coordinates[0] + 1][current_Coordinates[1]]
-                    var secondTile = data[current_Coordinates[0] + 2][current_Coordinates[1]]
-                    firstTile.cellType = Cell.Space
-                    top.node.addConnections(to: [firstTile.node], bidirectional: true)
-                    secondTile.cellType = Cell.Space
-                    firstTile.node.addConnections(to: [secondTile.node], bidirectional: true)
+                    firstTile = data[current_Coordinates[0] + 1][current_Coordinates[1]]
+                    secondTile = data[current_Coordinates[0] + 2][current_Coordinates[1]]
                 case 1:
                     mazeStack.push([current_Coordinates[0], current_Coordinates[1] + 2])
                     markVisited(x: current_Coordinates[0], y: current_Coordinates[1] + 2)
-                    
-                    var firstTile = data[current_Coordinates[0]][current_Coordinates[1] + 1]
-                    var secondTile = data[current_Coordinates[0]][current_Coordinates[1] + 2]
-                    
-                    firstTile.cellType = Cell.Space
-                    top.node.addConnections(to: [firstTile.node], bidirectional: true)
-                    secondTile.cellType = Cell.Space
-                    firstTile.node.addConnections(to: [secondTile.node], bidirectional: true)
+                    firstTile = data[current_Coordinates[0]][current_Coordinates[1] + 1]
+                    secondTile = data[current_Coordinates[0]][current_Coordinates[1] + 2]
                 case 2:
                     mazeStack.push([current_Coordinates[0] - 2, current_Coordinates[1]])
                     markVisited(x: current_Coordinates[0] - 2, y: current_Coordinates[1])
-                    
-                    var firstTile = data[current_Coordinates[0] - 1][current_Coordinates[1]]
-                    var secondTile = data[current_Coordinates[0] - 2][current_Coordinates[1]]
-                    
-                    firstTile.cellType = Cell.Space
-                    top.node.addConnections(to: [firstTile.node], bidirectional: true)
-                    secondTile.cellType = Cell.Space
-                    firstTile.node.addConnections(to: [secondTile.node], bidirectional: true)
+                    firstTile = data[current_Coordinates[0] - 1][current_Coordinates[1]]
+                    secondTile = data[current_Coordinates[0] - 2][current_Coordinates[1]]
                 case 3:
                     mazeStack.push([current_Coordinates[0], current_Coordinates[1] - 2])
                     markVisited(x: current_Coordinates[0], y: current_Coordinates[1] - 2)
-                    
-                    var firstTile = data[current_Coordinates[0]][current_Coordinates[1] - 1]
-                    var secondTile = data[current_Coordinates[0]][current_Coordinates[1] - 2]
-                    
-                    firstTile.cellType = Cell.Space
-                    top.node.addConnections(to: [firstTile.node], bidirectional: true)
-                    secondTile.cellType = Cell.Space
-                    firstTile.node.addConnections(to: [secondTile.node], bidirectional: true)
+                    firstTile = data[current_Coordinates[0]][current_Coordinates[1] - 1]
+                    secondTile = data[current_Coordinates[0]][current_Coordinates[1] - 2]
                 default:
                     print("")
                 }
+                
+                firstTile.cellType = Cell.Space
+                top.node.addConnections(to: [firstTile.node], bidirectional: true)
+                secondTile.cellType = Cell.Space
+                firstTile.node.addConnections(to: [secondTile.node], bidirectional: true)
                 
             } else {
                 mazeStack.pop()

@@ -48,8 +48,8 @@ class GameScene: SKScene {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        let location = touch.location(in: self)
+        //guard let touch = touches.first else { return }
+        //let location = touch.location(in: self)
     }
     
     
@@ -62,7 +62,7 @@ class GameScene: SKScene {
         }
         
         // Calculate time since last update
-        let dt = currentTime - self.lastUpdateTime
+        //let dt = currentTime - self.lastUpdateTime
         
         self.lastUpdateTime = currentTime
     }
