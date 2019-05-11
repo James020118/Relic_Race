@@ -9,8 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-let velocityMultiplier: CGFloat = 0.13
-let cameraScaleConstant: CGFloat = 0.3
+let velocityMultiplier: CGFloat = 0.3
 
 class GameScene: SKScene {
     
@@ -70,12 +69,14 @@ class GameScene: SKScene {
     
     
     
-    let JOYSTICK_X_OFFSET : CGFloat = 370
-    let JOYSTICK_Y_OFFSET : CGFloat = 270
+    let JOYSTICK_X_OFFSET : CGFloat = 450
+    let JOYSTICK_Y_OFFSET : CGFloat = 200
     func spawnJoystick() {
         // initialize joystick
         joystick.stick.image = UIImage(named: "stick")
         joystick.substrate.image = UIImage(named: "substrate")
+        joystick.substrate.diameter += 105
+        joystick.stick.diameter += 65
         joystick.position = CGPoint(x: player1.position.x - JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
         joystick.zPosition = 1
         addChild(joystick)
@@ -90,8 +91,8 @@ class GameScene: SKScene {
         }
     }
     
-    let MINIMAP_OFFSET_X : CGFloat = 450
-    let MINIMAP_OFFSET_Y : CGFloat = 250
+    let MINIMAP_OFFSET_X : CGFloat = 600
+    let MINIMAP_OFFSET_Y : CGFloat = 325
     func spawnMinimap(graph: GKGridGraph<GKGridGraphNode>) {
         minimap = MiniMapNode(maze: graph, self)
         minimap.position = CGPoint(x: player1.position.x + MINIMAP_OFFSET_X, y: player1.position.y + MINIMAP_OFFSET_Y)

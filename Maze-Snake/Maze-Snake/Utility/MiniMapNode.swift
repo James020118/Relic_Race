@@ -24,7 +24,7 @@ class MiniMapNode: SKSpriteNode {
         tileManager = TileManager(from: graph, with: textureSet)
         playerPos.fillColor = .red
         playerPos.zPosition = 6
-        let size = CGSize(width: scene.size.width/10, height: scene.size.height/10)
+        let size = CGSize(width: scene.size.width/8, height: scene.size.height/8)
         super.init(texture: nil, color: .black, size: size)
         scene.addChild(self)
         addChild(playerPos)

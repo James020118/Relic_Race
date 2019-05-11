@@ -43,7 +43,7 @@ class Player: Actor {
     }
     
     
-    let cameraScaleConstant: CGFloat = 0.3
+    let cameraScaleConstant: CGFloat = 0.4
     func spawnCamera() {
         guard let scene = parent as? GameScene else {
             return

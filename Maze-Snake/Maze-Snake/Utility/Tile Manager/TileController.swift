@@ -15,7 +15,7 @@ class TileManager {
     var tiles = [[TileNode]]()
     let graph: GKGridGraph<GKGridGraphNode>
     
-    let ZOOM_CONSTANT: CGFloat = 0.125
+    let ZOOM_CONSTANT: CGFloat = 0.085
     
     init(from graph: GKGridGraph<GKGridGraphNode>, with textures: TextureSet) {
         self.graph = graph
