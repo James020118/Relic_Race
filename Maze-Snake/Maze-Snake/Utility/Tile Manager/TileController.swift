@@ -17,10 +17,7 @@ class TileManager {
     
     let ZOOM_CONSTANT: CGFloat = 0.125
     
-    let isMiniMap: Bool
-    
-    init(from graph: GKGridGraph<GKGridGraphNode>, minimap: Bool) {
-        self.isMiniMap = minimap
+    init(from graph: GKGridGraph<GKGridGraphNode>, with textures: TextureSet) {
         self.graph = graph
         let nodes = graph.nodes as? [GKGridGraphNode] ?? []
         
@@ -30,7 +27,7 @@ class TileManager {
         for i in 0..<Maze.MAX_ROWS {
             tiles.append([])
             for _ in 0..<Maze.MAX_COLUMNS {
-                tiles[i].append(TileNode(node: nodes[counter], minimap: minimap))
+                tiles[i].append(TileNode(node: nodes[counter], with: textures))
                 counter += 1
             }
         }

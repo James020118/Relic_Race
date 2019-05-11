@@ -15,8 +15,13 @@ class MiniMapNode: SKSpriteNode {
     
     var playerPos = SKShapeNode(circleOfRadius: 10)
     
+    let textureSet = TextureSet(
+        floor: SKTexture(imageNamed: "Sand_Grid_Center"),
+        wall: SKTexture(imageNamed: "Water_Grid_Center")
+    )
+    
     init(maze graph: GKGridGraph<GKGridGraphNode>, _ scene: GameScene) {
-        tileManager = TileManager(from: graph, minimap: true)
+        tileManager = TileManager(from: graph, with: textureSet)
         playerPos.fillColor = .red
         playerPos.zPosition = 6
         let size = CGSize(width: scene.size.width/10, height: scene.size.height/10)
@@ -29,7 +34,7 @@ class MiniMapNode: SKSpriteNode {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        tileManager = TileManager(from: blankGraph(), minimap: true)
+        tileManager = TileManager(from: blankGraph(), with: TextureSet(floor: SKTexture(imageNamed: ""), wall: SKTexture(imageNamed: "")))
         super.init(coder: aDecoder)
     }
     

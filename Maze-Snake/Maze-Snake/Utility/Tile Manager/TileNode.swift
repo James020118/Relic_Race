@@ -23,29 +23,21 @@ class TileNode: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(node: GKGridGraphNode, minimap: Bool) {
+    init(node: GKGridGraphNode, with textures: TextureSet) {
         self.node = node
         
-        var textureName = "Grass_Grid_Center"
+        var texture: SKTexture!
         if node.connectedNodes.count > 0 {
-            //Wall
-            if !minimap {
-                textureName = "Grass_Grid_Center"
-            }else {
-                textureName = "Sand_Grid_Center"
-            }
+            //Floor
+            texture = textures.floor
             typeName = "space"
         }else {
-            //Floor
-            if !minimap {
-                textureName = "Cobblestone_Grid_Center"
-            }else {
-                textureName = "Water_Grid_Center"
-            }
+            //Wall
+            texture = textures.wall
             typeName = "wall"
         }
         
-        super.init(texture: SKTexture(imageNamed: textureName), color: .clear, size: CGSize(width: 10, height: 10))
+        super.init(texture: texture, color: .clear, size: CGSize(width: 10, height: 10))
         let pos = node.gridPosition
         column = Int(pos.x)
         row = Int(pos.y)

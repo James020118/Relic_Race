@@ -23,6 +23,11 @@ class GameScene: SKScene {
     
     var minimap: MiniMapNode!
     
+    let textureSet = TextureSet(
+        floor: SKTexture(imageNamed: "Grass_Grid_Center"),
+        wall: SKTexture(imageNamed: "Cobblestone_Grid_Center")
+    )
+    
     private var lastUpdateTime : TimeInterval = 0
     
     override func sceneDidLoad() {
@@ -31,7 +36,7 @@ class GameScene: SKScene {
         let maze = Maze(width: Maze.MAX_COLUMNS, height: Maze.MAX_ROWS)
         mazeGraph = maze.graph
         let graph = mazeGraph ?? blankGraph()
-        tileManager = TileManager(from: graph, minimap: false)
+        tileManager = TileManager(from: graph, with: textureSet)
         tileManager.addTilesTo(scene: self)
         
         self.lastUpdateTime = 0

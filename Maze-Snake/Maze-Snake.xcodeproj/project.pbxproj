@@ -29,6 +29,7 @@
 		61930BD8227D1B0700550DD0 /* TileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61930BD7227D1B0700550DD0 /* TileController.swift */; };
 		61930BDA227DD12200550DD0 /* TestTIles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 61930BD9227DD12200550DD0 /* TestTIles.sks */; };
 		61930BDC227DE7BF00550DD0 /* Maze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61930BDB227DE7BF00550DD0 /* Maze.swift */; };
+		619AFE5D22871E81000784A4 /* TextureSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619AFE5C22871E81000784A4 /* TextureSet.swift */; };
 		61B48313228397AF0045BF3A /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B48312228397AF0045BF3A /* Actor.swift */; };
 		61B48315228397EB0045BF3A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B48314228397EB0045BF3A /* Player.swift */; };
 		61DAA85A227CFBD1000FE4D0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DAA859227CFBD1000FE4D0 /* MainViewController.swift */; };
@@ -81,6 +82,7 @@
 		61930BD7227D1B0700550DD0 /* TileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileController.swift; sourceTree = "<group>"; };
 		61930BD9227DD12200550DD0 /* TestTIles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TestTIles.sks; sourceTree = "<group>"; };
 		61930BDB227DE7BF00550DD0 /* Maze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maze.swift; sourceTree = "<group>"; };
+		619AFE5C22871E81000784A4 /* TextureSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureSet.swift; sourceTree = "<group>"; };
 		61B48312228397AF0045BF3A /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		61B48314228397EB0045BF3A /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		61DAA859227CFBD1000FE4D0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				2E7870EA228205C900FB1303 /* Stack.swift */,
 				615D67FD2283C0D100D0100A /* GridPosition.swift */,
 				615D67FF2283C32500D0100A /* Directions.swift */,
+				619AFE5C22871E81000784A4 /* TextureSet.swift */,
 			);
 			path = "Data Structures";
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				2E9C4D022284AF4A009C9BFA /* AnalogStick.swift in Sources */,
 				61930BDC227DE7BF00550DD0 /* Maze.swift in Sources */,
 				2E39DF43227B65CA00EA1C84 /* AppDelegate.swift in Sources */,
+				619AFE5D22871E81000784A4 /* TextureSet.swift in Sources */,
 				61DAA85A227CFBD1000FE4D0 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
