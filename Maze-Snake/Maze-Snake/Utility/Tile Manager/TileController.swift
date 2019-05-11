@@ -88,11 +88,20 @@ class TileManager {
         return tiles[column][row]
     }
     
+    //MARK:- OPTIMIZATION
     
+    //TODO: TURN view.shouldCullNonVisibleNodes to false
+        //after viewOnScreenTiles() is complete
     
+    //TODO: Experiment with atlases
     
-    func path(from tile1: TileNode, to tile2: TileNode) {
-        graph.findPath(from: tile1.node, to: tile2.node)
+    //TODO: Remove offscreen nodes from parent and add those in-screen in
+    func viewOnScreenTiles(pos: CGPoint, parent: GameScene) {
+        let gridPos = indexFrom(position: pos)
+        var xlow = gridPos.column - 10
+        xlow = xlow > 0 ? xlow : 0
     }
+    
+    //TODO: Create bitmap to rasterize minimap
     
 }
