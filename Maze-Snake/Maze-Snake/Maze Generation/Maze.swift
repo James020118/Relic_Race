@@ -27,8 +27,8 @@ class MazeTile {
 
 class Maze {
     
-    static let MAX_ROWS = 31
-    static let MAX_COLUMNS = 55
+    static let MAX_ROWS = 21
+    static let MAX_COLUMNS = 37
     static let KEY = "gamma"
     
     var graph: GKGridGraph<GKGridGraphNode>
@@ -80,6 +80,7 @@ class Maze {
         mazeStack.push([startX, startY])
         markVisited(x: startX, y: startY)
         carve(x: startX, y: startY)
+        openUpMap()
         
         var nodes = [GKGridGraphNode]()
         for column in data {
@@ -226,5 +227,60 @@ class Maze {
             }
         }
     }
+    
+    func openUpMap() {
+        for y in 0..<data.count {
+            for x in 0..<data[y].count {
+                let node = data[y][x].node
+                //Dead End
+                if node.connectedNodes.count == 1 {
+                    var possibleDirection = [Direction]()
+                    var flag = true
+                    if x == Maze.MAX_COLUMNS-2 {
+                        possibleDirection.append(.left)
+                        flag = false
+                    }else if x == 1 {
+                        possibleDirection.append(.right)
+                        flag = false
+                    }
+                    if y == Maze.MAX_ROWS-2 {
+                        possibleDirection.append(.down)
+                        flag = false
+                    }else if y == 1 {
+                        possibleDirection.append(.up)
+                        flag = false
+                    }
+                    if flag {
+                        possibleDirection = [.up, .down, .left, .right]
+                    }
+                    
+                    let rand = possibleDirection.randomElement() ?? .up
+                    
+                    var node1 = node
+                    var node2 = node
+                    switch rand {
+                    case .up:
+                        node1 = data[y+1][x].node
+                        node2 = data[y+2][x].node
+                    case .down:
+                        node1 = data[y-1][x].node
+                        node2 = data[y-2][x].node
+                    case .left:
+                        node1 = data[y][x-1].node
+                        node2 = data[y][x-1].node
+                    case .right:
+                        node1 = data[y][x+1].node
+                        node2 = data[y][x+2].node
+                    }
+                    
+                    node.addConnections(to: [node1], bidirectional: true)
+                    node1.addConnections(to: [node2], bidirectional: true)
+                    
+                }
+            }
+        }
+    }
+    
+    
     
 }
