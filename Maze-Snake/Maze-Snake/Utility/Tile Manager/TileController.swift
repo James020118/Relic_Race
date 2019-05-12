@@ -95,11 +95,39 @@ class TileManager {
     
     //TODO: Experiment with atlases
     
-    //TODO: Remove offscreen nodes from parent and add those in-screen in
+    //Remove offscreen nodes from parent and add those in-screen in
+    //Removes over 600 nodes but doesn't reduce # of draw calls
     func viewOnScreenTiles(pos: CGPoint, parent: GameScene) {
         let gridPos = indexFrom(position: pos)
-        var xlow = gridPos.column - 10
+        
+        var xlow = gridPos.column - 8
         xlow = xlow > 0 ? xlow : 0
+        var xHigh = gridPos.column + 8
+        xHigh = xHigh < Maze.MAX_COLUMNS ? xHigh : Maze.MAX_COLUMNS-1
+        
+        var ylow = gridPos.row - 5
+        ylow = ylow > 0 ? ylow : 0
+        var yHigh = gridPos.row + 5
+        yHigh = yHigh < Maze.MAX_ROWS ? yHigh : Maze.MAX_ROWS-1
+        
+        for y in 0..<tiles.count {
+            for x in 0..<tiles[y].count {
+                let withinX = x >= xlow && x <= xHigh
+                let withinY = y >= ylow && y <= yHigh
+                
+                let tile = tiles[y][x]
+                if !(withinX && withinY) {
+                    tile.removeFromParent()
+                    continue
+                }
+                
+                if tile.parent == nil {
+                    parent.addChild(tile)
+                }
+                
+            }
+        }
+
     }
     
     //TODO: Create bitmap to rasterize minimap
