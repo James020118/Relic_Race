@@ -41,6 +41,7 @@ class TileNode: SKSpriteNode {
         let pos = node.gridPosition
         column = Int(pos.x)
         row = Int(pos.y)
+        blendMode = .replace
     }
     
     

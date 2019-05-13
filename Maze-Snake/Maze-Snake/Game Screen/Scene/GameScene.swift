@@ -45,7 +45,7 @@ class GameScene: SKScene {
         spawnJoystick()
         player1.spawnCamera()
         
-        //tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
+        tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
     }
     
     
@@ -90,7 +90,7 @@ class GameScene: SKScene {
             self.joystick.position = CGPoint(x: self.player1.position.x - self.JOYSTICK_X_OFFSET, y: self.player1.position.y - self.JOYSTICK_Y_OFFSET)
             self.minimap.position = CGPoint(x: self.player1.position.x + self.MINIMAP_OFFSET_X, y: self.player1.position.y + self.MINIMAP_OFFSET_Y)
             self.minimap.updatePlayer(position: self.player1.position)
-           //self.tileManager.viewOnScreenTiles(pos: self.player1.position, parent: self)
+           self.tileManager.viewOnScreenTiles(pos: self.player1.position, parent: self)
         }
         
     }

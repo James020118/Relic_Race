@@ -35,7 +35,7 @@ class GameViewController: UIViewController {
             view.showsNodeCount = true
             view.showsDrawCount = true
             view.showsPhysics = true
-            view.shouldCullNonVisibleNodes = true
+            view.shouldCullNonVisibleNodes = false
         }
         
     }
