@@ -88,12 +88,23 @@ class TileManager {
         return tiles[column][row]
     }
     
+    
+    
+    func getRandomTile() -> TileNode {
+        var spaces = [TileNode]()
+        for rows in tiles {
+            for tile in rows {
+                if tile.typeName == "space" {
+                    spaces.append(tile)
+                }
+            }
+        }
+        return spaces.randomElement() ?? tiles[1][1]
+    }
+    
     //MARK:- OPTIMIZATION
     
-    //TODO: TURN view.shouldCullNonVisibleNodes to false
-        //after viewOnScreenTiles() is complete
-    
-    //TODO: Experiment with atlases
+    //TODO: Use small related atlases
     
     //Remove offscreen nodes from parent and add those in-screen in
     //Removes over 600 nodes but doesn't reduce # of draw calls
