@@ -29,6 +29,7 @@ class Trophy: SKSpriteNode {
     
     func spawn() {
         gameScene.addChild(self)
+        zPosition = 6
         setRandomPosition()
     }
     

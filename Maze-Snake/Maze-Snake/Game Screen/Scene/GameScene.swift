@@ -20,6 +20,8 @@ class GameScene: SKScene {
     var joystick = AnalogJoystick(diameter: 150)
     var player1: Player!
     
+    var trophy: Trophy!
+    
     var minimap: MiniMapNode!
     
     let textureSet = TextureSet(
@@ -45,6 +47,9 @@ class GameScene: SKScene {
         spawnJoystick()
         player1.spawnCamera()
         
+        trophy = Trophy(texture: SKTexture(imageNamed: "trophy"), scene: self)
+        minimap.updateTrophy(position: trophy.position)
+        
         tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
     }
     
@@ -52,6 +57,8 @@ class GameScene: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         //guard let touch = touches.first else { return }
         //let location = touch.location(in: self)
+        trophy.setRandomPosition()
+        minimap.updateTrophy(position: trophy.position)
     }
     
     
@@ -101,7 +108,5 @@ class GameScene: SKScene {
         minimap = MiniMapNode(maze: graph, self)
         minimap.position = CGPoint(x: player1.position.x + MINIMAP_OFFSET_X, y: player1.position.y + MINIMAP_OFFSET_Y)
     }
-    
-    
     
 }

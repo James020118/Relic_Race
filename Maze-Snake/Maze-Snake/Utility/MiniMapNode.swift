@@ -14,6 +14,7 @@ class MiniMapNode: SKSpriteNode {
     var tileManager: TileManager
     
     var playerPos = SKShapeNode(circleOfRadius: 10)
+    var trophyPos = SKShapeNode(circleOfRadius: 10)
     
     let textureSet = TextureSet(
         floor: SKTexture(imageNamed: "Sand_Grid_Center"),
@@ -24,13 +25,16 @@ class MiniMapNode: SKSpriteNode {
         tileManager = TileManager(from: graph, with: textureSet)
         playerPos.fillColor = .red
         playerPos.zPosition = 6
+        trophyPos.fillColor = .yellow
+        trophyPos.zPosition = 6
         let size = CGSize(width: scene.size.width/8, height: scene.size.height/8)
         super.init(texture: nil, color: .black, size: size)
         scene.addChild(self)
         addChild(playerPos)
+        addChild(trophyPos)
         tileManager.addTilesTo(scene: self)
         updatePlayer(position: scene.player1.position)
-        zPosition = 5
+        zPosition = 7
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -46,6 +50,16 @@ class MiniMapNode: SKSpriteNode {
         let gridPos = scene.tileManager.indexFrom(position: position)
         let newPos = tileManager.getTile(row: gridPos.column, column: gridPos.row).position
         playerPos.position = newPos
+    }
+    
+    func updateTrophy(position: CGPoint) {
+        guard let scene = parent as? GameScene else {
+            return
+        }
+        
+        let gridPos = scene.tileManager.indexFrom(position: position)
+        let newPos = tileManager.getTile(row: gridPos.column, column: gridPos.row).position
+        trophyPos.position = newPos
     }
     
 }
