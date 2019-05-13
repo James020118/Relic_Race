@@ -18,6 +18,7 @@
 		2E39DF69227B65CA00EA1C84 /* Maze_SnakeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E39DF68227B65CA00EA1C84 /* Maze_SnakeUITests.swift */; };
 		2E7870EB228205C900FB1303 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7870EA228205C900FB1303 /* Stack.swift */; };
 		2E9C4D022284AF4A009C9BFA /* AnalogStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C4D012284AF4A009C9BFA /* AnalogStick.swift */; };
+		2EB4D68B2289EA96009F5F3E /* Trophy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB4D68A2289EA96009F5F3E /* Trophy.swift */; };
 		2EDD7A972280B6C4002B7783 /* NodeToDir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDD7A962280B6C4002B7783 /* NodeToDir.swift */; };
 		6111961F2284C4300075EEC9 /* MiniMapNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6111961E2284C4300075EEC9 /* MiniMapNode.swift */; };
 		61163AEE227CECDB001F49E1 /* Tiles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 61163AEC227CECDB001F49E1 /* Tiles.sks */; };
@@ -71,6 +72,7 @@
 		2E39DF6A227B65CA00EA1C84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E7870EA228205C900FB1303 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		2E9C4D012284AF4A009C9BFA /* AnalogStick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogStick.swift; sourceTree = "<group>"; };
+		2EB4D68A2289EA96009F5F3E /* Trophy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trophy.swift; sourceTree = "<group>"; };
 		2EDD7A962280B6C4002B7783 /* NodeToDir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeToDir.swift; sourceTree = "<group>"; };
 		6111961E2284C4300075EEC9 /* MiniMapNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniMapNode.swift; sourceTree = "<group>"; };
 		61163AEC227CECDB001F49E1 /* Tiles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Tiles.sks; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				2E39DF77227B66A000EA1C84 /* Game Screen */,
 				61930BDE227DE99100550DD0 /* Maze Generation */,
 				61B483112283976B0045BF3A /* Player Model */,
+				2EB4D6892289EA6F009F5F3E /* Trophy System */,
 			);
 			path = "Maze-Snake";
 			sourceTree = "<group>";
@@ -198,6 +201,14 @@
 				619AFE5C22871E81000784A4 /* TextureSet.swift */,
 			);
 			path = "Data Structures";
+			sourceTree = "<group>";
+		};
+		2EB4D6892289EA6F009F5F3E /* Trophy System */ = {
+			isa = PBXGroup;
+			children = (
+				2EB4D68A2289EA96009F5F3E /* Trophy.swift */,
+			);
+			path = "Trophy System";
 			sourceTree = "<group>";
 		};
 		2EDD7A952280B68A002B7783 /* Extensions */ = {
@@ -418,6 +429,7 @@
 			files = (
 				61E0D1FB228110B700A6DE5C /* GraphCreation.swift in Sources */,
 				2E39DF49227B65CA00EA1C84 /* GameScene.swift in Sources */,
+				2EB4D68B2289EA96009F5F3E /* Trophy.swift in Sources */,
 				2EDD7A972280B6C4002B7783 /* NodeToDir.swift in Sources */,
 				61930BD8227D1B0700550DD0 /* TileController.swift in Sources */,
 				615D68002283C32500D0100A /* Directions.swift in Sources */,

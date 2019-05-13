@@ -24,7 +24,7 @@ class GameScene: SKScene {
     
     let textureSet = TextureSet(
         floor: SKTexture(imageNamed: "Grass_Grid_Center"),
-        wall: SKTexture(imageNamed: "Cobblestone_Grid_Center")
+        wall: SKTexture(imageNamed: "wall_repeat")
     )
     
     private var lastUpdateTime : TimeInterval = 0
