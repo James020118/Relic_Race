@@ -11,7 +11,10 @@ import GameplayKit
 
 let velocityMultiplier: CGFloat = 0.3
 
-class GameScene: SKScene {
+let playerCategory: UInt32 = 0x1 << 1
+let trophyCategory: UInt32 = 0x1 << 2
+
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var mazeGraph: GKGridGraph<GKGridGraphNode>?
     
@@ -32,6 +35,8 @@ class GameScene: SKScene {
     private var lastUpdateTime : TimeInterval = 0
     
     override func sceneDidLoad() {
+        physicsWorld.contactDelegate = self
+        
         super.sceneDidLoad()
         
         let maze = Maze(width: Maze.MAX_COLUMNS, height: Maze.MAX_ROWS)
@@ -43,12 +48,24 @@ class GameScene: SKScene {
         self.lastUpdateTime = 0
         
         player1 = Player(texture: SKTexture(imageNamed: "stick"), parent: self)
+        player1.name = "player1"
         spawnMinimap(graph: graph)
         spawnJoystick()
         player1.spawnCamera()
         
         trophy = Trophy(texture: SKTexture(imageNamed: "trophy"), scene: self)
+//        trophy.physicsBody = SKPhysicsBody(circleOfRadius: 50)
+//        trophy.physicsBody?.isDynamic = false
+        trophy.name = "trophy"
         minimap.updateTrophy(position: trophy.position)
+        
+//        player1.physicsBody?.categoryBitMask = playerCategory
+//        player1.physicsBody?.contactTestBitMask = trophyCategory
+//        player1.physicsBody?.collisionBitMask = trophyCategory
+//
+//        trophy.physicsBody?.categoryBitMask = trophyCategory
+//        trophy.physicsBody?.contactTestBitMask = playerCategory
+//        trophy.physicsBody?.collisionBitMask = playerCategory
         
         tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
     }
@@ -57,13 +74,17 @@ class GameScene: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         //guard let touch = touches.first else { return }
         //let location = touch.location(in: self)
-        trophy.setRandomPosition()
-        minimap.updateTrophy(position: trophy.position)
+        
     }
     
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+        
+        if player1.position.x > trophy.position.x - 50 && player1.position.x < trophy.position.x + 50 && player1.position.y > trophy.position.y - 50 && player1.position.y < trophy.position.y + 50 {
+                trophy.setRandomPosition()
+                minimap.updateTrophy(position: trophy.position)
+        }
         
         // Initialize _lastUpdateTime if it has not already been
         if (self.lastUpdateTime == 0) {
@@ -108,5 +129,19 @@ class GameScene: SKScene {
         minimap = MiniMapNode(maze: graph, self)
         minimap.position = CGPoint(x: player1.position.x + MINIMAP_OFFSET_X, y: player1.position.y + MINIMAP_OFFSET_Y)
     }
+    
+//    func didBegin(_ contact: SKPhysicsContact) {
+//        let contactA = contact.bodyA.node ?? SKNode()
+//        let contactB = contact.bodyB.node ?? SKNode()
+//
+//        if (contactA.name == "trophy") || (contactB.name == "trophy") {
+//            if (contactA.name == "player1") || (contactB.name == "player1") {
+//                trophy.setRandomPosition()
+//                minimap.updateTrophy(position: trophy.position)
+//                contact.bodyB.node!.physicsBody = contact.bodyB.node!.physicsBody
+//                contact.bodyA.node!.physicsBody = contact.bodyA.node!.physicsBody
+//            }
+//        }
+//    }
     
 }
