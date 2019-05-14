@@ -40,6 +40,9 @@ class Player: Actor {
         physicsBody = SKPhysicsBody(circleOfRadius: frame.width / 2)
         physicsBody?.affectedByGravity = false
         physicsBody?.mass = 0
+        physicsBody?.categoryBitMask = playerCategory
+        physicsBody?.contactTestBitMask = trophyCategory
+        physicsBody?.collisionBitMask = trophyCategory
     }
     
     

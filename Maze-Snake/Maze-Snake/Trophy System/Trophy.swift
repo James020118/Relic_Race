@@ -19,6 +19,12 @@ class Trophy: SKSpriteNode {
         let height: CGFloat = gameScene.size.height / CGFloat(Maze.MAX_ROWS)
         let size = CGSize(width: width, height: height)
         super.init(texture: texture, color: .blue, size: size)
+        physicsBody = SKPhysicsBody(circleOfRadius: 50)
+        physicsBody?.isDynamic = false
+        physicsBody?.categoryBitMask = trophyCategory
+        physicsBody?.contactTestBitMask = playerCategory
+        physicsBody?.collisionBitMask = playerCategory
+        name = "trophy"
         spawn()
     }
     
