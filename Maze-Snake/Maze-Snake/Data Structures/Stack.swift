@@ -8,6 +8,10 @@
 
 import Foundation
 
+/*------------
+A Stack Data Structure implemented for use in Maze Generation
+ ------------*/
+
 struct Stack<Element> {
     var isEmpty: Bool {
         return array.isEmpty

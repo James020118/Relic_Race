@@ -10,31 +10,31 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
+
+/*-----------------
+ Viewcontroller to control the Game Screen
+ -----------------*/
 class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Spritekit GameScene creation
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFit
-                
-                if let gameScene = scene as? GameScene {
-                    let maze = Maze(width: Maze.MAX_COLUMNS, height: Maze.MAX_ROWS)
-                    gameScene.mazeGraph = maze.graph
-                }
-                
                 // Present the scene
                 view.presentScene(scene)
             }
             
+            //Optional Scene Settings
             view.ignoresSiblingOrder = true
             view.showsFPS = true
             view.showsNodeCount = true
             view.showsDrawCount = true
-            view.showsPhysics = true
+            view.showsPhysics = false
             view.shouldCullNonVisibleNodes = false
         }
         

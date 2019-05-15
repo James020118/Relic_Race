@@ -6,6 +6,9 @@
 //  Copyright © 2019 YBMW. All rights reserved.
 //
 
+/*------------
+ An enumeration to represent cardinal directions
+ ------------*/
 import Foundation
 
 enum Direction {

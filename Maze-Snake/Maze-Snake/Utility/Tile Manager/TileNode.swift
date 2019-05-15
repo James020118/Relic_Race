@@ -10,22 +10,34 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
+
+/*------------
+ A class to show a single tile in a maze
+ ------------*/
+
 class TileNode: SKSpriteNode {
-    
+    //Position
     var row: Int = 0
     var column: Int = 0
     
+    //Identifier
     var typeName: String = ""
     
+    //Related Node
     var node: GKGridGraphNode
     
+    //Saving data required init
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        node = GKGridGraphNode(gridPosition: simd_int2(x: 0, y: 0))
+        super.init(coder: aDecoder)
     }
     
+    //Conveniance init
     init(node: GKGridGraphNode, with textures: TextureSet) {
         self.node = node
         
+        //Assign texture based on
+        //whether its a wall or floor
         var texture: SKTexture!
         if node.connectedNodes.count > 0 {
             //Floor
@@ -38,13 +50,17 @@ class TileNode: SKSpriteNode {
         }
         
         super.init(texture: texture, color: .clear, size: CGSize(width: 10, height: 10))
+        //Set position
         let pos = node.gridPosition
         column = Int(pos.x)
         row = Int(pos.y)
+        //Optimization
         blendMode = .replace
     }
     
-    
+    /* Function that sets a node in its perspective
+        grid position in parent */
+    //Assigns proper size and tile position
     func setPosition(in scene: SKNode) {
         let WIDTH = scene.frame.width
         let HEIGHT = scene.frame.height

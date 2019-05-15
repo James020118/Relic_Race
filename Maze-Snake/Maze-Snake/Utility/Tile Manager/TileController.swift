@@ -10,19 +10,30 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
+/*------------
+ A class to manage a system of grid-based tiles
+ (Alternative for TileMap)
+ ------------*/
 
 class TileManager {
+    //A 2-D Array of tiles that represents a cell node
+    //tiles[y][x]
     var tiles = [[TileNode]]()
+    
+    //Graph of maze
     let graph: GKGridGraph<GKGridGraphNode>
     
+    //Constant used to control block size for camera zoom
     let ZOOM_CONSTANT: CGFloat = 0.085
     
+    //Conveniance Init
     init(from graph: GKGridGraph<GKGridGraphNode>, with textures: TextureSet) {
         self.graph = graph
         let nodes = graph.nodes as? [GKGridGraphNode] ?? []
         
         if nodes.isEmpty { return }
         
+        //Create all tile nodes based on maze graph
         var counter = 0
         for i in 0..<Maze.MAX_ROWS {
             tiles.append([])
@@ -35,7 +46,7 @@ class TileManager {
     }
     
     
-    
+    /* Function that adds all tiles to parent scene */
     func addTilesTo(scene: SKNode) {
         if scene as? GameScene != nil {
             addWallCollisions()
@@ -50,11 +61,12 @@ class TileManager {
     }
     
     
-    
+    /* Function that retreives the grid-based
+        coordinates from a position in the parent */
     func indexFrom(position: CGPoint) -> GridPosition {
         var row = 0
         var column = 0
-        
+        //Iterate through all tiles
         for y in 0..<tiles.count {
             for x in 0..<tiles[y].count {
                 if tiles[y][x].contains(position) {
@@ -68,7 +80,7 @@ class TileManager {
     }
     
     
-    
+    /* Function that adds physics body walls to all walls */
     private func addWallCollisions() {
         // give boundary to each tile in the tile sets
         for rows in tiles {
@@ -82,14 +94,14 @@ class TileManager {
     }
     
     
-    
-    
+    /* Function that retreives the tiles at
+        a given grid-position */
     func getTile(row: Int, column: Int) -> TileNode {
         return tiles[row][column]
     }
     
     
-    
+    /* Function that retreives a random floor tile */
     func getRandomTile() -> TileNode {
         var spaces = [TileNode]()
         for rows in tiles {

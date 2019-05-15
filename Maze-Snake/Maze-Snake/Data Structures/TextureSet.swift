@@ -9,6 +9,10 @@
 import Foundation
 import SpriteKit
 
+/*------------
+ A class to hold the textures for a given TileManager
+ ------------*/
+
 class TextureSet {
     let floor: SKTexture
     let wall: SKTexture
