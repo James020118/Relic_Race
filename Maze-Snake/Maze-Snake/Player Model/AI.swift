@@ -43,8 +43,6 @@ class AI: Actor {
         let node1 = tm.getTile(row: gridPos.row, column: gridPos.column).node
         let node2 = tm.getTile(row: point.row, column: point.column).node
         
-        print(node1.connectedNodes.count)
-        print(node2.connectedNodes.count)
         
         let shortestNodes = tm.graph.findPath(from: node1, to: node2)
         

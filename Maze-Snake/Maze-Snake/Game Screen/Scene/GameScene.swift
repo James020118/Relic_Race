@@ -50,6 +50,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player1 = Player(texture: SKTexture(imageNamed: "stick"), parent: self)
         player1.name = "player1"
         opponent = AI(texture: SKTexture(imageNamed: "Water_Grid_Center"), parent: self, pos: GridPosition(column: 1, row: Maze.MAX_ROWS-1))
+        opponent.name = "ai"
         spawnMinimap(graph: graph)
         spawnJoystick()
         player1.spawnCamera()
@@ -72,10 +73,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var lastOppUpdate: TimeInterval = 0
     override func update(_ currentTime: TimeInterval) {
         
-        if collisionFlag {
+        if player1CollisionFlag {
             trophy.setRandomPosition()
             minimap.updateTrophy(position: trophy.position)
-            collisionFlag = false
+            opponent.stop()
+            let trophyGridPos = tileManager.indexFrom(position: trophy.position)
+            opponent.gridPos = tileManager.indexFrom(position: opponent.position)
+            opponent.moveShortestPath(to: trophyGridPos)
+            player1CollisionFlag = false
+        }
+        
+        if opponentCollisionFlag {
+            trophy.setRandomPosition()
+            minimap.updateTrophy(position: trophy.position)
+            opponent.stop()
+            let trophyGridPos = tileManager.indexFrom(position: trophy.position)
+            opponent.gridPos = tileManager.indexFrom(position: opponent.position)
+            opponent.moveShortestPath(to: trophyGridPos)
+            opponentCollisionFlag = false
         }
         
         // Initialize _lastUpdateTime if it has not already been
@@ -129,14 +144,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         minimap.position = CGPoint(x: player1.position.x + MINIMAP_OFFSET_X, y: player1.position.y + MINIMAP_OFFSET_Y)
     }
     
-    var collisionFlag = false
+    var player1CollisionFlag = false
+    var opponentCollisionFlag = false
     func didBegin(_ contact: SKPhysicsContact) {
         let contactA = contact.bodyA.node ?? SKNode()
         let contactB = contact.bodyB.node ?? SKNode()
 
         if (contactA.name == "trophy") || (contactB.name == "trophy") {
             if (contactA.name == "player1") || (contactB.name == "player1") {
-                collisionFlag = true
+                player1CollisionFlag = true
+            }else if contactA.name == "ai" || contactB.name == "ai" {
+                opponentCollisionFlag = true
             }
         }
     }
