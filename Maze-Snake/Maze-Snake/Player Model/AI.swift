@@ -16,6 +16,17 @@ class AI: Actor {
     
     override init(texture: SKTexture?, parent: GameScene, pos: GridPosition) {
         super.init(texture: texture, parent: parent, pos: pos)
+        zPosition = 1
+        position = parent.tileManager.tiles[Maze.MAX_ROWS-1][1].position
+        gridPos = GridPosition(column: 1, row: Maze.MAX_ROWS-2)
+        
+        // create physics body for the player
+        physicsBody = SKPhysicsBody(circleOfRadius: frame.width / 2)
+        physicsBody?.affectedByGravity = false
+        physicsBody?.mass = 0
+        physicsBody?.categoryBitMask = playerCategory
+        physicsBody?.contactTestBitMask = trophyCategory
+        physicsBody?.collisionBitMask = trophyCategory
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,6 +42,9 @@ class AI: Actor {
         
         let node1 = tm.getTile(row: gridPos.row, column: gridPos.column).node
         let node2 = tm.getTile(row: point.row, column: point.column).node
+        
+        print(node1.connectedNodes.count)
+        print(node2.connectedNodes.count)
         
         let shortestNodes = tm.graph.findPath(from: node1, to: node2)
         

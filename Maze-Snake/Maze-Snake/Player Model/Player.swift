@@ -14,7 +14,7 @@ class Player: Actor {
     
     init(texture: SKTexture?, parent: GameScene) {
         camera = SKCameraNode()
-        super.init(texture: texture, parent: parent, pos: GridPosition(column: -1, row: -1))
+        super.init(texture: texture, parent: parent, pos: GridPosition(column: 1, row: Maze.MAX_ROWS-2))
         spawnPlayer()
     }
     
@@ -33,8 +33,7 @@ class Player: Actor {
         }
         
         zPosition = 1
-        position = scene.tileManager.tiles[Maze.MAX_ROWS-1][1].position
-        gridPos = GridPosition(column: 1, row: Maze.MAX_ROWS-1)
+        position = scene.tileManager.tiles[Maze.MAX_ROWS-2][1].position
         
         // create physics body for the player
         physicsBody = SKPhysicsBody(circleOfRadius: frame.width / 2)

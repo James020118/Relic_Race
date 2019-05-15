@@ -22,6 +22,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var joystick = AnalogJoystick(diameter: 150)
     var player1: Player!
+    var opponent: AI!
     
     var trophy: Trophy!
     
@@ -48,12 +49,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         player1 = Player(texture: SKTexture(imageNamed: "stick"), parent: self)
         player1.name = "player1"
+        opponent = AI(texture: SKTexture(imageNamed: "Water_Grid_Center"), parent: self, pos: GridPosition(column: 1, row: Maze.MAX_ROWS-1))
         spawnMinimap(graph: graph)
         spawnJoystick()
         player1.spawnCamera()
         
         trophy = Trophy(texture: SKTexture(imageNamed: "trophy"), scene: self)
         minimap.updateTrophy(position: trophy.position)
+        let trophyGridPos = tileManager.indexFrom(position: trophy.position)
+        opponent.moveShortestPath(to: trophyGridPos)
         
         tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
     }
@@ -62,10 +66,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         //guard let touch = touches.first else { return }
         //let location = touch.location(in: self)
-        
     }
     
     // Called before each frame is rendered
+    var lastOppUpdate: TimeInterval = 0
     override func update(_ currentTime: TimeInterval) {
         
         if collisionFlag {
@@ -81,6 +85,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Calculate time since last update
         //let dt = currentTime - self.lastUpdateTime
+        
+        
+        let dOppT = currentTime - lastOppUpdate
+        if dOppT > 0.25 {
+            minimap.updateOpponent(position: opponent.position)
+            self.lastOppUpdate = currentTime
+        }
         
         self.lastUpdateTime = currentTime
     }

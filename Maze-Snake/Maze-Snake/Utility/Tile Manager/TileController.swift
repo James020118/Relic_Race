@@ -85,7 +85,7 @@ class TileManager {
     
     
     func getTile(row: Int, column: Int) -> TileNode {
-        return tiles[column][row]
+        return tiles[row][column]
     }
     
     
