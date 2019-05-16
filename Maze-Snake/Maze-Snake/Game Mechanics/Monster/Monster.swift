@@ -8,6 +8,7 @@
 
 import Foundation
 import SpriteKit
+import GameplayKit
 
 class Monster: SKSpriteNode {
     
@@ -25,9 +26,9 @@ class Monster: SKSpriteNode {
         //TODO:- Put visual init of properties here
     }
     
-    func setRandomPosition() {
+    func setRandomPosition() -> GKGridGraphNode{
         guard let scene = parent as? GameScene else {
-            return
+            return GKGridGraphNode(gridPosition: simd_int2(x: 0, y: 0))
         }
         
         let tm = scene.tileManager!
@@ -36,6 +37,8 @@ class Monster: SKSpriteNode {
         })
         
         position = rand.position
+        
+        return rand.node
     }
     
     func generatePath() {
@@ -44,6 +47,14 @@ class Monster: SKSpriteNode {
         }
         
         //TODO:- Navigate through nodes in random directions to generate path
+        var nodes = scene.tileManager!.graph.nodes ?? []
+        var path = [setRandomPosition()]
+        for i in 0...5 {
+            let node = path.last!
+            let connectedNodes = node.connectedNodes
+            let newNode = connectedNodes.randomElement()
+            //path.append(newNode!)
+        }
         
         //TODO:- Once path of nodes is given,
             //convert to grid position, then [action]

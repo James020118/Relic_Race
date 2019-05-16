@@ -40,7 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //Textures for maze
     let textureSet = TextureSet(
-        floor: SKTexture(imageNamed: "Grass_Grid_Center"),
+        floor: SKTexture(imageNamed: "floor1"),
         wall: SKTexture(imageNamed: "wall_repeat-Two")
     )
     
@@ -61,15 +61,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.lastUpdateTime = 0
         
-        player1 = Player(texture: SKTexture(imageNamed: "stick"), parent: self)
+        player1 = Player(texture: SKTexture(imageNamed: "player"), parent: self)
         player1.name = "player1"
-        opponent = AI(texture: SKTexture(imageNamed: "Water_Grid_Center"), parent: self, pos: GridPosition(column: 1, row: Maze.MAX_ROWS-1))
+        opponent = AI(texture: SKTexture(imageNamed: "monster"), parent: self, pos: GridPosition(column: 1, row: Maze.MAX_ROWS-1))
         opponent.name = "ai"
         spawnMinimap(graph: graph)
         spawnJoystick()
         player1.spawnCamera()
         
-        trophy = Trophy(texture: SKTexture(imageNamed: "trophy"), scene: self)
+        trophy = Trophy(texture: SKTexture(imageNamed: "Trophyy"), scene: self)
         minimap.updateTrophy(position: trophy.position)
         let trophyGridPos = tileManager.indexFrom(position: trophy.position)
         opponent.moveShortestPath(to: trophyGridPos)
@@ -80,8 +80,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     /* Function that is called when user touches screen */
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //guard let touch = touches.first else { return }
-        //let location = touch.location(in: self)
+//        guard let touch = touches.first else { return }
+//        let location = touch.location(in: self)
+//        joystick.position = location
+//        JOYSTICK_X_OFFSET = location.x - player1.position.x
+//        JOYSTICK_Y_OFFSET = location.y - player1.position.y
     }
     
     
@@ -131,15 +134,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     /* Game Element Initialization of Properties  */
     
     //Joystick Init
-    let JOYSTICK_X_OFFSET : CGFloat = 450
-    let JOYSTICK_Y_OFFSET : CGFloat = 200
+    var JOYSTICK_X_OFFSET : CGFloat = 600
+    var JOYSTICK_Y_OFFSET : CGFloat = 275
     func spawnJoystick() {
         // initialize joystick
         joystick.stick.image = UIImage(named: "stick")
         joystick.substrate.image = UIImage(named: "substrate")
-        joystick.substrate.diameter += 105
-        joystick.stick.diameter += 65
-        joystick.position = CGPoint(x: player1.position.x - JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
+        joystick.substrate.diameter += 175
+        joystick.stick.diameter += 105
+        joystick.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
         joystick.zPosition = 1
         addChild(joystick)
         
@@ -147,8 +150,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             // track positions
             self.player1.position = CGPoint(x: self.player1.position.x + (data.velocity.x * velocityMultiplier), y: self.player1.position.y + (data.velocity.y * velocityMultiplier))
             self.player1.updateZoom()
-            self.joystick.position = CGPoint(x: self.player1.position.x - self.JOYSTICK_X_OFFSET, y: self.player1.position.y - self.JOYSTICK_Y_OFFSET)
-            self.minimap.position = CGPoint(x: self.player1.position.x + self.MINIMAP_OFFSET_X, y: self.player1.position.y + self.MINIMAP_OFFSET_Y)
+            self.joystick.position = CGPoint(x: self.player1.position.x + self.JOYSTICK_X_OFFSET, y: self.player1.position.y - self.JOYSTICK_Y_OFFSET)
+            self.minimap.position = CGPoint(x: self.player1.position.x - self.MINIMAP_OFFSET_X, y: self.player1.position.y + self.MINIMAP_OFFSET_Y)
             self.minimap.updatePlayer(position: self.player1.position)
            //Optimization
             self.tileManager.viewOnScreenTiles(pos: self.player1.position, parent: self)
@@ -161,7 +164,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let MINIMAP_OFFSET_Y : CGFloat = 325
     func spawnMinimap(graph: GKGridGraph<GKGridGraphNode>) {
         minimap = MiniMapNode(maze: graph, self)
-        minimap.position = CGPoint(x: player1.position.x + MINIMAP_OFFSET_X, y: player1.position.y + MINIMAP_OFFSET_Y)
+        minimap.position = CGPoint(x: player1.position.x - MINIMAP_OFFSET_X, y: player1.position.y + MINIMAP_OFFSET_Y)
     }
     
     //MARK:- SKPhysicsContactDelegate
