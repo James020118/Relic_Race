@@ -119,7 +119,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         let dOppT = currentTime - lastOppUpdate
-        if dOppT > 0.25 {
+        if dOppT > 0.125 {
             minimap.updateOpponent(position: opponent.position)
             self.lastOppUpdate = currentTime
         }
