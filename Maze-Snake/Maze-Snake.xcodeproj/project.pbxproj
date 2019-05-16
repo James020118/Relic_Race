@@ -31,6 +31,7 @@
 		61930BDA227DD12200550DD0 /* TestTIles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 61930BD9227DD12200550DD0 /* TestTIles.sks */; };
 		61930BDC227DE7BF00550DD0 /* Maze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61930BDB227DE7BF00550DD0 /* Maze.swift */; };
 		619AFE5D22871E81000784A4 /* TextureSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619AFE5C22871E81000784A4 /* TextureSet.swift */; };
+		619FEA2C228CEE4600C28842 /* Monster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619FEA2B228CEE4600C28842 /* Monster.swift */; };
 		61B48313228397AF0045BF3A /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B48312228397AF0045BF3A /* Actor.swift */; };
 		61B48315228397EB0045BF3A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B48314228397EB0045BF3A /* Player.swift */; };
 		61DAA85A227CFBD1000FE4D0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DAA859227CFBD1000FE4D0 /* MainViewController.swift */; };
@@ -85,6 +86,7 @@
 		61930BD9227DD12200550DD0 /* TestTIles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TestTIles.sks; sourceTree = "<group>"; };
 		61930BDB227DE7BF00550DD0 /* Maze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maze.swift; sourceTree = "<group>"; };
 		619AFE5C22871E81000784A4 /* TextureSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureSet.swift; sourceTree = "<group>"; };
+		619FEA2B228CEE4600C28842 /* Monster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monster.swift; sourceTree = "<group>"; };
 		61B48312228397AF0045BF3A /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		61B48314228397EB0045BF3A /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		61DAA859227CFBD1000FE4D0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -148,9 +150,7 @@
 				2E39DF78227B67D400EA1C84 /* Storyboards */,
 				61DAA858227CFBBC000FE4D0 /* Main Screen */,
 				2E39DF77227B66A000EA1C84 /* Game Screen */,
-				61930BDE227DE99100550DD0 /* Maze Generation */,
-				61B483112283976B0045BF3A /* Player Model */,
-				2EB4D6892289EA6F009F5F3E /* Trophy System */,
+				619FEA2A228CEDE800C28842 /* Game Mechanics */,
 			);
 			path = "Maze-Snake";
 			sourceTree = "<group>";
@@ -245,6 +245,25 @@
 				61930BDB227DE7BF00550DD0 /* Maze.swift */,
 			);
 			path = "Maze Generation";
+			sourceTree = "<group>";
+		};
+		619FEA29228CEDBD00C28842 /* Monster */ = {
+			isa = PBXGroup;
+			children = (
+				619FEA2B228CEE4600C28842 /* Monster.swift */,
+			);
+			path = Monster;
+			sourceTree = "<group>";
+		};
+		619FEA2A228CEDE800C28842 /* Game Mechanics */ = {
+			isa = PBXGroup;
+			children = (
+				619FEA29228CEDBD00C28842 /* Monster */,
+				2EB4D6892289EA6F009F5F3E /* Trophy System */,
+				61B483112283976B0045BF3A /* Player Model */,
+				61930BDE227DE99100550DD0 /* Maze Generation */,
+			);
+			path = "Game Mechanics";
 			sourceTree = "<group>";
 		};
 		61B483112283976B0045BF3A /* Player Model */ = {
@@ -427,6 +446,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				619FEA2C228CEE4600C28842 /* Monster.swift in Sources */,
 				61E0D1FB228110B700A6DE5C /* GraphCreation.swift in Sources */,
 				2E39DF49227B65CA00EA1C84 /* GameScene.swift in Sources */,
 				2EB4D68B2289EA96009F5F3E /* Trophy.swift in Sources */,
