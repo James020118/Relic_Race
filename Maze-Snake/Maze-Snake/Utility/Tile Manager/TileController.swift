@@ -102,13 +102,17 @@ class TileManager {
     
     
     /* Function that retreives a random floor tile */
-    func getRandomTile() -> TileNode {
+    func getRandomTile(condition: (TileNode)-> Bool = { _ in return true }) -> TileNode {
         var spaces = [TileNode]()
         for rows in tiles {
             for tile in rows {
+                
                 if tile.typeName == "space" {
-                    spaces.append(tile)
+                    if condition(tile) {
+                        spaces.append(tile)
+                    }
                 }
+                
             }
         }
         return spaces.randomElement() ?? tiles[1][1]
