@@ -53,7 +53,9 @@ class Monster: Actor {
         gridPos = GridPosition(from: rand.node.gridPosition)
         position = rand.position
         
-        return tm.getTile(row: 1, column: 1).node//rand.node
+        print("Monsters Position: ")
+        print(gridPos)
+        return rand.node
     }
     
     /* Create Infinitely Repeating Path for Monster */
@@ -63,22 +65,61 @@ class Monster: Actor {
         }
         
         //Navigate through nodes in random directions to generate path
-        var path = [setRandomPosition()]
-        for _ in 0...8 {
-            let node = path.last!
+        let oNode = setRandomPosition()
+        var path1 = [oNode]
+        var path2 = [oNode]
+        var firstDirection: GKGridGraphNode!
+        //First Path
+        for _ in 1...5 {
+            let node = path1.last!
             var connectedNodes = node.connectedNodes
-            var fIndex = -1
-            for i in 0..<connectedNodes.count {
-                if node == connectedNodes[i] {
-                    fIndex = i
+            var i = 0
+            outerloop: while i < connectedNodes.count {
+                for traveredNode in path1 {
+                    if connectedNodes[i] == traveredNode {
+                        connectedNodes.remove(at: i)
+                        i += 1
+                        continue outerloop;
+                    }
                 }
-            }
-            if fIndex != -1 {
-                connectedNodes.remove(at: fIndex)
+                i += 1
             }
             let newNode = connectedNodes.randomElement()
-            path.append(newNode! as! GKGridGraphNode)
+            firstDirection = newNode! as? GKGridGraphNode
+            path1.append(firstDirection)
         }
+        //Remove Possibility of Traversing First Path
+        var firstPossibilities = path2[0].connectedNodes
+        for index in 0..<firstPossibilities.count {
+            if firstPossibilities[index] == firstDirection {
+                firstPossibilities.remove(at: index)
+                break
+            }
+        }
+        //Second Path
+        for _ in 1...5 {
+            let node = path2.last!
+            var connectedNodes = node.connectedNodes
+            var i = 0
+            outerloop: while i < connectedNodes.count {
+                for traversedNode in path2 {
+                    if connectedNodes[i] == traversedNode {
+                        connectedNodes.remove(at: i)
+                        i += 1
+                        continue outerloop;
+                    }
+                }
+                i += 1
+            }
+            let newNode = connectedNodes.randomElement()
+            path2.append(newNode! as! GKGridGraphNode)
+        }
+        
+        //Generate Full Monsters Path
+        var path = path1
+        path += path1.reversed()
+        path += path2
+        path += path2.reversed()
         
         //Once path of nodes is given, convert to grid position, then [action]
         var actions = [SKAction]()
@@ -89,8 +130,7 @@ class Monster: Actor {
             actions.append(action)
         }
         
-        //Create action sequence with [given [action], [action].reversed()] repeating
-        actions += actions.reversed()
+        //Create action sequence with given [action] repeating
         let pathAction = SKAction.sequence(actions)
         return SKAction.repeatForever(pathAction)
     }
