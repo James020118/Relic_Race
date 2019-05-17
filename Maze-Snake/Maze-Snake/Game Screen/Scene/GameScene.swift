@@ -14,6 +14,7 @@ let velocityMultiplier: CGFloat = 0.2
 //Contact Identifiers
 let playerCategory: UInt32 = 0x1 << 1
 let trophyCategory: UInt32 = 0x1 << 2
+let monsterCategory: UInt32 = 0x1 << 3
 
 /*-----------------
  Scene for PvAI Gameplay
@@ -75,6 +76,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         opponent.moveShortestPath(to: trophyGridPos)
         
         tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
+        
+        let monster = Monster(texture: SKTexture(imageNamed: ""), parent: self)
     }
     
     

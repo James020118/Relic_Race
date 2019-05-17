@@ -10,23 +10,36 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-class Monster: SKSpriteNode {
+class Monster: Actor {
     
-    static let TILE_TRAVEL_TIME = 0.05
+    static let TILE_TRAVEL_TIME = 0.5
     
     init(texture: SKTexture, parent: GameScene) {
-        let size = CGSize(width: 0, height: 0)
-        super.init(texture: texture, color: .black, size: size)
+        super.init(texture: texture, parent: parent, pos: GridPosition(column: 0, row: 0))
+        spawn()
     }
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
+    /* Function that initializes the Monster */
     func spawn() {
-        //TODO:- Put visual init of properties here
+        //Visual init of properties here
+        zPosition = 1
+        
+        //Create physics body for the monster
+        physicsBody = SKPhysicsBody(circleOfRadius: frame.width / 2)
+        physicsBody?.affectedByGravity = false
+        physicsBody?.mass = 0
+//        physicsBody?.categoryBitMask = playerCategory
+//        physicsBody?.contactTestBitMask = trophyCategory
+//        physicsBody?.collisionBitMask = trophyCategory
+        
+        //Start Path action
+        run(generatePath())
     }
     
+    /* Spawn the monster in random floor tile */
     func setRandomPosition() -> GKGridGraphNode{
         guard let scene = parent as? GameScene else {
             return GKGridGraphNode(gridPosition: simd_int2(x: 0, y: 0))
@@ -37,11 +50,13 @@ class Monster: SKSpriteNode {
             return tile.node.connectedNodes.count > 2
         })
         
+        gridPos = GridPosition(from: rand.node.gridPosition)
         position = rand.position
         
-        return rand.node
+        return tm.getTile(row: 1, column: 1).node//rand.node
     }
     
+    /* Create Infinitely Repeating Path for Monster */
     func generatePath() -> SKAction {
         guard let scene = parent as? GameScene else {
             return SKAction()
@@ -49,9 +64,18 @@ class Monster: SKSpriteNode {
         
         //Navigate through nodes in random directions to generate path
         var path = [setRandomPosition()]
-        for _ in 0...5 {
+        for _ in 0...8 {
             let node = path.last!
-            let connectedNodes = node.connectedNodes
+            var connectedNodes = node.connectedNodes
+            var fIndex = -1
+            for i in 0..<connectedNodes.count {
+                if node == connectedNodes[i] {
+                    fIndex = i
+                }
+            }
+            if fIndex != -1 {
+                connectedNodes.remove(at: fIndex)
+            }
             let newNode = connectedNodes.randomElement()
             path.append(newNode! as! GKGridGraphNode)
         }
