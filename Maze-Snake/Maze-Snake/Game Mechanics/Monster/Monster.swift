@@ -39,6 +39,7 @@ class Monster: Actor {
         run(generatePath())
     }
     
+    
     /* Spawn the monster in random floor tile */
     func setRandomPosition() -> GKGridGraphNode{
         guard let scene = parent as? GameScene else {
@@ -58,6 +59,7 @@ class Monster: Actor {
         return rand.node
     }
     
+    
     /* Create Infinitely Repeating Path for Monster */
     func generatePath() -> SKAction {
         guard let scene = parent as? GameScene else {
@@ -73,44 +75,58 @@ class Monster: Actor {
         for _ in 1...5 {
             let node = path1.last!
             var connectedNodes = node.connectedNodes
+            //Prevent chance of going back and forth
             var i = 0
-            outerloop: while i < connectedNodes.count {
+            while i < connectedNodes.count {
                 for traveredNode in path1 {
                     if connectedNodes[i] == traveredNode {
                         connectedNodes.remove(at: i)
-                        i += 1
-                        continue outerloop;
+                        i -= 1
+                        break
                     }
                 }
                 i += 1
             }
+            //In case of dead end
+            if connectedNodes.isEmpty {
+                firstDirection = GKGridGraphNode(gridPosition: simd_int2(x: -1, y: -1))
+                break
+            }
+            //Add new random node to path
             let newNode = connectedNodes.randomElement()
             firstDirection = newNode! as? GKGridGraphNode
             path1.append(firstDirection)
         }
-        //Remove Possibility of Traversing First Path
-        var firstPossibilities = path2[0].connectedNodes
-        for index in 0..<firstPossibilities.count {
-            if firstPossibilities[index] == firstDirection {
-                firstPossibilities.remove(at: index)
-                break
-            }
-        }
         //Second Path
-        for _ in 1...5 {
+        for counter in 1...5 {
             let node = path2.last!
             var connectedNodes = node.connectedNodes
+            //Remove Possibility of Traversing First Path
+            if counter == 1 {
+                for index in 0..<connectedNodes.count {
+                    if connectedNodes[index] == firstDirection {
+                        connectedNodes.remove(at: index)
+                        break
+                    }
+                }
+            }
+            //Prevent chance of going back and forth
             var i = 0
-            outerloop: while i < connectedNodes.count {
+            while i < connectedNodes.count {
                 for traversedNode in path2 {
                     if connectedNodes[i] == traversedNode {
                         connectedNodes.remove(at: i)
-                        i += 1
-                        continue outerloop;
+                        i -= 1
+                        break
                     }
                 }
                 i += 1
             }
+            //In case of dead end
+            if connectedNodes.isEmpty {
+                break
+            }
+            //Add new random node to path
             let newNode = connectedNodes.randomElement()
             path2.append(newNode! as! GKGridGraphNode)
         }

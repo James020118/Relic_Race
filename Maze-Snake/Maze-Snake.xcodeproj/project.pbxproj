@@ -36,6 +36,7 @@
 		61B48315228397EB0045BF3A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B48314228397EB0045BF3A /* Player.swift */; };
 		61DAA85A227CFBD1000FE4D0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DAA859227CFBD1000FE4D0 /* MainViewController.swift */; };
 		61E0D1FB228110B700A6DE5C /* GraphCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E0D1FA228110B700A6DE5C /* GraphCreation.swift */; };
+		61F7C6AA228EF5F20006597B /* GraphNodeEquality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F7C6A9228EF5F20006597B /* GraphNodeEquality.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		61B48314228397EB0045BF3A /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		61DAA859227CFBD1000FE4D0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		61E0D1FA228110B700A6DE5C /* GraphCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCreation.swift; sourceTree = "<group>"; };
+		61F7C6A9228EF5F20006597B /* GraphNodeEquality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphNodeEquality.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 			children = (
 				2EDD7A962280B6C4002B7783 /* NodeToDir.swift */,
 				61E0D1FA228110B700A6DE5C /* GraphCreation.swift */,
+				61F7C6A9228EF5F20006597B /* GraphNodeEquality.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 				61B48315228397EB0045BF3A /* Player.swift in Sources */,
 				6111961F2284C4300075EEC9 /* MiniMapNode.swift in Sources */,
 				615D67FC2283BD0A00D0100A /* AI.swift in Sources */,
+				61F7C6AA228EF5F20006597B /* GraphNodeEquality.swift in Sources */,
 				61B48313228397AF0045BF3A /* Actor.swift in Sources */,
 				2E39DF4B227B65CA00EA1C84 /* GameViewController.swift in Sources */,
 				615D67FE2283C0D100D0100A /* GridPosition.swift in Sources */,
