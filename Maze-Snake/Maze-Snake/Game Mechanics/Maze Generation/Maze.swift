@@ -86,6 +86,7 @@ class Maze {
         for column in data {
             for tile in column {
                 nodes.append(tile.node)
+                print(tile.node.connectedNodes.count)
             }
         }
         graph = GKGridGraph(nodes)
@@ -238,9 +239,16 @@ class Maze {
                     if flag {
                         possibleDirection = [.up, .down, .left, .right]
                     }
+                    //Make sure possibilities already to don exist
+                    let currentDir = node.nodeDirections()
+                    possibleDirection = possibleDirection.filter { !currentDir.contains($0) }
+                    //No possible paths
+                    if possibleDirection.isEmpty {
+                        continue
+                    }
                     
-                    let rand = possibleDirection.randomElement() ?? .up
-                    
+                    //Choose a random possible path to carve
+                    let rand = possibleDirection.randomElement()!
                     var node1 = node
                     var node2 = node
                     switch rand {
@@ -252,7 +260,7 @@ class Maze {
                         node2 = data[y-2][x].node
                     case .left:
                         node1 = data[y][x-1].node
-                        node2 = data[y][x-1].node
+                        node2 = data[y][x-2].node
                     case .right:
                         node1 = data[y][x+1].node
                         node2 = data[y][x+2].node
