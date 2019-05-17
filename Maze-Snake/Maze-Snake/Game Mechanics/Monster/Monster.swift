@@ -47,6 +47,8 @@ class Monster: Actor {
         }
         
         let tm = scene.tileManager!
+        //TODO:- Fix Tile Spawning
+        //NOTE: SOMETHING WRONG WITH GRAPH GENERATION? AND CONNECTED NODES
         let rand = tm.getRandomTile(condition: { tile in
             return tile.node.connectedNodes.count > 2
         })
@@ -72,7 +74,7 @@ class Monster: Actor {
         var path2 = [oNode]
         var firstDirection: GKGridGraphNode!
         //First Path
-        for _ in 1...5 {
+        for counter in 1...5 {
             let node = path1.last!
             var connectedNodes = node.connectedNodes
             //Prevent chance of going back and forth
@@ -93,9 +95,11 @@ class Monster: Actor {
                 break
             }
             //Add new random node to path
-            let newNode = connectedNodes.randomElement()
-            firstDirection = newNode! as? GKGridGraphNode
-            path1.append(firstDirection)
+            let newNode = connectedNodes.randomElement()! as! GKGridGraphNode
+            if counter == 1 {
+                firstDirection = newNode
+            }
+            path1.append(newNode)
         }
         //Second Path
         for counter in 1...5 {
