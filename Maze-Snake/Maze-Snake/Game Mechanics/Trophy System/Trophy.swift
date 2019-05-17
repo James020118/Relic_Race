@@ -44,7 +44,4 @@ class Trophy: SKSpriteNode {
         position = tile.position
     }
     
-    //TODO: Add contact bitmask with player that
-        //respawns trophy to new position
-    
 }
