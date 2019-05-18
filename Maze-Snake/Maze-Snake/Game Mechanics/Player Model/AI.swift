@@ -12,13 +12,16 @@ import GameplayKit
 
 class AI: Actor {
     
+    var AI_Score = 0
+    
     static let TILE_TIME = 0.2
     
     override init(texture: SKTexture?, parent: GameScene, pos: GridPosition) {
         super.init(texture: texture, parent: parent, pos: pos)
         zPosition = 1
-        position = parent.tileManager.tiles[Maze.MAX_ROWS-1][1].position
-        gridPos = GridPosition(column: 1, row: Maze.MAX_ROWS-2)
+        // AI spawn point: bottom right corner of the maze
+        position = parent.tileManager.tiles[1][Maze.MAX_COLUMNS-2].position
+        gridPos = GridPosition(column: Maze.MAX_COLUMNS-2, row: 1)
         
         // create physics body for the player
         physicsBody = SKPhysicsBody(circleOfRadius: frame.width / 2)
@@ -73,5 +76,8 @@ class AI: Actor {
         self.run(comboAction)
     }
     
-    
+    func incrementScore() {
+        AI_Score += 1
+        print("ai score: \(AI_Score)")
+    }
 }

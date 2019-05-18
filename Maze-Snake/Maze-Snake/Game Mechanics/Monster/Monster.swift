@@ -31,9 +31,9 @@ class Monster: Actor {
         physicsBody = SKPhysicsBody(circleOfRadius: frame.width / 2)
         physicsBody?.affectedByGravity = false
         physicsBody?.mass = 0
-//        physicsBody?.categoryBitMask = playerCategory
-//        physicsBody?.contactTestBitMask = trophyCategory
-//        physicsBody?.collisionBitMask = trophyCategory
+        physicsBody?.categoryBitMask = monsterCategory
+        physicsBody?.contactTestBitMask = playerCategory
+        physicsBody?.collisionBitMask = playerCategory
         
         //Start Path action
         run(generatePath())
@@ -56,8 +56,8 @@ class Monster: Actor {
         gridPos = GridPosition(from: rand.node.gridPosition)
         position = rand.position
         
-        print("Monsters Position: ")
-        print(gridPos)
+//        print("Monsters Position: ")
+//        print(gridPos)
         return rand.node
     }
     

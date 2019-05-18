@@ -18,9 +18,11 @@ class MiniMapNode: SKSpriteNode {
     var tileManager: TileManager
     
     //Trackable Player Icons
-    var playerPos = SKShapeNode(circleOfRadius: 10)
-    var trophyPos = SKShapeNode(circleOfRadius: 10)
-    var opponentPos = SKShapeNode(circleOfRadius: 10)
+    var playerPos = SKSpriteNode(imageNamed: "player")
+    var trophyPos = SKSpriteNode(imageNamed: "Trophyy")
+    var opponentPos = SKSpriteNode(imageNamed: "monster")
+    var monsterPos1 = SKSpriteNode(imageNamed: "monster")
+    var monsterPos2 = SKSpriteNode(imageNamed: "monster")
     
     //Textures for minimap
     let textureSet = TextureSet(
@@ -32,12 +34,16 @@ class MiniMapNode: SKSpriteNode {
     init(maze graph: GKGridGraph<GKGridGraphNode>, _ scene: GameScene) {
         tileManager = TileManager(from: graph, with: textureSet)
         //Init Tracking Icons
-        playerPos.fillColor = .green
+        playerPos.size = CGSize(width: 30, height: 30)
         playerPos.zPosition = 6
-        trophyPos.fillColor = .yellow
+        trophyPos.size = CGSize(width: 30, height: 35)
         trophyPos.zPosition = 6
-        opponentPos.fillColor = .red
+        opponentPos.size = CGSize(width: 30, height: 30)
         opponentPos.zPosition = 6
+        monsterPos1.size = CGSize(width: 30, height: 30)
+        monsterPos1.zPosition = 6
+        monsterPos2.size = CGSize(width: 30, height: 30)
+        monsterPos2.zPosition = 6
         //Call parent init
         let size = CGSize(width: scene.size.width/8, height: scene.size.height/8)
         super.init(texture: nil, color: .black, size: size)
@@ -47,11 +53,15 @@ class MiniMapNode: SKSpriteNode {
         addChild(playerPos)
         addChild(trophyPos)
         addChild(opponentPos)
+        addChild(monsterPos1)
+        addChild(monsterPos2)
         //Init tiles
         tileManager.addTilesTo(scene: self)
         //Update trackable icons
         updatePlayer(position: scene.player1.position)
         updateOpponent(position: scene.opponent.position)
+        updateMonster(position: scene.monster1.position)
+        updateMonster2(position: scene.monster2.position)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -76,6 +86,16 @@ class MiniMapNode: SKSpriteNode {
     func updateOpponent(position: CGPoint) {
         update(position: position, property: { point in
             opponentPos.position = point
+        })
+    }
+    func updateMonster(position: CGPoint) {
+        update(position: position, property: { point in
+            monsterPos1.position = point
+        })
+    }
+    func updateMonster2(position: CGPoint) {
+        update(position: position, property: { point in
+            monsterPos2.position = point
         })
     }
     

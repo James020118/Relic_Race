@@ -33,6 +33,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var player1: Player!
     var opponent: AI!
     
+    //Monsters
+    var monster1: Monster!
+    var monster2: Monster!
+    
     //Objective
     var trophy: Trophy!
     
@@ -62,6 +66,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.lastUpdateTime = 0
         
+        monster1 = Monster(texture: SKTexture(imageNamed: "monster"), parent: self)
+        monster1.name = "monster1"
+        monster2 = Monster(texture: SKTexture(imageNamed: "monster"), parent: self)
+        monster2.name = "monster2"
+        
         player1 = Player(texture: SKTexture(imageNamed: "player"), parent: self)
         player1.name = "player1"
         opponent = AI(texture: SKTexture(imageNamed: "monster"), parent: self, pos: GridPosition(column: 1, row: Maze.MAX_ROWS-1))
@@ -76,8 +85,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         opponent.moveShortestPath(to: trophyGridPos)
         
         tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
-        
-        let monster = Monster(texture: SKTexture(imageNamed: ""), parent: self)
     }
     
     
@@ -96,6 +103,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         
         if player1CollisionFlag {
+            player1.incrementScore()
+            
             trophy.setRandomPosition()
             minimap.updateTrophy(position: trophy.position)
             opponent.stop()
@@ -106,6 +115,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if opponentCollisionFlag {
+            opponent.incrementScore()
+            
             trophy.setRandomPosition()
             minimap.updateTrophy(position: trophy.position)
             opponent.stop()
@@ -113,6 +124,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             opponent.gridPos = tileManager.indexFrom(position: opponent.position)
             opponent.moveShortestPath(to: trophyGridPos)
             opponentCollisionFlag = false
+        }
+        
+        if monsterCollisionFlag {
+            print("collision")
+            monsterCollisionFlag = false
         }
         
         // Initialize _lastUpdateTime if it has not already been
@@ -127,6 +143,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let dOppT = currentTime - lastOppUpdate
         if dOppT > 0.125 {
             minimap.updateOpponent(position: opponent.position)
+            minimap.updateMonster(position: monster1.position)
+            minimap.updateMonster2(position: monster2.position)
             self.lastOppUpdate = currentTime
         }
         
@@ -176,6 +194,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Flags to detect when there is a meaningful collsion
     var player1CollisionFlag = false
     var opponentCollisionFlag = false
+    var monsterCollisionFlag = false
     func didBegin(_ contact: SKPhysicsContact) {
         let contactA = contact.bodyA.node ?? SKNode()
         let contactB = contact.bodyB.node ?? SKNode()
@@ -187,6 +206,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             //Trophy-AI
             }else if contactA.name == "ai" || contactB.name == "ai" {
                 opponentCollisionFlag = true
+            }
+        } else if (contactA.name == "monster1") || (contactB.name == "monster1") {
+            //Monster-Player
+            if (contactA.name == "player1") || (contactB.name == "player1") {
+                monsterCollisionFlag = true
             }
         }
     }

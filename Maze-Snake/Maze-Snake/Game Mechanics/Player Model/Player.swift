@@ -10,6 +10,8 @@ import SpriteKit
 
 class Player: Actor {
     
+    var player_Score = 0
+    
     var camera: SKCameraNode
     
     init(texture: SKTexture?, parent: GameScene) {
@@ -33,6 +35,7 @@ class Player: Actor {
         }
         
         zPosition = 1
+        // Player spawn point: Top left corner of the maze
         position = scene.tileManager.tiles[Maze.MAX_ROWS-2][1].position
         
         // create physics body for the player
@@ -56,6 +59,11 @@ class Player: Actor {
         // camera zoom
         camera.xScale = cameraScaleConstant
         camera.yScale = cameraScaleConstant
+    }
+    
+    func incrementScore() {
+        player_Score += 1
+        print("player score: \(player_Score)")
     }
     
 }
