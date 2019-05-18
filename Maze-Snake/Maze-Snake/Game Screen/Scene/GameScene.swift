@@ -43,6 +43,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Real-time Tracking Minimap
     var minimap: MiniMapNode!
     
+    //Display various information
+    var info: InfoDisplay!
+    
     //Textures for maze
     let textureSet = TextureSet(
         floor: SKTexture(imageNamed: "floor1"),
@@ -85,6 +88,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         opponent.moveShortestPath(to: trophyGridPos)
         
         tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
+        
+        info = InfoDisplay(parent: self)
+        info.displayHealth(xCoord: player1.position.x + 625, yCoord: player1.position.y + 375)
+        info.displayPlayerScore(xCoord: player1.position.x, yCoord: player1.position.y + 425, score: player1.player_Score)
+        info.displayAIScore(xCoord: player1.position.x, yCoord: player1.position.y + 375, score: opponent.AI_Score)
     }
     
     
@@ -104,6 +112,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if player1CollisionFlag {
             player1.incrementScore()
+            info.changePlayerScore(newScore: player1.player_Score)
             
             trophy.setRandomPosition()
             minimap.updateTrophy(position: trophy.position)
@@ -116,6 +125,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if opponentCollisionFlag {
             opponent.incrementScore()
+            info.changeAIScore(newScore: opponent.AI_Score)
             
             trophy.setRandomPosition()
             minimap.updateTrophy(position: trophy.position)
@@ -127,7 +137,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if monsterCollisionFlag {
-            print("collision")
+            player1.decreaseHealth()
+            info.changeHealth(healthPoint: player1.player_Health)
+            
+            resetGame()
+            let trophyGridPos = tileManager.indexFrom(position: trophy.position)
+            opponent.gridPos = tileManager.indexFrom(position: opponent.position)
+            opponent.moveShortestPath(to: trophyGridPos)
             monsterCollisionFlag = false
         }
         
@@ -174,6 +190,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.joystick.position = CGPoint(x: self.player1.position.x + self.JOYSTICK_X_OFFSET, y: self.player1.position.y - self.JOYSTICK_Y_OFFSET)
             self.minimap.position = CGPoint(x: self.player1.position.x - self.MINIMAP_OFFSET_X, y: self.player1.position.y + self.MINIMAP_OFFSET_Y)
             self.minimap.updatePlayer(position: self.player1.position)
+            self.info.updateHealthPos(newX: self.player1.position.x + 625, newY: self.player1.position.y + 375)
+            self.info.updateScoreLabelPos(newX: self.player1.position.x, newY: self.player1.position.y + 425)
            //Optimization
             self.tileManager.viewOnScreenTiles(pos: self.player1.position, parent: self)
         }
@@ -207,12 +225,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }else if contactA.name == "ai" || contactB.name == "ai" {
                 opponentCollisionFlag = true
             }
-        } else if (contactA.name == "monster1") || (contactB.name == "monster1") {
+        } else if (contactA.name == "monster1") || (contactB.name == "monster1") || (contactA.name == "monster2") || (contactB.name == "monster2") {
             //Monster-Player
             if (contactA.name == "player1") || (contactB.name == "player1") {
                 monsterCollisionFlag = true
             }
         }
+    }
+    
+    func resetGame() {
+        player1.position = tileManager.tiles[Maze.MAX_ROWS-2][1].position
+        player1.player_Score = 0
+        player1.updateZoom()
+        info.changePlayerScore(newScore: player1.player_Score)
+        
+        opponent.stop()
+        opponent.position = tileManager.tiles[1][Maze.MAX_COLUMNS-2].position
+        opponent.gridPos = GridPosition(column: Maze.MAX_COLUMNS-2, row: 1)
+        opponent.AI_Score = 0
+        info.changeAIScore(newScore: opponent.AI_Score)
+        trophy.setRandomPosition()
+        minimap.updateTrophy(position: trophy.position)
+
+        joystick.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
+        minimap.position = CGPoint(x: player1.position.x - MINIMAP_OFFSET_X, y: player1.position.y + MINIMAP_OFFSET_Y)
     }
     
 }

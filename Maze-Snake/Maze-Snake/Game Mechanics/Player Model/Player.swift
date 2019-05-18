@@ -11,6 +11,7 @@ import SpriteKit
 class Player: Actor {
     
     var player_Score = 0
+    var player_Health = 3
     
     var camera: SKCameraNode
     
@@ -63,7 +64,12 @@ class Player: Actor {
     
     func incrementScore() {
         player_Score += 1
-        print("player score: \(player_Score)")
+    }
+    
+    func decreaseHealth() {
+        if player_Health > 0 {
+            player_Health -= 1
+        }
     }
     
 }

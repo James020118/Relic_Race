@@ -16,6 +16,7 @@ class AI: Actor {
     
     static let TILE_TIME = 0.2
     
+    
     override init(texture: SKTexture?, parent: GameScene, pos: GridPosition) {
         super.init(texture: texture, parent: parent, pos: pos)
         zPosition = 1
@@ -45,8 +46,7 @@ class AI: Actor {
         
         let node1 = tm.getTile(row: gridPos.row, column: gridPos.column).node
         let node2 = tm.getTile(row: point.row, column: point.column).node
-        
-        
+
         let shortestNodes = tm.graph.findPath(from: node1, to: node2)
         
         var positions = [GridPosition]()
@@ -78,6 +78,5 @@ class AI: Actor {
     
     func incrementScore() {
         AI_Score += 1
-        print("ai score: \(AI_Score)")
     }
 }
