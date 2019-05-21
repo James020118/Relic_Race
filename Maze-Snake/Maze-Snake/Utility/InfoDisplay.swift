@@ -154,18 +154,28 @@ class InfoDisplay {
     
     // constructing pause menu
     let pausedLabel1 = SKLabelNode()
+    let returnLabel = SKLabelNode()
     func pauseGame(xCoord: CGFloat, yCoord: CGFloat) {
         setUpBackground(x: xCoord, y: yCoord)
         
         pausedLabel1.zPosition = 21
         pausedLabel1.fontName = "AvenirNext-Bold"
         pausedLabel1.fontColor = UIColor.white
-        pausedLabel1.position = CGPoint(x: xCoord, y: yCoord + 200)
-        pausedLabel1.fontSize = 100
+        pausedLabel1.position = CGPoint(x: xCoord, y: yCoord + 180)
+        pausedLabel1.fontSize = 120
         pausedLabel1.alpha = 0
         pausedLabel1.text = "Game Paused"
         
+        returnLabel.zPosition = 21
+        returnLabel.fontName = "AvenirNext-Bold"
+        returnLabel.fontColor = UIColor.white
+        returnLabel.position = CGPoint(x: xCoord, y: yCoord)
+        returnLabel.fontSize = 100
+        returnLabel.text = "Return To Menu"
+        returnLabel.name = "return"
+        
         parent.addChild(pausedLabel1)
+        parent.addChild(returnLabel)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.pausedLabel1.run(SKAction.repeatForever(SKAction.sequence([SKAction.fadeIn(withDuration: 1), SKAction.fadeOut(withDuration: 1)])))
         }
@@ -178,6 +188,45 @@ class InfoDisplay {
         pausedLabel1.removeAllActions()
         pausedLabel1.removeFromParent()
         parent.pause.zPosition = 2
+    }
+    
+    let message1 = SKLabelNode()
+    let message2 = SKLabelNode()
+    func playerDiedDisplay(xCoord: CGFloat, yCoord: CGFloat) {
+        setUpBackground(x: xCoord, y: yCoord)
+        
+        message1.zPosition = 21
+        message1.fontName = "AvenirNext-Bold"
+        message1.fontColor = UIColor.white
+        message1.position = CGPoint(x: xCoord, y: yCoord + 150)
+        message1.fontSize = 130
+        message1.text = "You Died!"
+        
+        message2.zPosition = 21
+        message2.fontName = "AvenirNext-Bold"
+        message2.fontColor = UIColor.white
+        message2.position = CGPoint(x: xCoord, y: yCoord - 150)
+        message2.fontSize = 100
+        message2.text = "Try Again"
+        message2.alpha = 0
+        
+        parent.addChild(message1)
+        parent.addChild(message2)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.message2.run(SKAction.fadeIn(withDuration: 0.5))
+        }
+    }
+    
+    func endGame() {
+        parent.joystick.disabled = true
+        parent.player1.stop()
+        parent.opponent.stop()
+        parent.monster1.stop()
+        parent.monster2.stop()
+        
+        parent.player1.player_Score = 0
+        parent.player1.player_Health = 3
+        parent.opponent.AI_Score = 0
     }
     
 }

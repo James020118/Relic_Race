@@ -51,8 +51,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //Textures for maze
     let textureSet = TextureSet(
-        floor: SKTexture(imageNamed: "floor1"),
-        wall: SKTexture(imageNamed: "wall_repeat-Two")
+        floor: SKTexture(imageNamed: "floor_texture"),
+        wall: SKTexture(imageNamed: "wall_texture")
     )
     
     //Time Since Last Update(:) call
@@ -72,20 +72,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.lastUpdateTime = 0
         
-        monster1 = Monster(texture: SKTexture(imageNamed: "monster"), parent: self)
-        monster1.name = "monster1"
-        monster2 = Monster(texture: SKTexture(imageNamed: "monster"), parent: self)
-        monster2.name = "monster2"
+        characterInitialization()
         
-        player1 = Player(texture: SKTexture(imageNamed: "player"), parent: self)
-        player1.name = "player1"
-        opponent = AI(texture: SKTexture(imageNamed: "monster"), parent: self, pos: GridPosition(column: 1, row: Maze.MAX_ROWS-1))
-        opponent.name = "ai"
         spawnMinimap(graph: graph)
         spawnJoystick()
         player1.spawnCamera()
         
-        trophy = Trophy(texture: SKTexture(imageNamed: "Trophyy"), scene: self)
+        trophy = Trophy(texture: SKTexture(image: #imageLiteral(resourceName: "Trophyy.png")), scene: self)
         minimap.updateTrophy(position: trophy.position)
         let trophyGridPos = tileManager.indexFrom(position: trophy.position)
         opponent.moveShortestPath(to: trophyGridPos)
@@ -111,22 +104,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         guard let touch = touches.first else { return }
         
         let location = touch.location(in: self)
-//        joystick.position = location
-//        JOYSTICK_X_OFFSET = location.x - player1.position.x
-//        JOYSTICK_Y_OFFSET = location.y - player1.position.y
-        
         let node = self.atPoint(location)
         
         if node.name == "pause" {
             if isPausing {
                 info.removePauseGame()
                 opponent.isPaused = false
+                monster1.isPaused = false
+                monster2.isPaused = false
                 isPausing = false
             } else {
                 info.pauseGame(xCoord: player1.position.x, yCoord: player1.position.y)
                 opponent.isPaused = true
+                monster1.isPaused = true
+                monster2.isPaused = true
                 isPausing = true
             }
+        }
+        
+        if node.name == "return" {
+            removeAllChildren()
+            let transition = SKTransition.fade(withDuration: 1)
+            let menuScene = SKScene(fileNamed: "MenuScene")!
+            menuScene.scaleMode = .aspectFit
+            self.view?.presentScene(menuScene, transition: transition)
         }
     }
     
@@ -166,11 +167,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             player1.decreaseHealth()
             info.changeHealth(healthPoint: player1.player_Health)
             
-            resetGame()
-            let trophyGridPos = tileManager.indexFrom(position: trophy.position)
-            opponent.gridPos = tileManager.indexFrom(position: opponent.position)
-            opponent.moveShortestPath(to: trophyGridPos)
+            hittingMonster()
             monsterCollisionFlag = false
+            
+//            if player1.player_Health == 0 {
+//                info.endGame()
+//                
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                    self.info.playerDiedDisplay(xCoord: self.player1.position.x, yCoord: self.player1.position.y)
+//                }
+//            }
         }
         
         // Initialize _lastUpdateTime if it has not already been
@@ -193,19 +199,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let dCheckT = currentTime - lastCheck
         if dCheckT > 0.5 {
             if player1.player_Score == 5 {
-                monster1.stop()
-                monster2.stop()
-                opponent.stop()
-                player1.player_Score = 0
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                info.endGame()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.info.roundWinDisplay(winner: "player", xCoord: self.player1.position.x, yCoord: self.player1.position.y)
                 }
             } else if opponent.AI_Score == 5 {
-                monster1.stop()
-                monster2.stop()
-                opponent.stop()
-                opponent.AI_Score = 0
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                info.endGame()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.info.roundWinDisplay(winner: "ai", xCoord: self.player1.position.x, yCoord: self.player1.position.y)
                 }
             }
@@ -223,8 +225,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var JOYSTICK_Y_OFFSET : CGFloat = 275
     func spawnJoystick() {
         // initialize joystick
-        joystick.stick.image = UIImage(named: "stick")
-        joystick.substrate.image = UIImage(named: "substrate")
+        joystick.stick.image = #imageLiteral(resourceName: "stick.png")
+        joystick.substrate.image = #imageLiteral(resourceName: "substrate.png")
         joystick.substrate.diameter += 175
         joystick.stick.diameter += 105
         joystick.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
@@ -238,8 +240,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.joystick.position = CGPoint(x: self.player1.position.x + self.JOYSTICK_X_OFFSET, y: self.player1.position.y - self.JOYSTICK_Y_OFFSET)
             self.minimap.position = CGPoint(x: self.player1.position.x - self.MINIMAP_OFFSET_X, y: self.player1.position.y + self.MINIMAP_OFFSET_Y)
             self.minimap.updatePlayer(position: self.player1.position)
-            self.info.updateHealthPos(newX: self.player1.position.x + 625, newY: self.player1.position.y + 375)
-            self.info.updateScoreLabelPos(newX: self.player1.position.x - 625, newY: self.player1.position.y - 375)
+            self.info.updateHealthPos(newX: self.player1.position.x + self.DISPLAY_OFFSET_X, newY: self.player1.position.y + self.DISPLAY_OFFSET_Y)
+            self.info.updateScoreLabelPos(newX: self.player1.position.x - self.DISPLAY_OFFSET_X, newY: self.player1.position.y - self.DISPLAY_OFFSET_Y)
             self.pause.position = CGPoint(x: self.player1.position.x, y: self.player1.position.y + self.DISPLAY_OFFSET_Y + 35)
            //Optimization
             self.tileManager.viewOnScreenTiles(pos: self.player1.position, parent: self)
@@ -281,24 +283,4 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-    
-    // reset the game (but without reset monster positions)
-    func resetGame() {
-        player1.position = tileManager.tiles[Maze.MAX_ROWS-2][1].position
-        player1.player_Score = 0
-        player1.updateZoom()
-        info.changePlayerScore(newScore: player1.player_Score)
-        
-        opponent.stop()
-        opponent.position = tileManager.tiles[1][Maze.MAX_COLUMNS-2].position
-        opponent.gridPos = GridPosition(column: Maze.MAX_COLUMNS-2, row: 1)
-        opponent.AI_Score = 0
-        info.changeAIScore(newScore: opponent.AI_Score)
-        trophy.setRandomPosition()
-        minimap.updateTrophy(position: trophy.position)
-
-        joystick.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
-        minimap.position = CGPoint(x: player1.position.x - MINIMAP_OFFSET_X, y: player1.position.y + MINIMAP_OFFSET_Y)
-    }
-    
 }
