@@ -128,14 +128,24 @@ class InfoDisplay {
     
     // displaying message after a round win (first reach 5 trophies)
     let messageLabel = SKLabelNode()
+    let exitLabel = SKLabelNode()
     func roundWinDisplay(winner: String, xCoord: CGFloat, yCoord: CGFloat) {
         setUpBackground(x: xCoord, y: yCoord)
         messageLabel.zPosition = 21
         messageLabel.fontName = "AvenirNext-Bold"
-        messageLabel.position = CGPoint(x: xCoord, y: yCoord + 30)
+        messageLabel.position = CGPoint(x: xCoord, y: yCoord + 100)
         messageLabel.fontColor = UIColor.white
         messageLabel.fontSize = 100
         messageLabel.alpha = 0
+        
+        exitLabel.zPosition = 21
+        exitLabel.fontName = "AvenirNext-Bold"
+        exitLabel.position = CGPoint(x: xCoord, y: yCoord - 100)
+        exitLabel.fontColor = UIColor.white
+        exitLabel.fontSize = 100
+        exitLabel.alpha = 0
+        exitLabel.text = "Exit"
+        exitLabel.name = "exit"
         
         switch winner {
         case "player":
@@ -147,8 +157,12 @@ class InfoDisplay {
         }
         
         parent.addChild(messageLabel)
+        parent.addChild(exitLabel)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.messageLabel.run(SKAction.fadeIn(withDuration: 0.5))
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.exitLabel.run(SKAction.fadeIn(withDuration: 0.5))
+            }
         }
     }
     
@@ -161,7 +175,7 @@ class InfoDisplay {
         pausedLabel1.zPosition = 21
         pausedLabel1.fontName = "AvenirNext-Bold"
         pausedLabel1.fontColor = UIColor.white
-        pausedLabel1.position = CGPoint(x: xCoord, y: yCoord + 180)
+        pausedLabel1.position = CGPoint(x: xCoord, y: yCoord + 150)
         pausedLabel1.fontSize = 120
         pausedLabel1.alpha = 0
         pausedLabel1.text = "Game Paused"
@@ -169,7 +183,7 @@ class InfoDisplay {
         returnLabel.zPosition = 21
         returnLabel.fontName = "AvenirNext-Bold"
         returnLabel.fontColor = UIColor.white
-        returnLabel.position = CGPoint(x: xCoord, y: yCoord)
+        returnLabel.position = CGPoint(x: xCoord, y: yCoord - 150)
         returnLabel.fontSize = 100
         returnLabel.text = "Return To Menu"
         returnLabel.name = "return"
@@ -185,8 +199,8 @@ class InfoDisplay {
     // remove pause menu
     func removePauseGame() {
         darkBackground.removeFromParent()
-        pausedLabel1.removeAllActions()
         pausedLabel1.removeFromParent()
+        returnLabel.removeFromParent()
         parent.pause.zPosition = 2
     }
     

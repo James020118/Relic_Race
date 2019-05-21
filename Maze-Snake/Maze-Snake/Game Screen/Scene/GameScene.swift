@@ -122,7 +122,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
-        if node.name == "return" {
+        if node.name == "return" || node.name == "exit" {
             removeAllChildren()
             let transition = SKTransition.fade(withDuration: 1)
             let menuScene = SKScene(fileNamed: "MenuScene")!
@@ -200,14 +200,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if dCheckT > 0.5 {
             if player1.player_Score == 5 {
                 info.endGame()
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.info.roundWinDisplay(winner: "player", xCoord: self.player1.position.x, yCoord: self.player1.position.y)
                 }
             } else if opponent.AI_Score == 5 {
                 info.endGame()
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.info.roundWinDisplay(winner: "ai", xCoord: self.player1.position.x, yCoord: self.player1.position.y)
                 }
             }

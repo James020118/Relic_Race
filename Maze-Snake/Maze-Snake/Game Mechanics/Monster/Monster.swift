@@ -14,7 +14,10 @@ class Monster: Actor {
     
     static let TILE_TRAVEL_TIME = 0.5
     
-    init(texture: SKTexture, parent: GameScene) {
+    var number: Int = 0
+    
+    init(texture: SKTexture, parent: GameScene, number: Int) {
+        self.number = number
         super.init(texture: texture, parent: parent, pos: GridPosition(column: 0, row: 0))
         spawn()
     }
@@ -41,7 +44,7 @@ class Monster: Actor {
     
     
     /* Spawn the monster in random floor tile */
-    func setRandomPosition() -> GKGridGraphNode{
+    func setRandomPosition(num: Int) -> GKGridGraphNode{
         guard let scene = parent as? GameScene else {
             return GKGridGraphNode(gridPosition: simd_int2(x: 0, y: 0))
         }
@@ -50,7 +53,17 @@ class Monster: Actor {
         //TODO:- Fix Tile Spawning
         //NOTE: SOMETHING WRONG WITH GRAPH GENERATION? AND CONNECTED NODES
         let rand = tm.getRandomTile(condition: { tile in
-            return tile.node.connectedNodes.count > 2
+            let dx = tile.position.x - scene.frame.midX
+            let dy = abs(tile.position.y - scene.frame.midY)
+            switch num {
+            case 1:
+                return tile.node.connectedNodes.count > 2 && dx > tile.frame.width * 6 && dx < tile.frame.width * 11 && dy < tile.frame.height * 5
+            case 2:
+                return tile.node.connectedNodes.count > 2 && dx < tile.frame.width * -6 && dx > tile.frame.width * -11 && dy < tile.frame.height * 5
+            default:
+                return tile.node.connectedNodes.count > 2
+            }
+            
         })
         
         gridPos = GridPosition(from: rand.node.gridPosition)
@@ -69,7 +82,7 @@ class Monster: Actor {
         }
         
         //Navigate through nodes in random directions to generate path
-        let oNode = setRandomPosition()
+        let oNode = setRandomPosition(num: number)
         var path1 = [oNode]
         var path2 = [oNode]
         var firstDirection: GKGridGraphNode!

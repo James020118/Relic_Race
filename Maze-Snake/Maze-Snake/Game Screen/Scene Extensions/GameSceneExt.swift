@@ -15,9 +15,9 @@ extension GameScene {
     
     // in game object generation
     func characterInitialization() {
-        monster1 = Monster(texture: SKTexture(image: #imageLiteral(resourceName: "monster.png")), parent: self)
+        monster1 = Monster(texture: SKTexture(image: #imageLiteral(resourceName: "monster.png")), parent: self, number: 1)
         monster1.name = "monster1"
-        monster2 = Monster(texture: SKTexture(image: #imageLiteral(resourceName: "monster.png")), parent: self)
+        monster2 = Monster(texture: SKTexture(image: #imageLiteral(resourceName: "monster.png")), parent: self, number: 2)
         monster2.name = "monster2"
         
         player1 = Player(texture: SKTexture(image: #imageLiteral(resourceName: "player.png")), parent: self)
