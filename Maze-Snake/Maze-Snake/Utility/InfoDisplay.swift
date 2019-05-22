@@ -224,12 +224,19 @@ class InfoDisplay {
         message2.fontSize = 100
         message2.text = "Try Again"
         message2.alpha = 0
+        message2.name = "tryagain"
         
         parent.addChild(message1)
         parent.addChild(message2)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.message2.run(SKAction.fadeIn(withDuration: 0.5))
         }
+    }
+    
+    func removePlayerDiedDisplay() {
+        darkBackground.removeFromParent()
+        message1.removeFromParent()
+        message2.removeFromParent()
     }
     
     func endGame() {

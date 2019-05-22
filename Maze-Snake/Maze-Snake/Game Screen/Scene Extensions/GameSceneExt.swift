@@ -26,16 +26,39 @@ extension GameScene {
         opponent.name = "ai"
     }
     
-    // reset the game (but without reset monster positions)
+    // reset player's position after the player runs into a monster (but without reset monster positions)
     func hittingMonster() {
         player1.position = tileManager.tiles[Maze.MAX_ROWS-2][1].position
         player1.updateZoom()
+        minimap.updatePlayer(position: player1.position)
         
         joystick.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
         minimap.position = CGPoint(x: player1.position.x - MINIMAP_OFFSET_X, y: player1.position.y + MINIMAP_OFFSET_Y)
         info.updateHealthPos(newX: player1.position.x + DISPLAY_OFFSET_X, newY: player1.position.y + DISPLAY_OFFSET_Y)
         info.updateScoreLabelPos(newX: player1.position.x - DISPLAY_OFFSET_X, newY: player1.position.y - DISPLAY_OFFSET_Y)
         pause.position = CGPoint(x: player1.position.x, y: player1.position.y + DISPLAY_OFFSET_Y + 35)
+    }
+    
+    // reset the game after user decides to try again after died
+    func resetGameAfterPlayerDied() {
+        player1.player_Score = 0
+        player1.player_Health = 3
+        opponent.AI_Score = 0
+        
+        info.removePlayerDiedDisplay()
+        info.changeHealth(healthPoint: player1.player_Health)
+        joystick.disabled = false
+        
+        opponent.position = tileManager.tiles[1][Maze.MAX_COLUMNS-2].position
+        opponent.gridPos = GridPosition(column: Maze.MAX_COLUMNS-2, row: 1)
+        
+        trophy.setRandomPosition()
+        minimap.updateTrophy(position: trophy.position)
+        let trophyGridPos = tileManager.indexFrom(position: trophy.position)
+        opponent.moveShortestPath(to: trophyGridPos)
+        
+        monster1.run(monster1.generatePath())
+        monster2.run(monster2.generatePath())
     }
     
 }

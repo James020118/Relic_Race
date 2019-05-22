@@ -122,6 +122,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
+        if node.name == "tryagain" {
+            resetGameAfterPlayerDied()
+        }
+        
         if node.name == "return" || node.name == "exit" {
             removeAllChildren()
             let transition = SKTransition.fade(withDuration: 1)
@@ -170,13 +174,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             hittingMonster()
             monsterCollisionFlag = false
             
-//            if player1.player_Health == 0 {
-//                info.endGame()
-//                
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                    self.info.playerDiedDisplay(xCoord: self.player1.position.x, yCoord: self.player1.position.y)
-//                }
-//            }
+            if player1.player_Health == 0 {
+                info.endGame()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.info.playerDiedDisplay(xCoord: self.player1.position.x, yCoord: self.player1.position.y)
+                }
+            }
         }
         
         // Initialize _lastUpdateTime if it has not already been
