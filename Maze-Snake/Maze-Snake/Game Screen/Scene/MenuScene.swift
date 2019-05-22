@@ -44,7 +44,7 @@ class MenuScene: SKScene {
         titleLabel.fontColor = UIColor.white
         titleLabel.fontSize = 400
         titleLabel.text = "Maze Runner"
-        titleLabel.position = CGPoint(x: self.position.x, y: self.position.y + frame.height / 5)
+        titleLabel.position = CGPoint(x: frame.midX, y: frame.midY + frame.height / 6)
         addChild(titleLabel)
     }
     

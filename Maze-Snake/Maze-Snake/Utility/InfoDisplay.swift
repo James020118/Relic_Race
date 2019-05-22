@@ -10,20 +10,20 @@ import Foundation
 import UIKit
 import SpriteKit
 
-// a class for displaying various information in the game scene
+//A class for displaying various information in the game scene
 class InfoDisplay {
     
-    // parent scene
+    //Parent scene
     var parent: GameScene!
     
-    // node for displaying health
+    //Node for displaying health
     private var healthPanel = SKSpriteNode()
     
     init(parent: GameScene) {
         self.parent = parent
     }
     
-    // constructing node for displaying health
+    //Constructing node for displaying health
     let heart1 = SKSpriteNode(imageNamed: "heart")
     let heart2 = SKSpriteNode(imageNamed: "heart")
     let heart3 = SKSpriteNode(imageNamed: "heart")
@@ -51,7 +51,7 @@ class InfoDisplay {
         parent.addChild(healthPanel)
     }
     
-    // change the health of the player when hitting the monster
+    //Change the health of the player when hitting the monster
     func changeHealth(healthPoint: Int) {
         switch healthPoint {
         case 2:
@@ -67,12 +67,12 @@ class InfoDisplay {
         }
     }
     
-    // update node position
+    //Update node position
     func updateHealthPos(newX: CGFloat, newY: CGFloat) {
         healthPanel.position = CGPoint(x: newX, y: newY)
     }
     
-    // node for displaying player score
+    //Node for displaying player score
     let playerScoreLabel = SKLabelNode()
     func displayPlayerScore(xCoord: CGFloat, yCoord: CGFloat, score: Int) {
         playerScoreLabel.text = "Player Score: \(score)"
@@ -85,12 +85,12 @@ class InfoDisplay {
         parent.addChild(playerScoreLabel)
     }
     
-    // change player score
+    //Change player score
     func changePlayerScore(newScore: Int) {
         playerScoreLabel.text = "Player Score: \(newScore)"
     }
     
-    // displaying opponent score
+    //Displaying opponent score
     let AIScoreLabel = SKLabelNode()
     func displayAIScore(xCoord: CGFloat, yCoord: CGFloat, score: Int) {
         AIScoreLabel.text = "Opponent Score: \(score)"
@@ -103,18 +103,18 @@ class InfoDisplay {
         parent.addChild(AIScoreLabel)
     }
     
-    // change opponent score
+    //Change opponent score
     func changeAIScore(newScore: Int) {
         AIScoreLabel.text = "Opponent Score: \(newScore)"
     }
     
-    // update node position
+    //Update node position
     func updateScoreLabelPos(newX: CGFloat, newY: CGFloat) {
         playerScoreLabel.position = CGPoint(x: newX, y: newY)
         AIScoreLabel.position = CGPoint(x: newX, y: newY - 50)
     }
     
-    // construct a dark background for other use
+    //Construct a dark background for other use
     let darkBackground = SKSpriteNode()
     private func setUpBackground(x: CGFloat, y: CGFloat) {
         darkBackground.color = UIColor.black
@@ -126,7 +126,7 @@ class InfoDisplay {
         darkBackground.run(SKAction.fadeIn(withDuration: 0.5))
     }
     
-    // displaying message after a round win (first reach 5 trophies)
+    //Displaying message after a round win (first reach 5 trophies)
     let messageLabel = SKLabelNode()
     let exitLabel = SKLabelNode()
     func roundWinDisplay(winner: String, xCoord: CGFloat, yCoord: CGFloat) {
@@ -166,15 +166,16 @@ class InfoDisplay {
         }
     }
     
-    // constructing pause menu
+    //Constructing pause menu
     let pausedLabel1 = SKLabelNode()
     let returnLabel = SKLabelNode()
+    let settingsLabel = SKLabelNode()
     func pauseGame(xCoord: CGFloat, yCoord: CGFloat) {
         setUpBackground(x: xCoord, y: yCoord)
         
         pausedLabel1.zPosition = 21
         pausedLabel1.fontName = "AvenirNext-Bold"
-        pausedLabel1.fontColor = UIColor.white
+        pausedLabel1.fontColor = UIColor.red
         pausedLabel1.position = CGPoint(x: xCoord, y: yCoord + 150)
         pausedLabel1.fontSize = 120
         pausedLabel1.alpha = 0
@@ -183,28 +184,39 @@ class InfoDisplay {
         returnLabel.zPosition = 21
         returnLabel.fontName = "AvenirNext-Bold"
         returnLabel.fontColor = UIColor.white
-        returnLabel.position = CGPoint(x: xCoord, y: yCoord - 150)
+        returnLabel.position = CGPoint(x: xCoord, y: yCoord - 75)
         returnLabel.fontSize = 100
         returnLabel.text = "Return To Menu"
         returnLabel.name = "return"
         
+        settingsLabel.name = "settings"
+        settingsLabel.zPosition = 21
+        settingsLabel.fontName = "AvenirNext-Bold"
+        settingsLabel.fontColor = UIColor.white
+        settingsLabel.fontSize = 100
+        settingsLabel.text = "Settings"
+        settingsLabel.position = CGPoint(x: xCoord, y: yCoord - 250)
+        
         parent.addChild(pausedLabel1)
         parent.addChild(returnLabel)
+        parent.addChild(settingsLabel)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.pausedLabel1.run(SKAction.repeatForever(SKAction.sequence([SKAction.fadeIn(withDuration: 1), SKAction.fadeOut(withDuration: 1)])))
         }
         parent.pause.zPosition = 21
     }
     
-    // remove pause menu
+    //Remove pause menu from the parent
     func removePauseGame() {
         darkBackground.removeFromParent()
         pausedLabel1.removeAllActions()
         pausedLabel1.removeFromParent()
         returnLabel.removeFromParent()
+        settingsLabel.removeFromParent()
         parent.pause.zPosition = 2
     }
     
+    //Called when the player's health reaches 0, gives player an option to try again
     let message1 = SKLabelNode()
     let message2 = SKLabelNode()
     func playerDiedDisplay(xCoord: CGFloat, yCoord: CGFloat) {
@@ -238,7 +250,84 @@ class InfoDisplay {
         message1.removeFromParent()
         message2.removeFromParent()
     }
+
+    //Settings menu
+    let LABEL_MOVE_OFFSET: CGFloat = 575
     
+    let back = SKLabelNode()
+    let moveJoystick_Title = SKLabelNode()
+    let moveJoystick_Right = SKLabelNode()
+    let moveJoystck_Left = SKLabelNode()
+    func goToSettings(xCoord: CGFloat, yCoord: CGFloat) {
+        pausedLabel1.isHidden = true
+        pausedLabel1.isHidden = true
+        returnLabel.isHidden = true
+        parent.pause.isHidden = true
+        settingsLabel.run(SKAction.moveTo(y: settingsLabel.position.y + LABEL_MOVE_OFFSET, duration: 1))
+        
+        back.zPosition = 21
+        back.fontName = "AvenirNext-Bold"
+        back.fontColor = UIColor.white
+        back.position = CGPoint(x: xCoord - 725, y: yCoord + 350)
+        back.fontSize = 100
+        back.text = "Back"
+        back.name = "back"
+        
+        moveJoystick_Title.zPosition = 21
+        moveJoystick_Title.fontName = "AvenirNext-Bold"
+        moveJoystick_Title.fontColor = UIColor.white
+        moveJoystick_Title.position = CGPoint(x: xCoord - 300, y: yCoord + 50)
+        moveJoystick_Title.fontSize = 100
+        moveJoystick_Title.text = "Hud(joystick) Position: "
+        
+        moveJoystick_Right.zPosition = 21
+        moveJoystick_Right.fontName = "AvenirNext-Bold"
+        if parent.joystick_On_The_Right {
+            moveJoystick_Right.fontColor = UIColor.green
+        } else {
+            moveJoystick_Right.fontColor = UIColor.white
+        }
+        moveJoystick_Right.position = CGPoint(x: xCoord + 425, y: yCoord + 50)
+        moveJoystick_Right.fontSize = 100
+        moveJoystick_Right.text = "right"
+        moveJoystick_Right.name = "joystick_right"
+        
+        moveJoystck_Left.zPosition = 21
+        moveJoystck_Left.fontName = "AvenirNext-Bold"
+        if !parent.joystick_On_The_Right {
+            moveJoystck_Left.fontColor = UIColor.green
+        } else {
+            moveJoystck_Left.fontColor = UIColor.white
+        }
+        moveJoystck_Left.position = CGPoint(x: xCoord + 700, y: yCoord + 50)
+        moveJoystck_Left.fontSize = 100
+        moveJoystck_Left.text = "left"
+        moveJoystck_Left.name = "joystick_left"
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.parent.addChild(self.back)
+            self.parent.addChild(self.moveJoystick_Title)
+            self.parent.addChild(self.moveJoystick_Right)
+            self.parent.addChild(self.moveJoystck_Left)
+        }
+    }
+    
+    //Remove all nodes related to settings
+    func exitSettings() {
+        settingsLabel.run(SKAction.moveTo(y: settingsLabel.position.y - LABEL_MOVE_OFFSET, duration: 1))
+        back.removeFromParent()
+        moveJoystick_Title.removeFromParent()
+        moveJoystick_Right.removeFromParent()
+        moveJoystck_Left.removeFromParent()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.pausedLabel1.isHidden = false
+            self.pausedLabel1.isHidden = false
+            self.returnLabel.isHidden = false
+            self.parent.pause.isHidden = false
+        }
+    }
+    
+    //Stop all actions to get ready to reset the game
     func endGame() {
         parent.joystick.disabled = true
         parent.pause.isHidden = true
@@ -246,6 +335,8 @@ class InfoDisplay {
         parent.opponent.stop()
         parent.monster1.stop()
         parent.monster2.stop()
+        parent.monster3.stop()
+        parent.monster4.stop()
         
         parent.player1.player_Score = 0
         parent.player1.player_Health = 3

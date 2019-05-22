@@ -28,6 +28,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var tileManager: TileManager!
     //Joystick to control player
     var joystick = AnalogJoystick(diameter: 150)
+    //Determine whether joystick is on the left side or right side of the screen
+    var joystick_On_The_Right = true
     
     //Actors
     var player1: Player!
@@ -36,6 +38,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Monsters
     var monster1: Monster!
     var monster2: Monster!
+    var monster3: Monster!
+    var monster4: Monster!
     
     //Objective
     var trophy: Trophy!
@@ -72,6 +76,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.lastUpdateTime = 0
         
+        //Initialize all characters, including player, opponent, and monsters
         characterInitialization()
         
         spawnMinimap(graph: graph)
@@ -106,18 +111,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let location = touch.location(in: self)
         let node = self.atPoint(location)
         
+        //Detect touch on pause node
         if node.name == "pause" {
             if isPausing {
                 info.removePauseGame()
-                opponent.isPaused = false
-                monster1.isPaused = false
-                monster2.isPaused = false
+                pauseCharacters(bool: false)
                 isPausing = false
             } else {
                 info.pauseGame(xCoord: player1.position.x, yCoord: player1.position.y)
-                opponent.isPaused = true
-                monster1.isPaused = true
-                monster2.isPaused = true
+                pauseCharacters(bool: true)
                 isPausing = true
             }
         }
@@ -132,6 +134,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let menuScene = SKScene(fileNamed: "MenuScene")!
             menuScene.scaleMode = .aspectFit
             self.view?.presentScene(menuScene, transition: transition)
+        }
+        
+        if node.name == "settings" {
+            info.goToSettings(xCoord: player1.position.x, yCoord: player1.position.y)
+        }
+        
+        if node.name == "joystick_right" || node.name == "joystick_left" {
+            if node.name == "joystick_right" {
+                moveJoystick(toTheRight: true)
+            } else {
+                moveJoystick(toTheRight: false)
+            }
+        }
+        
+        if node.name == "back" {
+            info.exitSettings()
         }
     }
     
@@ -197,6 +215,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             minimap.updateOpponent(position: opponent.position)
             minimap.updateMonster(position: monster1.position)
             minimap.updateMonster2(position: monster2.position)
+            minimap.updateMonster3(position: monster3.position)
+            minimap.updateMonster4(position: monster4.position)
             self.lastOppUpdate = currentTime
         }
         
@@ -278,7 +298,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }else if contactA.name == "ai" || contactB.name == "ai" {
                 opponentCollisionFlag = true
             }
-        } else if (contactA.name == "monster1") || (contactB.name == "monster1") || (contactA.name == "monster2") || (contactB.name == "monster2") {
+        } else if (contactA.name == "monster1") || (contactB.name == "monster1") || (contactA.name == "monster2") || (contactB.name == "monster2") || (contactA.name == "monster3") || (contactB.name == "monster3") || (contactA.name == "monster4") || (contactB.name == "monster4"){
             //Monster-Player
             if (contactA.name == "player1") || (contactB.name == "player1") {
                 monsterCollisionFlag = true

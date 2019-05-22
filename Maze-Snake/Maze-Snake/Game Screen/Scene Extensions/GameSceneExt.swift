@@ -9,24 +9,29 @@
 import Foundation
 import SpriteKit
 
-// extension to the game scene
-// to keep the main scene file clean
+/* Extension file to the game scene
+To keep the main scene file clean */
 extension GameScene {
     
-    // in game object generation
+    //In game object generation
     func characterInitialization() {
         monster1 = Monster(texture: SKTexture(image: #imageLiteral(resourceName: "monster.png")), parent: self, number: 1)
         monster1.name = "monster1"
         monster2 = Monster(texture: SKTexture(image: #imageLiteral(resourceName: "monster.png")), parent: self, number: 2)
         monster2.name = "monster2"
+        monster3 = Monster(texture: SKTexture(image: #imageLiteral(resourceName: "monster.png")), parent: self, number: 3)
+        monster3.name = "monster3"
+        monster4 = Monster(texture: SKTexture(image: #imageLiteral(resourceName: "monster.png")), parent: self, number: 4)
+        monster4.name = "monster4"
+        
         
         player1 = Player(texture: SKTexture(image: #imageLiteral(resourceName: "player.png")), parent: self)
         player1.name = "player1"
-        opponent = AI(texture: SKTexture(image: #imageLiteral(resourceName: "monster.png")), parent: self, pos: GridPosition(column: 1, row: Maze.MAX_ROWS-1))
+        opponent = AI(texture: SKTexture(image: #imageLiteral(resourceName: "player.png")), parent: self, pos: GridPosition(column: 1, row: Maze.MAX_ROWS-1))
         opponent.name = "ai"
     }
     
-    // reset player's position after the player runs into a monster (but without reset monster positions)
+    //Reset player's position after the player runs into a monster (but without reset monster positions)
     func hittingMonster() {
         player1.position = tileManager.tiles[Maze.MAX_ROWS-2][1].position
         player1.updateZoom()
@@ -39,7 +44,7 @@ extension GameScene {
         pause.position = CGPoint(x: player1.position.x, y: player1.position.y + DISPLAY_OFFSET_Y + 35)
     }
     
-    // reset the game after user decides to try again after died
+    //Reset the game after user decides to try again after died
     func resetGameAfterPlayerDied() {
         player1.player_Score = 0
         player1.player_Health = 3
@@ -59,6 +64,37 @@ extension GameScene {
         
         monster1.run(monster1.generatePath())
         monster2.run(monster2.generatePath())
+    }
+    
+    //Pause all characters except for the player
+    func pauseCharacters(bool: Bool) {
+        opponent.isPaused = bool
+        monster1.isPaused = bool
+        monster2.isPaused = bool
+        monster3.isPaused = bool
+        monster4.isPaused = bool
+    }
+    
+    //Triggered in the settings
+    //Move joystick based on user's selection(left or right)
+    func moveJoystick(toTheRight: Bool) {
+        if toTheRight {
+            info.moveJoystick_Right.fontColor = UIColor.green
+            info.moveJoystck_Left.fontColor = UIColor.white
+            joystick_On_The_Right = true
+            if JOYSTICK_X_OFFSET < 0 {
+                JOYSTICK_X_OFFSET = JOYSTICK_X_OFFSET * -1
+            }
+            joystick.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
+        } else {
+            info.moveJoystick_Right.fontColor = UIColor.white
+            info.moveJoystck_Left.fontColor = UIColor.green
+            joystick_On_The_Right = false
+            if JOYSTICK_X_OFFSET > 0 {
+                JOYSTICK_X_OFFSET = JOYSTICK_X_OFFSET * -1
+            }
+            joystick.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
+        }
     }
     
 }

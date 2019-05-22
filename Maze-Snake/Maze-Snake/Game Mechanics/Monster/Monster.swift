@@ -53,13 +53,19 @@ class Monster: Actor {
         //TODO:- Fix Tile Spawning
         //NOTE: SOMETHING WRONG WITH GRAPH GENERATION? AND CONNECTED NODES
         let rand = tm.getRandomTile(condition: { tile in
-            let dx = tile.position.x - scene.frame.midX
-            let dy = abs(tile.position.y - scene.frame.midY)
+            let right_bound = scene.frame.midX + tile.frame.width * 2
+            let left_bound = scene.frame.midX - tile.frame.width * 2
+            let top_bound = scene.frame.midY + tile.frame.height * 2
+            let bottom_bound = scene.frame.midY - tile.frame.height * 2
             switch num {
             case 1:
-                return tile.node.connectedNodes.count > 2 && dx > tile.frame.width * 6 && dx < tile.frame.width * 11 && dy < tile.frame.height * 5
+                return tile.node.connectedNodes.count > 2 && tile.position.x > right_bound && tile.position.y > top_bound
             case 2:
-                return tile.node.connectedNodes.count > 2 && dx < tile.frame.width * -6 && dx > tile.frame.width * -11 && dy < tile.frame.height * 5
+                return tile.node.connectedNodes.count > 2 && tile.position.x < left_bound && tile.position.y > top_bound
+            case 3:
+                return tile.node.connectedNodes.count > 2 && tile.position.x < left_bound && tile.position.y < bottom_bound
+            case 4:
+                return tile.node.connectedNodes.count > 2 && tile.position.x > right_bound && tile.position.y < bottom_bound
             default:
                 return tile.node.connectedNodes.count > 2
             }
