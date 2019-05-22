@@ -199,6 +199,7 @@ class InfoDisplay {
     // remove pause menu
     func removePauseGame() {
         darkBackground.removeFromParent()
+        pausedLabel1.removeAllActions()
         pausedLabel1.removeFromParent()
         returnLabel.removeFromParent()
         parent.pause.zPosition = 2
@@ -233,6 +234,7 @@ class InfoDisplay {
     
     func endGame() {
         parent.joystick.disabled = true
+        parent.pause.isHidden = true
         parent.player1.stop()
         parent.opponent.stop()
         parent.monster1.stop()
