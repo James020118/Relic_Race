@@ -13,9 +13,7 @@ import GameplayKit
 class AI: Actor {
     
     var AI_Score = 0
-    
-    static let TILE_TIME = 0.2
-    
+    static var TILE_TIME = 0.2
     
     override init(texture: SKTexture?, parent: GameScene, pos: GridPosition) {
         super.init(texture: texture, parent: parent, pos: pos)

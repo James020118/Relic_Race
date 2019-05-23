@@ -10,21 +10,37 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
+enum Difficulty {
+    case Easy, Hard, Impossible
+}
 
 /*-----------------
  Viewcontroller to control the Game Screen
  -----------------*/
 class GameViewController: UIViewController {
 
+    var difficulty: Difficulty = .Easy
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        switch difficulty {
+        case .Easy:
+            AI.TILE_TIME = 0.3
+        case .Hard:
+            AI.TILE_TIME = 0.2
+        case .Impossible:
+            AI.TILE_TIME = 0.15
+        }
         
         //Spritekit GameScene creation
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "MenuScene") {
+            if let scene = SKScene(fileNamed: "GameScene") as? GameScene {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFit
+                //Store Instance
+                scene.parentVC = self
                 // Present the scene
                 view.presentScene(scene)
             }
