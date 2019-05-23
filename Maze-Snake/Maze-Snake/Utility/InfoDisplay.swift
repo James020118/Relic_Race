@@ -333,10 +333,10 @@ class InfoDisplay {
         parent.pause.isHidden = true
         parent.player1.stop()
         parent.opponent.stop()
-        parent.monster1.stop()
-        parent.monster2.stop()
-        parent.monster3.stop()
-        parent.monster4.stop()
+        
+        for monster in parent.monsters {
+            monster.stop()
+        }
         
         parent.player1.player_Score = 0
         parent.player1.player_Health = 3

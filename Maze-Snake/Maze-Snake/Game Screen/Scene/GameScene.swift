@@ -36,10 +36,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var opponent: AI!
     
     //Monsters
-    var monster1: Monster!
-    var monster2: Monster!
-    var monster3: Monster!
-    var monster4: Monster!
+    var monsters = [Monster]()
     
     //Objective
     var trophy: Trophy!
@@ -185,12 +182,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             opponentCollisionFlag = false
         }
         
-        if monsterCollisionFlag {
+        if monsterCollisionFlag != -1 {
             player1.decreaseHealth()
             info.changeHealth(healthPoint: player1.player_Health)
             
             hittingMonster()
-            monsterCollisionFlag = false
+            tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
+            monsterCollisionFlag = -1
             
             if player1.player_Health == 0 {
                 info.endGame()
@@ -213,10 +211,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let dOppT = currentTime - lastOppUpdate
         if dOppT > 0.125 {
             minimap.updateOpponent(position: opponent.position)
-            minimap.updateMonster(position: monster1.position)
-            minimap.updateMonster2(position: monster2.position)
-            minimap.updateMonster3(position: monster3.position)
-            minimap.updateMonster4(position: monster4.position)
+            var points = [CGPoint]()
+            for monster in monsters {
+                points.append(monster.position)
+            }
+            minimap.updateMonsters(positions: points)
             self.lastOppUpdate = currentTime
         }
         
@@ -285,7 +284,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Flags to detect when there is a meaningful collsion
     var player1CollisionFlag = false
     var opponentCollisionFlag = false
-    var monsterCollisionFlag = false
+    var monsterCollisionFlag = -1
     func didBegin(_ contact: SKPhysicsContact) {
         let contactA = contact.bodyA.node ?? SKNode()
         let contactB = contact.bodyB.node ?? SKNode()
@@ -298,10 +297,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }else if contactA.name == "ai" || contactB.name == "ai" {
                 opponentCollisionFlag = true
             }
-        } else if (contactA.name == "monster1") || (contactB.name == "monster1") || (contactA.name == "monster2") || (contactB.name == "monster2") || (contactA.name == "monster3") || (contactB.name == "monster3") || (contactA.name == "monster4") || (contactB.name == "monster4"){
-            //Monster-Player
-            if (contactA.name == "player1") || (contactB.name == "player1") {
-                monsterCollisionFlag = true
+            return
+        }
+        for i in 0..<monsters.count {
+            if (contactA.name == monsters[i].name) || (contactB.name == monsters[i].name) {
+                //Monster-Player
+                if (contactA.name == "player1") || (contactB.name == "player1") {
+                    monsterCollisionFlag = i
+                }
             }
         }
     }

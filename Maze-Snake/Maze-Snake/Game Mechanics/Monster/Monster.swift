@@ -13,6 +13,7 @@ import GameplayKit
 class Monster: Actor {
     
     static let TILE_TRAVEL_TIME = 0.5
+    static let MAX_MONSTERS = 4
     
     var number: Int = 0
     
@@ -57,26 +58,27 @@ class Monster: Actor {
             let left_bound = scene.frame.midX - tile.frame.width * 2
             let top_bound = scene.frame.midY + tile.frame.height * 2
             let bottom_bound = scene.frame.midY - tile.frame.height * 2
-            switch num {
-            case 1:
-                return tile.node.connectedNodes.count > 2 && tile.position.x > right_bound && tile.position.y > top_bound
-            case 2:
-                return tile.node.connectedNodes.count > 2 && tile.position.x < left_bound && tile.position.y > top_bound
-            case 3:
-                return tile.node.connectedNodes.count > 2 && tile.position.x < left_bound && tile.position.y < bottom_bound
-            case 4:
-                return tile.node.connectedNodes.count > 2 && tile.position.x > right_bound && tile.position.y < bottom_bound
-            default:
-                return tile.node.connectedNodes.count > 2
+            
+            let intersection = tile.node.connectedNodes.count > 2
+            
+            var withinBounds = true
+            if num % 4 == 0 {
+                withinBounds = tile.position.x > right_bound && tile.position.y < bottom_bound
+            }else if num % 3 == 0 {
+                withinBounds = tile.position.x < left_bound && tile.position.y < bottom_bound
+            }else if num % 2 == 0 {
+                withinBounds = tile.position.x < left_bound && tile.position.y > top_bound
+            }else if num % 1 == 0 {
+                withinBounds = tile.position.x > right_bound && tile.position.y > top_bound
             }
+        
+            return intersection && withinBounds
             
         })
         
         gridPos = GridPosition(from: rand.node.gridPosition)
         position = rand.position
         
-//        print("Monsters Position: ")
-//        print(gridPos)
         return rand.node
     }
     

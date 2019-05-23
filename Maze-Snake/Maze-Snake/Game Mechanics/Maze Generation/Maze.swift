@@ -86,7 +86,6 @@ class Maze {
         for column in data {
             for tile in column {
                 nodes.append(tile.node)
-                print(tile.node.connectedNodes.count)
             }
         }
         graph = GKGridGraph(nodes)

@@ -15,14 +15,11 @@ extension GameScene {
     
     //In game object generation
     func characterInitialization() {
-        monster1 = Monster(texture: SKTexture(image: #imageLiteral(resourceName: "monster.png")), parent: self, number: 1)
-        monster1.name = "monster1"
-        monster2 = Monster(texture: SKTexture(image: #imageLiteral(resourceName: "monster.png")), parent: self, number: 2)
-        monster2.name = "monster2"
-        monster3 = Monster(texture: SKTexture(image: #imageLiteral(resourceName: "monster.png")), parent: self, number: 3)
-        monster3.name = "monster3"
-        monster4 = Monster(texture: SKTexture(image: #imageLiteral(resourceName: "monster.png")), parent: self, number: 4)
-        monster4.name = "monster4"
+        for counter in 1...Monster.MAX_MONSTERS {
+            let monster = Monster(texture: SKTexture(image: #imageLiteral(resourceName: "monster.png")), parent: self, number: counter)
+            monster.name = "monster\(counter)"
+            monsters.append(monster)
+        }
         
         
         player1 = Player(texture: SKTexture(image: #imageLiteral(resourceName: "player.png")), parent: self)
@@ -62,17 +59,17 @@ extension GameScene {
         let trophyGridPos = tileManager.indexFrom(position: trophy.position)
         opponent.moveShortestPath(to: trophyGridPos)
         
-        monster1.run(monster1.generatePath())
-        monster2.run(monster2.generatePath())
+        for monster in monsters {
+            monster.run(monster.generatePath())
+        }
     }
     
     //Pause all characters except for the player
     func pauseCharacters(bool: Bool) {
         opponent.isPaused = bool
-        monster1.isPaused = bool
-        monster2.isPaused = bool
-        monster3.isPaused = bool
-        monster4.isPaused = bool
+        for monster in monsters {
+            monster.isPaused = bool
+        }
     }
     
     //Triggered in the settings

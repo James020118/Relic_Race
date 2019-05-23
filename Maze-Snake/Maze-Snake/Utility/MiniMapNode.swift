@@ -22,10 +22,7 @@ class MiniMapNode: SKSpriteNode {
     var trophyPos = SKSpriteNode(imageNamed: "Trophyy")
     var opponentPos = SKSpriteNode(imageNamed: "player")
     
-    var monsterPos1 = SKSpriteNode(imageNamed: "monster")
-    var monsterPos2 = SKSpriteNode(imageNamed: "monster")
-    var monsterPos3 = SKSpriteNode(imageNamed: "monster")
-    var monsterPos4 = SKSpriteNode(imageNamed: "monster")
+    var monstersPos = [SKSpriteNode]()
     
     //Textures for minimap
     let textureSet = TextureSet(
@@ -43,16 +40,12 @@ class MiniMapNode: SKSpriteNode {
         trophyPos.zPosition = 6
         opponentPos.size = CGSize(width: 30, height: 30)
         opponentPos.zPosition = 6
-        
-        monsterPos1.size = CGSize(width: 30, height: 30)
-        monsterPos1.zPosition = 6
-        monsterPos2.size = CGSize(width: 30, height: 30)
-        monsterPos2.zPosition = 6
-        monsterPos3.size = CGSize(width: 30, height: 30)
-        monsterPos3.zPosition = 6
-        monsterPos4.size = CGSize(width: 30, height: 30)
-        monsterPos4.zPosition = 6
-        
+        for i in 0..<scene.monsters.count {
+            let monsterPos = SKSpriteNode(imageNamed: "monster")
+            monsterPos.size = CGSize(width: 30, height: 30)
+            monsterPos.zPosition = 6
+            monstersPos.append(monsterPos)
+        }
         //Call parent init
         let size = CGSize(width: scene.size.width/8, height: scene.size.height/8)
         super.init(texture: nil, color: .black, size: size)
@@ -62,19 +55,19 @@ class MiniMapNode: SKSpriteNode {
         addChild(playerPos)
         addChild(trophyPos)
         addChild(opponentPos)
-        addChild(monsterPos1)
-        addChild(monsterPos2)
-        addChild(monsterPos3)
-        addChild(monsterPos4)
+        for monsterPos in monstersPos {
+            addChild(monsterPos)
+        }
         //Init tiles
         tileManager.addTilesTo(scene: self)
         //Update trackable icons
         updatePlayer(position: scene.player1.position)
         updateOpponent(position: scene.opponent.position)
-        updateMonster(position: scene.monster1.position)
-        updateMonster2(position: scene.monster2.position)
-        updateMonster3(position: scene.monster3.position)
-        updateMonster4(position: scene.monster4.position)
+        var points = [CGPoint]()
+        for monster in scene.monsters {
+            points.append(monster.position)
+        }
+        updateMonsters(positions: points)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -101,25 +94,13 @@ class MiniMapNode: SKSpriteNode {
             opponentPos.position = point
         })
     }
-    func updateMonster(position: CGPoint) {
-        update(position: position, property: { point in
-            monsterPos1.position = point
-        })
-    }
-    func updateMonster2(position: CGPoint) {
-        update(position: position, property: { point in
-            monsterPos2.position = point
-        })
-    }
-    func updateMonster3(position: CGPoint) {
-        update(position: position, property: { point in
-            monsterPos3.position = point
-        })
-    }
-    func updateMonster4(position: CGPoint) {
-        update(position: position, property: { point in
-            monsterPos4.position = point
-        })
+    
+    func updateMonsters(positions: [CGPoint]) {
+        for i in 0..<monstersPos.count {
+            update(position: positions[i], property: { point in
+                monstersPos[i].position = point
+            })
+        }
     }
     
     //Function to update a generic SKShapeNode's position
