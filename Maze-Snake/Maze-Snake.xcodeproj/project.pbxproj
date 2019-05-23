@@ -16,6 +16,7 @@
 		2E39DF53227B65CA00EA1C84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E39DF51227B65CA00EA1C84 /* LaunchScreen.storyboard */; };
 		2E39DF5E227B65CA00EA1C84 /* Maze_SnakeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E39DF5D227B65CA00EA1C84 /* Maze_SnakeTests.swift */; };
 		2E39DF69227B65CA00EA1C84 /* Maze_SnakeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E39DF68227B65CA00EA1C84 /* Maze_SnakeUITests.swift */; };
+		2E47C74E229721C50007576C /* walkingDown.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2E47C74D229721C50007576C /* walkingDown.atlas */; };
 		2E7870EB228205C900FB1303 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7870EA228205C900FB1303 /* Stack.swift */; };
 		2E9C4D022284AF4A009C9BFA /* AnalogStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C4D012284AF4A009C9BFA /* AnalogStick.swift */; };
 		2EB4D68B2289EA96009F5F3E /* Trophy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB4D68A2289EA96009F5F3E /* Trophy.swift */; };
@@ -76,6 +77,7 @@
 		2E39DF64227B65CA00EA1C84 /* Maze-SnakeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Maze-SnakeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E39DF68227B65CA00EA1C84 /* Maze_SnakeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maze_SnakeUITests.swift; sourceTree = "<group>"; };
 		2E39DF6A227B65CA00EA1C84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2E47C74D229721C50007576C /* walkingDown.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = walkingDown.atlas; sourceTree = "<group>"; };
 		2E7870EA228205C900FB1303 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		2E9C4D012284AF4A009C9BFA /* AnalogStick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogStick.swift; sourceTree = "<group>"; };
 		2EB4D68A2289EA96009F5F3E /* Trophy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trophy.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				2E39DF54227B65CA00EA1C84 /* Info.plist */,
 				2E39DF42227B65CA00EA1C84 /* AppDelegate.swift */,
 				61163AED227CECDB001F49E1 /* Assets.xcassets */,
+				2E47C74D229721C50007576C /* walkingDown.atlas */,
 				2E7870E92282055D00FB1303 /* Data Structures */,
 				611196202284DC070075EEC9 /* Utility */,
 				2EDD7A952280B68A002B7783 /* Extensions */,
@@ -440,6 +443,7 @@
 			files = (
 				2E39DF4E227B65CA00EA1C84 /* Main.storyboard in Resources */,
 				2E39DF45227B65CA00EA1C84 /* GameScene.sks in Resources */,
+				2E47C74E229721C50007576C /* walkingDown.atlas in Resources */,
 				61163AEE227CECDB001F49E1 /* Tiles.sks in Resources */,
 				2E39DF53227B65CA00EA1C84 /* LaunchScreen.storyboard in Resources */,
 				61930BDA227DD12200550DD0 /* TestTIles.sks in Resources */,

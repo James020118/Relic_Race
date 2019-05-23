@@ -18,7 +18,7 @@ class MiniMapNode: SKSpriteNode {
     var tileManager: TileManager
     
     //Trackable Player Icons
-    var playerPos = SKSpriteNode(imageNamed: "player")
+    var playerPos = SKSpriteNode(imageNamed: "oldMan")
     var trophyPos = SKSpriteNode(imageNamed: "Trophyy")
     var opponentPos = SKSpriteNode(imageNamed: "player")
     
@@ -40,7 +40,7 @@ class MiniMapNode: SKSpriteNode {
         trophyPos.zPosition = 6
         opponentPos.size = CGSize(width: 30, height: 30)
         opponentPos.zPosition = 6
-        for i in 0..<scene.monsters.count {
+        for _ in 0..<scene.monsters.count {
             let monsterPos = SKSpriteNode(imageNamed: "monster")
             monsterPos.size = CGSize(width: 30, height: 30)
             monsterPos.zPosition = 6

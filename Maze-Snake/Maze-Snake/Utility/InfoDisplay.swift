@@ -258,12 +258,15 @@ class InfoDisplay {
     let moveJoystick_Title = SKLabelNode()
     let moveJoystick_Right = SKLabelNode()
     let moveJoystck_Left = SKLabelNode()
+    let moveMap_Title = SKLabelNode()
+    let moveMap_Right = SKLabelNode()
+    let moveMap_Left = SKLabelNode()
     func goToSettings(xCoord: CGFloat, yCoord: CGFloat) {
         pausedLabel1.isHidden = true
         pausedLabel1.isHidden = true
         returnLabel.isHidden = true
         parent.pause.isHidden = true
-        settingsLabel.run(SKAction.moveTo(y: settingsLabel.position.y + LABEL_MOVE_OFFSET, duration: 1))
+        settingsLabel.run(SKAction.moveTo(y: settingsLabel.position.y + LABEL_MOVE_OFFSET, duration: 0.5))
         
         back.zPosition = 21
         back.fontName = "AvenirNext-Bold"
@@ -287,7 +290,7 @@ class InfoDisplay {
         } else {
             moveJoystick_Right.fontColor = UIColor.white
         }
-        moveJoystick_Right.position = CGPoint(x: xCoord + 425, y: yCoord + 50)
+        moveJoystick_Right.position = CGPoint(x: xCoord + 700, y: yCoord + 50)
         moveJoystick_Right.fontSize = 100
         moveJoystick_Right.text = "right"
         moveJoystick_Right.name = "joystick_right"
@@ -299,27 +302,64 @@ class InfoDisplay {
         } else {
             moveJoystck_Left.fontColor = UIColor.white
         }
-        moveJoystck_Left.position = CGPoint(x: xCoord + 700, y: yCoord + 50)
+        moveJoystck_Left.position = CGPoint(x: xCoord + 425, y: yCoord + 50)
         moveJoystck_Left.fontSize = 100
         moveJoystck_Left.text = "left"
         moveJoystck_Left.name = "joystick_left"
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        moveMap_Title.zPosition = 21
+        moveMap_Title.fontName = "AvenirNext-Bold"
+        moveMap_Title.fontColor = UIColor.white
+        moveMap_Title.position = CGPoint(x: xCoord - 300, y: yCoord - 150)
+        moveMap_Title.fontSize = 100
+        moveMap_Title.text = "Minimap Position: "
+        
+        moveMap_Right.zPosition = 21
+        moveMap_Right.fontName = "AvenirNext-Bold"
+        if !parent.minimap_On_The_Left {
+            moveMap_Right.fontColor = UIColor.green
+        } else {
+            moveMap_Right.fontColor = UIColor.white
+        }
+        moveMap_Right.position = CGPoint(x: xCoord + 700, y: yCoord - 150)
+        moveMap_Right.fontSize = 100
+        moveMap_Right.text = "right"
+        moveMap_Right.name = "minimap_right"
+        
+        moveMap_Left.zPosition = 21
+        moveMap_Left.fontName = "AvenirNext-Bold"
+        if parent.minimap_On_The_Left {
+            moveMap_Left.fontColor = UIColor.green
+        } else {
+            moveMap_Left.fontColor = UIColor.white
+        }
+        moveMap_Left.position = CGPoint(x: xCoord + 425, y: yCoord - 150)
+        moveMap_Left.fontSize = 100
+        moveMap_Left.text = "left"
+        moveMap_Left.name = "minimap_left"
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.parent.addChild(self.back)
             self.parent.addChild(self.moveJoystick_Title)
             self.parent.addChild(self.moveJoystick_Right)
             self.parent.addChild(self.moveJoystck_Left)
+            self.parent.addChild(self.moveMap_Title)
+            self.parent.addChild(self.moveMap_Right)
+            self.parent.addChild(self.moveMap_Left)
         }
     }
     
     //Remove all nodes related to settings
     func exitSettings() {
-        settingsLabel.run(SKAction.moveTo(y: settingsLabel.position.y - LABEL_MOVE_OFFSET, duration: 1))
+        settingsLabel.run(SKAction.moveTo(y: settingsLabel.position.y - LABEL_MOVE_OFFSET, duration: 0.5))
         back.removeFromParent()
         moveJoystick_Title.removeFromParent()
         moveJoystick_Right.removeFromParent()
         moveJoystck_Left.removeFromParent()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        moveMap_Title.removeFromParent()
+        moveMap_Right.removeFromParent()
+        moveMap_Left.removeFromParent()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.pausedLabel1.isHidden = false
             self.pausedLabel1.isHidden = false
             self.returnLabel.isHidden = false

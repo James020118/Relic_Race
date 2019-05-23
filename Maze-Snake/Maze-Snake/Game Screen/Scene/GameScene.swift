@@ -43,12 +43,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //Real-time Tracking Minimap
     var minimap: MiniMapNode!
+    var minimap_On_The_Left = true
     
     //Display various information
     var info: InfoDisplay!
-    let DISPLAY_OFFSET_X: CGFloat = 625
-    let DISPLAY_OFFSET_Y: CGFloat = 375
+    var DISPLAY_OFFSET_X: CGFloat = 625
+    var DISPLAY_OFFSET_Y: CGFloat = 375
+    
+    var LABEL_OFFSET_X: CGFloat = 625
+    var LABEL_OFFSET_Y: CGFloat = 375
     var pause = SKSpriteNode()
+    
+    //Walking textures
+    var walking_Down_TextureAtlas = SKTextureAtlas()
+    var walking_Down_Textures = [SKTexture]()
     
     //Textures for maze
     let textureSet = TextureSet(
@@ -89,8 +97,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         info = InfoDisplay(parent: self)
         info.displayHealth(xCoord: player1.position.x + DISPLAY_OFFSET_X, yCoord: player1.position.y + DISPLAY_OFFSET_Y)
-        info.displayPlayerScore(xCoord: player1.position.x - DISPLAY_OFFSET_X, yCoord: player1.position.y - DISPLAY_OFFSET_Y, score: player1.player_Score)
-        info.displayAIScore(xCoord: player1.position.x - DISPLAY_OFFSET_X, yCoord: player1.position.y - DISPLAY_OFFSET_Y - 50, score: opponent.AI_Score)
+        info.displayPlayerScore(xCoord: player1.position.x - LABEL_OFFSET_X, yCoord: player1.position.y - LABEL_OFFSET_Y, score: player1.player_Score)
+        info.displayAIScore(xCoord: player1.position.x - LABEL_OFFSET_X, yCoord: player1.position.y - LABEL_OFFSET_Y - 50, score: opponent.AI_Score)
         
         pause = SKSpriteNode(imageNamed: "pause")
         pause.zPosition = 2
@@ -98,6 +106,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pause.position = CGPoint(x: player1.position.x, y: player1.position.y + DISPLAY_OFFSET_Y + 35)
         pause.name = "pause"
         addChild(pause)
+        
+        textureInitialization()
+        player1.run(SKAction.repeatForever(SKAction.animate(with: walking_Down_Textures, timePerFrame: 0.25)))
     }
     
     var isPausing = false
@@ -145,6 +156,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
+        if node.name == "minimap_right" || node.name == "minimap_left" {
+            if node.name == "minimap_right" {
+                moveMinimap(toTheRight: true)
+            } else {
+                moveMinimap(toTheRight: false)
+            }
+        }
+        
+        
+        
         if node.name == "back" {
             info.exitSettings()
         }
@@ -155,6 +176,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var lastOppUpdate: TimeInterval = 0
     var lastCheck: TimeInterval = 0
     override func update(_ currentTime: TimeInterval) {
+        
         
         if player1CollisionFlag {
             player1.incrementScore()
@@ -264,6 +286,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.info.updateHealthPos(newX: self.player1.position.x + self.DISPLAY_OFFSET_X, newY: self.player1.position.y + self.DISPLAY_OFFSET_Y)
             self.info.updateScoreLabelPos(newX: self.player1.position.x - self.DISPLAY_OFFSET_X, newY: self.player1.position.y - self.DISPLAY_OFFSET_Y)
             self.pause.position = CGPoint(x: self.player1.position.x, y: self.player1.position.y + self.DISPLAY_OFFSET_Y + 35)
+            self.info.playerScoreLabel.position = CGPoint(x: self.player1.position.x - self.LABEL_OFFSET_X, y: self.player1.position.y - self.LABEL_OFFSET_Y)
+            self.info.AIScoreLabel.position = CGPoint(x: self.player1.position.x - self.LABEL_OFFSET_X, y: self.player1.position.y - self.LABEL_OFFSET_Y - 50)
            //Optimization
             self.tileManager.viewOnScreenTiles(pos: self.player1.position, parent: self)
         }
@@ -271,8 +295,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     //Minimap init
-    let MINIMAP_OFFSET_X : CGFloat = 600
-    let MINIMAP_OFFSET_Y : CGFloat = 325
+    var MINIMAP_OFFSET_X : CGFloat = 600
+    var MINIMAP_OFFSET_Y : CGFloat = 325
     func spawnMinimap(graph: GKGridGraph<GKGridGraphNode>) {
         minimap = MiniMapNode(maze: graph, self)
         minimap.position = CGPoint(x: player1.position.x - MINIMAP_OFFSET_X, y: player1.position.y + MINIMAP_OFFSET_Y)

@@ -13,6 +13,15 @@ import SpriteKit
 To keep the main scene file clean */
 extension GameScene {
     
+    //Texture initialization
+    func textureInitialization() {
+        walking_Down_TextureAtlas = SKTextureAtlas(named: "walkingDown")
+        for i in 1...walking_Down_TextureAtlas.textureNames.count {
+            let name = "walking_down_\(i)"
+            walking_Down_Textures.append(walking_Down_TextureAtlas.textureNamed(name))
+        }
+    }
+    
     //In game object generation
     func characterInitialization() {
         for counter in 1...Monster.MAX_MONSTERS {
@@ -22,7 +31,7 @@ extension GameScene {
         }
         
         
-        player1 = Player(texture: SKTexture(image: #imageLiteral(resourceName: "player.png")), parent: self)
+        player1 = Player(texture: SKTexture(image: #imageLiteral(resourceName: "oldMan.png")), parent: self)
         player1.name = "player1"
         opponent = AI(texture: SKTexture(image: #imageLiteral(resourceName: "player.png")), parent: self, pos: GridPosition(column: 1, row: Maze.MAX_ROWS-1))
         opponent.name = "ai"
@@ -58,6 +67,7 @@ extension GameScene {
         minimap.updateTrophy(position: trophy.position)
         let trophyGridPos = tileManager.indexFrom(position: trophy.position)
         opponent.moveShortestPath(to: trophyGridPos)
+        pause.isHidden = false
         
         for monster in monsters {
             monster.run(monster.generatePath())
@@ -82,7 +92,12 @@ extension GameScene {
             if JOYSTICK_X_OFFSET < 0 {
                 JOYSTICK_X_OFFSET = JOYSTICK_X_OFFSET * -1
             }
+            if LABEL_OFFSET_X < 0 {
+                LABEL_OFFSET_X = LABEL_OFFSET_X * -1
+            }
             joystick.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
+            info.playerScoreLabel.position = CGPoint(x: player1.position.x - LABEL_OFFSET_X, y: player1.position.y - LABEL_OFFSET_Y)
+            info.AIScoreLabel.position = CGPoint(x: player1.position.x - LABEL_OFFSET_X, y: player1.position.y - LABEL_OFFSET_Y - 50)
         } else {
             info.moveJoystick_Right.fontColor = UIColor.white
             info.moveJoystck_Left.fontColor = UIColor.green
@@ -90,7 +105,40 @@ extension GameScene {
             if JOYSTICK_X_OFFSET > 0 {
                 JOYSTICK_X_OFFSET = JOYSTICK_X_OFFSET * -1
             }
+            if LABEL_OFFSET_X > 0 {
+                LABEL_OFFSET_X = LABEL_OFFSET_X * -1
+            }
             joystick.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
+            info.playerScoreLabel.position = CGPoint(x: player1.position.x - LABEL_OFFSET_X, y: player1.position.y - LABEL_OFFSET_Y)
+            info.AIScoreLabel.position = CGPoint(x: player1.position.x - LABEL_OFFSET_X, y: player1.position.y - LABEL_OFFSET_Y - 50)
+        }
+    }
+    
+    func moveMinimap(toTheRight: Bool) {
+        if toTheRight {
+            info.moveMap_Right.fontColor = UIColor.green
+            info.moveMap_Left.fontColor = UIColor.white
+            minimap_On_The_Left = false
+            if MINIMAP_OFFSET_X > 0 {
+                MINIMAP_OFFSET_X = MINIMAP_OFFSET_X * -1
+            }
+            if DISPLAY_OFFSET_X > 0 {
+                DISPLAY_OFFSET_X = DISPLAY_OFFSET_X * -1
+            }
+            minimap.position = CGPoint(x: player1.position.x - MINIMAP_OFFSET_X, y: player1.position.y + MINIMAP_OFFSET_Y)
+            info.updateHealthPos(newX: player1.position.x + DISPLAY_OFFSET_X, newY: player1.position.y + DISPLAY_OFFSET_Y)
+        } else {
+            info.moveMap_Right.fontColor = UIColor.white
+            info.moveMap_Left.fontColor = UIColor.green
+            minimap_On_The_Left = true
+            if MINIMAP_OFFSET_X < 0 {
+                MINIMAP_OFFSET_X = MINIMAP_OFFSET_X * -1
+            }
+            if DISPLAY_OFFSET_X < 0 {
+                DISPLAY_OFFSET_X = DISPLAY_OFFSET_X * -1
+            }
+            minimap.position = CGPoint(x: player1.position.x - MINIMAP_OFFSET_X, y: player1.position.y + MINIMAP_OFFSET_Y)
+            info.updateHealthPos(newX: player1.position.x + DISPLAY_OFFSET_X, newY: player1.position.y + DISPLAY_OFFSET_Y)
         }
     }
     
