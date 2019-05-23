@@ -64,6 +64,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         wall: SKTexture(imageNamed: "wall_texture")
     )
     
+    //Parent VC instance
+    var parentVC: GameViewController!
+    
     //Time Since Last Update(:) call
     private var lastUpdateTime : TimeInterval = 0
     
@@ -138,10 +141,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if node.name == "return" || node.name == "exit" {
             removeAllChildren()
-            let transition = SKTransition.fade(withDuration: 1)
-            let menuScene = SKScene(fileNamed: "MenuScene")!
-            menuScene.scaleMode = .aspectFit
-            self.view?.presentScene(menuScene, transition: transition)
+            parentVC.dismiss(animated: true, completion: nil)
         }
         
         if node.name == "settings" {

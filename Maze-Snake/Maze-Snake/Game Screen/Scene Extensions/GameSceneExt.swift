@@ -24,8 +24,9 @@ extension GameScene {
     
     //In game object generation
     func characterInitialization() {
+        let texture = SKTexture(image: #imageLiteral(resourceName: "monster.png"))
         for counter in 1...Monster.MAX_MONSTERS {
-            let monster = Monster(texture: SKTexture(image: #imageLiteral(resourceName: "monster.png")), parent: self, number: counter)
+            let monster = Monster(texture: texture, parent: self, number: counter)
             monster.name = "monster\(counter)"
             monsters.append(monster)
         }
