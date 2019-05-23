@@ -218,46 +218,48 @@ class Maze {
         for y in 0..<data.count {
             for x in 0..<data[y].count {
                 let node = data[y][x].node
-                //Dead End
-                if node.connectedNodes.count == 1 {
-                    var possibleDirection = [Direction]()
-                    var flag = true
-                    if x == Maze.MAX_COLUMNS-2 {
-                        possibleDirection.append(.left)
-                        flag = false
-                    }else if x == 1 {
-                        possibleDirection.append(.right)
-                        flag = false
-                    }
-                    if y == Maze.MAX_ROWS-2 {
-                        possibleDirection.append(.down)
-                        flag = false
-                    }else if y == 1 {
-                        possibleDirection.append(.up)
-                        flag = false
-                    }
-                    if flag {
-                        possibleDirection = [.up, .down, .left, .right]
-                    }
-                    //Make sure possibilities already to don exist
-                    let currentDir = node.nodeDirections()
-                    possibleDirection = possibleDirection.filter { !currentDir.contains($0) }
-                    //No possible paths
-                    if possibleDirection.isEmpty {
-                        continue
-                    }
-                    
-                    //Choose a random possible path to carve
-                    let rand = possibleDirection.randomElement()!
+                //Not a dead end, move on
+                if node.connectedNodes.count != 1 {
+                    continue
+                }
+                var possibleDirection = [Direction]()
+                var flag = true
+                if x == Maze.MAX_COLUMNS-2 {
+                    possibleDirection.append(.left)
+                    flag = false
+                }else if x == 1 {
+                    possibleDirection.append(.right)
+                    flag = false
+                }
+                if y == Maze.MAX_ROWS-2 {
+                    possibleDirection.append(.up)
+                    flag = false
+                }else if y == 1 {
+                    possibleDirection.append(.down)
+                    flag = false
+                }
+                if flag {
+                    possibleDirection = [.up, .down, .left, .right]
+                }
+                
+                //Make sure possibilities already to don exist
+                let currentDir = node.nodeDirections()
+                possibleDirection = possibleDirection.filter { !currentDir.contains($0) }
+                //No possible paths
+                if possibleDirection.isEmpty {
+                    continue
+                }
+                
+                for possibility in possibleDirection {
                     var node1 = node
                     var node2 = node
-                    switch rand {
+                    switch possibility {
                     case .up:
-                        node1 = data[y+1][x].node
-                        node2 = data[y+2][x].node
-                    case .down:
                         node1 = data[y-1][x].node
                         node2 = data[y-2][x].node
+                    case .down:
+                        node1 = data[y+1][x].node
+                        node2 = data[y+2][x].node
                     case .left:
                         node1 = data[y][x-1].node
                         node2 = data[y][x-2].node
@@ -266,14 +268,26 @@ class Maze {
                         node2 = data[y][x+2].node
                     }
                     
-                    node.addConnections(to: [node1], bidirectional: true)
-                    node1.addConnections(to: [node2], bidirectional: true)
                     
+                    if node1.connectedNodes.count <= 1 && node2.connectedNodes.count <= 2 {
+                        node.addConnections(to: [node1], bidirectional: true)
+                        node1.addConnections(to: [node2], bidirectional: true)
+                    }
                 }
+                
             }
         }
     }
     
+    func outputConnections() {
+        for y in (0..<data.count).reversed() {
+            var line = ""
+            for x in 0..<data[y].count {
+                line.append(String(data[y][x].node.connectedNodes.count) + " ")
+            }
+            print(line)
+        }
+    }
     
     
 }
