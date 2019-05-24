@@ -26,13 +26,17 @@ class MiniMapNode: SKSpriteNode {
     
     //Textures for minimap
     let textureSet = TextureSet(
-        floor: SKTexture(imageNamed: "Sand_Grid_Center"),
-        wall: SKTexture(imageNamed: "Water_Grid_Center")
+        floor: SKTexture(imageNamed: ""),
+        wall: SKTexture(imageNamed: "")
     )
     
     //Conveniance init
     init(maze graph: GKGridGraph<GKGridGraphNode>, _ scene: GameScene) {
         tileManager = TileManager(from: graph, with: textureSet)
+        tileManager.changeTileColour(
+            wall: UIColor(red: 115/255, green: 109/255, blue: 115/255, alpha: 1),
+            floor: UIColor(red: 72/255, green: 53/255, blue: 27/255, alpha: 1)
+        )
         //Init Tracking Icons
         playerPos.size = CGSize(width: 30, height: 30)
         playerPos.zPosition = 6

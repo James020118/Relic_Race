@@ -93,6 +93,20 @@ class TileManager {
         }
     }
     
+    /* Function that replaces textures with a colour */
+    func changeTileColour(wall wColour: UIColor, floor fColour: UIColor) {
+        for y in 0..<tiles.count {
+            for tile in tiles[y] {
+                tile.texture = nil
+                if tile.node.connectedNodes.count == 0 {
+                    tile.color = wColour
+                }else {
+                    tile.color = fColour
+                }
+                
+            }
+        }
+    }
     
     /* Function that retreives the tiles at
         a given grid-position */
