@@ -83,6 +83,23 @@ extension GameScene {
         }
     }
     
+    func initializeHudPositions() {
+        if !joystick_On_The_Right {
+            JOYSTICK_X_OFFSET = JOYSTICK_X_OFFSET * -1
+            LABEL_OFFSET_X = LABEL_OFFSET_X * -1
+        }
+        
+        if !minimap_On_The_Left {
+            MINIMAP_OFFSET_X = MINIMAP_OFFSET_X * -1
+            DISPLAY_OFFSET_X = DISPLAY_OFFSET_X * -1
+        }
+        
+        joystick.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
+        minimap.position = CGPoint(x: player1.position.x - MINIMAP_OFFSET_X, y: player1.position.y + MINIMAP_OFFSET_Y)
+        info.updateHealthPos(newX: player1.position.x + DISPLAY_OFFSET_X, newY: player1.position.y + DISPLAY_OFFSET_Y)
+        info.updateScoreLabelPos(newX: player1.position.x - DISPLAY_OFFSET_X, newY: player1.position.y - DISPLAY_OFFSET_Y)
+    }
+    
     //Triggered in the settings
     //Move joystick based on user's selection(left or right)
     func moveJoystick(toTheRight: Bool) {
@@ -113,6 +130,8 @@ extension GameScene {
             info.playerScoreLabel.position = CGPoint(x: player1.position.x - LABEL_OFFSET_X, y: player1.position.y - LABEL_OFFSET_Y)
             info.AIScoreLabel.position = CGPoint(x: player1.position.x - LABEL_OFFSET_X, y: player1.position.y - LABEL_OFFSET_Y - 50)
         }
+        data.set(joystick_On_The_Right, forKey: "joystickPos")
+        print(data.object(forKey: "joystickPos") as! Bool)
     }
     
     func moveMinimap(toTheRight: Bool) {
@@ -141,6 +160,8 @@ extension GameScene {
             minimap.position = CGPoint(x: player1.position.x - MINIMAP_OFFSET_X, y: player1.position.y + MINIMAP_OFFSET_Y)
             info.updateHealthPos(newX: player1.position.x + DISPLAY_OFFSET_X, newY: player1.position.y + DISPLAY_OFFSET_Y)
         }
+        data.set(minimap_On_The_Left, forKey: "minimapPos")
+        print(data.object(forKey: "minimapPos") as! Bool)
     }
     
 }

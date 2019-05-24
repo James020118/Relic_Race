@@ -16,6 +16,8 @@ let playerCategory: UInt32 = 0x1 << 1
 let trophyCategory: UInt32 = 0x1 << 2
 let monsterCategory: UInt32 = 0x1 << 3
 
+let data = UserDefaults.standard
+
 /*-----------------
  Scene for PvAI Gameplay
  -----------------*/
@@ -76,6 +78,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         super.sceneDidLoad()
         
+        if data.object(forKey: "joystickPos") != nil && data.object(forKey: "minimapPos") != nil {
+            joystick_On_The_Right = data.bool(forKey: "joystickPos")
+            minimap_On_The_Left = data.bool(forKey: "minimapPos")
+        } else {
+            data.set(true, forKey: "joystickPos")
+            data.set(true, forKey: "minimapPos")
+        }
+        
+        print(joystick_On_The_Right)
+        print(minimap_On_The_Left)
+        
         let maze = Maze(width: Maze.MAX_COLUMNS, height: Maze.MAX_ROWS)
         mazeGraph = maze.graph
         let graph = mazeGraph ?? blankGraph()
@@ -111,6 +124,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(pause)
         
         textureInitialization()
+        initializeHudPositions()
         player1.run(SKAction.repeatForever(SKAction.animate(with: walking_Down_Textures, timePerFrame: 0.25)))
     }
     
