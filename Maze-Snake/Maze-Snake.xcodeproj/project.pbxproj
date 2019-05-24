@@ -21,6 +21,10 @@
 		2E7870EB228205C900FB1303 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7870EA228205C900FB1303 /* Stack.swift */; };
 		2E9C4D022284AF4A009C9BFA /* AnalogStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C4D012284AF4A009C9BFA /* AnalogStick.swift */; };
 		2EB4D68B2289EA96009F5F3E /* Trophy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB4D68A2289EA96009F5F3E /* Trophy.swift */; };
+		2ECD0A50229870D200318C0B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECD0A4F229870D200318C0B /* SettingsViewController.swift */; };
+		2ECD0A522298766C00318C0B /* walkingLeft.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2ECD0A512298766B00318C0B /* walkingLeft.atlas */; };
+		2ECD0A5422987E6400318C0B /* walkingUp.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2ECD0A5322987E6400318C0B /* walkingUp.atlas */; };
+		2ECD0A5622987F3400318C0B /* walkingRight.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2ECD0A5522987F3400318C0B /* walkingRight.atlas */; };
 		2EDD7A972280B6C4002B7783 /* NodeToDir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDD7A962280B6C4002B7783 /* NodeToDir.swift */; };
 		44ACC50A22906F8E0054C91A /* InfoDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ACC50922906F8E0054C91A /* InfoDisplay.swift */; };
 		44F2473E2294901300C69AA0 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F2473D2294901300C69AA0 /* MenuScene.swift */; };
@@ -83,6 +87,10 @@
 		2E7870EA228205C900FB1303 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		2E9C4D012284AF4A009C9BFA /* AnalogStick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogStick.swift; sourceTree = "<group>"; };
 		2EB4D68A2289EA96009F5F3E /* Trophy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trophy.swift; sourceTree = "<group>"; };
+		2ECD0A4F229870D200318C0B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		2ECD0A512298766B00318C0B /* walkingLeft.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = walkingLeft.atlas; sourceTree = "<group>"; };
+		2ECD0A5322987E6400318C0B /* walkingUp.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = walkingUp.atlas; sourceTree = "<group>"; };
+		2ECD0A5522987F3400318C0B /* walkingRight.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = walkingRight.atlas; sourceTree = "<group>"; };
 		2EDD7A962280B6C4002B7783 /* NodeToDir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeToDir.swift; sourceTree = "<group>"; };
 		44ACC50922906F8E0054C91A /* InfoDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDisplay.swift; sourceTree = "<group>"; };
 		44F2473D2294901300C69AA0 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
@@ -167,6 +175,9 @@
 				2E39DF42227B65CA00EA1C84 /* AppDelegate.swift */,
 				61163AED227CECDB001F49E1 /* Assets.xcassets */,
 				2E47C74D229721C50007576C /* walkingDown.atlas */,
+				2ECD0A5322987E6400318C0B /* walkingUp.atlas */,
+				2ECD0A512298766B00318C0B /* walkingLeft.atlas */,
+				2ECD0A5522987F3400318C0B /* walkingRight.atlas */,
 				2E7870E92282055D00FB1303 /* Data Structures */,
 				611196202284DC070075EEC9 /* Utility */,
 				2EDD7A952280B68A002B7783 /* Extensions */,
@@ -344,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				61DAA859227CFBD1000FE4D0 /* MainViewController.swift */,
+				2ECD0A4F229870D200318C0B /* SettingsViewController.swift */,
 			);
 			path = "Main Screen";
 			sourceTree = "<group>";
@@ -452,8 +464,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ECD0A5422987E6400318C0B /* walkingUp.atlas in Resources */,
+				2ECD0A522298766C00318C0B /* walkingLeft.atlas in Resources */,
 				2E39DF4E227B65CA00EA1C84 /* Main.storyboard in Resources */,
 				2E39DF45227B65CA00EA1C84 /* GameScene.sks in Resources */,
+				2ECD0A5622987F3400318C0B /* walkingRight.atlas in Resources */,
 				2E47C74E229721C50007576C /* walkingDown.atlas in Resources */,
 				61163AEE227CECDB001F49E1 /* Tiles.sks in Resources */,
 				2E39DF53227B65CA00EA1C84 /* LaunchScreen.storyboard in Resources */,
@@ -508,6 +523,7 @@
 				61930BDC227DE7BF00550DD0 /* Maze.swift in Sources */,
 				2E39DF43227B65CA00EA1C84 /* AppDelegate.swift in Sources */,
 				619AFE5D22871E81000784A4 /* TextureSet.swift in Sources */,
+				2ECD0A50229870D200318C0B /* SettingsViewController.swift in Sources */,
 				44F2474322949F2300C69AA0 /* GameSceneExt.swift in Sources */,
 				61DAA85A227CFBD1000FE4D0 /* MainViewController.swift in Sources */,
 			);

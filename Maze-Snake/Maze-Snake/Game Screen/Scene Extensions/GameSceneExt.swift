@@ -15,10 +15,32 @@ extension GameScene {
     
     //Texture initialization
     func textureInitialization() {
+        //Walking down texture initializaiton
         walking_Down_TextureAtlas = SKTextureAtlas(named: "walkingDown")
         for i in 1...walking_Down_TextureAtlas.textureNames.count {
             let name = "walking_down_\(i)"
             walking_Down_Textures.append(walking_Down_TextureAtlas.textureNamed(name))
+        }
+        
+        //Walking left texture initialization
+        walking_Left_TextureAtlas = SKTextureAtlas(named: "walkingLeft")
+        for i in 1...walking_Left_TextureAtlas.textureNames.count {
+            let name = "walking_left_\(i)"
+            walking_Left_Textures.append(walking_Left_TextureAtlas.textureNamed(name))
+        }
+        
+        //Walking up texture initialization
+        walking_Up_TextureAtlas = SKTextureAtlas(named: "walkingUp")
+        for i in 1...walking_Up_TextureAtlas.textureNames.count {
+            let name = "walking_up_\(i)"
+            walking_Up_Textures.append(walking_Up_TextureAtlas.textureNamed(name))
+        }
+        
+        //Walking right texture initialization
+        walking_Right_TextureAtlas = SKTextureAtlas(named: "walkingRight")
+        for i in 1...walking_Right_TextureAtlas.textureNames.count {
+            let name = "walking_right_\(i)"
+            walking_Right_Textures.append(walking_Right_TextureAtlas.textureNamed(name))
         }
     }
     

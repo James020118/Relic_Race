@@ -30,8 +30,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var tileManager: TileManager!
     //Joystick to control player
     var joystick = AnalogJoystick(diameter: 150)
-    //Determine whether joystick is on the left side or right side of the screen
-    var joystick_On_The_Right = true
     
     //Actors
     var player1: Player!
@@ -45,7 +43,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //Real-time Tracking Minimap
     var minimap: MiniMapNode!
-    var minimap_On_The_Left = true
     
     //Display various information
     var info: InfoDisplay!
@@ -59,6 +56,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Walking textures
     var walking_Down_TextureAtlas = SKTextureAtlas()
     var walking_Down_Textures = [SKTexture]()
+    
+    var walking_Left_TextureAtlas = SKTextureAtlas()
+    var walking_Left_Textures = [SKTexture]()
+    
+    var walking_Up_TextureAtlas = SKTextureAtlas()
+    var walking_Up_Textures = [SKTexture]()
+    
+    var walking_Right_TextureAtlas = SKTextureAtlas()
+    var walking_Right_Textures = [SKTexture]()
     
     //Textures for maze
     let textureSet = TextureSet(
@@ -77,14 +83,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func sceneDidLoad() {
         physicsWorld.contactDelegate = self
         super.sceneDidLoad()
-        
-        if data.object(forKey: "joystickPos") != nil && data.object(forKey: "minimapPos") != nil {
-            joystick_On_The_Right = data.bool(forKey: "joystickPos")
-            minimap_On_The_Left = data.bool(forKey: "minimapPos")
-        } else {
-            data.set(true, forKey: "joystickPos")
-            data.set(true, forKey: "minimapPos")
-        }
         
         print(joystick_On_The_Right)
         print(minimap_On_The_Left)
@@ -125,7 +123,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         textureInitialization()
         initializeHudPositions()
-        player1.run(SKAction.repeatForever(SKAction.animate(with: walking_Down_Textures, timePerFrame: 0.25)))
     }
     
     var isPausing = false
@@ -178,13 +175,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
-        
-        
         if node.name == "back" {
             info.exitSettings()
         }
     }
     
+    /*
+    var isRunningAnimation = false
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        
+        let location = touch.location(in: self)
+        let node = self.atPoint(location)
+        
+        if node.name == "joystick" {
+            if !isRunningAnimation {
+                player1.run(SKAction.repeatForever(SKAction.animate(with: walking_Down_Textures, timePerFrame: 0.2)))
+                isRunningAnimation = true
+            }
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        
+        let location = touch.location(in: self)
+        let node = self.atPoint(location)
+        
+        if node.name == "joystick" {
+            if isRunningAnimation {
+               isRunningAnimation = false
+            }
+        }
+    }
+    */
     
     /* Function that is called before each frame is rendered */
     var lastOppUpdate: TimeInterval = 0
@@ -282,6 +306,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var JOYSTICK_Y_OFFSET : CGFloat = 275
     func spawnJoystick() {
         // initialize joystick
+        joystick.stick.name = "joystick"
         joystick.stick.image = #imageLiteral(resourceName: "stick.png")
         joystick.substrate.image = #imageLiteral(resourceName: "substrate.png")
         joystick.substrate.diameter += 175

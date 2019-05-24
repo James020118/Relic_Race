@@ -285,7 +285,7 @@ class InfoDisplay {
         
         moveJoystick_Right.zPosition = 21
         moveJoystick_Right.fontName = "AvenirNext-Bold"
-        if parent.joystick_On_The_Right {
+        if joystick_On_The_Right {
             moveJoystick_Right.fontColor = UIColor.green
         } else {
             moveJoystick_Right.fontColor = UIColor.white
@@ -297,7 +297,7 @@ class InfoDisplay {
         
         moveJoystck_Left.zPosition = 21
         moveJoystck_Left.fontName = "AvenirNext-Bold"
-        if !parent.joystick_On_The_Right {
+        if !joystick_On_The_Right {
             moveJoystck_Left.fontColor = UIColor.green
         } else {
             moveJoystck_Left.fontColor = UIColor.white
@@ -316,7 +316,7 @@ class InfoDisplay {
         
         moveMap_Right.zPosition = 21
         moveMap_Right.fontName = "AvenirNext-Bold"
-        if !parent.minimap_On_The_Left {
+        if !minimap_On_The_Left {
             moveMap_Right.fontColor = UIColor.green
         } else {
             moveMap_Right.fontColor = UIColor.white
@@ -328,7 +328,7 @@ class InfoDisplay {
         
         moveMap_Left.zPosition = 21
         moveMap_Left.fontName = "AvenirNext-Bold"
-        if parent.minimap_On_The_Left {
+        if minimap_On_The_Left {
             moveMap_Left.fontColor = UIColor.green
         } else {
             moveMap_Left.fontColor = UIColor.white

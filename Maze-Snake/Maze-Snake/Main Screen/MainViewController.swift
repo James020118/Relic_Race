@@ -8,12 +8,22 @@
 
 import UIKit
 
+var joystick_On_The_Right = true
+var minimap_On_The_Left = true
+
 class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        if data.object(forKey: "joystickPos") != nil && data.object(forKey: "minimapPos") != nil {
+            joystick_On_The_Right = data.bool(forKey: "joystickPos")
+            minimap_On_The_Left = data.bool(forKey: "minimapPos")
+        } else {
+            data.set(true, forKey: "joystickPos")
+            data.set(true, forKey: "minimapPos")
+        }
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
