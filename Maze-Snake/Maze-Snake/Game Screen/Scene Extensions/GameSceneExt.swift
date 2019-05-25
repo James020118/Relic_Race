@@ -13,6 +13,22 @@ import SpriteKit
 To keep the main scene file clean */
 extension GameScene {
     
+    func spawnInfo() {
+        info = InfoDisplay(parent: self)
+        info.displayHealth(xCoord: player1.position.x + DISPLAY_OFFSET_X, yCoord: player1.position.y + DISPLAY_OFFSET_Y)
+        info.displayPlayerScore(xCoord: player1.position.x - LABEL_OFFSET_X, yCoord: player1.position.y - LABEL_OFFSET_Y, score: player1.player_Score)
+        info.displayAIScore(xCoord: player1.position.x - LABEL_OFFSET_X, yCoord: player1.position.y - LABEL_OFFSET_Y - 50, score: opponent.AI_Score)
+    }
+    
+    func spawnPause() {
+        pause = SKSpriteNode(imageNamed: "pause")
+        pause.zPosition = 2
+        pause.size = CGSize(width: 200, height: 200)
+        pause.position = CGPoint(x: player1.position.x, y: player1.position.y + DISPLAY_OFFSET_Y + 35)
+        pause.name = "pause"
+        addChild(pause)
+    }
+    
     //Texture initialization
     func textureInitialization() {
         //Walking down texture initializaiton

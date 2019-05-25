@@ -96,33 +96,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.lastUpdateTime = 0
         
         //Initialize all characters, including player, opponent, and monsters
+        //Spawn Game Elements
         characterInitialization()
-        
         spawnMinimap(graph: graph)
         spawnJoystick()
         player1.spawnCamera()
-        
         trophy = Trophy(texture: SKTexture(image: #imageLiteral(resourceName: "Trophyy.png")), scene: self)
         minimap.updateTrophy(position: trophy.position)
         let trophyGridPos = tileManager.indexFrom(position: trophy.position)
         opponent.moveShortestPath(to: trophyGridPos)
-        
+        //Optimization
         tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
-        
-        info = InfoDisplay(parent: self)
-        info.displayHealth(xCoord: player1.position.x + DISPLAY_OFFSET_X, yCoord: player1.position.y + DISPLAY_OFFSET_Y)
-        info.displayPlayerScore(xCoord: player1.position.x - LABEL_OFFSET_X, yCoord: player1.position.y - LABEL_OFFSET_Y, score: player1.player_Score)
-        info.displayAIScore(xCoord: player1.position.x - LABEL_OFFSET_X, yCoord: player1.position.y - LABEL_OFFSET_Y - 50, score: opponent.AI_Score)
-        
-        pause = SKSpriteNode(imageNamed: "pause")
-        pause.zPosition = 2
-        pause.size = CGSize(width: 200, height: 200)
-        pause.position = CGPoint(x: player1.position.x, y: player1.position.y + DISPLAY_OFFSET_Y + 35)
-        pause.name = "pause"
-        addChild(pause)
-        
+        //Spawn HUD
+        spawnInfo()
+        spawnPause()
         textureInitialization()
         initializeHudPositions()
+        moveMinimap(toTheRight: !data.bool(forKey: "minimapPos"))
+        moveJoystick(toTheRight: data.bool(forKey: "joystickPos"))
     }
     
     var isPausing = false

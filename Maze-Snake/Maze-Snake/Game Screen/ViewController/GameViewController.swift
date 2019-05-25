@@ -26,11 +26,11 @@ class GameViewController: UIViewController {
         
         switch difficulty {
         case .Easy:
-            AI.TILE_TIME = 0.3
+            AI.TILE_TIME = 0.6
         case .Hard:
-            AI.TILE_TIME = 0.2
+            AI.TILE_TIME = 0.4
         case .Impossible:
-            AI.TILE_TIME = 0.15
+            AI.TILE_TIME = 0.3
         }
         
         //Spritekit GameScene creation
