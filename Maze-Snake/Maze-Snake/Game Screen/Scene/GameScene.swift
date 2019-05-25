@@ -44,14 +44,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Real-time Tracking Minimap
     var minimap: MiniMapNode!
     
+    //Pause Button
+    var pause = SKSpriteNode()
+    
     //Display various information
     var info: InfoDisplay!
+    
+    //HUD Position Offset Constants
     var DISPLAY_OFFSET_X: CGFloat = 625
     var DISPLAY_OFFSET_Y: CGFloat = 375
-    
     var LABEL_OFFSET_X: CGFloat = 625
     var LABEL_OFFSET_Y: CGFloat = 375
-    var pause = SKSpriteNode()
+    var JOYSTICK_X_OFFSET : CGFloat = 600
+    var JOYSTICK_Y_OFFSET : CGFloat = 275
+    var MINIMAP_OFFSET_X : CGFloat = 600
+    var MINIMAP_OFFSET_Y : CGFloat = 325
     
     //Walking textures
     var walking_Down_TextureAtlas = SKTextureAtlas()
@@ -75,8 +82,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Parent VC instance
     var parentVC: GameViewController!
     
-    //Time Since Last Update(:) call
-    private var lastUpdateTime : TimeInterval = 0
     
     //MARK:- Lifecycle Functions
     /* Function that is called when scene loads */
@@ -84,16 +89,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         super.sceneDidLoad()
         
-        print(joystick_On_The_Right)
-        print(minimap_On_The_Left)
-        
+        //Generate Maze
         let maze = Maze(width: Maze.MAX_COLUMNS, height: Maze.MAX_ROWS)
         mazeGraph = maze.graph
         let graph = mazeGraph ?? blankGraph()
+        
+        //Setup Map w/ Graph
         tileManager = TileManager(from: graph, with: textureSet)
         tileManager.addTilesTo(scene: self)
-        
-        self.lastUpdateTime = 0
         
         //Initialize all characters, including player, opponent, and monsters
         //Spawn Game Elements
@@ -101,12 +104,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         spawnMinimap(graph: graph)
         spawnJoystick()
         player1.spawnCamera()
-        trophy = Trophy(texture: SKTexture(image: #imageLiteral(resourceName: "Trophyy.png")), scene: self)
-        minimap.updateTrophy(position: trophy.position)
-        let trophyGridPos = tileManager.indexFrom(position: trophy.position)
-        opponent.moveShortestPath(to: trophyGridPos)
+        trophySystemSetup()
         //Optimization
         tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
+        
         //Spawn HUD
         spawnInfo()
         spawnPause()
@@ -119,11 +120,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isPausing = false
     /* Function that is called when user touches screen */
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //Get element at touch pos
         guard let touch = touches.first else { return }
-        
         let location = touch.location(in: self)
         let node = self.atPoint(location)
         
+        /* Response to User Game Menu Interaction */
         //Detect touch on pause node
         if node.name == "pause" {
             if isPausing {
@@ -201,64 +203,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     */
     
+    
     /* Function that is called before each frame is rendered */
     var lastOppUpdate: TimeInterval = 0
     var lastCheck: TimeInterval = 0
+    //Flags to detect when there is a meaningful collsion
+    var player1CollisionFlag = false
+    var opponentCollisionFlag = false
+    var monsterCollisionFlag = -1
     override func update(_ currentTime: TimeInterval) {
-        
-        
+        /* When a meaningful collision is detected, have an appropriate response */
         if player1CollisionFlag {
-            player1.incrementScore()
-            info.changePlayerScore(newScore: player1.player_Score)
-            
-            trophy.setRandomPosition()
-            minimap.updateTrophy(position: trophy.position)
-            opponent.stop()
-            let trophyGridPos = tileManager.indexFrom(position: trophy.position)
-            opponent.gridPos = tileManager.indexFrom(position: opponent.position)
-            opponent.moveShortestPath(to: trophyGridPos)
-            player1CollisionFlag = false
+            playerCollisionResponse()
         }
-        
         if opponentCollisionFlag {
-            opponent.incrementScore()
-            info.changeAIScore(newScore: opponent.AI_Score)
-            
-            trophy.setRandomPosition()
-            minimap.updateTrophy(position: trophy.position)
-            opponent.stop()
-            let trophyGridPos = tileManager.indexFrom(position: trophy.position)
-            opponent.gridPos = tileManager.indexFrom(position: opponent.position)
-            opponent.moveShortestPath(to: trophyGridPos)
-            opponentCollisionFlag = false
+            opponentCollisionResponse()
         }
-        
         if monsterCollisionFlag != -1 {
-            player1.decreaseHealth()
-            info.changeHealth(healthPoint: player1.player_Health)
-            
-            hittingMonster()
-            tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
-            monsterCollisionFlag = -1
-            
-            if player1.player_Health == 0 {
-                info.endGame()
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.info.playerDiedDisplay(xCoord: self.player1.position.x, yCoord: self.player1.position.y)
-                }
-            }
+           monsterCollisionResponse()
         }
         
-        // Initialize _lastUpdateTime if it has not already been
-        if (self.lastUpdateTime == 0) {
-            self.lastUpdateTime = currentTime
-        }
-        
-        // Calculate time since last update
-        //let dt = currentTime - self.lastUpdateTime
-        
-        
+        /* Update the minimap icon positions */
         let dOppT = currentTime - lastOppUpdate
         if dOppT > 0.125 {
             minimap.updateOpponent(position: opponent.position)
@@ -270,96 +235,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.lastOppUpdate = currentTime
         }
         
-        let dCheckT = currentTime - lastCheck
-        if dCheckT > 0.5 {
-            if player1.player_Score == 5 {
-                info.endGame()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    self.info.roundWinDisplay(winner: "player", xCoord: self.player1.position.x, yCoord: self.player1.position.y)
-                }
-            } else if opponent.AI_Score == 5 {
-                info.endGame()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    self.info.roundWinDisplay(winner: "ai", xCoord: self.player1.position.x, yCoord: self.player1.position.y)
-                }
-            }
-            self.lastCheck = currentTime
-        }
-        
-        self.lastUpdateTime = currentTime
     }
     
-    //MARK:- Game Element Inits
-    /* Game Element Initialization of Properties  */
     
-    //Joystick Init
-    var JOYSTICK_X_OFFSET : CGFloat = 600
-    var JOYSTICK_Y_OFFSET : CGFloat = 275
-    func spawnJoystick() {
-        // initialize joystick
-        joystick.stick.name = "joystick"
-        joystick.stick.image = #imageLiteral(resourceName: "stick.png")
-        joystick.substrate.image = #imageLiteral(resourceName: "substrate.png")
-        joystick.substrate.diameter += 175
-        joystick.stick.diameter += 105
-        joystick.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
-        joystick.zPosition = 1
-        addChild(joystick)
-        
-        joystick.trackingHandler = { [unowned self] data in
-            // track positions
-            self.player1.position = CGPoint(x: self.player1.position.x + (data.velocity.x * velocityMultiplier), y: self.player1.position.y + (data.velocity.y * velocityMultiplier))
-            self.player1.updateZoom()
-            self.joystick.position = CGPoint(x: self.player1.position.x + self.JOYSTICK_X_OFFSET, y: self.player1.position.y - self.JOYSTICK_Y_OFFSET)
-            self.minimap.position = CGPoint(x: self.player1.position.x - self.MINIMAP_OFFSET_X, y: self.player1.position.y + self.MINIMAP_OFFSET_Y)
-            self.minimap.updatePlayer(position: self.player1.position)
-            self.info.updateHealthPos(newX: self.player1.position.x + self.DISPLAY_OFFSET_X, newY: self.player1.position.y + self.DISPLAY_OFFSET_Y)
-            self.info.updateScoreLabelPos(newX: self.player1.position.x - self.DISPLAY_OFFSET_X, newY: self.player1.position.y - self.DISPLAY_OFFSET_Y)
-            self.pause.position = CGPoint(x: self.player1.position.x, y: self.player1.position.y + self.DISPLAY_OFFSET_Y + 35)
-            self.info.playerScoreLabel.position = CGPoint(x: self.player1.position.x - self.LABEL_OFFSET_X, y: self.player1.position.y - self.LABEL_OFFSET_Y)
-            self.info.AIScoreLabel.position = CGPoint(x: self.player1.position.x - self.LABEL_OFFSET_X, y: self.player1.position.y - self.LABEL_OFFSET_Y - 50)
-           //Optimization
-            self.tileManager.viewOnScreenTiles(pos: self.player1.position, parent: self)
-        }
-        
-    }
-    
-    //Minimap init
-    var MINIMAP_OFFSET_X : CGFloat = 600
-    var MINIMAP_OFFSET_Y : CGFloat = 325
-    func spawnMinimap(graph: GKGridGraph<GKGridGraphNode>) {
-        minimap = MiniMapNode(maze: graph, self)
-        minimap.position = CGPoint(x: player1.position.x - MINIMAP_OFFSET_X, y: player1.position.y + MINIMAP_OFFSET_Y)
-    }
-    
-    //MARK:- SKPhysicsContactDelegate
-    
-    /* Function called when 2 physics bodies collide */
-    //Flags to detect when there is a meaningful collsion
-    var player1CollisionFlag = false
-    var opponentCollisionFlag = false
-    var monsterCollisionFlag = -1
-    func didBegin(_ contact: SKPhysicsContact) {
-        let contactA = contact.bodyA.node ?? SKNode()
-        let contactB = contact.bodyB.node ?? SKNode()
-
-        if (contactA.name == "trophy") || (contactB.name == "trophy") {
-            //Trophy-Player
-            if (contactA.name == "player1") || (contactB.name == "player1") {
-                player1CollisionFlag = true
-            //Trophy-AI
-            }else if contactA.name == "ai" || contactB.name == "ai" {
-                opponentCollisionFlag = true
-            }
-            return
-        }
-        for i in 0..<monsters.count {
-            if (contactA.name == monsters[i].name) || (contactB.name == monsters[i].name) {
-                //Monster-Player
-                if (contactA.name == "player1") || (contactB.name == "player1") {
-                    monsterCollisionFlag = i
-                }
-            }
-        }
-    }
 }

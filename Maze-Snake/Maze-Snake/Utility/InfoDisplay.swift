@@ -21,12 +21,17 @@ class InfoDisplay {
     
     init(parent: GameScene) {
         self.parent = parent
+        heart1 = SKSpriteNode(texture: heartTexture)
+        heart2 = SKSpriteNode(texture: heartTexture)
+        heart3 = SKSpriteNode(texture: heartTexture)
     }
     
     //Constructing node for displaying health
-    let heart1 = SKSpriteNode(imageNamed: "heart")
-    let heart2 = SKSpriteNode(imageNamed: "heart")
-    let heart3 = SKSpriteNode(imageNamed: "heart")
+    let heartTexture = SKTexture(imageNamed: "heart")
+    let heart1: SKSpriteNode
+    let heart2: SKSpriteNode
+    let heart3: SKSpriteNode
+    
     func displayHealth(xCoord: CGFloat, yCoord: CGFloat) {
         let frame = SKSpriteNode(imageNamed: "frame")
         frame.size = CGSize(width: 400, height: 150)

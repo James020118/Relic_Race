@@ -21,7 +21,6 @@ class MiniMapNode: SKSpriteNode {
     var playerPos = SKSpriteNode(imageNamed: "oldMan")
     var trophyPos = SKSpriteNode(imageNamed: "Trophyy")
     var opponentPos = SKSpriteNode(imageNamed: "player")
-    
     var monstersPos = [SKSpriteNode]()
     
     //Textures for minimap
@@ -32,6 +31,7 @@ class MiniMapNode: SKSpriteNode {
     
     //Conveniance init
     init(maze graph: GKGridGraph<GKGridGraphNode>, _ scene: GameScene) {
+        //Optimization
         tileManager = TileManager(from: graph, with: textureSet)
         tileManager.changeTileColour(
             wall: UIColor(red: 115/255, green: 109/255, blue: 115/255, alpha: 1),
@@ -54,6 +54,7 @@ class MiniMapNode: SKSpriteNode {
         let size = CGSize(width: scene.size.width/8, height: scene.size.height/8)
         super.init(texture: nil, color: .black, size: size)
         zPosition = 7
+        blendMode = .replace
         //Add children to minimap
         scene.addChild(self)
         addChild(playerPos)

@@ -51,8 +51,7 @@ class Monster: Actor {
         }
         
         let tm = scene.tileManager!
-        //TODO:- Fix Tile Spawning
-        //NOTE: SOMETHING WRONG WITH GRAPH GENERATION? AND CONNECTED NODES
+        
         let rand = tm.getRandomTile(condition: { tile in
             let right_bound = scene.frame.midX + tile.frame.width * 2
             let left_bound = scene.frame.midX - tile.frame.width * 2

@@ -8,10 +8,57 @@
 
 import Foundation
 import SpriteKit
+import GameplayKit
 
 /* Extension file to the game scene
 To keep the main scene file clean */
 extension GameScene {
+    
+    //MARK:- Game Element Inits
+    /* Game Element Initialization of Properties  */
+    
+    //Joystick Init
+    func spawnJoystick() {
+        // initialize joystick
+        joystick.stick.name = "joystick"
+        joystick.stick.image = #imageLiteral(resourceName: "stick.png")
+        joystick.substrate.image = #imageLiteral(resourceName: "substrate.png")
+        joystick.substrate.diameter += 175
+        joystick.stick.diameter += 105
+        joystick.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
+        joystick.zPosition = 1
+        addChild(joystick)
+        
+        joystick.trackingHandler = { [unowned self] data in
+            // track positions
+            self.player1.position = CGPoint(x: self.player1.position.x + (data.velocity.x * velocityMultiplier), y: self.player1.position.y + (data.velocity.y * velocityMultiplier))
+            self.player1.updateZoom()
+            self.joystick.position = CGPoint(x: self.player1.position.x + self.JOYSTICK_X_OFFSET, y: self.player1.position.y - self.JOYSTICK_Y_OFFSET)
+            self.minimap.position = CGPoint(x: self.player1.position.x - self.MINIMAP_OFFSET_X, y: self.player1.position.y + self.MINIMAP_OFFSET_Y)
+            self.minimap.updatePlayer(position: self.player1.position)
+            self.info.updateHealthPos(newX: self.player1.position.x + self.DISPLAY_OFFSET_X, newY: self.player1.position.y + self.DISPLAY_OFFSET_Y)
+            self.info.updateScoreLabelPos(newX: self.player1.position.x - self.DISPLAY_OFFSET_X, newY: self.player1.position.y - self.DISPLAY_OFFSET_Y)
+            self.pause.position = CGPoint(x: self.player1.position.x, y: self.player1.position.y + self.DISPLAY_OFFSET_Y + 35)
+            self.info.playerScoreLabel.position = CGPoint(x: self.player1.position.x - self.LABEL_OFFSET_X, y: self.player1.position.y - self.LABEL_OFFSET_Y)
+            self.info.AIScoreLabel.position = CGPoint(x: self.player1.position.x - self.LABEL_OFFSET_X, y: self.player1.position.y - self.LABEL_OFFSET_Y - 50)
+            //Optimization
+            self.tileManager.viewOnScreenTiles(pos: self.player1.position, parent: self)
+        }
+        
+    }
+    
+    //Minimap init
+    func spawnMinimap(graph: GKGridGraph<GKGridGraphNode>) {
+        minimap = MiniMapNode(maze: graph, self)
+        minimap.position = CGPoint(x: player1.position.x - MINIMAP_OFFSET_X, y: player1.position.y + MINIMAP_OFFSET_Y)
+    }
+    
+    func trophySystemSetup() {
+        trophy = Trophy(texture: SKTexture(image: #imageLiteral(resourceName: "Trophyy.png")), scene: self)
+        minimap.updateTrophy(position: trophy.position)
+        let trophyGridPos = tileManager.indexFrom(position: trophy.position)
+        opponent.moveShortestPath(to: trophyGridPos)
+    }
     
     func spawnInfo() {
         info = InfoDisplay(parent: self)
