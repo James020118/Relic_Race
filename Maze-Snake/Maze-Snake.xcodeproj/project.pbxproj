@@ -44,6 +44,8 @@
 		619FEA2C228CEE4600C28842 /* Monster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619FEA2B228CEE4600C28842 /* Monster.swift */; };
 		61B48313228397AF0045BF3A /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B48312228397AF0045BF3A /* Actor.swift */; };
 		61B48315228397EB0045BF3A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B48314228397EB0045BF3A /* Player.swift */; };
+		61DA9DDA2298E27500129D34 /* BestFittingUIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DA9DD92298E27500129D34 /* BestFittingUIFont.swift */; };
+		61DA9DDC2298E2BD00129D34 /* FitToBoundsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DA9DDB2298E2BD00129D34 /* FitToBoundsLabel.swift */; };
 		61DAA85A227CFBD1000FE4D0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DAA859227CFBD1000FE4D0 /* MainViewController.swift */; };
 		61E0D1FB228110B700A6DE5C /* GraphCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E0D1FA228110B700A6DE5C /* GraphCreation.swift */; };
 		61F7C6AA228EF5F20006597B /* GraphNodeEquality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F7C6A9228EF5F20006597B /* GraphNodeEquality.swift */; };
@@ -110,6 +112,8 @@
 		619FEA2B228CEE4600C28842 /* Monster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monster.swift; sourceTree = "<group>"; };
 		61B48312228397AF0045BF3A /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		61B48314228397EB0045BF3A /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		61DA9DD92298E27500129D34 /* BestFittingUIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestFittingUIFont.swift; sourceTree = "<group>"; };
+		61DA9DDB2298E2BD00129D34 /* FitToBoundsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitToBoundsLabel.swift; sourceTree = "<group>"; };
 		61DAA859227CFBD1000FE4D0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		61E0D1FA228110B700A6DE5C /* GraphCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCreation.swift; sourceTree = "<group>"; };
 		61F7C6A9228EF5F20006597B /* GraphNodeEquality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphNodeEquality.swift; sourceTree = "<group>"; };
@@ -253,6 +257,8 @@
 				2EDD7A962280B6C4002B7783 /* NodeToDir.swift */,
 				61E0D1FA228110B700A6DE5C /* GraphCreation.swift */,
 				61F7C6A9228EF5F20006597B /* GraphNodeEquality.swift */,
+				61DA9DD92298E27500129D34 /* BestFittingUIFont.swift */,
+				61DA9DDB2298E2BD00129D34 /* FitToBoundsLabel.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -506,6 +512,7 @@
 				2EB4D68B2289EA96009F5F3E /* Trophy.swift in Sources */,
 				2EDD7A972280B6C4002B7783 /* NodeToDir.swift in Sources */,
 				61930BD8227D1B0700550DD0 /* TileController.swift in Sources */,
+				61DA9DDC2298E2BD00129D34 /* FitToBoundsLabel.swift in Sources */,
 				615D68002283C32500D0100A /* Directions.swift in Sources */,
 				61B48315228397EB0045BF3A /* Player.swift in Sources */,
 				44ACC50A22906F8E0054C91A /* InfoDisplay.swift in Sources */,
@@ -513,6 +520,7 @@
 				615D67FC2283BD0A00D0100A /* AI.swift in Sources */,
 				2E1362AB22971D190055DEF0 /* PlayViewController.swift in Sources */,
 				61F7C6AA228EF5F20006597B /* GraphNodeEquality.swift in Sources */,
+				61DA9DDA2298E27500129D34 /* BestFittingUIFont.swift in Sources */,
 				61B48313228397AF0045BF3A /* Actor.swift in Sources */,
 				2E39DF4B227B65CA00EA1C84 /* GameViewController.swift in Sources */,
 				615D67FE2283C0D100D0100A /* GridPosition.swift in Sources */,
