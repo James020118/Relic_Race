@@ -12,7 +12,7 @@ import GameplayKit
 
 class Monster: Actor {
     
-    static let TILE_TRAVEL_TIME = 0.5
+    static let TILE_TRAVEL_TIME = 0.6
     static let MAX_MONSTERS = 4
     
     var number: Int = 0
