@@ -265,6 +265,9 @@ class Maze {
                     case .right:
                         node1 = data[y][x+1].node
                         node2 = data[y][x+2].node
+                    case .none:
+                        node1 = node
+                        node2 = node
                     }
                     
                     

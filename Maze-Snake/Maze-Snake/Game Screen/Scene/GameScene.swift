@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 
 //Speed of player
-let velocityMultiplier: CGFloat = 0.2
+let velocityMultiplier: CGFloat = 0.11
 //Contact Identifiers
 let playerCategory: UInt32 = 0x1 << 1
 let trophyCategory: UInt32 = 0x1 << 2
@@ -173,6 +173,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    //For walking animation retrieve direction of motion by storing previous position and compare to present
+    var prevPos: CGPoint?
+    var prevDir: Direction?
+    func selectCorrectWalk(playerPos: CGPoint) -> Direction {
+        var currentHeading: Direction = .none
+        guard let prevPos = prevPos else {
+            self.prevPos = playerPos
+            return .none
+        }
+        let dx = playerPos.x - prevPos.x
+        let dy = playerPos.y - prevPos.y
+        
+        if playerPos == prevPos {
+            currentHeading = .none
+        }else if abs(dx) > abs(dy) {
+            if playerPos.x > prevPos.x {
+                currentHeading = .right
+            }else if playerPos.x < prevPos.x {
+                currentHeading = .left
+            }
+        }else if abs(dx) <= abs(dy) {
+            if playerPos.y > prevPos.y {
+                currentHeading = .up
+            }else if playerPos.y < prevPos.y {
+                currentHeading = .down
+            }
+        }
+        self.prevPos = playerPos
+        
+        return currentHeading
+    }
     /*
     var isRunningAnimation = false
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -189,18 +220,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        
-        let location = touch.location(in: self)
-        let node = self.atPoint(location)
-        
-        if node.name == "joystick" {
-            if isRunningAnimation {
-               isRunningAnimation = false
-            }
-        }
-    }
+    
     */
     
     

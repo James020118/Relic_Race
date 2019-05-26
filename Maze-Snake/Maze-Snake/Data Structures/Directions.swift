@@ -12,5 +12,5 @@
 import Foundation
 
 enum Direction {
-    case left, right, up, down
+    case left, right, up, down, none
 }

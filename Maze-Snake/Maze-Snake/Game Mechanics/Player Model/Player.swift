@@ -62,6 +62,33 @@ class Player: Actor {
         camera.yScale = cameraScaleConstant
     }
     
+    func animateWalk(in direction: Direction) {
+        guard let scene = parent as? GameScene else {
+            return
+        }
+        
+        stop()
+        
+        var atlas = [SKTexture]()
+        switch direction {
+        case .up:
+            atlas = scene.walking_Up_Textures
+        case .down:
+            atlas = scene.walking_Down_Textures
+        case .right:
+            atlas = scene.walking_Right_Textures
+        case .left:
+            atlas = scene.walking_Left_Textures
+        case .none:
+            atlas = []
+        }
+        if !atlas.isEmpty {
+            run(SKAction.repeatForever(SKAction.animate(with: atlas, timePerFrame: 0.15)))
+        }else {
+            texture = SKTexture(imageNamed: "oldMan")
+        }
+    }
+    
     func incrementScore() {
         player_Score += 1
     }

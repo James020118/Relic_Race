@@ -41,8 +41,20 @@ extension GameScene {
             self.pause.position = CGPoint(x: self.player1.position.x, y: self.player1.position.y + self.DISPLAY_OFFSET_Y + 35)
             self.info.playerScoreLabel.position = CGPoint(x: self.player1.position.x - self.LABEL_OFFSET_X, y: self.player1.position.y - self.LABEL_OFFSET_Y)
             self.info.AIScoreLabel.position = CGPoint(x: self.player1.position.x - self.LABEL_OFFSET_X, y: self.player1.position.y - self.LABEL_OFFSET_Y - 50)
+            //Make walking animation
+            let direction = self.selectCorrectWalk(playerPos: self.player1.position)
+            if direction != self.prevDir {
+                print("Changed Dir")
+                self.player1.animateWalk(in: direction)
+            }
+            self.prevDir = direction
             //Optimization
             self.tileManager.viewOnScreenTiles(pos: self.player1.position, parent: self)
+        }
+        
+        joystick.stopHandler = {
+            self.prevPos = self.player1.position
+            self.player1.animateWalk(in: .none)
         }
         
     }
