@@ -11,6 +11,8 @@
 		2E07DAFF229DAFEF0092217F /* AIGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07DAFE229DAFEF0092217F /* AIGameScene.swift */; };
 		2E07DB01229DB2370092217F /* Opponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07DB00229DB2370092217F /* Opponent.swift */; };
 		2E07DB03229DB3150092217F /* OtherPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07DB02229DB3150092217F /* OtherPlayer.swift */; };
+		2E07DB06229DBE500092217F /* PvPGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07DB05229DBE500092217F /* PvPGameScene.swift */; };
+		2E07DB08229DBECD0092217F /* PvPGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2E07DB07229DBECD0092217F /* PvPGameScene.sks */; };
 		2E1362AB22971D190055DEF0 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1362AA22971D190055DEF0 /* PlayViewController.swift */; };
 		2E39DF43227B65CA00EA1C84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E39DF42227B65CA00EA1C84 /* AppDelegate.swift */; };
 		2E39DF45227B65CA00EA1C84 /* AIGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2E39DF44227B65CA00EA1C84 /* AIGameScene.sks */; };
@@ -76,6 +78,8 @@
 		2E07DAFE229DAFEF0092217F /* AIGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGameScene.swift; sourceTree = "<group>"; };
 		2E07DB00229DB2370092217F /* Opponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opponent.swift; sourceTree = "<group>"; };
 		2E07DB02229DB3150092217F /* OtherPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherPlayer.swift; sourceTree = "<group>"; };
+		2E07DB05229DBE500092217F /* PvPGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PvPGameScene.swift; sourceTree = "<group>"; };
+		2E07DB07229DBECD0092217F /* PvPGameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PvPGameScene.sks; sourceTree = "<group>"; };
 		2E1362AA22971D190055DEF0 /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		2E39DF3F227B65CA00EA1C84 /* Maze-Snake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Maze-Snake.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E39DF42227B65CA00EA1C84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +154,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E07DB04229DBE1A0092217F /* Base Game */ = {
+			isa = PBXGroup;
+			children = (
+				2E39DF48227B65CA00EA1C84 /* GameScene.swift */,
+				61DE97D82299705300EE28E3 /* Game Inits */,
+				61DE97D92299708800EE28E3 /* Physcics Contact */,
+			);
+			path = "Base Game";
+			sourceTree = "<group>";
+		};
 		2E1362A922971C8B0055DEF0 /* Play Screen */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +235,7 @@
 		2E39DF77227B66A000EA1C84 /* Game Screen */ = {
 			isa = PBXGroup;
 			children = (
+				2E07DB04229DBE1A0092217F /* Base Game */,
 				61DAA855227CFAE2000FE4D0 /* ViewController */,
 				61DAA854227CFAD6000FE4D0 /* Scene */,
 				61DAA853227CFAB8000FE4D0 /* SKS Resources */,
@@ -341,11 +356,10 @@
 		61DAA854227CFAD6000FE4D0 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				61DE97D92299708800EE28E3 /* Physcics Contact */,
-				61DE97D82299705300EE28E3 /* Game Inits */,
 				2E39DF44227B65CA00EA1C84 /* AIGameScene.sks */,
-				2E39DF48227B65CA00EA1C84 /* GameScene.swift */,
 				2E07DAFE229DAFEF0092217F /* AIGameScene.swift */,
+				2E07DB05229DBE500092217F /* PvPGameScene.swift */,
+				2E07DB07229DBECD0092217F /* PvPGameScene.sks */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -496,6 +510,7 @@
 				61163AEE227CECDB001F49E1 /* Tiles.sks in Resources */,
 				2E39DF53227B65CA00EA1C84 /* LaunchScreen.storyboard in Resources */,
 				61930BDA227DD12200550DD0 /* TestTIles.sks in Resources */,
+				2E07DB08229DBECD0092217F /* PvPGameScene.sks in Resources */,
 				61163AEF227CECDB001F49E1 /* Assets.xcassets in Resources */,
 				2E39DF47227B65CA00EA1C84 /* Actions.sks in Resources */,
 			);
@@ -548,6 +563,7 @@
 				2E9C4D022284AF4A009C9BFA /* AnalogStick.swift in Sources */,
 				61930BDC227DE7BF00550DD0 /* Maze.swift in Sources */,
 				2E39DF43227B65CA00EA1C84 /* AppDelegate.swift in Sources */,
+				2E07DB06229DBE500092217F /* PvPGameScene.swift in Sources */,
 				619AFE5D22871E81000784A4 /* TextureSet.swift in Sources */,
 				2E07DB03229DB3150092217F /* OtherPlayer.swift in Sources */,
 				2ECD0A50229870D200318C0B /* SettingsViewController.swift in Sources */,

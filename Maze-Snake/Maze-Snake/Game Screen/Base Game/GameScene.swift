@@ -86,35 +86,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //MARK:- Lifecycle Functions
     /* Function that is called when scene loads */
     override func sceneDidLoad() {
-        physicsWorld.contactDelegate = self
         super.sceneDidLoad()
-        
-        //Generate Maze
-        let maze = Maze(width: Maze.MAX_COLUMNS, height: Maze.MAX_ROWS)
-        mazeGraph = maze.graph
-        let graph = mazeGraph ?? blankGraph()
-        
-        //Setup Map w/ Graph
-        tileManager = TileManager(from: graph, with: textureSet)
-        tileManager.addTilesTo(scene: self)
-        
-        //Initialize all characters, including player, opponent, and monsters
-        //Spawn Game Elements
-        characterInitialization()
-        spawnMinimap(graph: graph)
-        spawnJoystick()
-        player1.spawnCamera()
-        trophySystemSetup()
-        //Optimization
-        tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
-        
-        //Spawn HUD
-        spawnInfo()
-        spawnPause()
-        textureInitialization()
-        initializeHudPositions()
-        moveMinimap(toTheRight: !data.bool(forKey: "minimapPos"))
-        moveJoystick(toTheRight: data.bool(forKey: "joystickPos"))
+        initializeGame(type: "ai")
     }
     
     var isPausing = false
@@ -225,7 +198,48 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
            monsterCollisionResponse()
         }
         
+        /* Update the minimap icon positions */
+        let dOppT = currentTime - lastOppUpdate
+        if dOppT > 0.125 {
+            minimap.updateOpponent(position: opponent.position)
+            var points = [CGPoint]()
+            for monster in monsters {
+                points.append(monster.position)
+            }
+            minimap.updateMonsters(positions: points)
+            self.lastOppUpdate = currentTime
+        }
+        
     }
     
+    func initializeGame(type: String) {
+        physicsWorld.contactDelegate = self
+        //Generate Maze
+        let maze = Maze(width: Maze.MAX_COLUMNS, height: Maze.MAX_ROWS)
+        mazeGraph = maze.graph
+        let graph = mazeGraph ?? blankGraph()
+        
+        //Setup Map w/ Graph
+        tileManager = TileManager(from: graph, with: textureSet)
+        tileManager.addTilesTo(scene: self)
+        
+        //Initialize all characters, including player, opponent, and monsters
+        //Spawn Game Elements
+        characterInitialization(type)
+        spawnMinimap(graph: graph)
+        spawnJoystick()
+        player1.spawnCamera()
+        trophySystemSetup()
+        //Optimization
+        tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
+        
+        //Spawn HUD
+        spawnInfo()
+        spawnPause()
+        textureInitialization()
+        initializeHudPositions()
+        moveMinimap(toTheRight: !data.bool(forKey: "minimapPos"))
+        moveJoystick(toTheRight: data.bool(forKey: "joystickPos"))
+    }
     
 }

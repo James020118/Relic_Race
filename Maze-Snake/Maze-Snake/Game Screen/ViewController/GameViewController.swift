@@ -36,7 +36,7 @@ class GameViewController: UIViewController {
         //Spritekit GameScene creation
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "AIGameScene") as? AIGameScene {
+            if let scene = SKScene(fileNamed: "PvPGameScene") as? PvPGameScene {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFit
                 //Store Instance
