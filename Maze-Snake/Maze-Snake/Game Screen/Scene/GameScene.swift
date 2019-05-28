@@ -33,7 +33,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //Actors
     var player1: Player!
-    var opponent: AI!
+    var opponent: Opponent!
     
     //Monsters
     var monsters = [Monster]()
@@ -204,24 +204,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         return currentHeading
     }
-    /*
-    var isRunningAnimation = false
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        
-        let location = touch.location(in: self)
-        let node = self.atPoint(location)
-        
-        if node.name == "joystick" {
-            if !isRunningAnimation {
-                player1.run(SKAction.repeatForever(SKAction.animate(with: walking_Down_Textures, timePerFrame: 0.2)))
-                isRunningAnimation = true
-            }
-        }
-    }
-    
-    
-    */
     
     
     /* Function that is called before each frame is rendered */
@@ -241,18 +223,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         if monsterCollisionFlag != -1 {
            monsterCollisionResponse()
-        }
-        
-        /* Update the minimap icon positions */
-        let dOppT = currentTime - lastOppUpdate
-        if dOppT > 0.125 {
-            minimap.updateOpponent(position: opponent.position)
-            var points = [CGPoint]()
-            for monster in monsters {
-                points.append(monster.position)
-            }
-            minimap.updateMonsters(positions: points)
-            self.lastOppUpdate = currentTime
         }
         
     }

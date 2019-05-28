@@ -385,7 +385,7 @@ class InfoDisplay {
         
         parent.player1.player_Score = 0
         parent.player1.player_Health = 3
-        parent.opponent.AI_Score = 0
+        parent.opponent.score = 0
     }
     
 }

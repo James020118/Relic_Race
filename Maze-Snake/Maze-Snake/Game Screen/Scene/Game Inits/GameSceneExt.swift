@@ -68,15 +68,17 @@ extension GameScene {
     func trophySystemSetup() {
         trophy = Trophy(texture: SKTexture(image: #imageLiteral(resourceName: "Trophyy.png")), scene: self)
         minimap.updateTrophy(position: trophy.position)
-        let trophyGridPos = tileManager.indexFrom(position: trophy.position)
-        opponent.moveShortestPath(to: trophyGridPos)
+        if let ai = opponent as? AI {
+            let trophyGridPos = tileManager.indexFrom(position: trophy.position)
+            ai.moveShortestPath(to: trophyGridPos)
+        }
     }
     
     func spawnInfo() {
         info = InfoDisplay(parent: self)
         info.displayHealth(xCoord: player1.position.x + DISPLAY_OFFSET_X, yCoord: player1.position.y + DISPLAY_OFFSET_Y)
         info.displayPlayerScore(xCoord: player1.position.x - LABEL_OFFSET_X, yCoord: player1.position.y - LABEL_OFFSET_Y, score: player1.player_Score)
-        info.displayAIScore(xCoord: player1.position.x - LABEL_OFFSET_X, yCoord: player1.position.y - LABEL_OFFSET_Y - 50, score: opponent.AI_Score)
+        info.displayAIScore(xCoord: player1.position.x - LABEL_OFFSET_X, yCoord: player1.position.y - LABEL_OFFSET_Y - 50, score: opponent.score)
     }
     
     func spawnPause() {
@@ -152,7 +154,7 @@ extension GameScene {
     func resetGameAfterPlayerDied() {
         player1.player_Score = 0
         player1.player_Health = 3
-        opponent.AI_Score = 0
+        opponent.score = 0
         
         info.removePlayerDiedDisplay()
         info.changeHealth(healthPoint: player1.player_Health)
@@ -163,8 +165,10 @@ extension GameScene {
         
         trophy.setRandomPosition()
         minimap.updateTrophy(position: trophy.position)
-        let trophyGridPos = tileManager.indexFrom(position: trophy.position)
-        opponent.moveShortestPath(to: trophyGridPos)
+        if let ai = opponent as? AI {
+            let trophyGridPos = tileManager.indexFrom(position: trophy.position)
+            ai.moveShortestPath(to: trophyGridPos)
+        }
         pause.isHidden = false
         
         for monster in monsters {

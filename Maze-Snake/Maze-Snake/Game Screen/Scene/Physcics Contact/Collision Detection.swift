@@ -25,9 +25,11 @@ extension GameScene {
         trophy.setRandomPosition()
         minimap.updateTrophy(position: trophy.position)
         opponent.stop()
-        let trophyGridPos = tileManager.indexFrom(position: trophy.position)
         opponent.gridPos = tileManager.indexFrom(position: opponent.position)
-        opponent.moveShortestPath(to: trophyGridPos)
+        if let ai = opponent as? AI {
+            let trophyGridPos = tileManager.indexFrom(position: trophy.position)
+            ai.moveShortestPath(to: trophyGridPos)
+        }
         player1CollisionFlag = false
         //Check Win
         if player1.player_Score == 5 {
@@ -67,17 +69,19 @@ extension GameScene {
     func opponentCollisionResponse() {
         //Increment Score
         opponent.incrementScore()
-        info.changeAIScore(newScore: opponent.AI_Score)
+        info.changeAIScore(newScore: opponent.score)
         //Spawn New Trophy and appropriate response
         trophy.setRandomPosition()
         minimap.updateTrophy(position: trophy.position)
         opponent.stop()
         let trophyGridPos = tileManager.indexFrom(position: trophy.position)
         opponent.gridPos = tileManager.indexFrom(position: opponent.position)
-        opponent.moveShortestPath(to: trophyGridPos)
+        if let ai = opponent as? AI {
+            ai.moveShortestPath(to: trophyGridPos)
+        }
         opponentCollisionFlag = false
         //Check Win
-        if opponent.AI_Score == 5 {
+        if opponent.score == 5 {
             info.endGame()
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 self.info.roundWinDisplay(winner: "ai", xCoord: self.player1.position.x, yCoord: self.player1.position.y)
