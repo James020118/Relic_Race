@@ -319,23 +319,14 @@
             </objects>
             <point key="canvasLocation" x="298.36956521739131" y="-1023.1884057971015"/>
         </scene>
-        <!--View Controller-->
+        <!--PvP View Controller-->
         <scene sceneID="iSm-Ze-Ha8">
             <objects>
-                <viewController id="zUA-vj-krR" sceneMemberID="viewController">
+                <viewController id="zUA-vj-krR" customClass="PvPViewController" customModule="Maze_Snake" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IEF-CG-Urv">
                         <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lobby" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfD-jA-qnJ">
-                                <rect key="frame" x="347" y="63" width="48" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="E0G-NR-Jg6"/>
                     </view>
                 </viewController>

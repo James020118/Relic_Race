@@ -40,6 +40,58 @@ class Maze {
     var visitedMap: [[Bool]] = []
     var mazeStack = Stack<[Int]>()
     
+    init(from decoder: MazeEncodingBuffer) {
+        let tiles = decoder.tiles
+        
+        mazeWidth = Maze.MAX_COLUMNS
+        mazeHeight = Maze.MAX_ROWS
+        
+        //Craete a blank map
+        var nodes2D = [[GKGridGraphNode]]()
+        for y in 0..<tiles.count {
+            var subNodes = [GKGridGraphNode]()
+            for x in 0..<tiles[y].count {
+                let node = GKGridGraphNode(gridPosition: simd_int2(x: Int32(x), y: Int32(y)))
+                subNodes.append(node)
+            }
+            nodes2D.append(subNodes)
+        }
+        //Add Connections
+        for y in 0..<tiles.count {
+            for x in 0..<tiles[y].count {
+                
+                if x == 0 || x == Maze.MAX_COLUMNS || y == 0 || y == Maze.MAX_ROWS {
+                    continue
+                }
+                
+                let node = nodes2D[y][x]
+                if tiles[y][x] == "space" {
+                    if tiles[y+1][x] == "space" {
+                        node.addConnections(to: [nodes2D[y+1][x]], bidirectional: true)
+                    }
+                    if tiles[y-1][x] == "space" {
+                        node.addConnections(to: [nodes2D[y-1][x]], bidirectional: true)
+                    }
+                    if tiles[y][x+1] == "space" {
+                        node.addConnections(to: [nodes2D[y][x+1]], bidirectional: true)
+                    }
+                    if tiles[y][x-1] == "space" {
+                        node.addConnections(to: [nodes2D[y][x-1]], bidirectional: true)
+                    }
+                }
+            }
+        }
+        //Convert data to graph
+        var nodes = [GKGridGraphNode]()
+        for y in 0..<tiles.count {
+            for x in 0..<tiles[y].count {
+                nodes.append(nodes2D[y][x])
+            }
+        }
+        graph = GKGridGraph(nodes: nodes)
+        
+    }
+    
     // Generate a random maze.
     init(width: Int, height: Int) {
         graph = GKGridGraph()
