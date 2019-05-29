@@ -86,6 +86,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //MARK:- Lifecycle Functions
     /* Function that is called when scene loads */
     override func sceneDidLoad() {
+        SKTextureAtlas(named: "Game Textures").preload {
+            print("Completed")
+        }
         super.sceneDidLoad()
         initializeGame(type: "ai")
     }
