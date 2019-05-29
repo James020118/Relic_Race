@@ -33,6 +33,7 @@
 		2ECD0A5422987E6400318C0B /* walkingUp.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2ECD0A5322987E6400318C0B /* walkingUp.atlas */; };
 		2ECD0A5622987F3400318C0B /* walkingRight.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2ECD0A5522987F3400318C0B /* walkingRight.atlas */; };
 		2EDD7A972280B6C4002B7783 /* NodeToDir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDD7A962280B6C4002B7783 /* NodeToDir.swift */; };
+		44A0D10D229E1CC5001C9706 /* PvPConnectionExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A0D10C229E1CC5001C9706 /* PvPConnectionExt.swift */; };
 		44ACC50A22906F8E0054C91A /* InfoDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ACC50922906F8E0054C91A /* InfoDisplay.swift */; };
 		44F2474322949F2300C69AA0 /* GameSceneExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F2474222949F2300C69AA0 /* GameSceneExt.swift */; };
 		6111961F2284C4300075EEC9 /* MiniMapNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6111961E2284C4300075EEC9 /* MiniMapNode.swift */; };
@@ -107,6 +108,7 @@
 		2ECD0A5322987E6400318C0B /* walkingUp.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = walkingUp.atlas; sourceTree = "<group>"; };
 		2ECD0A5522987F3400318C0B /* walkingRight.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = walkingRight.atlas; sourceTree = "<group>"; };
 		2EDD7A962280B6C4002B7783 /* NodeToDir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeToDir.swift; sourceTree = "<group>"; };
+		44A0D10C229E1CC5001C9706 /* PvPConnectionExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PvPConnectionExt.swift; sourceTree = "<group>"; };
 		44ACC50922906F8E0054C91A /* InfoDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDisplay.swift; sourceTree = "<group>"; };
 		44F2474222949F2300C69AA0 /* GameSceneExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneExt.swift; sourceTree = "<group>"; };
 		6111961E2284C4300075EEC9 /* MiniMapNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniMapNode.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				2E07DAFE229DAFEF0092217F /* AIGameScene.swift */,
 				2E07DB05229DBE500092217F /* PvPGameScene.swift */,
 				2E07DB07229DBECD0092217F /* PvPGameScene.sks */,
+				44A0D10C229E1CC5001C9706 /* PvPConnectionExt.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -533,6 +536,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				619FEA2C228CEE4600C28842 /* Monster.swift in Sources */,
+				44A0D10D229E1CC5001C9706 /* PvPConnectionExt.swift in Sources */,
 				61E0D1FB228110B700A6DE5C /* GraphCreation.swift in Sources */,
 				61DE97DB2299712400EE28E3 /* Collision Detection.swift in Sources */,
 				2E39DF49227B65CA00EA1C84 /* GameScene.swift in Sources */,
