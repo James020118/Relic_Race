@@ -32,6 +32,22 @@ extension PvPGameScene {
     /* Required Methods for Peer to Peer connections */
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         
+        print("Called")
+        //Get Maze Data
+        do {
+            //Decode Data
+            let buffer = try JSONDecoder().decode(MazeEncodingBuffer.self, from: data)
+            let maze = Maze(from: buffer)
+            maze.outputConnections()
+            graph = maze.graph
+            //Init game
+            connectedLabel.removeFromParent()
+            nextLabel.removeFromParent()
+            super.sceneDidLoad()
+        }catch{
+            //Update Game Positions
+        }
+        
     }
     
     

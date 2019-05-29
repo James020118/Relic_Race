@@ -131,14 +131,7 @@ extension GameScene {
         
         player1 = Player(texture: SKTexture(image: #imageLiteral(resourceName: "oldMan.png")), parent: self)
         player1.name = "player1"
-        if type == "ai" {
-            opponent = AI(texture: SKTexture(image: #imageLiteral(resourceName: "player.png")), parent: self, pos: GridPosition(column: 1, row: Maze.MAX_ROWS-1))
-            opponent.name = "ai"
-        }else if type == "u-opp" {
-            opponent = OtherPlayer(texture: SKTexture(image: #imageLiteral(resourceName: "player.png")), parent: self, pos: GridPosition(column: 1, row: Maze.MAX_ROWS-1))
-            opponent.name = "ai"
-        }
-        
+        generateOpponent()
     }
     
     //Reset player's position after the player runs into a monster (but without reset monster positions)

@@ -10,6 +10,24 @@ import Foundation
 
 struct MazeEncodingBuffer: Codable {
     let tiles: [[String]]
+    
+    init(from maze: Maze) {
+        var tiles = [[String]]()
+        //Convert to encoded format
+        for y in 0..<maze.data.count {
+            var sub = [String]()
+            for x in 0..<maze.data[y].count {
+                if maze.data[y][x].cellType == .Wall {
+                    sub.append("wall")
+                }else if maze.data[y][x].cellType == .Space {
+                    sub.append("floor")
+                }
+            }
+            tiles.append(sub)
+        }
+        self.tiles = tiles
+    }
+    
 }
 
 /*

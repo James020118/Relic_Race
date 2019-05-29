@@ -204,11 +204,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func initializeGame(type: String) {
         physicsWorld.contactDelegate = self
-        //Generate Maze
-        let maze = Maze(width: Maze.MAX_COLUMNS, height: Maze.MAX_ROWS)
-        mazeGraph = maze.graph
-        let graph = mazeGraph ?? blankGraph()
-        
+        let graph = makeMaze()
         //Setup Map w/ Graph
         tileManager = TileManager(from: graph, with: textureSet)
         tileManager.addTilesTo(scene: self)
@@ -230,6 +226,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initializeHudPositions()
         moveMinimap(toTheRight: !data.bool(forKey: "minimapPos"))
         moveJoystick(toTheRight: data.bool(forKey: "joystickPos"))
+    }
+    
+    func generateOpponent() {
+        
+    }
+    
+    func makeMaze() -> GKGridGraph<GKGridGraphNode> {
+        //Generate Maze
+        let maze = Maze(width: Maze.MAX_COLUMNS, height: Maze.MAX_ROWS)
+        mazeGraph = maze.graph
+        let graph = mazeGraph ?? blankGraph()
+        
+        return graph
     }
     
 }
