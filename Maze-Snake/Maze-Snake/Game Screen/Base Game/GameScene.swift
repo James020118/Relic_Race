@@ -53,7 +53,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //HUD Position Offset Constants
     var DISPLAY_OFFSET_X: CGFloat = 625
     var DISPLAY_OFFSET_Y: CGFloat = 375
-    var LABEL_OFFSET_X: CGFloat = 625
+    var LABEL_OFFSET_X: CGFloat = 600
     var LABEL_OFFSET_Y: CGFloat = 375
     var JOYSTICK_X_OFFSET : CGFloat = 600
     var JOYSTICK_Y_OFFSET : CGFloat = 275

@@ -40,7 +40,7 @@ extension GameScene {
             self.info.updateScoreLabelPos(newX: self.player1.position.x - self.DISPLAY_OFFSET_X, newY: self.player1.position.y - self.DISPLAY_OFFSET_Y)
             self.pause.position = CGPoint(x: self.player1.position.x, y: self.player1.position.y + self.DISPLAY_OFFSET_Y + 35)
             self.info.playerScoreLabel.position = CGPoint(x: self.player1.position.x - self.LABEL_OFFSET_X, y: self.player1.position.y - self.LABEL_OFFSET_Y)
-            self.info.AIScoreLabel.position = CGPoint(x: self.player1.position.x - self.LABEL_OFFSET_X, y: self.player1.position.y - self.LABEL_OFFSET_Y - 50)
+            self.info.AIScoreLabel.position = CGPoint(x: self.player1.position.x - self.LABEL_OFFSET_X, y: self.player1.position.y - self.LABEL_OFFSET_Y - 75)
             //Make walking animation
             let direction = self.selectCorrectWalk(playerPos: self.player1.position)
             if direction != self.prevDir {
@@ -77,13 +77,13 @@ extension GameScene {
         info = InfoDisplay(parent: self)
         info.displayHealth(xCoord: player1.position.x + DISPLAY_OFFSET_X, yCoord: player1.position.y + DISPLAY_OFFSET_Y)
         info.displayPlayerScore(xCoord: player1.position.x - LABEL_OFFSET_X, yCoord: player1.position.y - LABEL_OFFSET_Y, score: player1.player_Score)
-        info.displayAIScore(xCoord: player1.position.x - LABEL_OFFSET_X, yCoord: player1.position.y - LABEL_OFFSET_Y - 50, score: opponent.score)
+        info.displayAIScore(xCoord: player1.position.x - LABEL_OFFSET_X, yCoord: player1.position.y - LABEL_OFFSET_Y - 75, score: opponent.score)
     }
     
     func spawnPause() {
-        pause = SKSpriteNode(imageNamed: "pause")
+        pause = SKSpriteNode(imageNamed: "pauseButton")
         pause.zPosition = 2
-        pause.size = CGSize(width: 200, height: 200)
+        pause.size = CGSize(width: 100, height: 100)
         pause.position = CGPoint(x: player1.position.x, y: player1.position.y + DISPLAY_OFFSET_Y + 35)
         pause.name = "pause"
         addChild(pause)
@@ -220,7 +220,7 @@ extension GameScene {
             }
             joystick.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
             info.playerScoreLabel.position = CGPoint(x: player1.position.x - LABEL_OFFSET_X, y: player1.position.y - LABEL_OFFSET_Y)
-            info.AIScoreLabel.position = CGPoint(x: player1.position.x - LABEL_OFFSET_X, y: player1.position.y - LABEL_OFFSET_Y - 50)
+            info.AIScoreLabel.position = CGPoint(x: player1.position.x - LABEL_OFFSET_X, y: player1.position.y - LABEL_OFFSET_Y - 75)
         } else {
             info.moveJoystick_Right.fontColor = UIColor.white
             info.moveJoystck_Left.fontColor = UIColor.green
@@ -233,7 +233,7 @@ extension GameScene {
             }
             joystick.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
             info.playerScoreLabel.position = CGPoint(x: player1.position.x - LABEL_OFFSET_X, y: player1.position.y - LABEL_OFFSET_Y)
-            info.AIScoreLabel.position = CGPoint(x: player1.position.x - LABEL_OFFSET_X, y: player1.position.y - LABEL_OFFSET_Y - 50)
+            info.AIScoreLabel.position = CGPoint(x: player1.position.x - LABEL_OFFSET_X, y: player1.position.y - LABEL_OFFSET_Y - 75)
         }
         data.set(joystick_On_The_Right, forKey: "joystickPos")
     }
