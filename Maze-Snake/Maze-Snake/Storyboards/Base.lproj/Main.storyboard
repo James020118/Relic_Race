@@ -323,7 +323,7 @@
         <scene sceneID="iSm-Ze-Ha8">
             <objects>
                 <viewController id="zUA-vj-krR" customClass="PvPViewController" customModule="Maze_Snake" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="IEF-CG-Urv">
+                    <view key="view" contentMode="scaleToFill" id="IEF-CG-Urv" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

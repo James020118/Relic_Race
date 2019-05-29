@@ -80,7 +80,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     )
     
     //Parent VC instance
-    var parentVC: GameViewController!
+    var parentVC: UIViewController!
     
     
     //MARK:- Lifecycle Functions
@@ -214,32 +214,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func initializeGame(type: String) {
         physicsWorld.contactDelegate = self
-        //Generate Maze
-        let maze = Maze(width: Maze.MAX_COLUMNS, height: Maze.MAX_ROWS)
-        mazeGraph = maze.graph
-        let graph = mazeGraph ?? blankGraph()
         
-        //Setup Map w/ Graph
-        tileManager = TileManager(from: graph, with: textureSet)
-        tileManager.addTilesTo(scene: self)
+        if type == "ai" {
+            //Generate Maze
+            let maze = Maze(width: Maze.MAX_COLUMNS, height: Maze.MAX_ROWS)
+            mazeGraph = maze.graph
+            let graph = mazeGraph ?? blankGraph()
+            
+            //Setup Map w/ Graph
+            tileManager = TileManager(from: graph, with: textureSet)
+            tileManager.addTilesTo(scene: self)
+            
+            //Initialize all characters, including player, opponent, and monsters
+            //Spawn Game Elements
+            characterInitialization(type)
+            spawnMinimap(graph: graph)
+            spawnJoystick()
+            player1.spawnCamera()
+            trophySystemSetup()
+            //Optimization
+            tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
+            
+            //Spawn HUD
+            spawnInfo()
+            spawnPause()
+            textureInitialization()
+            initializeHudPositions()
+            moveMinimap(toTheRight: !data.bool(forKey: "minimapPos"))
+            moveJoystick(toTheRight: data.bool(forKey: "joystickPos"))
+        } else if type == "u-opp" {
+            
+        }
         
-        //Initialize all characters, including player, opponent, and monsters
-        //Spawn Game Elements
-        characterInitialization(type)
-        spawnMinimap(graph: graph)
-        spawnJoystick()
-        player1.spawnCamera()
-        trophySystemSetup()
-        //Optimization
-        tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
-        
-        //Spawn HUD
-        spawnInfo()
-        spawnPause()
-        textureInitialization()
-        initializeHudPositions()
-        moveMinimap(toTheRight: !data.bool(forKey: "minimapPos"))
-        moveJoystick(toTheRight: data.bool(forKey: "joystickPos"))
     }
     
 }
