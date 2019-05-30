@@ -71,20 +71,24 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
             print("")
             Maze(from: buffer).outputConnections()
             print("")
-            var data: Data!
+            
+            var data = Data(base64Encoded: "")
             let encoder = JSONEncoder()
             do {
                 data = try encoder.encode(buffer)
+                print(data)
             }catch{
-                data = Data(base64Encoded: "")
+                fatalError()
             }
             print(buffer)
             do {
-                try mcSession?.send(data, toPeers: mcSession!.connectedPeers, with: .reliable)
+                try mcSession?.send(data!, toPeers: mcSession!.connectedPeers, with: .reliable)
             }catch{
                 print("Oops!")
             }
             //Initialize the game
+            connectedLabel.removeFromParent()
+            nextLabel.removeFromParent()
             super.sceneDidLoad()
         }
     }

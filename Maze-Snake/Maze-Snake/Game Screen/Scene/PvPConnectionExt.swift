@@ -36,18 +36,19 @@ extension PvPGameScene {
         //Get Maze Data
         do {
             //Decode Data
+            print(data)
             let buffer = try JSONDecoder().decode(MazeEncodingBuffer.self, from: data)
             let maze = Maze(from: buffer)
             maze.outputConnections()
             graph = maze.graph
             //Init game
-            connectedLabel.removeFromParent()
-            nextLabel.removeFromParent()
-            super.sceneDidLoad()
+            hostSessionLabel.removeFromParent()
+            joinSessionLabel.removeFromParent()
+            cancelLabel.removeFromParent()
         }catch{
             //Update Game Positions
+            fatalError()
         }
-        
     }
     
     
@@ -115,7 +116,7 @@ extension PvPGameScene {
         addChild(joinSessionLabel)
         addChild(cancelLabel)
         
-        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .none)
         mcSession?.delegate = self
     }
     

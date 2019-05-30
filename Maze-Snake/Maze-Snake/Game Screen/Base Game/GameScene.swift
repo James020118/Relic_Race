@@ -227,6 +227,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //Load Sound Effects
         sfxController = SFXController(from: self)
         sfxController.preloadSounds()
+        sfxController.stopSound(named: "footsteps")
         //Setup Map w/ Graph
         let graph = makeMaze()
         tileManager = TileManager(from: graph, with: textureSet)
