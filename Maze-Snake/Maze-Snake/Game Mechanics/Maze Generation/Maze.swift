@@ -65,22 +65,23 @@ class Maze {
                 }
                 
                 let node = nodes2D[y][x]
-                if tiles[y][x] == "space" {
-                    if tiles[y+1][x] == "space" {
+                if tiles[y][x] == "floor" {
+                    if tiles[y+1][x] == "floor" {
                         node.addConnections(to: [nodes2D[y+1][x]], bidirectional: true)
                     }
-                    if tiles[y-1][x] == "space" {
+                    if tiles[y-1][x] == "floor" {
                         node.addConnections(to: [nodes2D[y-1][x]], bidirectional: true)
                     }
-                    if tiles[y][x+1] == "space" {
+                    if tiles[y][x+1] == "floor" {
                         node.addConnections(to: [nodes2D[y][x+1]], bidirectional: true)
                     }
-                    if tiles[y][x-1] == "space" {
+                    if tiles[y][x-1] == "floor" {
                         node.addConnections(to: [nodes2D[y][x-1]], bidirectional: true)
                     }
                 }
             }
         }
+        
         //Convert data to graph
         var nodes = [GKGridGraphNode]()
         for y in 0..<tiles.count {
@@ -326,6 +327,22 @@ class Maze {
                     if node1.connectedNodes.count <= 1 && node2.connectedNodes.count <= 2 {
                         node.addConnections(to: [node1], bidirectional: true)
                         node1.addConnections(to: [node2], bidirectional: true)
+                        switch possibility {
+                        case .up:
+                            data[y-1][x].cellType = .Space
+                            data[y-2][x].cellType = .Space
+                        case .down:
+                            data[y+1][x].cellType = .Space
+                            data[y+2][x].cellType = .Space
+                        case .left:
+                            data[y][x-1].cellType = .Space
+                            data[y][x-2].cellType = .Space
+                        case .right:
+                            data[y][x+1].cellType = .Space
+                            data[y][x+2].cellType = .Space
+                        default:
+                            print("idk")
+                        }
                     }
                 }
                 

@@ -45,6 +45,7 @@ extension PvPGameScene {
             hostSessionLabel.removeFromParent()
             joinSessionLabel.removeFromParent()
             cancelLabel.removeFromParent()
+            super.sceneDidLoad()
         }catch{
             //Update Game Positions
             fatalError()

@@ -76,7 +76,6 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
             let encoder = JSONEncoder()
             do {
                 data = try encoder.encode(buffer)
-                print(data)
             }catch{
                 fatalError()
             }
