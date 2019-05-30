@@ -22,38 +22,43 @@ class SFXController {
     }
     
     
-    /* Function that prepares sound effects */
     func preloadSounds(){
-        //Array of sounds
         let sounds: [String] = ["death", "end", "footsteps", "game-over", "trophy-collect"]
-        //Catch exceptions thrown
-        do {
-            //Iterate thriugh array
-            for sound in sounds {
-                let fileExtension = "wav"
-                //Retrieve location
-                let path:String = Bundle.main.path(forResource: sound, ofType: fileExtension)!
-                //Create URL
-                let url: URL = URL(fileURLWithPath: path)
-                //Make AVAudioPlayer object
-                let player: AVAudioPlayer = try AVAudioPlayer(contentsOf: url)
-                //Prepare for use
-                player.prepareToPlay()
+
+        for sound in sounds {
+            //Get Sound Bundle
+            let fileExtension = "wav"
+            let path:String = Bundle.main.path(forResource: sound, ofType: fileExtension)!
+            let url: URL = URL(fileURLWithPath: path)
+            //Create Audionode to play
+            let node = SKAudioNode(url: url)
+            audioNodes[sound] = node
+            node.autoplayLooped = false
+            if sound == "footsteps" {
+                node.autoplayLooped = true
             }
-            //Catch  block
-        } catch {}
+            parent.addChild(node)
+        }
         
     }
     
+    
     func playSound(named name: String, completion handler: (() -> Void)?) {
-        let soundAction = SKAction.playSoundFileNamed(name, waitForCompletion: true)
-        var actions = [soundAction]
-        if handler != nil {
-            let completion = SKAction.run(handler!)
-            actions.append(completion)
+        guard let node = audioNodes[name] else {
+            return
         }
-        let sequence = SKAction.sequence(actions)
-        parent.run(sequence)
+        let playAction = SKAction.play()
+        node.run(playAction)
     }
+    
+    
+    func stopSound(named name: String) {
+        guard let node = audioNodes[name] else {
+            return
+        }
+        node.removeAllActions()
+        node.run(SKAction.stop())
+    }
+    
     
 }

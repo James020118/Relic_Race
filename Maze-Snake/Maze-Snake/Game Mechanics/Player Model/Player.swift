@@ -68,6 +68,7 @@ class Player: Actor {
         }
         
         stop()
+        scene.sfxController.stopSound(named: "footsteps")
         
         var atlas = [SKTexture]()
         switch direction {
@@ -84,6 +85,7 @@ class Player: Actor {
         }
         if !atlas.isEmpty {
             run(SKAction.repeatForever(SKAction.animate(with: atlas, timePerFrame: 0.15)))
+            scene.sfxController.playSound(named: "footsteps", completion: nil)
         }else {
             texture = SKTexture(imageNamed: "oldMan")
         }

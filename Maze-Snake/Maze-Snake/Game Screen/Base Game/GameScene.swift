@@ -208,6 +208,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         /* Update the minimap icon positions */
         let dOppT = currentTime - lastOppUpdate
         if dOppT > 0.125 {
+            if opponent == nil {
+                return
+            }
             minimap.updateOpponent(position: opponent.position)
             var points = [CGPoint]()
             for monster in monsters {
