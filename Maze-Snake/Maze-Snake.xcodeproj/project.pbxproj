@@ -50,6 +50,14 @@
 		619FEA2C228CEE4600C28842 /* Monster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619FEA2B228CEE4600C28842 /* Monster.swift */; };
 		61B48313228397AF0045BF3A /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B48312228397AF0045BF3A /* Actor.swift */; };
 		61B48315228397EB0045BF3A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B48314228397EB0045BF3A /* Player.swift */; };
+		61D584F0229F4BA300C751C5 /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D584EF229F4BA300C751C5 /* SoundController.swift */; };
+		61D584F8229F4EC900C751C5 /* background-music.wav in Resources */ = {isa = PBXBuildFile; fileRef = 61D584F2229F4EC800C751C5 /* background-music.wav */; };
+		61D584F9229F4EC900C751C5 /* end.wav in Resources */ = {isa = PBXBuildFile; fileRef = 61D584F3229F4EC800C751C5 /* end.wav */; };
+		61D584FA229F4EC900C751C5 /* footsteps.wav in Resources */ = {isa = PBXBuildFile; fileRef = 61D584F4229F4EC800C751C5 /* footsteps.wav */; };
+		61D584FB229F4EC900C751C5 /* trophy-collect.wav in Resources */ = {isa = PBXBuildFile; fileRef = 61D584F5229F4EC800C751C5 /* trophy-collect.wav */; };
+		61D584FC229F4EC900C751C5 /* death.wav in Resources */ = {isa = PBXBuildFile; fileRef = 61D584F6229F4EC800C751C5 /* death.wav */; };
+		61D584FD229F4EC900C751C5 /* game-over.wav in Resources */ = {isa = PBXBuildFile; fileRef = 61D584F7229F4EC900C751C5 /* game-over.wav */; };
+		61D584FF229F619700C751C5 /* SFXController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D584FE229F619700C751C5 /* SFXController.swift */; };
 		61DA9DDA2298E27500129D34 /* BestFittingUIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DA9DD92298E27500129D34 /* BestFittingUIFont.swift */; };
 		61DA9DDC2298E2BD00129D34 /* FitToBoundsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DA9DDB2298E2BD00129D34 /* FitToBoundsLabel.swift */; };
 		61DAA85A227CFBD1000FE4D0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DAA859227CFBD1000FE4D0 /* MainViewController.swift */; };
@@ -125,6 +133,14 @@
 		619FEA2B228CEE4600C28842 /* Monster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monster.swift; sourceTree = "<group>"; };
 		61B48312228397AF0045BF3A /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		61B48314228397EB0045BF3A /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		61D584EF229F4BA300C751C5 /* SoundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
+		61D584F2229F4EC800C751C5 /* background-music.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "background-music.wav"; sourceTree = "<group>"; };
+		61D584F3229F4EC800C751C5 /* end.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = end.wav; sourceTree = "<group>"; };
+		61D584F4229F4EC800C751C5 /* footsteps.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = footsteps.wav; sourceTree = "<group>"; };
+		61D584F5229F4EC800C751C5 /* trophy-collect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "trophy-collect.wav"; sourceTree = "<group>"; };
+		61D584F6229F4EC800C751C5 /* death.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = death.wav; sourceTree = "<group>"; };
+		61D584F7229F4EC900C751C5 /* game-over.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "game-over.wav"; sourceTree = "<group>"; };
+		61D584FE229F619700C751C5 /* SFXController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFXController.swift; sourceTree = "<group>"; };
 		61DA9DD92298E27500129D34 /* BestFittingUIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestFittingUIFont.swift; sourceTree = "<group>"; };
 		61DA9DDB2298E2BD00129D34 /* FitToBoundsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitToBoundsLabel.swift; sourceTree = "<group>"; };
 		61DAA859227CFBD1000FE4D0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -205,6 +221,7 @@
 				61DAA858227CFBBC000FE4D0 /* Menu Screens */,
 				2E39DF77227B66A000EA1C84 /* Game Screen */,
 				619FEA2A228CEDE800C28842 /* Game Mechanics */,
+				61D584EE229F498100C751C5 /* Sounds */,
 			);
 			path = "Maze-Snake";
 			sourceTree = "<group>";
@@ -336,6 +353,29 @@
 				2E07DB02229DB3150092217F /* OtherPlayer.swift */,
 			);
 			path = "Player Model";
+			sourceTree = "<group>";
+		};
+		61D584EE229F498100C751C5 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				61D584F1229F4EA300C751C5 /* Music Assets */,
+				61D584EF229F4BA300C751C5 /* SoundController.swift */,
+				61D584FE229F619700C751C5 /* SFXController.swift */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		61D584F1229F4EA300C751C5 /* Music Assets */ = {
+			isa = PBXGroup;
+			children = (
+				61D584F2229F4EC800C751C5 /* background-music.wav */,
+				61D584F6229F4EC800C751C5 /* death.wav */,
+				61D584F3229F4EC800C751C5 /* end.wav */,
+				61D584F4229F4EC800C751C5 /* footsteps.wav */,
+				61D584F7229F4EC900C751C5 /* game-over.wav */,
+				61D584F5229F4EC800C751C5 /* trophy-collect.wav */,
+			);
+			path = "Music Assets";
 			sourceTree = "<group>";
 		};
 		61DAA853227CFAB8000FE4D0 /* SKS Resources */ = {
@@ -500,13 +540,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				2ECD0A5422987E6400318C0B /* walkingUp.atlas in Resources */,
+				61D584FC229F4EC900C751C5 /* death.wav in Resources */,
+				61D584FA229F4EC900C751C5 /* footsteps.wav in Resources */,
 				2ECD0A522298766C00318C0B /* walkingLeft.atlas in Resources */,
 				2E39DF4E227B65CA00EA1C84 /* Main.storyboard in Resources */,
 				2E39DF45227B65CA00EA1C84 /* AIGameScene.sks in Resources */,
 				2ECD0A5622987F3400318C0B /* walkingRight.atlas in Resources */,
 				2E47C74E229721C50007576C /* walkingDown.atlas in Resources */,
+				61D584FB229F4EC900C751C5 /* trophy-collect.wav in Resources */,
 				61163AEE227CECDB001F49E1 /* Tiles.sks in Resources */,
+				61D584FD229F4EC900C751C5 /* game-over.wav in Resources */,
 				2E39DF53227B65CA00EA1C84 /* LaunchScreen.storyboard in Resources */,
+				61D584F9229F4EC900C751C5 /* end.wav in Resources */,
+				61D584F8229F4EC900C751C5 /* background-music.wav in Resources */,
 				61930BDA227DD12200550DD0 /* TestTIles.sks in Resources */,
 				2E07DB08229DBECD0092217F /* PvPGameScene.sks in Resources */,
 				61163AEF227CECDB001F49E1 /* Assets.xcassets in Resources */,
@@ -552,6 +598,7 @@
 				615D67FC2283BD0A00D0100A /* AI.swift in Sources */,
 				2E1362AB22971D190055DEF0 /* PlayViewController.swift in Sources */,
 				61F7C6AA228EF5F20006597B /* GraphNodeEquality.swift in Sources */,
+				61D584FF229F619700C751C5 /* SFXController.swift in Sources */,
 				61DA9DDA2298E27500129D34 /* BestFittingUIFont.swift in Sources */,
 				2E07DB0A229DC06D0092217F /* PvPViewController.swift in Sources */,
 				61B48313228397AF0045BF3A /* Actor.swift in Sources */,
@@ -560,6 +607,7 @@
 				61930BD6227D19C200550DD0 /* TileNode.swift in Sources */,
 				2E07DAFD229DAA2F0092217F /* MazeEncodingBuffer.swift in Sources */,
 				2E7870EB228205C900FB1303 /* Stack.swift in Sources */,
+				61D584F0229F4BA300C751C5 /* SoundController.swift in Sources */,
 				2E9C4D022284AF4A009C9BFA /* AnalogStick.swift in Sources */,
 				61930BDC227DE7BF00550DD0 /* Maze.swift in Sources */,
 				2E39DF43227B65CA00EA1C84 /* AppDelegate.swift in Sources */,

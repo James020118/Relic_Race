@@ -24,6 +24,9 @@ let data = UserDefaults.standard
 class GameScene: SKScene, SKPhysicsContactDelegate {
     //MARK:- Gameplay Properties
     
+    //Object for Sound Effects
+    var sfxController: SFXController!
+    
     //Graph for Maze
     var mazeGraph: GKGridGraph<GKGridGraphNode>?
     //Manages grid-like tiles
@@ -202,17 +205,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
            monsterCollisionResponse()
         }
         
-        //Minimap update has been moved to the subclasses
+        /* Update the minimap icon positions */
+        let dOppT = currentTime - lastOppUpdate
+        if dOppT > 0.125 {
+            minimap.updateOpponent(position: opponent.position)
+            var points = [CGPoint]()
+            for monster in monsters {
+                points.append(monster.position)
+            }
+            minimap.updateMonsters(positions: points)
+            self.lastOppUpdate = currentTime
+        }
         
     }
     
     func initializeGame(type: String) {
         physicsWorld.contactDelegate = self
-        let graph = makeMaze()
+        //Load Sound Effects
+        sfxController = SFXController(from: self)
+        sfxController.preloadSounds()
         //Setup Map w/ Graph
+        let graph = makeMaze()
         tileManager = TileManager(from: graph, with: textureSet)
         tileManager.addTilesTo(scene: self)
-        
         //Initialize all characters, including player, opponent, and monsters
         //Spawn Game Elements
         characterInitialization(type)

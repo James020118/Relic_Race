@@ -19,10 +19,15 @@ enum Difficulty {
  -----------------*/
 class GameViewController: UIViewController {
 
+    var soundController: SoundController!
+    
     var difficulty: Difficulty = .Easy
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        soundController = SoundController()
+        soundController.prepareMusicandSession()
         
         switch difficulty {
         case .Easy:
@@ -56,6 +61,14 @@ class GameViewController: UIViewController {
         
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        soundController.play(at: 0.1)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        soundController.stop()
+    }
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.landscape
     }

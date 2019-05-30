@@ -27,17 +27,6 @@ class AIGameScene: GameScene {
     
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
-        
-        /* Update the minimap icon positions */
-        let dOppT = currentTime - lastOppUpdate
-        if dOppT > 0.125 {
-            minimap.updateOpponent(position: opponent.position)
-            var points = [CGPoint]()
-            for monster in monsters {
-                points.append(monster.position)
-            }
-            minimap.updateMonsters(positions: points)
-            self.lastOppUpdate = currentTime
-        }
     }
+    
 }

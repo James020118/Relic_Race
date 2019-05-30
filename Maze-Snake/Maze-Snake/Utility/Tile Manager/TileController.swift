@@ -134,8 +134,6 @@ class TileManager {
     
     //MARK:- OPTIMIZATION
     
-    //TODO: Use small related atlases
-    
     //TODO: Remove all game nodes from parent when game moves to pause/end screen
     
     //TODO: Reduce number of draw calls
