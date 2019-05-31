@@ -30,12 +30,12 @@ extension GameScene {
             let trophyGridPos = tileManager.indexFrom(position: trophy.position)
             ai.moveShortestPath(to: trophyGridPos)
         }
-        sfxController.playSound(named: "trophy-collect", completion: nil)
+        sfxController.playSound(named: "trophy-collect")
         player1CollisionFlag = false
         //Check Win
         if player1.player_Score == 5 {
             info.endGame()
-            sfxController.playSound(named: "game-over", completion: nil)
+            sfxController.playSound(named: "game-over")
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 self.info.roundWinDisplay(winner: "player", xCoord: self.player1.position.x, yCoord: self.player1.position.y)
             }
@@ -54,12 +54,12 @@ extension GameScene {
         //Respawn
         hittingMonster()
         tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
-        sfxController.playSound(named: "death", completion: nil)
+        sfxController.playSound(named: "death")
         monsterCollisionFlag = -1
         //Check loss
         if player1.player_Health == 0 {
             info.endGame()
-            sfxController.playSound(named: "game-over", completion: nil)
+            sfxController.playSound(named: "game-over")
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.info.playerDiedDisplay(xCoord: self.player1.position.x, yCoord: self.player1.position.y)
             }
@@ -83,12 +83,12 @@ extension GameScene {
         if let ai = opponent as? AI {
             ai.moveShortestPath(to: trophyGridPos)
         }
-        sfxController.playSound(named: "trophy-collect", completion: nil)
+        sfxController.playSound(named: "trophy-collect")
         opponentCollisionFlag = false
         //Check Win
         if opponent.score == 5 {
             info.endGame()
-            sfxController.playSound(named: "game-over", completion: nil)
+            sfxController.playSound(named: "game-over")
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 self.info.roundWinDisplay(winner: "ai", xCoord: self.player1.position.x, yCoord: self.player1.position.y)
             }

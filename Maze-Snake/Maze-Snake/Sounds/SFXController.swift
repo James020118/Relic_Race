@@ -43,11 +43,13 @@ class SFXController {
     }
     
     
-    func playSound(named name: String, completion handler: (() -> Void)?) {
+    func playSound(named name: String, at volume: Float = 0.65) {
         guard let node = audioNodes[name] else {
             return
         }
+        let volAction = SKAction.changeVolume(to: volume, duration: 0)
         let playAction = SKAction.play()
+        node.run(volAction)
         node.run(playAction)
     }
     

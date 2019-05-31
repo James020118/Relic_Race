@@ -12,9 +12,14 @@ import GameplayKit
 
 class PvPViewController: UIViewController {
 
+    var soundController: SoundController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        soundController = SoundController()
+        soundController.prepareMusicandSession()
+        
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "PvPGameScene") as? PvPGameScene {
@@ -34,6 +39,14 @@ class PvPViewController: UIViewController {
             view.showsPhysics = false
             view.shouldCullNonVisibleNodes = false
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        soundController.play(at: 0.15)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        soundController.stop()
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

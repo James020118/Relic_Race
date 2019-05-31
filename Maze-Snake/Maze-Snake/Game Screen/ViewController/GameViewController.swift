@@ -62,7 +62,7 @@ class GameViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        soundController.play(at: 0.1)
+        soundController.play(at: 0.15)
     }
     
     override func viewDidDisappear(_ animated: Bool) {

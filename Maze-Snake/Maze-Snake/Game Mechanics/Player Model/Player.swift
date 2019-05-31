@@ -85,7 +85,7 @@ class Player: Actor {
         }
         if !atlas.isEmpty {
             run(SKAction.repeatForever(SKAction.animate(with: atlas, timePerFrame: 0.15)))
-            scene.sfxController.playSound(named: "footsteps", completion: nil)
+            scene.sfxController.playSound(named: "footsteps", at: 0.6)
         }else {
             texture = SKTexture(imageNamed: "oldMan")
         }
