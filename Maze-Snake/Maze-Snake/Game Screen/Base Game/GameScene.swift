@@ -187,6 +187,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     /* Function that is called before each frame is rendered */
+    var startUpdateFlag = false
+    
     var lastOppUpdate: TimeInterval = 0
     var lastCheck: TimeInterval = 0
     //Flags to detect when there is a meaningful collsion
@@ -208,7 +210,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         /* Update the minimap icon positions */
         let dOppT = currentTime - lastOppUpdate
         if dOppT > 0.125 {
-            if opponent == nil {
+            if !startUpdateFlag {
                 return
             }
             minimap.updateOpponent(position: opponent.position)
@@ -229,13 +231,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         sfxController.preloadSounds()
         sfxController.stopSound(named: "footsteps")
         //Setup Map w/ Graph
-        let graph = makeMaze()
-        tileManager = TileManager(from: graph, with: textureSet)
+        mazeGraph = makeMaze()
+        tileManager = TileManager(from: mazeGraph!, with: textureSet)
         tileManager.addTilesTo(scene: self)
         //Initialize all characters, including player, opponent, and monsters
         //Spawn Game Elements
         characterInitialization(type)
-        spawnMinimap(graph: graph)
+        spawnMinimap(graph: mazeGraph!)
         spawnJoystick()
         player1.spawnCamera()
         trophySystemSetup()
@@ -249,6 +251,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initializeHudPositions()
         moveMinimap(toTheRight: !data.bool(forKey: "minimapPos"))
         moveJoystick(toTheRight: data.bool(forKey: "joystickPos"))
+        startUpdateFlag = true
     }
     
     func generateOpponent() {
@@ -258,8 +261,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func makeMaze() -> GKGridGraph<GKGridGraphNode> {
         //Generate Maze
         let maze = Maze(width: Maze.MAX_COLUMNS, height: Maze.MAX_ROWS)
-        mazeGraph = maze.graph
-        let graph = mazeGraph ?? blankGraph()
+        let graph = maze.graph
         
         return graph
     }
