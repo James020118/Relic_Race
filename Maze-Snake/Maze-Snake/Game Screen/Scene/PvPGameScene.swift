@@ -39,10 +39,17 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
         return graph ?? blankGraph()
     }
     
+    override func opponentToTrophyResponse() { }
+    
     override func playerToTrophyResponse() {
         super.playerToTrophyResponse()
-        let data = Data(bytes: &player1.player_Score, count: MemoryLayout<Int>.size)
+        let packet = ScoringPacket(
+            score: player1.player_Score,
+            pos: tileManager.indexFrom(position: trophy!.position)
+        )
         do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(packet)
             try mcSession?.send(data, toPeers: mcSession!.connectedPeers, with: .reliable)
         }catch{
             print("Oops!")

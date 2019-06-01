@@ -65,17 +65,22 @@ extension PvPGameScene {
         
         
         //---- If data is score
-        let value = data.withUnsafeBytes {
-            $0.load(as: Int.self)
-        }
-        if value != opponent.score {
-            opponent.score = value
-            info.changeAIScore(newScore: opponent.score)
-        }
-        checkOpponentWin()
-        if !(value >= 0 && value <= 5) {
+        do {
+            //Decode Data
+            let packet = try JSONDecoder().decode(ScoringPacket.self, from: data)
+            let gridPos = packet.pos
+            let newPos = tileManager.getTile(row: gridPos.row, column: gridPos.column).position
+            trophy.position = newPos
+            minimap.updateTrophy(position: newPos)
+            let value = packet.score
+            if value != opponent.score {
+                opponent.score = value
+                info.changeAIScore(newScore: opponent.score)
+                sfxController.playSound(named: "trophy-collect")
+            }
+            checkOpponentWin()
             return
-        }
+        }catch{ print("Data is not scoring data") }
         
     }
     

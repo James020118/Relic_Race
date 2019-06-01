@@ -275,6 +275,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player1CollisionFlag = false
     }
     
+    func opponentToTrophyResponse() {
+        //Increment Score
+        opponent.incrementScore()
+        info.changeAIScore(newScore: opponent.score)
+        //Spawn New Trophy and appropriate response
+        trophy.setRandomPosition()
+        minimap.updateTrophy(position: trophy.position)
+        opponent.stop()
+        let trophyGridPos = tileManager.indexFrom(position: trophy.position)
+        opponent.gridPos = tileManager.indexFrom(position: opponent.position)
+        if let ai = opponent as? AI {
+            ai.moveShortestPath(to: trophyGridPos)
+        }
+        sfxController.playSound(named: "trophy-collect")
+        opponentCollisionFlag = false
+    }
+    
     func makeMaze() -> GKGridGraph<GKGridGraphNode> {
         //Generate Maze
         let maze = Maze(width: Maze.MAX_COLUMNS, height: Maze.MAX_ROWS)
