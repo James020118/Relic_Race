@@ -49,6 +49,7 @@ extension GameScene {
             self.prevDir = direction
             //Optimization
             self.tileManager.viewOnScreenTiles(pos: self.player1.position, parent: self)
+            self.player1.gridPos = self.tileManager.indexFrom(position: self.player1.position)
         }
         
         joystick.stopHandler = {

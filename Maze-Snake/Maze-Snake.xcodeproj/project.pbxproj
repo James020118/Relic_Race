@@ -392,9 +392,9 @@
 			isa = PBXGroup;
 			children = (
 				2E39DF44227B65CA00EA1C84 /* AIGameScene.sks */,
+				2E07DB07229DBECD0092217F /* PvPGameScene.sks */,
 				2E07DAFE229DAFEF0092217F /* AIGameScene.swift */,
 				2E07DB05229DBE500092217F /* PvPGameScene.swift */,
-				2E07DB07229DBECD0092217F /* PvPGameScene.sks */,
 				44A0D10C229E1CC5001C9706 /* PvPConnectionExt.swift */,
 			);
 			path = Scene;

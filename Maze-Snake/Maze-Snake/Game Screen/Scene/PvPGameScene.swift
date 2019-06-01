@@ -67,21 +67,10 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
         //Executed when two devices are connected and the user is proceedint to the game in pvp mode
         if node.name == "next" {
             let buffer = makeGraphData()
-            print(buffer.tiles)
-            print("")
-            Maze(from: buffer).outputConnections()
-            print("")
-            
-            var data = Data(base64Encoded: "")
-            let encoder = JSONEncoder()
             do {
-                data = try encoder.encode(buffer)
-            }catch{
-                fatalError()
-            }
-            print(buffer)
-            do {
-                try mcSession?.send(data!, toPeers: mcSession!.connectedPeers, with: .reliable)
+                let encoder = JSONEncoder()
+                let data = try encoder.encode(buffer)
+                try mcSession?.send(data, toPeers: mcSession!.connectedPeers, with: .reliable)
             }catch{
                 print("Oops!")
             }
@@ -92,8 +81,23 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
         }
     }
     
+    var lastSent: TimeInterval = 0
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
+        
+        let dSent = currentTime - lastSent
+        if dSent >= 0.5 && startUpdateFlag {
+            let sendPos = player1.gridPos
+            do {
+                let encoder = JSONEncoder()
+                let data = try encoder.encode(sendPos)
+                try mcSession?.send(data, toPeers: mcSession!.connectedPeers, with: .reliable)
+            }catch{
+                print("Oops!")
+            }
+            lastSent = currentTime
+        }
+        
     }
     
     func makeGraphData() -> MazeEncodingBuffer {

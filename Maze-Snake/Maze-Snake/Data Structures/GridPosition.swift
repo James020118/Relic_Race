@@ -13,7 +13,7 @@ import SpriteKit
  A Data Structure that represents a coordinate in the TileManager \
  ------------*/
 
-struct GridPosition {
+struct GridPosition: Codable {
     var column: Int
     var row: Int
     

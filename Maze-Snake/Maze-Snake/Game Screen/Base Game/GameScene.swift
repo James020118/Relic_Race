@@ -95,6 +95,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         super.sceneDidLoad()
         initializeGame(type: "ai")
+        print("Completed game load")
     }
     
     var isPausing = false
@@ -243,7 +244,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         trophySystemSetup()
         //Optimization
         tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
-        
         //Spawn HUD
         spawnInfo()
         spawnPause()
