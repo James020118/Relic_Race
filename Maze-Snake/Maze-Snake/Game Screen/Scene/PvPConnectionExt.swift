@@ -32,37 +32,51 @@ extension PvPGameScene {
     /* Required Methods for Peer to Peer connections */
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         
-        if startUpdateFlag {
+        //------ If data is initial payload
+        if !startUpdateFlag {
+            //Get Maze Data
             do {
                 //Decode Data
-                print("PLZ SEND POS")
-                let gridPos = try JSONDecoder().decode(GridPosition.self, from: data)
-                let newPos = tileManager.getTile(row: gridPos.row, column: gridPos.column).position
-                opponent.position = newPos
+                print(data)
+                let buffer = try JSONDecoder().decode(MazeEncodingBuffer.self, from: data)
+                let maze = Maze(from: buffer)
+                graph = maze.graph
             }catch{
                 //Update Game Positions
                 fatalError()
             }
+            //Init game
+            hostSessionLabel.removeFromParent()
+            joinSessionLabel.removeFromParent()
+            cancelLabel.removeFromParent()
+            super.sceneDidLoad()
             return
         }
         
-        print("Called")
-        //Get Maze Data
+        
+        //----- If data is player position
         do {
             //Decode Data
-            print(data)
-            let buffer = try JSONDecoder().decode(MazeEncodingBuffer.self, from: data)
-            let maze = Maze(from: buffer)
-            graph = maze.graph
-        }catch{
-            //Update Game Positions
-            fatalError()
+            let gridPos = try JSONDecoder().decode(GridPosition.self, from: data)
+            let newPos = tileManager.getTile(row: gridPos.row, column: gridPos.column).position
+            opponent.position = newPos
+            return
+        }catch{ print("Data is not player pos") }
+        
+        
+        //---- If data is score
+        let value = data.withUnsafeBytes {
+            $0.load(as: Int.self)
         }
-        //Init game
-        hostSessionLabel.removeFromParent()
-        joinSessionLabel.removeFromParent()
-        cancelLabel.removeFromParent()
-        super.sceneDidLoad()
+        if value != opponent.score {
+            opponent.score = value
+            info.changeAIScore(newScore: opponent.score)
+        }
+        checkOpponentWin()
+        if !(value >= 0 && value <= 5) {
+            return
+        }
+        
     }
     
     

@@ -17,7 +17,6 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
     var hostSessionLabel = SKLabelNode()
     var joinSessionLabel = SKLabelNode()
     var cancelLabel = SKLabelNode()
-    
     var connectedLabel = SKLabelNode()
     var nextLabel = SKLabelNode()
     
@@ -40,6 +39,15 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
         return graph ?? blankGraph()
     }
     
+    override func playerToTrophyResponse() {
+        super.playerToTrophyResponse()
+        let data = Data(bytes: &player1.player_Score, count: MemoryLayout<Int>.size)
+        do {
+            try mcSession?.send(data, toPeers: mcSession!.connectedPeers, with: .reliable)
+        }catch{
+            print("Oops!")
+        }
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
