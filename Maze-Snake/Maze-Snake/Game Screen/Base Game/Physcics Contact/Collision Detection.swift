@@ -43,16 +43,8 @@ extension GameScene {
         tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
         sfxController.playSound(named: "death")
         monsterCollisionFlag = -1
-        checkMonsterWin()
-    }
-    func checkMonsterWin() {
-        //Check loss
         if player1.player_Health == 0 {
-            info.endGame()
-            sfxController.playSound(named: "game-over")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.info.playerDiedDisplay(xCoord: self.player1.position.x, yCoord: self.player1.position.y)
-            }
+            checkMonsterWin()
         }
     }
     

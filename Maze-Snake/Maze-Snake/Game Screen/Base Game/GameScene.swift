@@ -292,6 +292,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         opponentCollisionFlag = false
     }
     
+    func checkMonsterWin() {
+        //Check loss
+        info.endGame()
+        sfxController.playSound(named: "game-over")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.info.playerDiedDisplay(xCoord: self.player1.position.x, yCoord: self.player1.position.y)
+        }
+    }
+    
     func makeMaze() -> GKGridGraph<GKGridGraphNode> {
         //Generate Maze
         let maze = Maze(width: Maze.MAX_COLUMNS, height: Maze.MAX_ROWS)

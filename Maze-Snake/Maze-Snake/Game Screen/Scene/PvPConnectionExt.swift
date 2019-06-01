@@ -82,6 +82,14 @@ extension PvPGameScene {
             return
         }catch{ print("Data is not scoring data") }
         
+        
+        //--- If opponent dies to monster
+        let value = data.withUnsafeBytes {
+            $0.load(as: UInt8.self)
+        }
+        if value == 1 {
+            info.roundWinDisplay(winner: "player", xCoord: player1.position.x, yCoord: player1.position.y)
+        }
     }
     
     

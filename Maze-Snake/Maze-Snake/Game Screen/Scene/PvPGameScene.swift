@@ -30,6 +30,7 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
         pvpConnectionPrompt()
     }
     
+    /* Overriding Preferences in Base Game Generation */
     override func generateOpponent() {
         opponent = OtherPlayer(texture: SKTexture(image: #imageLiteral(resourceName: "player.png")), parent: self, pos: GridPosition(column: 1, row: Maze.MAX_ROWS-1))
         opponent.name = "ai"
@@ -54,6 +55,17 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
         }catch{
             print("Oops!")
         }
+    }
+    
+    override func checkMonsterWin() {
+        do {
+            var val: UInt8 = 1
+            let data = Data(bytes: &val, count: MemoryLayout<UInt8>.size)
+            try mcSession?.send(data, toPeers: mcSession!.connectedPeers, with: .reliable)
+        }catch{
+            print("Oops!")
+        }
+        super.checkMonsterWin()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
