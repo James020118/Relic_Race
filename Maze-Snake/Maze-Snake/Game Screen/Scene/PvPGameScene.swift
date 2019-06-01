@@ -66,6 +66,7 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
             print("Oops!")
         }
         super.checkMonsterWin()
+        parentVC.dismiss(animated: true, completion: nil)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

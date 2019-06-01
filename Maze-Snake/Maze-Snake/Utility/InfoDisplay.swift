@@ -152,6 +152,8 @@ class InfoDisplay {
             messageLabel.text = "You won!"
         case "ai":
             messageLabel.text = "AI won!"
+        case "opponent":
+            messageLabel.text = "Opponent won!"
         default:
             print("---")
         }
