@@ -16,6 +16,7 @@ class Monster: Actor {
     static let MAX_MONSTERS = 4
     
     var number: Int = 0
+    var path = [GridPosition]()
     
     init(texture: SKTexture, parent: GameScene, number: Int) {
         self.number = number
@@ -151,8 +152,8 @@ class Monster: Actor {
                 break
             }
             //Add new random node to path
-            let newNode = connectedNodes.randomElement()
-            path2.append(newNode! as! GKGridGraphNode)
+            let newNode = connectedNodes.randomElement()! as! GKGridGraphNode
+            path2.append(newNode)
         }
         
         //Generate Full Monsters Path
@@ -164,10 +165,13 @@ class Monster: Actor {
         //Once path of nodes is given, convert to grid position, then [action]
         var actions = [SKAction]()
         for node in path {
+            //Once path of nodes is given, convert to grid position, then [action]
             let gridPos = GridPosition(from: node.gridPosition)
             let newPos = scene.tileManager.getTile(row: gridPos.row, column: gridPos.column).position
             let action = SKAction.move(to: newPos, duration: Monster.TILE_TRAVEL_TIME)
             actions.append(action)
+            //Store positions of each step in path
+            self.path.append(gridPos)
         }
         
         //Create action sequence with given [action] repeating

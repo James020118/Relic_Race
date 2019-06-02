@@ -94,7 +94,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         super.sceneDidLoad()
-        initializeGame(type: "ai")
+        initializeGame()
         print("Completed game load")
     }
     
@@ -225,19 +225,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func initializeGame(type: String) {
+    func initializeGame() {
+        premapSetup()
+        //Setup Map w/ Graph
+        mazeGraph = makeMaze()
+        tileSetup()
+        setupGame()
+    }
+    
+    func premapSetup() {
         physicsWorld.contactDelegate = self
         //Load Sound Effects
         sfxController = SFXController(from: self)
         sfxController.preloadSounds()
         sfxController.stopSound(named: "footsteps")
-        //Setup Map w/ Graph
-        mazeGraph = makeMaze()
+    }
+    
+    func tileSetup() {
         tileManager = TileManager(from: mazeGraph!, with: textureSet)
         tileManager.addTilesTo(scene: self)
+    }
+    
+    func setupGame() {
         //Initialize all characters, including player, opponent, and monsters
         //Spawn Game Elements
-        characterInitialization(type)
+        characterInitialization()
         spawnMinimap(graph: mazeGraph!)
         spawnJoystick()
         player1.spawnCamera()
@@ -254,8 +266,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         startUpdateFlag = true
     }
     
+    /* Functions to override to change game generation behavior */
+    
     func generateOpponent() {
         
+    }
+    
+    func generateMonsters() -> [Monster] {
+        let texture = SKTexture(image: #imageLiteral(resourceName: "monster.png"))
+        var tmpMonster = [Monster]()
+        for counter in 1...Monster.MAX_MONSTERS {
+            let monster = Monster(texture: texture, parent: self, number: counter)
+            monster.name = "monster\(counter)"
+            tmpMonster.append(monster)
+        }
+        return tmpMonster
     }
     
     func playerToTrophyResponse() {

@@ -20,15 +20,82 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
     var connectedLabel = SKLabelNode()
     var nextLabel = SKLabelNode()
     
+    //MPC Properties
     var peerID = MCPeerID(displayName: UIDevice.current.name)
     var mcSession: MCSession?
     var mcAdvertiserAssistant: MCAdvertiserAssistant?
     
+    //Storing Host-generated game properties
     var graph: GKGridGraph<GKGridGraphNode>?
+    var sharedMonsters = [Monster]()
+    
+    
+    /* Lifecycle Functions */
     
     override func sceneDidLoad() {
         pvpConnectionPrompt()
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
+        //Get element at touch pos
+        guard let touch = touches.first else { return }
+        let location = touch.location(in: self)
+        let node = self.atPoint(location)
+        
+        if node.name == "host" {
+            startHosting()
+        }
+        
+        //Executed when user decides to join an existing session in pvp mode
+        if node.name == "join" {
+            joinSession()
+        }
+        
+        //Executed when user leaves session creation menu
+        if node.name == "cancel" {
+            removeAllChildren()
+            parentVC.dismiss(animated: true, completion: nil)
+        }
+        
+        //Executed when two devices are connected and the user is proceedint to the game in pvp mode
+        if node.name == "next" {
+            let buffer = makeGameData()
+            do {
+                let encoder = JSONEncoder()
+                let data = try encoder.encode(buffer)
+                print(data)
+                try mcSession?.send(data, toPeers: mcSession!.connectedPeers, with: .reliable)
+            }catch{
+                print("Oops!")
+            }
+            //Initialize the game
+            connectedLabel.removeFromParent()
+            nextLabel.removeFromParent()
+            setupGame()
+        }
+    }
+    
+    var lastSent: TimeInterval = 0
+    override func update(_ currentTime: TimeInterval) {
+        super.update(currentTime)
+        
+        let dSent = currentTime - lastSent
+        if dSent >= 0.5 && startUpdateFlag {
+            let sendPos = player1.gridPos
+            do {
+                let encoder = JSONEncoder()
+                let data = try encoder.encode(sendPos)
+                try mcSession?.send(data, toPeers: mcSession!.connectedPeers, with: .reliable)
+            }catch{
+                print("Oops!")
+            }
+            lastSent = currentTime
+        }
+        
+    }
+    
     
     /* Overriding Preferences in Base Game Generation */
     override func generateOpponent() {
@@ -38,6 +105,10 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
     
     override func makeMaze() -> GKGridGraph<GKGridGraphNode> {
         return graph ?? blankGraph()
+    }
+    
+    override func generateMonsters() -> [Monster] {
+        return sharedMonsters
     }
     
     override func opponentToTrophyResponse() { }
@@ -69,71 +140,27 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
         parentVC.dismiss(animated: true, completion: nil)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
+    
+    /* GAME -> SENDABLE DATA */
+    
+    func makeGameData() -> GameEncodingBuffer {
+        premapSetup()
+        let maze = makeMazeData()
+        tileSetup()
+        let monsters = super.generateMonsters()
+        sharedMonsters = monsters
+        let buffer = GameEncodingBuffer(from: maze, and: monsters)
         
-        //Get element at touch pos
-        guard let touch = touches.first else { return }
-        let location = touch.location(in: self)
-        let node = self.atPoint(location)
-        
-        if node.name == "host" {
-            startHosting()
-        }
-        
-        //Executed when user decides to join an existing session in pvp mode
-        if node.name == "join" {
-            joinSession()
-        }
-        
-        //Executed when user leaves session creation menu
-        if node.name == "cancel" {
-            removeAllChildren()
-            parentVC.dismiss(animated: true, completion: nil)
-        }
-        
-        //Executed when two devices are connected and the user is proceedint to the game in pvp mode
-        if node.name == "next" {
-            let buffer = makeGraphData()
-            do {
-                let encoder = JSONEncoder()
-                let data = try encoder.encode(buffer)
-                try mcSession?.send(data, toPeers: mcSession!.connectedPeers, with: .reliable)
-            }catch{
-                print("Oops!")
-            }
-            //Initialize the game
-            connectedLabel.removeFromParent()
-            nextLabel.removeFromParent()
-            super.sceneDidLoad()
-        }
+        return buffer
     }
     
-    var lastSent: TimeInterval = 0
-    override func update(_ currentTime: TimeInterval) {
-        super.update(currentTime)
-        
-        let dSent = currentTime - lastSent
-        if dSent >= 0.5 && startUpdateFlag {
-            let sendPos = player1.gridPos
-            do {
-                let encoder = JSONEncoder()
-                let data = try encoder.encode(sendPos)
-                try mcSession?.send(data, toPeers: mcSession!.connectedPeers, with: .reliable)
-            }catch{
-                print("Oops!")
-            }
-            lastSent = currentTime
-        }
-        
-    }
-    
-    func makeGraphData() -> MazeEncodingBuffer {
+    func makeMazeData() -> Maze {
         //Generate Maze
         let maze = Maze(width: Maze.MAX_COLUMNS, height: Maze.MAX_ROWS)
         mazeGraph = maze.graph
-        graph = mazeGraph ?? blankGraph()
-        return MazeEncodingBuffer(from: maze)
+        graph = maze.graph
+        
+        return maze
     }
     
 }

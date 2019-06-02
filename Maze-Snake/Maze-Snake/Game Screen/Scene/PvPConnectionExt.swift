@@ -38,18 +38,21 @@ extension PvPGameScene {
             do {
                 //Decode Data
                 print(data)
-                let buffer = try JSONDecoder().decode(MazeEncodingBuffer.self, from: data)
+                let buffer = try JSONDecoder().decode(GameEncodingBuffer.self, from: data)
+                premapSetup()
                 let maze = Maze(from: buffer)
+                mazeGraph = maze.graph
                 graph = maze.graph
+                tileSetup()
+                sharedMonsters = buffer.getMonsters(from: self)
             }catch{
-                //Update Game Positions
                 fatalError()
             }
             //Init game
             hostSessionLabel.removeFromParent()
             joinSessionLabel.removeFromParent()
             cancelLabel.removeFromParent()
-            super.sceneDidLoad()
+            setupGame()
             return
         }
         

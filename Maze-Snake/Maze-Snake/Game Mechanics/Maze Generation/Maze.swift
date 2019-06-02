@@ -40,7 +40,7 @@ class Maze {
     var visitedMap: [[Bool]] = []
     var mazeStack = Stack<[Int]>()
     
-    init(from decoder: MazeEncodingBuffer) {
+    init(from decoder: GameEncodingBuffer) {
         let tiles = decoder.tiles
         
         mazeWidth = Maze.MAX_COLUMNS

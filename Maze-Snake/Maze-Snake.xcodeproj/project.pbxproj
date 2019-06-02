@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2E07DAFD229DAA2F0092217F /* MazeEncodingBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07DAFC229DAA2F0092217F /* MazeEncodingBuffer.swift */; };
+		2E07DAFD229DAA2F0092217F /* GameEncodingBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07DAFC229DAA2F0092217F /* GameEncodingBuffer.swift */; };
 		2E07DAFF229DAFEF0092217F /* AIGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07DAFE229DAFEF0092217F /* AIGameScene.swift */; };
 		2E07DB01229DB2370092217F /* Opponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07DB00229DB2370092217F /* Opponent.swift */; };
 		2E07DB03229DB3150092217F /* OtherPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07DB02229DB3150092217F /* OtherPlayer.swift */; };
@@ -85,7 +85,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2E07DAFC229DAA2F0092217F /* MazeEncodingBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeEncodingBuffer.swift; sourceTree = "<group>"; };
+		2E07DAFC229DAA2F0092217F /* GameEncodingBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEncodingBuffer.swift; sourceTree = "<group>"; };
 		2E07DAFE229DAFEF0092217F /* AIGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGameScene.swift; sourceTree = "<group>"; };
 		2E07DB00229DB2370092217F /* Opponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opponent.swift; sourceTree = "<group>"; };
 		2E07DB02229DB3150092217F /* OtherPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherPlayer.swift; sourceTree = "<group>"; };
@@ -273,7 +273,7 @@
 				615D67FD2283C0D100D0100A /* GridPosition.swift */,
 				615D67FF2283C32500D0100A /* Directions.swift */,
 				619AFE5C22871E81000784A4 /* TextureSet.swift */,
-				2E07DAFC229DAA2F0092217F /* MazeEncodingBuffer.swift */,
+				2E07DAFC229DAA2F0092217F /* GameEncodingBuffer.swift */,
 				6117704E22A2B54100F67AB8 /* ScoringPacket.swift */,
 			);
 			path = "Data Structures";
@@ -608,7 +608,7 @@
 				2E39DF4B227B65CA00EA1C84 /* GameViewController.swift in Sources */,
 				615D67FE2283C0D100D0100A /* GridPosition.swift in Sources */,
 				61930BD6227D19C200550DD0 /* TileNode.swift in Sources */,
-				2E07DAFD229DAA2F0092217F /* MazeEncodingBuffer.swift in Sources */,
+				2E07DAFD229DAA2F0092217F /* GameEncodingBuffer.swift in Sources */,
 				2E7870EB228205C900FB1303 /* Stack.swift in Sources */,
 				61D584F0229F4BA300C751C5 /* SoundController.swift in Sources */,
 				2E9C4D022284AF4A009C9BFA /* AnalogStick.swift in Sources */,
