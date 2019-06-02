@@ -1,0 +1,6 @@
+framework module Pods_Maze_Snake {
+  umbrella header "Pods-Maze-Snake-umbrella.h"
+
+  export *
+  module * { export * }
+}

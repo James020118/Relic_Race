@@ -26,6 +26,7 @@
 		2E39DF69227B65CA00EA1C84 /* Maze_SnakeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E39DF68227B65CA00EA1C84 /* Maze_SnakeUITests.swift */; };
 		2E47C74E229721C50007576C /* walkingDown.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2E47C74D229721C50007576C /* walkingDown.atlas */; };
 		2E7870EB228205C900FB1303 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7870EA228205C900FB1303 /* Stack.swift */; };
+		2E8B678022A19F57005BC45B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E8B677F22A19F57005BC45B /* GoogleService-Info.plist */; };
 		2E9C4D022284AF4A009C9BFA /* AnalogStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C4D012284AF4A009C9BFA /* AnalogStick.swift */; };
 		2EB4D68B2289EA96009F5F3E /* Trophy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB4D68A2289EA96009F5F3E /* Trophy.swift */; };
 		2ECD0A50229870D200318C0B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECD0A4F229870D200318C0B /* SettingsViewController.swift */; };
@@ -33,6 +34,7 @@
 		2ECD0A5422987E6400318C0B /* walkingUp.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2ECD0A5322987E6400318C0B /* walkingUp.atlas */; };
 		2ECD0A5622987F3400318C0B /* walkingRight.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2ECD0A5522987F3400318C0B /* walkingRight.atlas */; };
 		2EDD7A972280B6C4002B7783 /* NodeToDir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDD7A962280B6C4002B7783 /* NodeToDir.swift */; };
+		3CD6A9F1537C1A3181838A14 /* Pods_Maze_SnakeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6476F6835E8EEC2C6A37FF3 /* Pods_Maze_SnakeUITests.framework */; };
 		44A0D10D229E1CC5001C9706 /* PvPConnectionExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A0D10C229E1CC5001C9706 /* PvPConnectionExt.swift */; };
 		44ACC50A22906F8E0054C91A /* InfoDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ACC50922906F8E0054C91A /* InfoDisplay.swift */; };
 		44F2474322949F2300C69AA0 /* GameSceneExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F2474222949F2300C69AA0 /* GameSceneExt.swift */; };
@@ -65,6 +67,8 @@
 		61DE97DB2299712400EE28E3 /* Collision Detection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DE97DA2299712400EE28E3 /* Collision Detection.swift */; };
 		61E0D1FB228110B700A6DE5C /* GraphCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E0D1FA228110B700A6DE5C /* GraphCreation.swift */; };
 		61F7C6AA228EF5F20006597B /* GraphNodeEquality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F7C6A9228EF5F20006597B /* GraphNodeEquality.swift */; };
+		76AD79465BB11557E07076DD /* Pods_Maze_SnakeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CEF2C19BF1BDFD63C34591F /* Pods_Maze_SnakeTests.framework */; };
+		B09BD8479F66A13AD193249D /* Pods_Maze_Snake.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69A40D2655BDD286DF17249A /* Pods_Maze_Snake.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +114,7 @@
 		2E39DF6A227B65CA00EA1C84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E47C74D229721C50007576C /* walkingDown.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = walkingDown.atlas; sourceTree = "<group>"; };
 		2E7870EA228205C900FB1303 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		2E8B677F22A19F57005BC45B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2E9C4D012284AF4A009C9BFA /* AnalogStick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogStick.swift; sourceTree = "<group>"; };
 		2EB4D68A2289EA96009F5F3E /* Trophy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trophy.swift; sourceTree = "<group>"; };
 		2ECD0A4F229870D200318C0B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +125,8 @@
 		44A0D10C229E1CC5001C9706 /* PvPConnectionExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PvPConnectionExt.swift; sourceTree = "<group>"; };
 		44ACC50922906F8E0054C91A /* InfoDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDisplay.swift; sourceTree = "<group>"; };
 		44F2474222949F2300C69AA0 /* GameSceneExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneExt.swift; sourceTree = "<group>"; };
+		4B902D139DE70F3F9EDA8D52 /* Pods-Maze-Snake.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze-Snake.debug.xcconfig"; path = "Target Support Files/Pods-Maze-Snake/Pods-Maze-Snake.debug.xcconfig"; sourceTree = "<group>"; };
+		58A47ACEA6407DD66FE2207D /* Pods-Maze-SnakeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze-SnakeTests.release.xcconfig"; path = "Target Support Files/Pods-Maze-SnakeTests/Pods-Maze-SnakeTests.release.xcconfig"; sourceTree = "<group>"; };
 		6111961E2284C4300075EEC9 /* MiniMapNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniMapNode.swift; sourceTree = "<group>"; };
 		61163AEC227CECDB001F49E1 /* Tiles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Tiles.sks; sourceTree = "<group>"; };
 		61163AED227CECDB001F49E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -149,6 +156,13 @@
 		61DE97DA2299712400EE28E3 /* Collision Detection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collision Detection.swift"; sourceTree = "<group>"; };
 		61E0D1FA228110B700A6DE5C /* GraphCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCreation.swift; sourceTree = "<group>"; };
 		61F7C6A9228EF5F20006597B /* GraphNodeEquality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphNodeEquality.swift; sourceTree = "<group>"; };
+		69A40D2655BDD286DF17249A /* Pods_Maze_Snake.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Maze_Snake.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CEF2C19BF1BDFD63C34591F /* Pods_Maze_SnakeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Maze_SnakeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		81222F015F1D4FAF48765096 /* Pods-Maze-Snake.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze-Snake.release.xcconfig"; path = "Target Support Files/Pods-Maze-Snake/Pods-Maze-Snake.release.xcconfig"; sourceTree = "<group>"; };
+		82F6C88E1CD707E10423CA06 /* Pods-Maze-SnakeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze-SnakeUITests.release.xcconfig"; path = "Target Support Files/Pods-Maze-SnakeUITests/Pods-Maze-SnakeUITests.release.xcconfig"; sourceTree = "<group>"; };
+		C6476F6835E8EEC2C6A37FF3 /* Pods_Maze_SnakeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Maze_SnakeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6A09E0AE737391E00D83005 /* Pods-Maze-SnakeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze-SnakeUITests.debug.xcconfig"; path = "Target Support Files/Pods-Maze-SnakeUITests/Pods-Maze-SnakeUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		FD7F01F40A32466DAF462D56 /* Pods-Maze-SnakeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze-SnakeTests.debug.xcconfig"; path = "Target Support Files/Pods-Maze-SnakeTests/Pods-Maze-SnakeTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B09BD8479F66A13AD193249D /* Pods_Maze_Snake.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76AD79465BB11557E07076DD /* Pods_Maze_SnakeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,12 +186,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CD6A9F1537C1A3181838A14 /* Pods_Maze_SnakeUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		29235E970A509C51E571A240 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				69A40D2655BDD286DF17249A /* Pods_Maze_Snake.framework */,
+				7CEF2C19BF1BDFD63C34591F /* Pods_Maze_SnakeTests.framework */,
+				C6476F6835E8EEC2C6A37FF3 /* Pods_Maze_SnakeUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2E07DB04229DBE1A0092217F /* Base Game */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +220,8 @@
 				2E39DF5C227B65CA00EA1C84 /* Maze-SnakeTests */,
 				2E39DF67227B65CA00EA1C84 /* Maze-SnakeUITests */,
 				2E39DF40227B65CA00EA1C84 /* Products */,
+				5904ADE617A4FEFF47F49CB4 /* Pods */,
+				29235E970A509C51E571A240 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -209,6 +238,7 @@
 		2E39DF41227B65CA00EA1C84 /* Maze-Snake */ = {
 			isa = PBXGroup;
 			children = (
+				2E8B677F22A19F57005BC45B /* GoogleService-Info.plist */,
 				2E39DF54227B65CA00EA1C84 /* Info.plist */,
 				2E39DF42227B65CA00EA1C84 /* AppDelegate.swift */,
 				61163AED227CECDB001F49E1 /* Assets.xcassets */,
@@ -297,6 +327,20 @@
 				61DA9DDB2298E2BD00129D34 /* FitToBoundsLabel.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5904ADE617A4FEFF47F49CB4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4B902D139DE70F3F9EDA8D52 /* Pods-Maze-Snake.debug.xcconfig */,
+				81222F015F1D4FAF48765096 /* Pods-Maze-Snake.release.xcconfig */,
+				FD7F01F40A32466DAF462D56 /* Pods-Maze-SnakeTests.debug.xcconfig */,
+				58A47ACEA6407DD66FE2207D /* Pods-Maze-SnakeTests.release.xcconfig */,
+				D6A09E0AE737391E00D83005 /* Pods-Maze-SnakeUITests.debug.xcconfig */,
+				82F6C88E1CD707E10423CA06 /* Pods-Maze-SnakeUITests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		611196202284DC070075EEC9 /* Utility */ = {
@@ -445,9 +489,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2E39DF6D227B65CB00EA1C84 /* Build configuration list for PBXNativeTarget "Maze-Snake" */;
 			buildPhases = (
+				D179F27A754669AE37E427CF /* [CP] Check Pods Manifest.lock */,
 				2E39DF3B227B65CA00EA1C84 /* Sources */,
 				2E39DF3C227B65CA00EA1C84 /* Frameworks */,
 				2E39DF3D227B65CA00EA1C84 /* Resources */,
+				C6B2BD0340EFFEABB5F2BD74 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -462,6 +508,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2E39DF70227B65CB00EA1C84 /* Build configuration list for PBXNativeTarget "Maze-SnakeTests" */;
 			buildPhases = (
+				64AB903AED98C97114FFEB71 /* [CP] Check Pods Manifest.lock */,
 				2E39DF55227B65CA00EA1C84 /* Sources */,
 				2E39DF56227B65CA00EA1C84 /* Frameworks */,
 				2E39DF57227B65CA00EA1C84 /* Resources */,
@@ -480,6 +527,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2E39DF73227B65CB00EA1C84 /* Build configuration list for PBXNativeTarget "Maze-SnakeUITests" */;
 			buildPhases = (
+				9F50336AB0EBEB979FD6079F /* [CP] Check Pods Manifest.lock */,
 				2E39DF60227B65CA00EA1C84 /* Sources */,
 				2E39DF61227B65CA00EA1C84 /* Frameworks */,
 				2E39DF62227B65CA00EA1C84 /* Resources */,
@@ -553,6 +601,7 @@
 				61D584FB229F4EC900C751C5 /* trophy-collect.wav in Resources */,
 				61163AEE227CECDB001F49E1 /* Tiles.sks in Resources */,
 				61D584FD229F4EC900C751C5 /* game-over.wav in Resources */,
+				2E8B678022A19F57005BC45B /* GoogleService-Info.plist in Resources */,
 				2E39DF53227B65CA00EA1C84 /* LaunchScreen.storyboard in Resources */,
 				61D584F9229F4EC900C751C5 /* end.wav in Resources */,
 				61D584F8229F4EC900C751C5 /* background-music.wav in Resources */,
@@ -578,6 +627,99 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		64AB903AED98C97114FFEB71 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Maze-SnakeTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9F50336AB0EBEB979FD6079F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Maze-SnakeUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C6B2BD0340EFFEABB5F2BD74 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Maze-Snake/Pods-Maze-Snake-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Maze-Snake/Pods-Maze-Snake-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D179F27A754669AE37E427CF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Maze-Snake-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2E39DF3B227B65CA00EA1C84 /* Sources */ = {
@@ -794,6 +936,7 @@
 		};
 		2E39DF6E227B65CB00EA1C84 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B902D139DE70F3F9EDA8D52 /* Pods-Maze-Snake.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -812,6 +955,7 @@
 		};
 		2E39DF6F227B65CB00EA1C84 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 81222F015F1D4FAF48765096 /* Pods-Maze-Snake.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -830,6 +974,7 @@
 		};
 		2E39DF71227B65CB00EA1C84 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD7F01F40A32466DAF462D56 /* Pods-Maze-SnakeTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -850,6 +995,7 @@
 		};
 		2E39DF72227B65CB00EA1C84 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 58A47ACEA6407DD66FE2207D /* Pods-Maze-SnakeTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -870,6 +1016,7 @@
 		};
 		2E39DF74227B65CB00EA1C84 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6A09E0AE737391E00D83005 /* Pods-Maze-SnakeUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -889,6 +1036,7 @@
 		};
 		2E39DF75227B65CB00EA1C84 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82F6C88E1CD707E10423CA06 /* Pods-Maze-SnakeUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
