@@ -22,7 +22,9 @@ extension GameScene {
         //Check Win
         if player1.player_Score == 5 {
             info.endGame()
-            sfxController.playSound(named: "game-over")
+            if music_Is_On {
+                sfxController.playSound(named: "game-over")
+            }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 self.info.roundWinDisplay(winner: "player", xCoord: self.player1.position.x, yCoord: self.player1.position.y)
             }
@@ -41,7 +43,9 @@ extension GameScene {
         //Respawn
         hittingMonster()
         tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
-        sfxController.playSound(named: "death")
+        if music_Is_On {
+            sfxController.playSound(named: "death")
+        }
         monsterCollisionFlag = -1
         if player1.player_Health == 0 {
             checkMonsterWin()
@@ -61,7 +65,9 @@ extension GameScene {
         //Check Win
         if opponent.score >= 5 {
             info.endGame()
-            sfxController.playSound(named: "game-over")
+            if music_Is_On {
+                sfxController.playSound(named: "game-over")
+            }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 self.info.roundWinDisplay(winner: "ai", xCoord: self.player1.position.x, yCoord: self.player1.position.y)
             }

@@ -10,6 +10,7 @@ import UIKit
 
 var joystick_On_The_Right = true
 var minimap_On_The_Left = true
+var music_Is_On = true
 
 class MainViewController: UIViewController {
 
@@ -17,12 +18,14 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        if data.object(forKey: "joystickPos") != nil && data.object(forKey: "minimapPos") != nil {
+        if data.object(forKey: "joystickPos") != nil && data.object(forKey: "minimapPos") != nil && data.object(forKey: "musicOn") != nil {
             joystick_On_The_Right = data.bool(forKey: "joystickPos")
             minimap_On_The_Left = data.bool(forKey: "minimapPos")
+            music_Is_On = data.bool(forKey: "musicOn")
         } else {
             data.set(true, forKey: "joystickPos")
             data.set(true, forKey: "minimapPos")
+            data.set(true, forKey: "musicOn")
         }
     }
     

@@ -62,11 +62,15 @@ class GameViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        soundController.play(at: 0.15)
+        if music_Is_On {
+           soundController.play(at: 0.15)
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        soundController.stop()
+        if music_Is_On {
+            soundController.stop()
+        }
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

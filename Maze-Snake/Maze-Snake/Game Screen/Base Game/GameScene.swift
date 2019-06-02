@@ -149,6 +149,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
+        if node.name == "sound_on" || node.name == "sound_off" {
+            if node.name == "sound_on" {
+                changeSound(turnOn: true)
+            } else {
+                changeSound(turnOn: false)
+            }
+        }
+        
         if node.name == "back" {
             info.exitSettings()
         }
@@ -296,7 +304,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let trophyGridPos = tileManager.indexFrom(position: trophy.position)
             ai.moveShortestPath(to: trophyGridPos)
         }
-        sfxController.playSound(named: "trophy-collect")
+        if music_Is_On {
+            sfxController.playSound(named: "trophy-collect")
+        }
         player1CollisionFlag = false
     }
     
@@ -313,14 +323,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let ai = opponent as? AI {
             ai.moveShortestPath(to: trophyGridPos)
         }
-        sfxController.playSound(named: "trophy-collect")
+        if music_Is_On {
+           sfxController.playSound(named: "trophy-collect")
+        }
         opponentCollisionFlag = false
     }
     
     func checkMonsterWin() {
         //Check loss
         info.endGame()
-        sfxController.playSound(named: "game-over")
+        if music_Is_On {
+            sfxController.playSound(named: "game-over")
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.info.playerDiedDisplay(xCoord: self.player1.position.x, yCoord: self.player1.position.y)
         }

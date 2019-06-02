@@ -28,13 +28,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hud(joystick) Position: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKr-Fh-DWE">
-                                <rect key="frame" x="16" y="159" width="304" height="37"/>
+                                <rect key="frame" x="16" y="144" width="304" height="37"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="27"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nic-nz-Eml">
-                                <rect key="frame" x="360" y="152" width="60" height="58"/>
+                                <rect key="frame" x="360" y="133" width="60" height="58"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="33"/>
                                 <state key="normal" title="Left">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -44,13 +44,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minimap Position: " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="25" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="thg-JS-8l2">
-                                <rect key="frame" x="16.000000000000014" y="212" width="244.33333333333337" height="37"/>
+                                <rect key="frame" x="16.000000000000014" y="197" width="244.33333333333337" height="37"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="27"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDV-z9-Jxz">
-                                <rect key="frame" x="452.33333333333331" y="152" width="85.999999999999943" height="58"/>
+                                <rect key="frame" x="452.33333333333331" y="133" width="85.999999999999943" height="58"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="33"/>
                                 <state key="normal" title="Right">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -60,7 +60,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eti-9z-KC1">
-                                <rect key="frame" x="360.33333333333331" y="206" width="60" height="58"/>
+                                <rect key="frame" x="360.33333333333331" y="186" width="60" height="58"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="33"/>
                                 <state key="normal" title="Left">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -82,7 +82,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UHR-Z8-cls">
-                                <rect key="frame" x="452.66666666666669" y="205" width="86.000000000000057" height="58"/>
+                                <rect key="frame" x="452.66666666666669" y="186" width="86.000000000000057" height="58"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="33"/>
                                 <state key="normal" title="Right">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -91,22 +91,51 @@
                                     <action selector="onRightMinimapClick:" destination="Oem-Kq-USO" eventType="touchUpInside" id="xFg-tX-ReG"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bUk-XT-bDU">
+                                <rect key="frame" x="360" y="255" width="60" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="33"/>
+                                <state key="normal" title="On">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onMusicOnClick:" destination="Oem-Kq-USO" eventType="touchUpInside" id="maG-I7-TcW"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Music/Sound Effects:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndD-1Z-YC6">
+                                <rect key="frame" x="16" y="255" width="276" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="27"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ba8-Qa-htu">
+                                <rect key="frame" x="460" y="255" width="70" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="33"/>
+                                <state key="normal" title="Off">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onMusicOffClick:" destination="Oem-Kq-USO" eventType="touchUpInside" id="VIn-t9-Uoa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="meZ-4B-7wQ" firstAttribute="top" secondItem="Z1n-hy-Nl3" secondAttribute="top" constant="42" id="2wY-IW-UZa"/>
-                            <constraint firstItem="lDV-z9-Jxz" firstAttribute="top" secondItem="meZ-4B-7wQ" secondAttribute="bottom" constant="41" id="5PD-eh-IYM"/>
+                            <constraint firstItem="lDV-z9-Jxz" firstAttribute="top" secondItem="meZ-4B-7wQ" secondAttribute="bottom" constant="22" id="5PD-eh-IYM"/>
                             <constraint firstItem="thg-JS-8l2" firstAttribute="leading" secondItem="Z1n-hy-Nl3" secondAttribute="leading" constant="16" id="7rb-3n-Or5"/>
                             <constraint firstItem="eti-9z-KC1" firstAttribute="leading" secondItem="thg-JS-8l2" secondAttribute="trailing" constant="100" id="Aem-Rx-b5U"/>
                             <constraint firstItem="thg-JS-8l2" firstAttribute="top" secondItem="sKr-Fh-DWE" secondAttribute="bottom" constant="16" id="Jet-OB-HVb"/>
                             <constraint firstItem="UHR-Z8-cls" firstAttribute="top" secondItem="nic-nz-Eml" secondAttribute="bottom" constant="-5" id="NK3-xt-fYs"/>
-                            <constraint firstItem="nic-nz-Eml" firstAttribute="top" secondItem="meZ-4B-7wQ" secondAttribute="bottom" constant="41" id="Nip-II-LCy"/>
+                            <constraint firstItem="nic-nz-Eml" firstAttribute="top" secondItem="meZ-4B-7wQ" secondAttribute="bottom" constant="22" id="Nip-II-LCy"/>
                             <constraint firstItem="meZ-4B-7wQ" firstAttribute="leading" secondItem="Z1n-hy-Nl3" secondAttribute="leading" constant="8" id="RGZ-b0-ujz"/>
-                            <constraint firstItem="sKr-Fh-DWE" firstAttribute="top" secondItem="meZ-4B-7wQ" secondAttribute="bottom" constant="48" id="UG9-KM-k2P"/>
+                            <constraint firstItem="sKr-Fh-DWE" firstAttribute="top" secondItem="meZ-4B-7wQ" secondAttribute="bottom" constant="33" id="UG9-KM-k2P"/>
                             <constraint firstItem="nic-nz-Eml" firstAttribute="leading" secondItem="sKr-Fh-DWE" secondAttribute="trailing" constant="40" id="Yig-JR-UqJ"/>
                             <constraint firstItem="8W7-Wm-dbx" firstAttribute="leading" secondItem="Z1n-hy-Nl3" secondAttribute="leading" id="dqr-bW-KvC"/>
                             <constraint firstItem="UHR-Z8-cls" firstAttribute="leading" secondItem="eti-9z-KC1" secondAttribute="trailing" constant="32.333333333333314" id="f6S-qe-3Bk"/>
-                            <constraint firstItem="eti-9z-KC1" firstAttribute="top" secondItem="sKr-Fh-DWE" secondAttribute="bottom" constant="10" id="gNB-NB-H1L"/>
+                            <constraint firstItem="eti-9z-KC1" firstAttribute="top" secondItem="sKr-Fh-DWE" secondAttribute="bottom" constant="5" id="gNB-NB-H1L"/>
                             <constraint firstItem="Z1n-hy-Nl3" firstAttribute="trailing" secondItem="meZ-4B-7wQ" secondAttribute="trailing" constant="8" id="hMB-Id-2KP"/>
                             <constraint firstItem="QEz-Sa-GtB" firstAttribute="top" secondItem="Z1n-hy-Nl3" secondAttribute="top" constant="8" id="hgs-3p-Fd5"/>
                             <constraint firstItem="8W7-Wm-dbx" firstAttribute="top" secondItem="Z1n-hy-Nl3" secondAttribute="top" id="i4Y-TJ-Maq"/>
@@ -125,6 +154,9 @@
                         <outlet property="minimapLabel" destination="thg-JS-8l2" id="mll-xK-6CH"/>
                         <outlet property="minimap_Position_Left" destination="eti-9z-KC1" id="CG3-es-otv"/>
                         <outlet property="minimap_Position_Right" destination="UHR-Z8-cls" id="DUd-Me-o7e"/>
+                        <outlet property="musicLabel" destination="ndD-1Z-YC6" id="Zif-cr-kqj"/>
+                        <outlet property="musicOffButton" destination="ba8-Qa-htu" id="FYv-MB-5Tx"/>
+                        <outlet property="musicOnButton" destination="bUk-XT-bDU" id="up7-Io-iiJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zx0-Kb-5Ud" userLabel="First Responder" sceneMemberID="firstResponder"/>

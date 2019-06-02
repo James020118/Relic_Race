@@ -79,7 +79,9 @@ extension PvPGameScene {
             if value != opponent.score {
                 opponent.score = value
                 info.changeAIScore(newScore: opponent.score)
-                sfxController.playSound(named: "trophy-collect")
+                if music_Is_On {
+                    sfxController.playSound(named: "trophy-collect")
+                }
             }
             checkOpponentWin()
             return

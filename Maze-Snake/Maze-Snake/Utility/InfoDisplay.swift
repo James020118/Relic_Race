@@ -257,14 +257,20 @@ class InfoDisplay {
 
     //Settings menu
     let LABEL_MOVE_OFFSET: CGFloat = 575
-    
+    //All Settings Labels
     let back = SKLabelNode()
     let moveJoystick_Title = SKLabelNode()
     let moveJoystick_Right = SKLabelNode()
     let moveJoystck_Left = SKLabelNode()
+    
     let moveMap_Title = SKLabelNode()
     let moveMap_Right = SKLabelNode()
     let moveMap_Left = SKLabelNode()
+    
+    let soundTitle = SKLabelNode()
+    let soundOnLabel = SKLabelNode()
+    let soundOffLabel = SKLabelNode()
+    
     func goToSettings(xCoord: CGFloat, yCoord: CGFloat) {
         pausedLabel1.isHidden = true
         pausedLabel1.isHidden = true
@@ -342,6 +348,37 @@ class InfoDisplay {
         moveMap_Left.text = "left"
         moveMap_Left.name = "minimap_left"
         
+        soundTitle.zPosition = 21
+        soundTitle.fontName = "AvenirNext-Bold"
+        soundTitle.fontColor = UIColor.white
+        soundTitle.position = CGPoint(x: xCoord - 300, y: yCoord - 350)
+        soundTitle.fontSize = 100
+        soundTitle.text = "Music/Sound Effects:"
+        
+        soundOffLabel.zPosition = 21
+        soundOffLabel.fontName = "AvenirNext-Bold"
+        if !music_Is_On {
+            soundOffLabel.fontColor = UIColor.green
+        } else {
+            soundOffLabel.fontColor = UIColor.white
+        }
+        soundOffLabel.position = CGPoint(x: xCoord + 700, y: yCoord - 350)
+        soundOffLabel.fontSize = 100
+        soundOffLabel.text = "Off"
+        soundOffLabel.name = "sound_off"
+        
+        soundOnLabel.zPosition = 21
+        soundOnLabel.fontName = "AvenirNext-Bold"
+        if music_Is_On {
+            soundOnLabel.fontColor = UIColor.green
+        } else {
+            soundOnLabel.fontColor = UIColor.white
+        }
+        soundOnLabel.position = CGPoint(x: xCoord + 425, y: yCoord - 350)
+        soundOnLabel.fontSize = 100
+        soundOnLabel.text = "On"
+        soundOnLabel.name = "sound_on"
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.parent.addChild(self.back)
             self.parent.addChild(self.moveJoystick_Title)
@@ -350,6 +387,9 @@ class InfoDisplay {
             self.parent.addChild(self.moveMap_Title)
             self.parent.addChild(self.moveMap_Right)
             self.parent.addChild(self.moveMap_Left)
+            self.parent.addChild(self.soundTitle)
+            self.parent.addChild(self.soundOnLabel)
+            self.parent.addChild(self.soundOffLabel)
         }
     }
     
@@ -363,6 +403,9 @@ class InfoDisplay {
         moveMap_Title.removeFromParent()
         moveMap_Right.removeFromParent()
         moveMap_Left.removeFromParent()
+        soundTitle.removeFromParent()
+        soundOnLabel.removeFromParent()
+        soundOffLabel.removeFromParent()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.pausedLabel1.isHidden = false
             self.pausedLabel1.isHidden = false

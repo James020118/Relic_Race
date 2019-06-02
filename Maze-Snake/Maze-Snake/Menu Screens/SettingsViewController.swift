@@ -14,9 +14,13 @@ class SettingsViewController: UIViewController {
     @IBOutlet var joystick_Position_Right: UIButton!
     @IBOutlet var minimap_Position_Left: UIButton!
     @IBOutlet var minimap_Position_Right: UIButton!
+    @IBOutlet var musicOnButton: UIButton!
+    @IBOutlet var musicOffButton: UIButton!
+    
     
     @IBOutlet weak var joystickLabel: UILabel!
     @IBOutlet weak var minimapLabel: UILabel!
+    @IBOutlet weak var musicLabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -25,9 +29,11 @@ class SettingsViewController: UIViewController {
         if data.object(forKey: "joystickPos") != nil && data.object(forKey: "minimapPos") != nil {
             joystick_On_The_Right = data.bool(forKey: "joystickPos")
             minimap_On_The_Left = data.bool(forKey: "minimapPos")
+            music_Is_On = data.bool(forKey: "musicOn")
         } else {
             data.set(true, forKey: "joystickPos")
             data.set(true, forKey: "minimapPos")
+            data.set(true, forKey: "musicOn")
         }
         //Setup UI based on Preference
         setupOptions()
@@ -38,6 +44,7 @@ class SettingsViewController: UIViewController {
         //Dynanically set-font
         joystickLabel.fitTextToBounds()
         minimapLabel.fitTextToBounds()
+        musicLabel.fitTextToBounds()
     }
     
     @IBAction func onLeftJoystickClick(_ sender: Any) {
@@ -61,6 +68,16 @@ class SettingsViewController: UIViewController {
         minimap_On_The_Left = false
         setupOptions()
     }
+    @IBAction func onMusicOnClick(_ sender: Any) {
+        data.set(true, forKey: "musicOn")
+        music_Is_On = true
+        setupOptions()
+    }
+    @IBAction func onMusicOffClick(_ sender: Any) {
+        data.set(false, forKey: "musicOn")
+        music_Is_On = false
+        setupOptions()
+    }
     
     
     func setupOptions() {
@@ -77,6 +94,13 @@ class SettingsViewController: UIViewController {
         }else {
             minimap_Position_Right.setTitleColor(.green, for: .normal)
             minimap_Position_Left.setTitleColor(.white, for: .normal)
+        }
+        if music_Is_On {
+            musicOnButton.setTitleColor(.green, for: .normal)
+            musicOffButton.setTitleColor(.white, for: .normal)
+        } else {
+            musicOnButton.setTitleColor(.white, for: .normal)
+            musicOffButton.setTitleColor(.green, for: .normal)
         }
     }
     

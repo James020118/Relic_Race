@@ -255,4 +255,23 @@ extension GameScene {
         data.set(minimap_On_The_Left, forKey: "minimapPos")
     }
     
+    //To-Do: Reference parent View Controller and stop/play music when changing the setting
+    func changeSound(turnOn: Bool) {
+//        let rootVC = self.view?.window?.rootViewController as! GameViewController
+        if turnOn {
+//            rootVC.soundController.stop()
+            info.soundOnLabel.fontColor = UIColor.green
+            info.soundOffLabel.fontColor = UIColor.white
+            music_Is_On = true
+        } else {
+//            if music_Is_On {
+//                rootVC.soundController.play(at: 0.15)
+//            }
+            info.soundOnLabel.fontColor = UIColor.white
+            info.soundOffLabel.fontColor = UIColor.green
+            music_Is_On = false
+        }
+        data.set(music_Is_On, forKey: "musicOn")
+    }
+    
 }
