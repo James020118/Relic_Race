@@ -49,6 +49,7 @@ extension GameScene {
             self.prevDir = direction
             //Optimization
             self.tileManager.viewOnScreenTiles(pos: self.player1.position, parent: self)
+            self.player1.gridPos = self.tileManager.indexFrom(position: self.player1.position)
         }
         
         joystick.stopHandler = {
@@ -121,14 +122,8 @@ extension GameScene {
     }
     
     //In game object generation
-    func characterInitialization(_ type: String) {
-        let texture = SKTexture(image: #imageLiteral(resourceName: "monster.png"))
-        for counter in 1...Monster.MAX_MONSTERS {
-            let monster = Monster(texture: texture, parent: self, number: counter)
-            monster.name = "monster\(counter)"
-            monsters.append(monster)
-        }
-        
+    func characterInitialization() {
+        monsters = generateMonsters()
         player1 = Player(texture: SKTexture(image: #imageLiteral(resourceName: "oldMan.png")), parent: self)
         player1.name = "player1"
         generateOpponent()

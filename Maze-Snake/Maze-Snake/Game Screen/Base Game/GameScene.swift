@@ -94,7 +94,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         super.sceneDidLoad()
-        initializeGame(type: "ai")
+        initializeGame()
+        print("Completed game load")
     }
     
     var isPausing = false
@@ -224,26 +225,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func initializeGame(type: String) {
+    func initializeGame() {
+        premapSetup()
+        //Setup Map w/ Graph
+        mazeGraph = makeMaze()
+        tileSetup()
+        setupGame()
+    }
+    
+    func premapSetup() {
         physicsWorld.contactDelegate = self
         //Load Sound Effects
         sfxController = SFXController(from: self)
         sfxController.preloadSounds()
         sfxController.stopSound(named: "footsteps")
-        //Setup Map w/ Graph
-        mazeGraph = makeMaze()
+    }
+    
+    func tileSetup() {
         tileManager = TileManager(from: mazeGraph!, with: textureSet)
         tileManager.addTilesTo(scene: self)
+    }
+    
+    func setupGame() {
         //Initialize all characters, including player, opponent, and monsters
         //Spawn Game Elements
-        characterInitialization(type)
+        characterInitialization()
         spawnMinimap(graph: mazeGraph!)
         spawnJoystick()
         player1.spawnCamera()
         trophySystemSetup()
         //Optimization
         tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
-        
         //Spawn HUD
         spawnInfo()
         spawnPause()
@@ -254,8 +266,64 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         startUpdateFlag = true
     }
     
+    /* Functions to override to change game generation behavior */
+    
     func generateOpponent() {
         
+    }
+    
+    func generateMonsters() -> [Monster] {
+        let texture = SKTexture(image: #imageLiteral(resourceName: "monster.png"))
+        var tmpMonster = [Monster]()
+        for counter in 1...Monster.MAX_MONSTERS {
+            let monster = Monster(texture: texture, parent: self, number: counter)
+            monster.name = "monster\(counter)"
+            tmpMonster.append(monster)
+        }
+        return tmpMonster
+    }
+    
+    func playerToTrophyResponse() {
+        //Increment Score
+        player1.incrementScore()
+        info.changePlayerScore(newScore: player1.player_Score)
+        //Spawn New Trophy and appropriate response
+        trophy.setRandomPosition()
+        minimap.updateTrophy(position: trophy.position)
+        opponent.stop()
+        opponent.gridPos = tileManager.indexFrom(position: opponent.position)
+        if let ai = opponent as? AI {
+            let trophyGridPos = tileManager.indexFrom(position: trophy.position)
+            ai.moveShortestPath(to: trophyGridPos)
+        }
+        sfxController.playSound(named: "trophy-collect")
+        player1CollisionFlag = false
+    }
+    
+    func opponentToTrophyResponse() {
+        //Increment Score
+        opponent.incrementScore()
+        info.changeAIScore(newScore: opponent.score)
+        //Spawn New Trophy and appropriate response
+        trophy.setRandomPosition()
+        minimap.updateTrophy(position: trophy.position)
+        opponent.stop()
+        let trophyGridPos = tileManager.indexFrom(position: trophy.position)
+        opponent.gridPos = tileManager.indexFrom(position: opponent.position)
+        if let ai = opponent as? AI {
+            ai.moveShortestPath(to: trophyGridPos)
+        }
+        sfxController.playSound(named: "trophy-collect")
+        opponentCollisionFlag = false
+    }
+    
+    func checkMonsterWin() {
+        //Check loss
+        info.endGame()
+        sfxController.playSound(named: "game-over")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.info.playerDiedDisplay(xCoord: self.player1.position.x, yCoord: self.player1.position.y)
+        }
     }
     
     func makeMaze() -> GKGridGraph<GKGridGraphNode> {

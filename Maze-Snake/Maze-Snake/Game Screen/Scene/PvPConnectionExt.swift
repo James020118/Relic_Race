@@ -32,23 +32,66 @@ extension PvPGameScene {
     /* Required Methods for Peer to Peer connections */
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         
-        print("Called")
-        //Get Maze Data
-        do {
-            //Decode Data
-            print(data)
-            let buffer = try JSONDecoder().decode(MazeEncodingBuffer.self, from: data)
-            let maze = Maze(from: buffer)
-            maze.outputConnections()
-            graph = maze.graph
+        //------ If data is initial payload
+        if !startUpdateFlag {
+            //Get Maze Data
+            do {
+                //Decode Data
+                print(data)
+                let buffer = try JSONDecoder().decode(GameEncodingBuffer.self, from: data)
+                premapSetup()
+                let maze = Maze(from: buffer)
+                mazeGraph = maze.graph
+                graph = maze.graph
+                tileSetup()
+                sharedMonsters = buffer.getMonsters(from: self)
+            }catch{
+                fatalError()
+            }
             //Init game
             hostSessionLabel.removeFromParent()
             joinSessionLabel.removeFromParent()
             cancelLabel.removeFromParent()
-            super.sceneDidLoad()
-        }catch{
-            //Update Game Positions
-            fatalError()
+            setupGame()
+            return
+        }
+        
+        
+        //----- If data is player position
+        do {
+            //Decode Data
+            let gridPos = try JSONDecoder().decode(GridPosition.self, from: data)
+            let newPos = tileManager.getTile(row: gridPos.row, column: gridPos.column).position
+            opponent.position = newPos
+            return
+        }catch{ print("Data is not player pos") }
+        
+        
+        //---- If data is score
+        do {
+            //Decode Data
+            let packet = try JSONDecoder().decode(ScoringPacket.self, from: data)
+            let gridPos = packet.pos
+            let newPos = tileManager.getTile(row: gridPos.row, column: gridPos.column).position
+            trophy.position = newPos
+            minimap.updateTrophy(position: newPos)
+            let value = packet.score
+            if value != opponent.score {
+                opponent.score = value
+                info.changeAIScore(newScore: opponent.score)
+                sfxController.playSound(named: "trophy-collect")
+            }
+            checkOpponentWin()
+            return
+        }catch{ print("Data is not scoring data") }
+        
+        
+        //--- If opponent dies to monster
+        let value = data.withUnsafeBytes {
+            $0.load(as: UInt8.self)
+        }
+        if value == 1 {
+            info.roundWinDisplay(winner: "player", xCoord: player1.position.x, yCoord: player1.position.y)
         }
     }
     

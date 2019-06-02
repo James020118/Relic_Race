@@ -18,20 +18,7 @@ extension GameScene {
      - Check Win
      */
     func playerCollisionResponse() {
-        //Increment Score
-        player1.incrementScore()
-        info.changePlayerScore(newScore: player1.player_Score)
-        //Spawn New Trophy and appropriate response
-        trophy.setRandomPosition()
-        minimap.updateTrophy(position: trophy.position)
-        opponent.stop()
-        opponent.gridPos = tileManager.indexFrom(position: opponent.position)
-        if let ai = opponent as? AI {
-            let trophyGridPos = tileManager.indexFrom(position: trophy.position)
-            ai.moveShortestPath(to: trophyGridPos)
-        }
-        sfxController.playSound(named: "trophy-collect")
-        player1CollisionFlag = false
+        playerToTrophyResponse()
         //Check Win
         if player1.player_Score == 5 {
             info.endGame()
@@ -56,13 +43,8 @@ extension GameScene {
         tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
         sfxController.playSound(named: "death")
         monsterCollisionFlag = -1
-        //Check loss
         if player1.player_Health == 0 {
-            info.endGame()
-            sfxController.playSound(named: "game-over")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.info.playerDiedDisplay(xCoord: self.player1.position.x, yCoord: self.player1.position.y)
-            }
+            checkMonsterWin()
         }
     }
     
@@ -71,22 +53,13 @@ extension GameScene {
         - Spawn New Trophy
      */
     func opponentCollisionResponse() {
-        //Increment Score
-        opponent.incrementScore()
-        info.changeAIScore(newScore: opponent.score)
-        //Spawn New Trophy and appropriate response
-        trophy.setRandomPosition()
-        minimap.updateTrophy(position: trophy.position)
-        opponent.stop()
-        let trophyGridPos = tileManager.indexFrom(position: trophy.position)
-        opponent.gridPos = tileManager.indexFrom(position: opponent.position)
-        if let ai = opponent as? AI {
-            ai.moveShortestPath(to: trophyGridPos)
-        }
-        sfxController.playSound(named: "trophy-collect")
-        opponentCollisionFlag = false
+        opponentToTrophyResponse()
+        checkOpponentWin()
+    }
+    
+    func checkOpponentWin() {
         //Check Win
-        if opponent.score == 5 {
+        if opponent.score >= 5 {
             info.endGame()
             sfxController.playSound(named: "game-over")
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {

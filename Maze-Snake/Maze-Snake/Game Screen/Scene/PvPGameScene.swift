@@ -17,29 +17,24 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
     var hostSessionLabel = SKLabelNode()
     var joinSessionLabel = SKLabelNode()
     var cancelLabel = SKLabelNode()
-    
     var connectedLabel = SKLabelNode()
     var nextLabel = SKLabelNode()
     
+    //MPC Properties
     var peerID = MCPeerID(displayName: UIDevice.current.name)
     var mcSession: MCSession?
     var mcAdvertiserAssistant: MCAdvertiserAssistant?
     
+    //Storing Host-generated game properties
     var graph: GKGridGraph<GKGridGraphNode>?
+    var sharedMonsters = [Monster]()
+    
+    
+    /* Lifecycle Functions */
     
     override func sceneDidLoad() {
         pvpConnectionPrompt()
     }
-    
-    override func generateOpponent() {
-        opponent = OtherPlayer(texture: SKTexture(image: #imageLiteral(resourceName: "player.png")), parent: self, pos: GridPosition(column: 1, row: Maze.MAX_ROWS-1))
-        opponent.name = "ai"
-    }
-    
-    override func makeMaze() -> GKGridGraph<GKGridGraphNode> {
-        return graph ?? blankGraph()
-    }
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
@@ -66,42 +61,106 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
         
         //Executed when two devices are connected and the user is proceedint to the game in pvp mode
         if node.name == "next" {
-            let buffer = makeGraphData()
-            print(buffer.tiles)
-            print("")
-            Maze(from: buffer).outputConnections()
-            print("")
-            
-            var data = Data(base64Encoded: "")
-            let encoder = JSONEncoder()
+            let buffer = makeGameData()
             do {
-                data = try encoder.encode(buffer)
-            }catch{
-                fatalError()
-            }
-            print(buffer)
-            do {
-                try mcSession?.send(data!, toPeers: mcSession!.connectedPeers, with: .reliable)
+                let encoder = JSONEncoder()
+                let data = try encoder.encode(buffer)
+                print(data)
+                try mcSession?.send(data, toPeers: mcSession!.connectedPeers, with: .reliable)
             }catch{
                 print("Oops!")
             }
             //Initialize the game
             connectedLabel.removeFromParent()
             nextLabel.removeFromParent()
-            super.sceneDidLoad()
+            setupGame()
         }
     }
     
+    var lastSent: TimeInterval = 0
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
+        
+        let dSent = currentTime - lastSent
+        if dSent >= 0.5 && startUpdateFlag {
+            let sendPos = player1.gridPos
+            do {
+                let encoder = JSONEncoder()
+                let data = try encoder.encode(sendPos)
+                try mcSession?.send(data, toPeers: mcSession!.connectedPeers, with: .reliable)
+            }catch{
+                print("Oops!")
+            }
+            lastSent = currentTime
+        }
+        
     }
     
-    func makeGraphData() -> MazeEncodingBuffer {
+    
+    /* Overriding Preferences in Base Game Generation */
+    override func generateOpponent() {
+        opponent = OtherPlayer(texture: SKTexture(image: #imageLiteral(resourceName: "player.png")), parent: self, pos: GridPosition(column: 1, row: Maze.MAX_ROWS-1))
+        opponent.name = "ai"
+    }
+    
+    override func makeMaze() -> GKGridGraph<GKGridGraphNode> {
+        return graph ?? blankGraph()
+    }
+    
+    override func generateMonsters() -> [Monster] {
+        return sharedMonsters
+    }
+    
+    override func opponentToTrophyResponse() { }
+    
+    override func playerToTrophyResponse() {
+        super.playerToTrophyResponse()
+        let packet = ScoringPacket(
+            score: player1.player_Score,
+            pos: tileManager.indexFrom(position: trophy!.position)
+        )
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(packet)
+            try mcSession?.send(data, toPeers: mcSession!.connectedPeers, with: .reliable)
+        }catch{
+            print("Oops!")
+        }
+    }
+    
+    override func checkMonsterWin() {
+        do {
+            var val: UInt8 = 1
+            let data = Data(bytes: &val, count: MemoryLayout<UInt8>.size)
+            try mcSession?.send(data, toPeers: mcSession!.connectedPeers, with: .reliable)
+        }catch{
+            print("Oops!")
+        }
+        super.checkMonsterWin()
+        parentVC.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    /* GAME -> SENDABLE DATA */
+    
+    func makeGameData() -> GameEncodingBuffer {
+        premapSetup()
+        let maze = makeMazeData()
+        tileSetup()
+        let monsters = super.generateMonsters()
+        sharedMonsters = monsters
+        let buffer = GameEncodingBuffer(from: maze, and: monsters)
+        
+        return buffer
+    }
+    
+    func makeMazeData() -> Maze {
         //Generate Maze
         let maze = Maze(width: Maze.MAX_COLUMNS, height: Maze.MAX_ROWS)
         mazeGraph = maze.graph
-        graph = mazeGraph ?? blankGraph()
-        return MazeEncodingBuffer(from: maze)
+        graph = maze.graph
+        
+        return maze
     }
     
 }
