@@ -65,18 +65,18 @@ class Maze {
                 }
                 
                 let node = nodes2D[y][x]
-                if tiles[y][x] == "floor" {
-                    if tiles[y+1][x] == "floor" {
-                        node.addConnections(to: [nodes2D[y+1][x]], bidirectional: true)
+                if tiles[y][x] == "s" {
+                    if tiles[y+1][x] == "s" {
+                        node.addConnections(to: [nodes2D[y+1][x]], bidirectional: false)
                     }
-                    if tiles[y-1][x] == "floor" {
-                        node.addConnections(to: [nodes2D[y-1][x]], bidirectional: true)
+                    if tiles[y-1][x] == "s" {
+                        node.addConnections(to: [nodes2D[y-1][x]], bidirectional: false)
                     }
-                    if tiles[y][x+1] == "floor" {
-                        node.addConnections(to: [nodes2D[y][x+1]], bidirectional: true)
+                    if tiles[y][x+1] == "s" {
+                        node.addConnections(to: [nodes2D[y][x+1]], bidirectional: false)
                     }
-                    if tiles[y][x-1] == "floor" {
-                        node.addConnections(to: [nodes2D[y][x-1]], bidirectional: true)
+                    if tiles[y][x-1] == "s" {
+                        node.addConnections(to: [nodes2D[y][x-1]], bidirectional: false)
                     }
                 }
             }

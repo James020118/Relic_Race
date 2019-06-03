@@ -21,9 +21,9 @@ struct GameEncodingBuffer: Codable {
             var sub = [String]()
             for x in 0..<maze.data[y].count {
                 if maze.data[y][x].cellType == .Wall {
-                    sub.append("wall")
+                    sub.append("w")
                 }else if maze.data[y][x].cellType == .Space {
-                    sub.append("floor")
+                    sub.append("s")
                 }
             }
             tiles.append(sub)

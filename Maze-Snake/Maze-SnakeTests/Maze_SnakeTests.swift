@@ -39,6 +39,36 @@ class Maze_SnakeTests: XCTestCase {
         
         let graph: GKGridGraph<GKGridGraphNode> = GKGridGraph(array)
     }
+    
+    //Original Data Size: 5890 bytes
+    //Single Character Size: 3172 bytes
+    //Bool Size: 4330 bytes
+    func testEncodingGame() {
+        let maze = Maze(width: Maze.MAX_COLUMNS, height: Maze.MAX_ROWS)
+        let buffer = GameEncodingBuffer(from: maze, and: [])
+        var data: Data?
+        do {
+            data = try JSONEncoder().encode(buffer)
+            print(data!)
+        }catch {}
+        
+        var maze2: Maze?
+        do {
+            let buffer = try JSONDecoder().decode(GameEncodingBuffer.self, from: data!)
+            print(data!)
+            maze2 = Maze(from: buffer)
+        }catch {}
+        
+        var successfulDecode = true
+        for i in 0..<maze.graph.nodes!.count {
+            if maze.graph.nodes![i].connectedNodes.count != maze2!.graph.nodes![i].connectedNodes.count {
+                successfulDecode = false
+            }
+        }
+        
+        XCTAssert(successfulDecode, "Decoding was not successful")
+        
+    }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
