@@ -69,7 +69,7 @@ extension GameScene {
                 sfxController.playSound(named: "game-over")
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                self.info.roundWinDisplay(winner: "ai", xCoord: self.player1.position.x, yCoord: self.player1.position.y)
+                self.info.roundWinDisplay(winner: "opponent", xCoord: self.player1.position.x, yCoord: self.player1.position.y)
             }
         }
     }
