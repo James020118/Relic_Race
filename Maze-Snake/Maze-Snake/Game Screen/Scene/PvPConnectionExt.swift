@@ -46,7 +46,7 @@ extension PvPGameScene {
                 tileSetup()
                 sharedMonsters = buffer.getMonsters(from: self)
             }catch{
-                fatalError()
+                parentVC.dismiss(animated: true, completion: nil)
             }
             //Init game
             hostSessionLabel.removeFromParent()
@@ -106,6 +106,7 @@ extension PvPGameScene {
             print("Connecting: \(peerID.displayName)")
         case .notConnected:
             print("Not Connected: \(peerID.displayName)")
+            parentVC.dismiss(animated: true, completion: nil)
         @unknown default:
             print("Unknown state: \(peerID.displayName)")
         }

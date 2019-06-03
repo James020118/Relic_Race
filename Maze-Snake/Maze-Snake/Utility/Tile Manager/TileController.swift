@@ -26,6 +26,8 @@ class TileManager {
     //Constant used to control block size for camera zoom
     let ZOOM_CONSTANT: CGFloat = 0.085
     
+    var scene: SKNode!
+    
     //Conveniance Init
     init(from graph: GKGridGraph<GKGridGraphNode>, with textures: TextureSet) {
         self.graph = graph
@@ -58,23 +60,27 @@ class TileManager {
                 tile.setPosition(in: scene)
             }
         }
+        
+        self.scene = scene
     }
     
     
     /* Function that retreives the grid-based
         coordinates from a position in the parent */
     func indexFrom(position: CGPoint) -> GridPosition {
-        var row = 0
-        var column = 0
-        //Iterate through all tiles
-        for y in 0..<tiles.count {
-            for x in 0..<tiles[y].count {
-                if tiles[y][x].contains(position) {
-                    column = x
-                    row = y
-                }
-            }
-        }
+        //Constants in equation
+        let WIDTH = scene.frame.width
+        let HEIGHT = scene.frame.height
+        let NODE_X = tiles.first!.first!.size.width/2
+        let NODE_Y = tiles.first!.first!.size.height/2
+        //Calculating x positions based on screen ratios
+        let ratioX = position.x + WIDTH/2 - NODE_X
+        let unroundedX = CGFloat(Maze.MAX_COLUMNS)*(ratioX) / WIDTH
+        let column = Int(unroundedX.rounded())
+        //Calculating y positions based on screen ratios
+        let ratioY = position.y + HEIGHT/2 - NODE_Y
+        let unroundedY = CGFloat(Maze.MAX_ROWS)*(ratioY) / HEIGHT
+        let row = Int(unroundedY.rounded())
         
         return GridPosition(column: column, row: row)
     }
