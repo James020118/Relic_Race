@@ -9,8 +9,19 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import Firebase
 
 class AIGameScene: GameScene {
+    var db: Firestore!
+    let currentUser = Auth.auth().currentUser!
+    
+    var allUserData = [String : Any]()
+    
+    var difficulty = Difficulty.Easy
+    
+    var easyTime = [Int]()
+    var hardTime = [Int]()
+    var impossibleTime = [Int]()
     
     var time = 0
     var timer = Timer()
@@ -18,17 +29,57 @@ class AIGameScene: GameScene {
     override func sceneDidLoad() {
         super.sceneDidLoad()
         
+        db = Firestore.firestore()
+        
         info.setUpTimerLabel()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
             self.time += 1
-            self.info.timerLabel.text = "\(self.time / 60):\(self.time % 60)"
-            print(self.time)
+            self.info.timerLabel.text = "Time Spent: " + self.formattedTime()
         })
+        
+        
+        let docRef = db.collection("users").document(currentUser.email!)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                self.allUserData = document.data()!
+                print("Finally retrieved")
+                
+                let nsEasy = self.allUserData["easyTime"] as? [NSNumber] ?? []
+                for num in nsEasy {
+                    self.easyTime.append(num.intValue)
+                }
+                let nsHard = self.allUserData["hardTime"] as? [NSNumber] ?? []
+                for num in nsHard {
+                    self.hardTime.append(num.intValue)
+                }
+                let nsImpossible = self.allUserData["impossibleTime"] as? [NSNumber] ?? []
+                for num in nsImpossible {
+                    self.impossibleTime.append(num.intValue)
+                }
+            }
+        }
+        
+    }
+    
+    override func playerWin() {
+        timer.invalidate()
+        saveTime()
+        super.playerWin()
+    }
+    
+    override func checkMonsterWin() {
+        timer.invalidate()
+        super.checkMonsterWin()
+    }
+    
+    override func checkOpponentWin() {
+        if opponent.score >= 5 {
+            timer.invalidate()
+        }
+        super.checkOpponentWin()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
         let node = self.atPoint(location)
@@ -40,11 +91,12 @@ class AIGameScene: GameScene {
             } else {
                 timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
                     self.time += 1
-                    self.info.timerLabel.text = "\(self.time / 60):\(self.time % 60)"
-                    print(self.time)
+                    self.info.timerLabel.text = "Time Spent: " + self.formattedTime()
                 })
             }
         }
+        
+        super.touchesBegan(touches, with: event)
     }
     
     override func generateOpponent() {
@@ -56,12 +108,37 @@ class AIGameScene: GameScene {
         super.update(currentTime)
         
         info.timerLabel.position = CGPoint(x: player1.position.x, y: player1.position.y + info.TIMER_OFFSET_Y)
+    }
+    
+    func formattedTime() -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .positional
+        let formattedString = formatter.string(from: TimeInterval(time))!
         
-        //Do not know why this block of code doesn't execute
-//        if player1.player_Score == 5 || opponent.score == 5 {
-//            timer.invalidate()
-//            print(timer.isValid)
-//        }
+        return formattedString
+    }
+    
+    func saveTime() {
+        var data = [String : Any]()
+        
+        switch difficulty {
+        case .Easy:
+            easyTime.append(time)
+        case .Hard:
+            hardTime.append(time)
+        case .Impossible:
+            impossibleTime.append(time)
+        }
+        data = ["easyTime": easyTime, "hardTime": hardTime, "impossibleTime": impossibleTime, "email": allUserData["email"]!, "currency": allUserData["currency"]!, "name": allUserData["name"]!]
+        
+        db.collection("users").document(currentUser.email!).setData(data) { err in
+            if let err = err {
+                print("Error writing time to firestore: \(err)")
+            } else {
+                print("Time successfully added!")
+            }
+        }
     }
     
 }

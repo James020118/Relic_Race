@@ -57,9 +57,11 @@ class SignUpViewController: UIViewController {
                 //Create user file on database
                 self.db.collection("users").document(email).setData([
                     "email": email,
-                    "password": password,
                     "name": username,
-                    "currency": 0
+                    "currency": 0,
+                    "easyTime": [Int](),
+                    "hardTime": [Int](),
+                    "impossibleTime": [Int]()
                 ]) { error in
                     if let error = error {
                         print("Error writing document: \(error)")
@@ -82,6 +84,11 @@ class SignUpViewController: UIViewController {
         
         
         
+    }
+    
+    /* Function that removes soft keyboard after use */
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
 }

@@ -58,6 +58,11 @@ class LogInViewController: UIViewController {
         }
     }
     
+    /* Function that removes soft keyboard after use */
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     @IBAction func unwindToLogIn(unwind: UIStoryboardSegue) {}
     
 }
