@@ -37,6 +37,8 @@
 		3CD6A9F1537C1A3181838A14 /* Pods_Maze_SnakeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6476F6835E8EEC2C6A37FF3 /* Pods_Maze_SnakeUITests.framework */; };
 		44A0D10D229E1CC5001C9706 /* PvPConnectionExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A0D10C229E1CC5001C9706 /* PvPConnectionExt.swift */; };
 		44ACC50A22906F8E0054C91A /* InfoDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ACC50922906F8E0054C91A /* InfoDisplay.swift */; };
+		44B14C7C22A5BB9A0071BFAB /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B14C7B22A5BB9A0071BFAB /* LogInViewController.swift */; };
+		44B14C7E22A5BBA70071BFAB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B14C7D22A5BBA70071BFAB /* SignUpViewController.swift */; };
 		44F2474322949F2300C69AA0 /* GameSceneExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F2474222949F2300C69AA0 /* GameSceneExt.swift */; };
 		6111961F2284C4300075EEC9 /* MiniMapNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6111961E2284C4300075EEC9 /* MiniMapNode.swift */; };
 		61163AEE227CECDB001F49E1 /* Tiles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 61163AEC227CECDB001F49E1 /* Tiles.sks */; };
@@ -124,6 +126,8 @@
 		2EDD7A962280B6C4002B7783 /* NodeToDir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeToDir.swift; sourceTree = "<group>"; };
 		44A0D10C229E1CC5001C9706 /* PvPConnectionExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PvPConnectionExt.swift; sourceTree = "<group>"; };
 		44ACC50922906F8E0054C91A /* InfoDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDisplay.swift; sourceTree = "<group>"; };
+		44B14C7B22A5BB9A0071BFAB /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		44B14C7D22A5BBA70071BFAB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		44F2474222949F2300C69AA0 /* GameSceneExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneExt.swift; sourceTree = "<group>"; };
 		4B902D139DE70F3F9EDA8D52 /* Pods-Maze-Snake.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze-Snake.debug.xcconfig"; path = "Target Support Files/Pods-Maze-Snake/Pods-Maze-Snake.debug.xcconfig"; sourceTree = "<group>"; };
 		58A47ACEA6407DD66FE2207D /* Pods-Maze-SnakeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze-SnakeTests.release.xcconfig"; path = "Target Support Files/Pods-Maze-SnakeTests/Pods-Maze-SnakeTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -339,7 +343,6 @@
 				D6A09E0AE737391E00D83005 /* Pods-Maze-SnakeUITests.debug.xcconfig */,
 				82F6C88E1CD707E10423CA06 /* Pods-Maze-SnakeUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -459,6 +462,8 @@
 		61DAA858227CFBBC000FE4D0 /* Menu Screens */ = {
 			isa = PBXGroup;
 			children = (
+				44B14C7B22A5BB9A0071BFAB /* LogInViewController.swift */,
+				44B14C7D22A5BBA70071BFAB /* SignUpViewController.swift */,
 				61DAA859227CFBD1000FE4D0 /* MainViewController.swift */,
 				2ECD0A4F229870D200318C0B /* SettingsViewController.swift */,
 				2E1362AA22971D190055DEF0 /* PlayViewController.swift */,
@@ -682,14 +687,26 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Maze-Snake/Pods-Maze-Snake-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -758,7 +775,9 @@
 				2E39DF43227B65CA00EA1C84 /* AppDelegate.swift in Sources */,
 				2E07DB06229DBE500092217F /* PvPGameScene.swift in Sources */,
 				619AFE5D22871E81000784A4 /* TextureSet.swift in Sources */,
+				44B14C7C22A5BB9A0071BFAB /* LogInViewController.swift in Sources */,
 				2E07DB03229DB3150092217F /* OtherPlayer.swift in Sources */,
+				44B14C7E22A5BBA70071BFAB /* SignUpViewController.swift in Sources */,
 				2ECD0A50229870D200318C0B /* SettingsViewController.swift in Sources */,
 				44F2474322949F2300C69AA0 /* GameSceneExt.swift in Sources */,
 				6117704F22A2B54100F67AB8 /* ScoringPacket.swift in Sources */,
