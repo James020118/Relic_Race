@@ -89,13 +89,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //MARK:- Lifecycle Functions
     /* Function that is called when scene loads */
     override func sceneDidLoad() {
-        SKTextureAtlas(named: "Game_Textures").preload {
-            print("Completed")
-        }
-        
+//        let loadingBackground = SKSpriteNode(
+//            texture: nil,
+//            color: .black,
+//            size: CGSize(width: self.frame.width, height: frame.height)
+//        )
+//        let loadingLabel = SKLabelNode(text: "Loading . . .")
+//        loadingLabel.fontSize = 44
+//        loadingLabel.position = CGPoint.zero
+//        loadingBackground.position = CGPoint.zero
+//        loadingBackground.addChild(loadingLabel)
+//        loadingLabel.zPosition = 100
+//        loadingBackground.zPosition = 100
+//        addChild(loadingBackground)
         super.sceneDidLoad()
         initializeGame()
         print("Completed game load")
+        //loadingBackground.removeFromParent()
     }
     
     var isPausing = false
@@ -243,6 +253,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func premapSetup() {
         physicsWorld.contactDelegate = self
+        SKTextureAtlas(named: "Game_Textures").preload {
+            print("Completed")
+        }
         //Load Sound Effects
         sfxController = SFXController(from: self)
         sfxController.preloadSounds()

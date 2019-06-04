@@ -76,11 +76,14 @@ class TileManager {
         //Calculating x positions based on screen ratios
         let ratioX = position.x + WIDTH/2 - NODE_X
         let unroundedX = CGFloat(Maze.MAX_COLUMNS)*(ratioX) / WIDTH
-        let column = Int(unroundedX.rounded())
+        var column = Int(unroundedX.rounded())
         //Calculating y positions based on screen ratios
         let ratioY = position.y + HEIGHT/2 - NODE_Y
         let unroundedY = CGFloat(Maze.MAX_ROWS)*(ratioY) / HEIGHT
-        let row = Int(unroundedY.rounded())
+        var row = Int(unroundedY.rounded())
+        
+        row = row >= 0 && row < Maze.MAX_ROWS ? row : 0
+        column = column >= 0 && column < Maze.MAX_COLUMNS ? column : 0
         
         return GridPosition(column: column, row: row)
     }
