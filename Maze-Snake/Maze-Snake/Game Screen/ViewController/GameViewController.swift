@@ -46,6 +46,8 @@ class GameViewController: UIViewController {
                 scene.scaleMode = .aspectFit
                 //Store Instance
                 scene.parentVC = self
+                //Assgin Difficulty
+                scene.difficulty = difficulty
                 // Present the scene
                 view.presentScene(scene)
             }

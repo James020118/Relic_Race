@@ -75,6 +75,7 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
             nextLabel.removeFromParent()
             setupGame()
         }
+        
     }
     
     var lastSent: TimeInterval = 0

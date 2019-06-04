@@ -342,6 +342,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         opponentCollisionFlag = false
     }
     
+    func playerWin() {
+        info.endGame()
+        if music_Is_On {
+            sfxController.playSound(named: "game-over")
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.info.roundWinDisplay(winner: "player", xCoord: self.player1.position.x, yCoord: self.player1.position.y)
+        }
+    }
+    
     func checkMonsterWin() {
         //Check loss
         info.endGame()
@@ -350,6 +360,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.info.playerDiedDisplay(xCoord: self.player1.position.x, yCoord: self.player1.position.y)
+        }
+    }
+    
+    func checkOpponentWin() {
+        //Check Win
+        if opponent.score >= 5 {
+            info.endGame()
+            if music_Is_On {
+                sfxController.playSound(named: "game-over")
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                self.info.roundWinDisplay(winner: "opponent", xCoord: self.player1.position.x, yCoord: self.player1.position.y)
+            }
         }
     }
     

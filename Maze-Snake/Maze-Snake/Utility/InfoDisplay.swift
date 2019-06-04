@@ -129,23 +129,32 @@ class InfoDisplay {
     //Displaying message after a round win (first reach 5 trophies)
     let messageLabel = SKLabelNode()
     let exitLabel = SKLabelNode()
+    let timeDisplayLabel = SKLabelNode()
     func roundWinDisplay(winner: String, xCoord: CGFloat, yCoord: CGFloat) {
         setUpBackground(x: xCoord, y: yCoord)
         messageLabel.zPosition = 21
         messageLabel.fontName = "AvenirNext-Bold"
-        messageLabel.position = CGPoint(x: xCoord, y: yCoord + 100)
+        messageLabel.position = CGPoint(x: xCoord, y: yCoord + 150)
         messageLabel.fontColor = UIColor.white
         messageLabel.fontSize = 100
         messageLabel.alpha = 0
         
         exitLabel.zPosition = 21
         exitLabel.fontName = "AvenirNext-Bold"
-        exitLabel.position = CGPoint(x: xCoord, y: yCoord - 100)
+        exitLabel.position = CGPoint(x: xCoord, y: yCoord - 250)
         exitLabel.fontColor = UIColor.white
         exitLabel.fontSize = 100
         exitLabel.alpha = 0
         exitLabel.text = "Exit"
         exitLabel.name = "exit"
+        
+        timeDisplayLabel.zPosition = 21
+        timeDisplayLabel.fontName = "AvenirNext-Bold"
+        timeDisplayLabel.position = CGPoint(x: xCoord, y: yCoord - 50)
+        timeDisplayLabel.fontColor = UIColor.white
+        timeDisplayLabel.fontSize = 100
+        timeDisplayLabel.alpha = 0
+        timeDisplayLabel.text = "Time used: \(timerLabel.text ?? "0:0")"
         
         switch winner {
         case "player":
@@ -160,10 +169,14 @@ class InfoDisplay {
         
         parent.addChild(messageLabel)
         parent.addChild(exitLabel)
+        parent.addChild(timeDisplayLabel)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.messageLabel.run(SKAction.fadeIn(withDuration: 0.5))
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.exitLabel.run(SKAction.fadeIn(withDuration: 0.5))
+                self.timeDisplayLabel.run(SKAction.fadeIn(withDuration: 0.5))
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.exitLabel.run(SKAction.fadeIn(withDuration: 0.5))
+                }
             }
         }
     }
@@ -428,6 +441,19 @@ class InfoDisplay {
         parent.player1.player_Score = 0
         parent.player1.player_Health = 3
         parent.opponent.score = 0
+    }
+    
+    //Timer set-up for solo mode
+    let TIMER_OFFSET_Y: CGFloat = 300
+    var timerLabel = SKLabelNode()
+    func setUpTimerLabel() {
+        timerLabel.zPosition = 2
+        timerLabel.position = CGPoint(x: parent.player1.position.x, y: parent.player1.position.y + TIMER_OFFSET_Y)
+        timerLabel.fontName = "AvenirNext-Bold"
+        timerLabel.fontSize = 60
+        timerLabel.fontColor = UIColor.white
+        timerLabel.text = "0:0"
+        parent.addChild(timerLabel)
     }
     
 }

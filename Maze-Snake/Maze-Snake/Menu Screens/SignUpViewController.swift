@@ -29,7 +29,6 @@ class SignUpViewController: UIViewController {
     
     @IBAction func signUpButtonPressed(_ sender: Any) {
         signUp()
-        performSegue(withIdentifier: "unwind", sender: sender)
     }
     
     @IBAction func goToLogIn(_ sender: Any) {
@@ -58,9 +57,11 @@ class SignUpViewController: UIViewController {
                 //Create user file on database
                 self.db.collection("users").document(email).setData([
                     "email": email,
-                    "password": password,
                     "name": username,
-                    "currency": 0
+                    "currency": 0,
+                    "easyTime": [Int](),
+                    "hardTime": [Int](),
+                    "impossibleTime": [Int]()
                 ]) { error in
                     if let error = error {
                         print("Error writing document: \(error)")
@@ -68,8 +69,12 @@ class SignUpViewController: UIViewController {
                         print("Document successfully written")
                     }
                 }
+                
+                self.errorLabel.textColor = UIColor.green
+                self.errorLabel.text = "Success! Please Log In."
             } else {
                 print("Error creating user: \(error!.localizedDescription)")
+                self.errorLabel.textColor = UIColor.red
                 self.errorLabel.text = "Error: \(error!.localizedDescription)"
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.errorLabel.text = ""
@@ -79,6 +84,11 @@ class SignUpViewController: UIViewController {
         
         
         
+    }
+    
+    /* Function that removes soft keyboard after use */
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
 }
