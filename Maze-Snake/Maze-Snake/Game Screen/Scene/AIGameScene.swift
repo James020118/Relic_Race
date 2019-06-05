@@ -19,9 +19,12 @@ class AIGameScene: GameScene {
     
     var difficulty = Difficulty.Easy
     
+    //Database data
     var easyTime = [Int]()
     var hardTime = [Int]()
     var impossibleTime = [Int]()
+    var currency = 0
+    
     
     var time = 0
     var timer = Timer()
@@ -56,6 +59,7 @@ class AIGameScene: GameScene {
                 for num in nsImpossible {
                     self.impossibleTime.append(num.intValue)
                 }
+                self.currency = self.allUserData["currency"] as! Int
             }
         }
         
@@ -77,6 +81,22 @@ class AIGameScene: GameScene {
             timer.invalidate()
         }
         super.checkOpponentWin()
+    }
+    
+    override func playerToTrophyResponse() {
+        super.playerToTrophyResponse()
+        
+        currency += 1
+        var data = [String : Any]()
+        data = ["easyTime": easyTime, "hardTime": hardTime, "impossibleTime": impossibleTime, "email": allUserData["email"]!, "currency": currency, "name": allUserData["name"]!]
+        
+        db.collection("users").document(currentUser.email!).setData(data) { err in
+            if let err = err {
+                print("Error adding currency to firestore: \(err)")
+            } else {
+                print("Currency successfully increased!")
+            }
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -130,7 +150,7 @@ class AIGameScene: GameScene {
         case .Impossible:
             impossibleTime.append(time)
         }
-        data = ["easyTime": easyTime, "hardTime": hardTime, "impossibleTime": impossibleTime, "email": allUserData["email"]!, "currency": allUserData["currency"]!, "name": allUserData["name"]!]
+        data = ["easyTime": easyTime, "hardTime": hardTime, "impossibleTime": impossibleTime, "email": allUserData["email"]!, "currency": currency, "name": allUserData["name"]!]
         
         db.collection("users").document(currentUser.email!).setData(data) { err in
             if let err = err {

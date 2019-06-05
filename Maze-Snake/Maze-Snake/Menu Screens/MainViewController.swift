@@ -35,7 +35,9 @@ class MainViewController: UIViewController {
             data.set(true, forKey: "minimapPos")
             data.set(true, forKey: "musicOn")
         }
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         let currentUser = Auth.auth().currentUser!
         welcomeLabel.text = "Welcome, \(currentUser.displayName!)"
         
@@ -43,10 +45,9 @@ class MainViewController: UIViewController {
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let currency = document.data()!["currency"] as! Int
-                self.currencyLabel.text = "Currency: \(currency)"
+                self.currencyLabel.text = "Trophies: \(currency)"
             }
         }
-        
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

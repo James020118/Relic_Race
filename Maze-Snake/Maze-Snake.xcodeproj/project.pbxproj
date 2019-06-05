@@ -34,6 +34,7 @@
 		2ECD0A5422987E6400318C0B /* walkingUp.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2ECD0A5322987E6400318C0B /* walkingUp.atlas */; };
 		2ECD0A5622987F3400318C0B /* walkingRight.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2ECD0A5522987F3400318C0B /* walkingRight.atlas */; };
 		2EDD7A972280B6C4002B7783 /* NodeToDir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDD7A962280B6C4002B7783 /* NodeToDir.swift */; };
+		2EEEBAF122A83EBE005EEBF1 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEEBAF022A83EBE005EEBF1 /* StoreViewController.swift */; };
 		3CD6A9F1537C1A3181838A14 /* Pods_Maze_SnakeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6476F6835E8EEC2C6A37FF3 /* Pods_Maze_SnakeUITests.framework */; };
 		44A0D10D229E1CC5001C9706 /* PvPConnectionExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A0D10C229E1CC5001C9706 /* PvPConnectionExt.swift */; };
 		44ACC50A22906F8E0054C91A /* InfoDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ACC50922906F8E0054C91A /* InfoDisplay.swift */; };
@@ -124,6 +125,7 @@
 		2ECD0A5322987E6400318C0B /* walkingUp.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = walkingUp.atlas; sourceTree = "<group>"; };
 		2ECD0A5522987F3400318C0B /* walkingRight.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = walkingRight.atlas; sourceTree = "<group>"; };
 		2EDD7A962280B6C4002B7783 /* NodeToDir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeToDir.swift; sourceTree = "<group>"; };
+		2EEEBAF022A83EBE005EEBF1 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		44A0D10C229E1CC5001C9706 /* PvPConnectionExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PvPConnectionExt.swift; sourceTree = "<group>"; };
 		44ACC50922906F8E0054C91A /* InfoDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDisplay.swift; sourceTree = "<group>"; };
 		44B14C7B22A5BB9A0071BFAB /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 				61DAA859227CFBD1000FE4D0 /* MainViewController.swift */,
 				2ECD0A4F229870D200318C0B /* SettingsViewController.swift */,
 				2E1362AA22971D190055DEF0 /* PlayViewController.swift */,
+				2EEEBAF022A83EBE005EEBF1 /* StoreViewController.swift */,
 			);
 			path = "Menu Screens";
 			sourceTree = "<group>";
@@ -756,6 +759,7 @@
 				61B48315228397EB0045BF3A /* Player.swift in Sources */,
 				2E07DAFF229DAFEF0092217F /* AIGameScene.swift in Sources */,
 				44ACC50A22906F8E0054C91A /* InfoDisplay.swift in Sources */,
+				2EEEBAF122A83EBE005EEBF1 /* StoreViewController.swift in Sources */,
 				6111961F2284C4300075EEC9 /* MiniMapNode.swift in Sources */,
 				615D67FC2283BD0A00D0100A /* AI.swift in Sources */,
 				2E1362AB22971D190055DEF0 /* PlayViewController.swift in Sources */,
