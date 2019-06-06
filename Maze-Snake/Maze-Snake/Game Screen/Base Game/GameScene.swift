@@ -59,7 +59,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var LABEL_OFFSET_X: CGFloat = 600
     var LABEL_OFFSET_Y: CGFloat = 375
     var JOYSTICK_X_OFFSET : CGFloat = 600
-    var JOYSTICK_Y_OFFSET : CGFloat = 275
+    var JOYSTICK_Y_OFFSET : CGFloat = 200
     var MINIMAP_OFFSET_X : CGFloat = 600
     var MINIMAP_OFFSET_Y : CGFloat = 325
     
@@ -89,23 +89,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //MARK:- Lifecycle Functions
     /* Function that is called when scene loads */
     override func sceneDidLoad() {
-//        let loadingBackground = SKSpriteNode(
-//            texture: nil,
-//            color: .black,
-//            size: CGSize(width: self.frame.width, height: frame.height)
-//        )
-//        let loadingLabel = SKLabelNode(text: "Loading . . .")
-//        loadingLabel.fontSize = 44
-//        loadingLabel.position = CGPoint.zero
-//        loadingBackground.position = CGPoint.zero
-//        loadingBackground.addChild(loadingLabel)
-//        loadingLabel.zPosition = 100
-//        loadingBackground.zPosition = 100
-//        addChild(loadingBackground)
         super.sceneDidLoad()
         initializeGame()
         print("Completed game load")
-        //loadingBackground.removeFromParent()
     }
     
     var isPausing = false

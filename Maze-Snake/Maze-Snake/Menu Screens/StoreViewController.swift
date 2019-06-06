@@ -9,7 +9,9 @@
 import UIKit
 
 class StoreViewController: UIViewController {
-
+    
+    @IBOutlet var playerModel: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -37,12 +37,15 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        
         //Get element at touch pos
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
         let node = self.atPoint(location)
+        
+        if node.name == "exit" || node.name == "return" {
+            mcSession?.disconnect()
+        }
+        super.touchesBegan(touches, with: event)
         
         if node.name == "host" {
             startHosting()

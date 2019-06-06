@@ -101,11 +101,15 @@ extension PvPGameScene {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
         case .connected:
+            if let advertiser = mcAdvertiserAssistant {
+                advertiser.stop()
+            }
             print("Connected: \(peerID.displayName)")
         case .connecting:
             print("Connecting: \(peerID.displayName)")
         case .notConnected:
             print("Not Connected: \(peerID.displayName)")
+            mcSession?.disconnect()
             parentVC.dismiss(animated: true, completion: nil)
         @unknown default:
             print("Unknown state: \(peerID.displayName)")

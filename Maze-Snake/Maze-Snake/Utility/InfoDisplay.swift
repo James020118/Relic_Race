@@ -148,13 +148,15 @@ class InfoDisplay {
         exitLabel.text = "Exit"
         exitLabel.name = "exit"
         
-        timeDisplayLabel.zPosition = 21
-        timeDisplayLabel.fontName = "AvenirNext-Bold"
-        timeDisplayLabel.position = CGPoint(x: xCoord, y: yCoord - 50)
-        timeDisplayLabel.fontColor = UIColor.white
-        timeDisplayLabel.fontSize = 100
-        timeDisplayLabel.alpha = 0
-        timeDisplayLabel.text = "Time used: \(timerLabel.text ?? "0:0")"
+        if parent as? AIGameScene != nil {
+            timeDisplayLabel.zPosition = 21
+            timeDisplayLabel.fontName = "AvenirNext-Bold"
+            timeDisplayLabel.position = CGPoint(x: xCoord, y: yCoord - 50)
+            timeDisplayLabel.fontColor = UIColor.white
+            timeDisplayLabel.fontSize = 100
+            timeDisplayLabel.alpha = 0
+            timeDisplayLabel.text = "\(timerLabel.text ?? "0:0")"
+        }
         
         switch winner {
         case "player":
