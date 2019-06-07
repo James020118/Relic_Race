@@ -24,24 +24,32 @@ class StoreViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    
-    
-    @IBAction func onDefaultClick(_ sender: Any) {
-    }
-    
-    @IBAction func onOption2Click(_ sender: Any) {
-    }
-    
-    @IBAction func onOption1Click(_ sender: Any) {
+    @IBAction func onSkinClick(_ sender: UIButton) {
         //Check if they have skin in online inventory
         
         //Check if the player has enough trophies
-        
+        let cost = sender.tag * 50
+        let trophies = 0//Trophies
         //If not popup with "You do not have enough trophies"
-        
+        if cost > trophies {
+            Toast().showAlert(
+                backgroundColor: UIColor.white,
+                textColor: UIColor.black,
+                message: "Not enough trophies"
+            )
+            return
+        }
         //If so present a confirmation alert to buy
+        if cost < trophies {
+            let alert = UIAlertController(title: "Confirm Purchase of \(cost) trophies for skin", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Confirm", style: UIAlertAction.Style.default, handler: {
+                //If press "yes" take away coins give them the skin and equip it
+                sender.setTitle("Equip", for: .normal)
+            }))
+        }
         
-        //If press "yes" take away coins give them the skin and equip it
+        
+        
     }
     
     //TODO:- Add skin inventory to AIGameScene firebase modifications
