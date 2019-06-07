@@ -11,6 +11,8 @@ import UIKit
 class StoreViewController: UIViewController {
     
     @IBOutlet var playerModel: UIImageView!
+    @IBOutlet var skin1option: UIButton!
+    @IBOutlet var skin2Option: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,15 +25,29 @@ class StoreViewController: UIViewController {
     }
     
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func onDefaultClick(_ sender: Any) {
     }
-    */
+    
+    @IBAction func onOption2Click(_ sender: Any) {
+    }
+    
+    @IBAction func onOption1Click(_ sender: Any) {
+        //Check if they have skin in online inventory
+        
+        //Check if the player has enough trophies
+        
+        //If not popup with "You do not have enough trophies"
+        
+        //If so present a confirmation alert to buy
+        
+        //If press "yes" take away coins give them the skin and equip it
+    }
+    
+    //TODO:- Add skin inventory to AIGameScene firebase modifications
+        //Create new user, add a string array with default skin in it
+    
+    //TODO:- First time user launches the app write the file with list of skins
+    //in Appdelegate if file doesnt exist write new file and get skin data from firebase
 
 }
