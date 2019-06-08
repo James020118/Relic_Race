@@ -40,6 +40,7 @@
 		44ACC50A22906F8E0054C91A /* InfoDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ACC50922906F8E0054C91A /* InfoDisplay.swift */; };
 		44B14C7C22A5BB9A0071BFAB /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B14C7B22A5BB9A0071BFAB /* LogInViewController.swift */; };
 		44B14C7E22A5BBA70071BFAB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B14C7D22A5BBA70071BFAB /* SignUpViewController.swift */; };
+		44CDCFA922AC481900069FED /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CDCFA822AC481900069FED /* LeaderboardViewController.swift */; };
 		44F2474322949F2300C69AA0 /* GameSceneExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F2474222949F2300C69AA0 /* GameSceneExt.swift */; };
 		6111961F2284C4300075EEC9 /* MiniMapNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6111961E2284C4300075EEC9 /* MiniMapNode.swift */; };
 		61163AEE227CECDB001F49E1 /* Tiles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 61163AEC227CECDB001F49E1 /* Tiles.sks */; };
@@ -131,6 +132,7 @@
 		44ACC50922906F8E0054C91A /* InfoDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDisplay.swift; sourceTree = "<group>"; };
 		44B14C7B22A5BB9A0071BFAB /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		44B14C7D22A5BBA70071BFAB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		44CDCFA822AC481900069FED /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
 		44F2474222949F2300C69AA0 /* GameSceneExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneExt.swift; sourceTree = "<group>"; };
 		4B902D139DE70F3F9EDA8D52 /* Pods-Maze-Snake.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze-Snake.debug.xcconfig"; path = "Target Support Files/Pods-Maze-Snake/Pods-Maze-Snake.debug.xcconfig"; sourceTree = "<group>"; };
 		58A47ACEA6407DD66FE2207D /* Pods-Maze-SnakeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze-SnakeTests.release.xcconfig"; path = "Target Support Files/Pods-Maze-SnakeTests/Pods-Maze-SnakeTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -473,6 +475,7 @@
 				2ECD0A4F229870D200318C0B /* SettingsViewController.swift */,
 				2E1362AA22971D190055DEF0 /* PlayViewController.swift */,
 				2EEEBAF022A83EBE005EEBF1 /* StoreViewController.swift */,
+				44CDCFA822AC481900069FED /* LeaderboardViewController.swift */,
 			);
 			path = "Menu Screens";
 			sourceTree = "<group>";
@@ -752,6 +755,7 @@
 				619FEA2C228CEE4600C28842 /* Monster.swift in Sources */,
 				44A0D10D229E1CC5001C9706 /* PvPConnectionExt.swift in Sources */,
 				61E0D1FB228110B700A6DE5C /* GraphCreation.swift in Sources */,
+				44CDCFA922AC481900069FED /* LeaderboardViewController.swift in Sources */,
 				61DE97DB2299712400EE28E3 /* Collision Detection.swift in Sources */,
 				2E39DF49227B65CA00EA1C84 /* GameScene.swift in Sources */,
 				2EB4D68B2289EA96009F5F3E /* Trophy.swift in Sources */,
