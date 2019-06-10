@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 
+let EQUIPPED_KEY = "eSkin"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -22,6 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let db = Firestore.firestore()
         
         print(db)
+        
+        if data.string(forKey: EQUIPPED_KEY) == nil {
+            data.set("oldMan", forKey: EQUIPPED_KEY)
+        }
         return true
     }
 

@@ -24,6 +24,8 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        difficultySegmentControl.layer.cornerRadius = 5
+        
         db = Firestore.firestore()
         
         db.collection("users").getDocuments() { (querySnapshot, error) in
@@ -115,9 +117,9 @@ extension LeaderboardViewController {
         cell.layer.backgroundColor = UIColor.clear.cgColor
         
         cell.textLabel?.font = UIFont(name: "AvenirNext-Regular", size: 20)
-        cell.textLabel?.textColor = UIColor.yellow
+        cell.textLabel?.textColor = UIColor.white
         cell.detailTextLabel?.font = UIFont(name: "AvenirNext-Regular", size: 20)
-        cell.detailTextLabel?.textColor = UIColor.yellow
+        cell.detailTextLabel?.textColor = UIColor.white
         
         switch difficultySegmentControl.selectedSegmentIndex {
         case 0:

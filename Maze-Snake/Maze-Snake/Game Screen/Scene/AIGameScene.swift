@@ -87,10 +87,9 @@ class AIGameScene: GameScene {
         super.playerToTrophyResponse()
         
         currency += 1
-        var data = [String : Any]()
-        data = ["easyTime": easyTime, "hardTime": hardTime, "impossibleTime": impossibleTime, "email": allUserData["email"]!, "currency": currency, "name": allUserData["name"]!]
+        allUserData["currency"] = currency
         
-        db.collection("users").document(currentUser.email!).setData(data) { err in
+        db.collection("users").document(currentUser.email!).setData(allUserData) { err in
             if let err = err {
                 print("Error adding currency to firestore: \(err)")
             } else {
@@ -114,6 +113,13 @@ class AIGameScene: GameScene {
                     self.info.timerLabel.text = "Time Spent: " + self.formattedTime()
                 })
             }
+        }
+        
+        if node.name == "tryagain" {
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
+                self.time += 1
+                self.info.timerLabel.text = "Time Spent: " + self.formattedTime()
+            })
         }
         
         super.touchesBegan(touches, with: event)
@@ -140,8 +146,6 @@ class AIGameScene: GameScene {
     }
     
     func saveTime() {
-        var data = [String : Any]()
-        
         switch difficulty {
         case .Easy:
             easyTime.append(time)
@@ -150,9 +154,12 @@ class AIGameScene: GameScene {
         case .Impossible:
             impossibleTime.append(time)
         }
-        data = ["easyTime": easyTime, "hardTime": hardTime, "impossibleTime": impossibleTime, "email": allUserData["email"]!, "currency": currency, "name": allUserData["name"]!]
         
-        db.collection("users").document(currentUser.email!).setData(data) { err in
+        allUserData["easyTime"] = easyTime
+        allUserData["hardTime"] = hardTime
+        allUserData["impossibleTime"] = impossibleTime
+        
+        db.collection("users").document(currentUser.email!).setData(allUserData) { err in
             if let err = err {
                 print("Error writing time to firestore: \(err)")
             } else {

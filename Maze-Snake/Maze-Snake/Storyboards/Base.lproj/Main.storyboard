@@ -405,7 +405,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phoneBackground" translatesAutoresizingMaskIntoConstraints="NO" id="i9g-4i-LcQ">
                                 <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Global Leaderboard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPh-L9-kDj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leaderboard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPh-L9-kDj">
                                 <rect key="frame" x="20" y="10" width="528" height="48"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="35"/>
                                 <color key="textColor" name="findHighlightColor" catalog="System" colorSpace="catalog"/>
@@ -458,12 +458,13 @@
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CEY-5y-45c">
                                 <rect key="frame" x="20" y="57" width="528" height="29"/>
+                                <color key="backgroundColor" red="0.99990183115005493" green="1" blue="0.99987989664077759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <segments>
                                     <segment title="Easy"/>
                                     <segment title="Hard"/>
                                     <segment title="Impossible"/>
                                 </segments>
-                                <color key="tintColor" name="findHighlightColor" catalog="System" colorSpace="catalog"/>
+                                <color key="tintColor" red="0.0" green="0.75254178047180176" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="onSegmentedControlClick:" destination="sFn-ry-qeE" eventType="valueChanged" id="MbJ-YK-1gU"/>
                                 </connections>

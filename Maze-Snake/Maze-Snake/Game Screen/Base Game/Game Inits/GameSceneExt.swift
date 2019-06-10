@@ -92,6 +92,18 @@ extension GameScene {
     
     //Texture initialization
     func textureInitialization() {
+        var names = [String]()
+        switch data.string(forKey: EQUIPPED_KEY) {
+        case "oldMan":
+            names = ["walkingDown", "walkingLeft", "walkingUp", "walkingRight"]
+        case "otherMan1":
+            names = ["walkingDown", "walkingLeft", "walkingUp", "walkingRight"]
+        case "otherMan2":
+            names = ["walkingDown", "walkingLeft", "walkingUp", "walkingRight"]
+        default:
+            print("ahahhaahaa")
+        }
+        
         //Walking down texture initializaiton
         walking_Down_TextureAtlas = SKTextureAtlas(named: "walkingDown")
         for i in 1...walking_Down_TextureAtlas.textureNames.count {
