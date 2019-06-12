@@ -80,13 +80,13 @@ class StoreViewController: UIViewController {
             Toast().showAlert(
                 backgroundColor: UIColor.white,
                 textColor: UIColor.black,
-                message: "Not enough trophies"
+                message: "Not enough Relics"
             )
             return
         }
         //If so present a confirmation alert to buy
         if cost <= trophies {
-            let alert = UIAlertController(title: "Confirm Purchase of \(cost) trophies for skin", message: nil, preferredStyle: .alert)
+            let alert = UIAlertController(title: "Confirm Purchase of \(cost) Relics for skin", message: nil, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Confirm", style: UIAlertAction.Style.default, handler: { (_) -> Void in
                 //If press "yes" take away coins give them the skin and equip it
                 sender.setTitle("Equip", for: .normal)

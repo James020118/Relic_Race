@@ -106,12 +106,12 @@ class AIGameScene: GameScene {
         //Detect touch on pause node
         if node.name == "pause" {
             if isPausing {
-                timer.invalidate()
-            } else {
                 timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
                     self.time += 1
                     self.info.timerLabel.text = "Time Spent: " + self.formattedTime()
                 })
+            } else {
+                timer.invalidate()
             }
         }
         

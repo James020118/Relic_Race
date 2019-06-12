@@ -54,10 +54,6 @@ class GameViewController: UIViewController {
             
             //Optional Scene Settings
             view.ignoresSiblingOrder = true
-            view.showsFPS = true
-            view.showsNodeCount = true
-            view.showsDrawCount = true
-            view.showsPhysics = false
             view.shouldCullNonVisibleNodes = false
         }
         

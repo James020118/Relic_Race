@@ -28,6 +28,7 @@
 		2E7870EB228205C900FB1303 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7870EA228205C900FB1303 /* Stack.swift */; };
 		2E8B678022A19F57005BC45B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E8B677F22A19F57005BC45B /* GoogleService-Info.plist */; };
 		2E9C4D022284AF4A009C9BFA /* AnalogStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C4D012284AF4A009C9BFA /* AnalogStick.swift */; };
+		2EA6DB1922B177D900E73E89 /* CreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA6DB1822B177D900E73E89 /* CreditsViewController.swift */; };
 		2EB4D68B2289EA96009F5F3E /* Trophy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB4D68A2289EA96009F5F3E /* Trophy.swift */; };
 		2ECD0A50229870D200318C0B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECD0A4F229870D200318C0B /* SettingsViewController.swift */; };
 		2ECD0A522298766C00318C0B /* walkingLeft.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2ECD0A512298766B00318C0B /* walkingLeft.atlas */; };
@@ -121,6 +122,7 @@
 		2E7870EA228205C900FB1303 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		2E8B677F22A19F57005BC45B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2E9C4D012284AF4A009C9BFA /* AnalogStick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogStick.swift; sourceTree = "<group>"; };
+		2EA6DB1822B177D900E73E89 /* CreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
 		2EB4D68A2289EA96009F5F3E /* Trophy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trophy.swift; sourceTree = "<group>"; };
 		2ECD0A4F229870D200318C0B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		2ECD0A512298766B00318C0B /* walkingLeft.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = walkingLeft.atlas; sourceTree = "<group>"; };
@@ -476,6 +478,7 @@
 				2E1362AA22971D190055DEF0 /* PlayViewController.swift */,
 				2EEEBAF022A83EBE005EEBF1 /* StoreViewController.swift */,
 				44CDCFA822AC481900069FED /* LeaderboardViewController.swift */,
+				2EA6DB1822B177D900E73E89 /* CreditsViewController.swift */,
 			);
 			path = "Menu Screens";
 			sourceTree = "<group>";
@@ -755,6 +758,7 @@
 				619FEA2C228CEE4600C28842 /* Monster.swift in Sources */,
 				44A0D10D229E1CC5001C9706 /* PvPConnectionExt.swift in Sources */,
 				61E0D1FB228110B700A6DE5C /* GraphCreation.swift in Sources */,
+				2EA6DB1922B177D900E73E89 /* CreditsViewController.swift in Sources */,
 				44CDCFA922AC481900069FED /* LeaderboardViewController.swift in Sources */,
 				61DE97DB2299712400EE28E3 /* Collision Detection.swift in Sources */,
 				2E39DF49227B65CA00EA1C84 /* GameScene.swift in Sources */,
@@ -971,13 +975,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2XGL4K68PY;
+				DEVELOPMENT_TEAM = XFUSR494RJ;
 				INFOPLIST_FILE = "Maze-Snake/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.YBMW.Maze-Snake1";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.YBMW.Maze-Snake11";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -990,13 +994,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2XGL4K68PY;
+				DEVELOPMENT_TEAM = XFUSR494RJ;
 				INFOPLIST_FILE = "Maze-Snake/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.YBMW.Maze-Snake1";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.YBMW.Maze-Snake11";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

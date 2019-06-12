@@ -107,10 +107,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if node.name == "pause" {
             if isPausing {
                 info.removePauseGame()
+                joystick.disabled = false
                 pauseCharacters(bool: false)
                 isPausing = false
             } else {
                 info.pauseGame(xCoord: player1.position.x, yCoord: player1.position.y)
+                joystick.disabled = true
                 pauseCharacters(bool: true)
                 isPausing = true
             }

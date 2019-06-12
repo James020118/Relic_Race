@@ -45,7 +45,7 @@ class MainViewController: UIViewController {
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let currency = document.data()!["currency"] as! Int
-                self.currencyLabel.text = "Trophies: \(currency)"
+                self.currencyLabel.text = "Relics: \(currency)"
             }
         }
     }
