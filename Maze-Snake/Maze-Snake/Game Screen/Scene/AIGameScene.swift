@@ -140,8 +140,13 @@ class AIGameScene: GameScene {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute, .second]
         formatter.unitsStyle = .positional
-        let formattedString = formatter.string(from: TimeInterval(time))!
-        
+        var formattedString = formatter.string(from: TimeInterval(time))!
+        if time < 60 {
+            if time < 10 {
+                formattedString = "0" + formattedString
+            }
+            formattedString = "0:" + formattedString
+        }
         return formattedString
     }
     
