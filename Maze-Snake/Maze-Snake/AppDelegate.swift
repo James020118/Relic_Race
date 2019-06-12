@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    static var gameScreen: GameViewController?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
@@ -37,8 +39,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        guard let gameScreen = AppDelegate.gameScreen else {
+            return
+        }
+        if music_Is_On {
+            gameScreen.soundController.stop()
+        }
+        gameScreen.aiGame.timer.invalidate()
+        gameScreen.aiGame.isPaused = true
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -46,7 +54,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        guard let gameScreen = AppDelegate.gameScreen else {
+            return
+        }
+        gameScreen.aiGame.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
+            gameScreen.aiGame.time += 1
+            gameScreen.aiGame.info.timerLabel.text = "Time Spent: " + gameScreen.aiGame.formattedTime()
+        })
+        gameScreen.aiGame.isPaused = false
+        AppDelegate.gameScreen = nil
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

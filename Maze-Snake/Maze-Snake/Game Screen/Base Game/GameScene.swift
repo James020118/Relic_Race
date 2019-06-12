@@ -192,7 +192,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return currentHeading
     }
     
-    
     /* Function that is called before each frame is rendered */
     var startUpdateFlag = false
     

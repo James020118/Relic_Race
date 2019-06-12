@@ -21,6 +21,8 @@ class GameViewController: UIViewController {
 
     var soundController: SoundController!
     
+    var aiGame: AIGameScene!
+    
     var difficulty: Difficulty = .Easy
     
     override func viewDidLoad() {
@@ -42,6 +44,7 @@ class GameViewController: UIViewController {
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "AIGameScene") as? AIGameScene {
+                aiGame = scene
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFit
                 //Store Instance
@@ -59,13 +62,15 @@ class GameViewController: UIViewController {
         
     }
 
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.gameScreen = self
         if music_Is_On {
            soundController.play(at: 0.15)
         }
+        
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         if music_Is_On {
             soundController.stop()
         }
