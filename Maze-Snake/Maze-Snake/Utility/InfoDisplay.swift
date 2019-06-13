@@ -155,7 +155,7 @@ class InfoDisplay {
             timeDisplayLabel.fontColor = UIColor.white
             timeDisplayLabel.fontSize = 100
             timeDisplayLabel.alpha = 0
-            timeDisplayLabel.text = "\(timerLabel.text ?? "0:0")"
+            timeDisplayLabel.text = "\(timerLabel.text ?? "0:00")"
         }
         
         switch winner {
@@ -454,7 +454,7 @@ class InfoDisplay {
         timerLabel.fontName = "AvenirNext-Bold"
         timerLabel.fontSize = 60
         timerLabel.fontColor = UIColor.white
-        timerLabel.text = "0:0"
+        timerLabel.text = "0:00"
         parent.addChild(timerLabel)
     }
     
