@@ -124,13 +124,13 @@ extension LeaderboardViewController {
         switch difficultySegmentControl.selectedSegmentIndex {
         case 0:
             cell.textLabel?.text = "\(indexPath.row + 1): " + allEasyTime[indexPath.row].name
-            cell.detailTextLabel?.text = "\(allEasyTime[indexPath.row].time)"
+            cell.detailTextLabel?.text = "\(allEasyTime[indexPath.row].time)s"
         case 1:
             cell.textLabel?.text = "\(indexPath.row + 1): " + allHardTime[indexPath.row].name
-            cell.detailTextLabel?.text = "\(allHardTime[indexPath.row].time)"
+            cell.detailTextLabel?.text = "\(allHardTime[indexPath.row].time)s"
         case 2:
             cell.textLabel?.text = "\(indexPath.row + 1): " + allImpossibleTime[indexPath.row].name
-            cell.detailTextLabel?.text = "\(allImpossibleTime[indexPath.row].time)"
+            cell.detailTextLabel?.text = "\(allImpossibleTime[indexPath.row].time)s"
         default:
             break
         }
