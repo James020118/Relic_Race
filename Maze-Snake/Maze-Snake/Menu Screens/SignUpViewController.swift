@@ -62,7 +62,7 @@ class SignUpViewController: UIViewController {
                     "easyTime": [Int](),
                     "hardTime": [Int](),
                     "impossibleTime": [Int](),
-                    "skins": ["oldMan"]
+                    "skins": ["oldMan"],
                     "currentlyEquipped": "oldMan"
                 ]) { error in
                     if let error = error {
