@@ -18,8 +18,10 @@ class StoreViewController: UIViewController {
     
     var userTrophyCount = 0
     var skins = [String]()
+    var currentlyEquipped = ""
     
     @IBOutlet var playerModel: UIImageView!
+    @IBOutlet var defaultOption: UIButton!
     @IBOutlet var skin1option: UIButton!
     @IBOutlet var skin2Option: UIButton!
     
@@ -34,16 +36,33 @@ class StoreViewController: UIViewController {
                 self.userData = document.data() ?? [:]
                 self.userTrophyCount = self.userData["currency"] as? Int ?? 0
                 self.skins = self.userData["skins"] as? [String] ??  ["oldMan"]
+                self.currentlyEquipped = self.userData["currentlyEquipped"] as? String ?? "oldMan"
                 
                 for skinName in self.skins {
                     switch skinName {
-                    case "otherMan1":
-                        self.skin1option.setTitle("Equip", for: .normal)
-                    case "otherMan2":
-                        self.skin2Option.setTitle("Equip", for: .normal)
+                    case "oldMan":
+                        if skinName == self.currentlyEquipped {
+                            self.defaultOption.setTitle("Equipped", for: .normal)
+                        }
+                    case "youngMan":
+                        if skinName == self.currentlyEquipped {
+                            self.skin1option.setTitle("Equipped", for: .normal)
+                            self.playerModel.image = #imageLiteral(resourceName: "youngMan.png")
+                        } else {
+                            self.skin1option.setTitle("Equip", for: .normal)
+                        }
+                    case "gingerMan":
+                        if skinName == self.currentlyEquipped {
+                            self.skin2Option.setTitle("Equipped", for: .normal)
+                            self.playerModel.image = #imageLiteral(resourceName: "gingerMan.png")
+                        } else {
+                            self.skin2Option.setTitle("Equip", for: .normal)
+                        }
                     default:
                         print("hahahahahaha")
                     }
+                    
+                    
                 }
             }
         }
@@ -60,9 +79,9 @@ class StoreViewController: UIViewController {
         
         switch cost {
         case 150:
-            skinBought = "otherMan1"
+            skinBought = "youngMan"
         case 250:
-            skinBought = "otherMan2"
+            skinBought = "gingerMan"
         default:
             skinBought = "oldMan"
         }
@@ -70,7 +89,31 @@ class StoreViewController: UIViewController {
         //Check if they have skin in online inventory
         if sender.titleLabel?.text == "Equip" {
             //Store choice
-            data.set(skinBought, forKey: EQUIPPED_KEY)
+            for skinName in skins {
+                if skinName == "oldMan" {
+                    defaultOption.setTitle("Equip", for: .normal)
+                } else if skinName == "youngMan" {
+                    skin1option.setTitle("Equip", for: .normal)
+                } else if skinName == "gingerMan" {
+                    skin2Option.setTitle("Equip", for: .normal)
+                }
+            }
+            
+            currentlyEquipped = skinBought
+            userData["currentlyEquipped"] = currentlyEquipped
+            db.collection("users").document(currentUser.email!).setData(userData)
+            switch skinBought {
+            case "oldMan":
+                playerModel.image = #imageLiteral(resourceName: "headass.png")
+            case "youngMan":
+                playerModel.image = #imageLiteral(resourceName: "youngMan.png")
+            case "gingerMan":
+                playerModel.image = #imageLiteral(resourceName: "gingerMan.png")
+            default:
+                playerModel.image = #imageLiteral(resourceName: "headass.png")
+            }
+            
+            sender.setTitle("Equipped", for: .normal)
             return
         }
         
@@ -89,10 +132,33 @@ class StoreViewController: UIViewController {
             let alert = UIAlertController(title: "Confirm Purchase of \(cost) Relics for skin", message: nil, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Confirm", style: UIAlertAction.Style.default, handler: { (_) -> Void in
                 //If press "yes" take away coins give them the skin and equip it
-                sender.setTitle("Equip", for: .normal)
-                data.set(skinBought, forKey: EQUIPPED_KEY)
+                self.currentlyEquipped = skinBought
+                self.userData["currentlyEquipped"] = self.currentlyEquipped
+                
+                switch skinBought {
+                case "oldMan":
+                    self.playerModel.image = #imageLiteral(resourceName: "headass.png")
+                case "youngMan":
+                    self.playerModel.image = #imageLiteral(resourceName: "youngMan.png")
+                case "gingerMan":
+                    self.playerModel.image = #imageLiteral(resourceName: "gingerMan.png")
+                default:
+                    self.playerModel.image = #imageLiteral(resourceName: "headass.png")
+                }
+                
                 self.userTrophyCount -= cost
                 self.skins.append(skinBought)
+                
+                for skinName in self.skins {
+                    if skinName == "oldMan" {
+                        self.defaultOption.setTitle("Equip", for: .normal)
+                    } else if skinName == "youngMan" {
+                        self.skin1option.setTitle("Equip", for: .normal)
+                    } else if skinName == "gingerMan" {
+                        self.skin2Option.setTitle("Equip", for: .normal)
+                    }
+                }
+                sender.setTitle("Equipped", for: .normal)
                 
                 self.userData["currency"] = self.userTrophyCount
                 self.userData["skins"] = self.skins

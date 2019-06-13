@@ -93,40 +93,40 @@ extension GameScene {
     //Texture initialization
     func textureInitialization() {
         var names = [String]()
-        switch data.string(forKey: EQUIPPED_KEY) {
+        switch playerTexture {
         case "oldMan":
             names = ["walkingDown", "walkingLeft", "walkingUp", "walkingRight"]
-        case "otherMan1":
-            names = ["walkingDown", "walkingLeft", "walkingUp", "walkingRight"]
-        case "otherMan2":
-            names = ["walkingDown", "walkingLeft", "walkingUp", "walkingRight"]
+        case "youngMan":
+            names = ["youngManWalkingDown", "youngManWalkingLeft", "youngManWalkingUp", "youngManWalkingRight"]
+        case "gingerMan":
+            names = ["gingerManWalkingDown", "gingerManWalkingLeft", "gingerManWalkingUp", "gingerManWalkingRight"]
         default:
             print("ahahhaahaa")
         }
         
         //Walking down texture initializaiton
-        walking_Down_TextureAtlas = SKTextureAtlas(named: "walkingDown")
+        walking_Down_TextureAtlas = SKTextureAtlas(named: names[0])
         for i in 1...walking_Down_TextureAtlas.textureNames.count {
             let name = "walking_down_\(i)"
             walking_Down_Textures.append(walking_Down_TextureAtlas.textureNamed(name))
         }
         
         //Walking left texture initialization
-        walking_Left_TextureAtlas = SKTextureAtlas(named: "walkingLeft")
+        walking_Left_TextureAtlas = SKTextureAtlas(named: names[1])
         for i in 1...walking_Left_TextureAtlas.textureNames.count {
             let name = "walking_left_\(i)"
             walking_Left_Textures.append(walking_Left_TextureAtlas.textureNamed(name))
         }
         
         //Walking up texture initialization
-        walking_Up_TextureAtlas = SKTextureAtlas(named: "walkingUp")
+        walking_Up_TextureAtlas = SKTextureAtlas(named: names[2])
         for i in 1...walking_Up_TextureAtlas.textureNames.count {
             let name = "walking_up_\(i)"
             walking_Up_Textures.append(walking_Up_TextureAtlas.textureNamed(name))
         }
         
         //Walking right texture initialization
-        walking_Right_TextureAtlas = SKTextureAtlas(named: "walkingRight")
+        walking_Right_TextureAtlas = SKTextureAtlas(named: names[3])
         for i in 1...walking_Right_TextureAtlas.textureNames.count {
             let name = "walking_right_\(i)"
             walking_Right_Textures.append(walking_Right_TextureAtlas.textureNamed(name))
@@ -136,7 +136,7 @@ extension GameScene {
     //In game object generation
     func characterInitialization() {
         monsters = generateMonsters()
-        player1 = Player(texture: SKTexture(image: #imageLiteral(resourceName: "oldMan.png")), parent: self)
+        player1 = Player(texture: SKTexture(imageNamed: playerTexture), parent: self)
         player1.name = "player1"
         generateOpponent()
     }

@@ -37,6 +37,14 @@
 		2EDD7A972280B6C4002B7783 /* NodeToDir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDD7A962280B6C4002B7783 /* NodeToDir.swift */; };
 		2EEEBAF122A83EBE005EEBF1 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEEBAF022A83EBE005EEBF1 /* StoreViewController.swift */; };
 		3CD6A9F1537C1A3181838A14 /* Pods_Maze_SnakeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6476F6835E8EEC2C6A37FF3 /* Pods_Maze_SnakeUITests.framework */; };
+		4436ED2E22B1BFB50002E469 /* youngManWalkingDown.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4436ED2D22B1BFB50002E469 /* youngManWalkingDown.atlas */; };
+		4436ED3022B1BFBD0002E469 /* youngManWalkingUp.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4436ED2F22B1BFBD0002E469 /* youngManWalkingUp.atlas */; };
+		4436ED3222B1BFC30002E469 /* youngManWalkingLeft.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4436ED3122B1BFC30002E469 /* youngManWalkingLeft.atlas */; };
+		4436ED3422B1BFC90002E469 /* youngManWalkingRight.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4436ED3322B1BFC90002E469 /* youngManWalkingRight.atlas */; };
+		4436ED3622B1BFD10002E469 /* gingerManWalkingDown.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4436ED3522B1BFD10002E469 /* gingerManWalkingDown.atlas */; };
+		4436ED3822B1BFD70002E469 /* gingerManWalkingUp.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4436ED3722B1BFD70002E469 /* gingerManWalkingUp.atlas */; };
+		4436ED3A22B1BFDD0002E469 /* gingerManWalkingLeft.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4436ED3922B1BFDC0002E469 /* gingerManWalkingLeft.atlas */; };
+		4436ED3C22B1BFE10002E469 /* gingerManWalkingRight.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4436ED3B22B1BFE10002E469 /* gingerManWalkingRight.atlas */; };
 		44A0D10D229E1CC5001C9706 /* PvPConnectionExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A0D10C229E1CC5001C9706 /* PvPConnectionExt.swift */; };
 		44ACC50A22906F8E0054C91A /* InfoDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ACC50922906F8E0054C91A /* InfoDisplay.swift */; };
 		44B14C7C22A5BB9A0071BFAB /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B14C7B22A5BB9A0071BFAB /* LogInViewController.swift */; };
@@ -130,6 +138,14 @@
 		2ECD0A5522987F3400318C0B /* walkingRight.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = walkingRight.atlas; sourceTree = "<group>"; };
 		2EDD7A962280B6C4002B7783 /* NodeToDir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeToDir.swift; sourceTree = "<group>"; };
 		2EEEBAF022A83EBE005EEBF1 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
+		4436ED2D22B1BFB50002E469 /* youngManWalkingDown.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = youngManWalkingDown.atlas; sourceTree = "<group>"; };
+		4436ED2F22B1BFBD0002E469 /* youngManWalkingUp.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = youngManWalkingUp.atlas; sourceTree = "<group>"; };
+		4436ED3122B1BFC30002E469 /* youngManWalkingLeft.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = youngManWalkingLeft.atlas; sourceTree = "<group>"; };
+		4436ED3322B1BFC90002E469 /* youngManWalkingRight.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = youngManWalkingRight.atlas; sourceTree = "<group>"; };
+		4436ED3522B1BFD10002E469 /* gingerManWalkingDown.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = gingerManWalkingDown.atlas; sourceTree = "<group>"; };
+		4436ED3722B1BFD70002E469 /* gingerManWalkingUp.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = gingerManWalkingUp.atlas; sourceTree = "<group>"; };
+		4436ED3922B1BFDC0002E469 /* gingerManWalkingLeft.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = gingerManWalkingLeft.atlas; sourceTree = "<group>"; };
+		4436ED3B22B1BFE10002E469 /* gingerManWalkingRight.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = gingerManWalkingRight.atlas; sourceTree = "<group>"; };
 		44A0D10C229E1CC5001C9706 /* PvPConnectionExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PvPConnectionExt.swift; sourceTree = "<group>"; };
 		44ACC50922906F8E0054C91A /* InfoDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDisplay.swift; sourceTree = "<group>"; };
 		44B14C7B22A5BB9A0071BFAB /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -258,6 +274,14 @@
 				2ECD0A5322987E6400318C0B /* walkingUp.atlas */,
 				2ECD0A512298766B00318C0B /* walkingLeft.atlas */,
 				2ECD0A5522987F3400318C0B /* walkingRight.atlas */,
+				4436ED2D22B1BFB50002E469 /* youngManWalkingDown.atlas */,
+				4436ED2F22B1BFBD0002E469 /* youngManWalkingUp.atlas */,
+				4436ED3122B1BFC30002E469 /* youngManWalkingLeft.atlas */,
+				4436ED3322B1BFC90002E469 /* youngManWalkingRight.atlas */,
+				4436ED3522B1BFD10002E469 /* gingerManWalkingDown.atlas */,
+				4436ED3722B1BFD70002E469 /* gingerManWalkingUp.atlas */,
+				4436ED3922B1BFDC0002E469 /* gingerManWalkingLeft.atlas */,
+				4436ED3B22B1BFE10002E469 /* gingerManWalkingRight.atlas */,
 				2E7870E92282055D00FB1303 /* Data Structures */,
 				611196202284DC070075EEC9 /* Utility */,
 				2EDD7A952280B68A002B7783 /* Extensions */,
@@ -611,19 +635,27 @@
 				61D584FC229F4EC900C751C5 /* death.wav in Resources */,
 				61D584FA229F4EC900C751C5 /* footsteps.wav in Resources */,
 				2ECD0A522298766C00318C0B /* walkingLeft.atlas in Resources */,
+				4436ED2E22B1BFB50002E469 /* youngManWalkingDown.atlas in Resources */,
 				2E39DF4E227B65CA00EA1C84 /* Main.storyboard in Resources */,
 				2E39DF45227B65CA00EA1C84 /* AIGameScene.sks in Resources */,
 				2ECD0A5622987F3400318C0B /* walkingRight.atlas in Resources */,
 				2E47C74E229721C50007576C /* walkingDown.atlas in Resources */,
+				4436ED3A22B1BFDD0002E469 /* gingerManWalkingLeft.atlas in Resources */,
 				61D584FB229F4EC900C751C5 /* trophy-collect.wav in Resources */,
 				61163AEE227CECDB001F49E1 /* Tiles.sks in Resources */,
 				61D584FD229F4EC900C751C5 /* game-over.wav in Resources */,
+				4436ED3022B1BFBD0002E469 /* youngManWalkingUp.atlas in Resources */,
 				2E8B678022A19F57005BC45B /* GoogleService-Info.plist in Resources */,
+				4436ED3C22B1BFE10002E469 /* gingerManWalkingRight.atlas in Resources */,
 				2E39DF53227B65CA00EA1C84 /* LaunchScreen.storyboard in Resources */,
+				4436ED3822B1BFD70002E469 /* gingerManWalkingUp.atlas in Resources */,
 				61D584F9229F4EC900C751C5 /* end.wav in Resources */,
+				4436ED3422B1BFC90002E469 /* youngManWalkingRight.atlas in Resources */,
 				61D584F8229F4EC900C751C5 /* background-music.wav in Resources */,
+				4436ED3622B1BFD10002E469 /* gingerManWalkingDown.atlas in Resources */,
 				61930BDA227DD12200550DD0 /* TestTIles.sks in Resources */,
 				2E07DB08229DBECD0092217F /* PvPGameScene.sks in Resources */,
+				4436ED3222B1BFC30002E469 /* youngManWalkingLeft.atlas in Resources */,
 				61163AEF227CECDB001F49E1 /* Assets.xcassets in Resources */,
 				2E39DF47227B65CA00EA1C84 /* Actions.sks in Resources */,
 			);

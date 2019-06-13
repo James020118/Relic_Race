@@ -88,8 +88,8 @@ class Player: Actor {
             if music_Is_On {
                 scene.sfxController.playSound(named: "footsteps", at: 0.6)
             }
-        }else {
-            texture = SKTexture(imageNamed: "oldMan")
+        } else {
+            texture = SKTexture(imageNamed: playerTexture)
         }
     }
     

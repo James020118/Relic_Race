@@ -63,6 +63,7 @@ class SignUpViewController: UIViewController {
                     "hardTime": [Int](),
                     "impossibleTime": [Int](),
                     "skins": ["oldMan"]
+                    "currentlyEquipped": "oldMan"
                 ]) { error in
                     if let error = error {
                         print("Error writing document: \(error)")

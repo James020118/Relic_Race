@@ -13,12 +13,17 @@ var joystick_On_The_Right = true
 var minimap_On_The_Left = true
 var music_Is_On = true
 
+var playerTexture = ""
+
 class MainViewController: UIViewController {
     
     var db: Firestore!
     
     @IBOutlet var welcomeLabel: UILabel!
     @IBOutlet var currencyLabel: UILabel!
+    @IBOutlet var playerModelSmall: UIImageView!
+    
+    var currentlyEquipped = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,8 +51,24 @@ class MainViewController: UIViewController {
             if let document = document, document.exists {
                 let currency = document.data()!["currency"] as! Int
                 self.currencyLabel.text = "Relics: \(currency)"
+                self.currentlyEquipped = document.data()!["currentlyEquipped"] as! String
+                
+                switch self.currentlyEquipped {
+                case "oldMan":
+                    self.playerModelSmall.image = #imageLiteral(resourceName: "headass.png")
+                case "youngMan":
+                    self.playerModelSmall.image = #imageLiteral(resourceName: "youngMan.png")
+                case "gingerMan":
+                    self.playerModelSmall.image = #imageLiteral(resourceName: "gingerMan.png")
+                default:
+                    self.playerModelSmall.image = #imageLiteral(resourceName: "headass.png")
+                }
+                
+                playerTexture = self.currentlyEquipped
             }
         }
+        
+
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

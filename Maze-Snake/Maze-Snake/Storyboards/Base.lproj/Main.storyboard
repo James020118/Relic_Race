@@ -448,8 +448,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kLu-jP-qnX">
-                                <rect key="frame" x="200" y="182" width="55" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <rect key="frame" x="200" y="177" width="63" height="53"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="30"/>
                                 <state key="normal" title="Play">
                                     <color key="titleColor" red="0.99990183115005493" green="1" blue="0.99987989664077759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -458,8 +458,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dy9-YU-Tit">
-                                <rect key="frame" x="299" y="182" width="69" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <rect key="frame" x="291" y="177" width="77" height="53"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="30"/>
                                 <state key="normal" title="Store">
                                     <color key="titleColor" red="0.99990183115005493" green="1" blue="0.99987989664077759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -478,13 +478,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ck-14-TJG">
-                                <rect key="frame" x="20" y="81" width="528" height="41"/>
+                                <rect key="frame" x="20" y="76" width="528" height="41"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="30"/>
                                 <color key="textColor" red="0.99882620573043823" green="1" blue="0.33262071013450623" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Relics:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2uw-W1-m4g">
-                                <rect key="frame" x="177" y="139" width="350" height="35"/>
+                                <rect key="frame" x="177" y="134" width="350" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="350" id="f8E-ZP-fsD"/>
                                 </constraints>
@@ -493,8 +493,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B6l-f8-mcU">
-                                <rect key="frame" x="20" y="232" width="528" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <rect key="frame" x="20" y="227" width="528" height="53"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="30"/>
                                 <state key="normal" title="Leaderboard">
                                     <color key="titleColor" red="0.99990183115005493" green="1" blue="0.99987989664077759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -561,6 +561,7 @@
                     </view>
                     <connections>
                         <outlet property="currencyLabel" destination="2uw-W1-m4g" id="ppw-54-NOc"/>
+                        <outlet property="playerModelSmall" destination="OxC-H7-q6i" id="tl3-Ci-ozX"/>
                         <outlet property="welcomeLabel" destination="1ck-14-TJG" id="N7f-9V-51D"/>
                     </connections>
                 </viewController>
@@ -695,13 +696,13 @@
                                             <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="IWB-MS-9Le">
                                                 <rect key="frame" x="0.0" y="0.0" width="336" height="123"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GAO-AC-P9K">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headass" translatesAutoresizingMaskIntoConstraints="NO" id="GAO-AC-P9K">
                                                         <rect key="frame" x="0.0" y="0.0" width="90.5" height="123"/>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eWe-8s-wMe">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youngMan" translatesAutoresizingMaskIntoConstraints="NO" id="eWe-8s-wMe">
                                                         <rect key="frame" x="122.5" y="0.0" width="91" height="123"/>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tq1-q7-0bx">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gingerMan" translatesAutoresizingMaskIntoConstraints="NO" id="Tq1-q7-0bx">
                                                         <rect key="frame" x="245.5" y="0.0" width="90.5" height="123"/>
                                                     </imageView>
                                                 </subviews>
@@ -714,7 +715,7 @@
                                                         <color key="backgroundColor" red="0.0" green="0.028642290849999998" blue="0.58130096460000003" alpha="0.58429855929999996" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <state key="normal" title="Equip">
-                                                            <color key="titleColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onSkinClick:" destination="pf8-ye-3W8" eventType="touchUpInside" id="bS8-eC-0BK"/>
@@ -725,7 +726,7 @@
                                                         <color key="backgroundColor" red="0.0" green="0.028642290848731416" blue="0.58130096459824987" alpha="0.58429855928689889" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <state key="normal" title="150 Relics">
-                                                            <color key="titleColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onSkinClick:" destination="pf8-ye-3W8" eventType="touchUpInside" id="2WD-M0-ie5"/>
@@ -736,7 +737,7 @@
                                                         <color key="backgroundColor" red="0.0" green="0.028642290849999998" blue="0.58130096460000003" alpha="0.58429855929999996" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <state key="normal" title="250 Relics">
-                                                            <color key="titleColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onSkinClick:" destination="pf8-ye-3W8" eventType="touchUpInside" id="CJz-v9-xnH"/>
@@ -797,7 +798,7 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skins Shop" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vT-yT-U1x">
                                 <rect key="frame" x="85" y="20" width="463" height="45"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="35"/>
                                 <color key="textColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -825,6 +826,7 @@
                         <viewLayoutGuide key="safeArea" id="Kxd-z1-MxC"/>
                     </view>
                     <connections>
+                        <outlet property="defaultOption" destination="hzD-e1-wbi" id="JT5-Pn-jwY"/>
                         <outlet property="playerModel" destination="uP0-tK-yLU" id="lxz-6d-RsC"/>
                         <outlet property="skin1option" destination="pb9-6t-LO7" id="5ps-Wh-Baf"/>
                         <outlet property="skin2Option" destination="OQc-YG-TBZ" id="JyV-0q-Tts"/>
@@ -1127,8 +1129,10 @@
     <resources>
         <image name="Settings logo" width="80" height="80"/>
         <image name="backButton" width="80" height="80"/>
+        <image name="gingerMan" width="22" height="26"/>
         <image name="headass" width="1256" height="1534"/>
         <image name="lessDogShitBackground" width="2436" height="1125"/>
         <image name="phoneBackground" width="2436" height="1125"/>
+        <image name="youngMan" width="22" height="26"/>
     </resources>
 </document>
