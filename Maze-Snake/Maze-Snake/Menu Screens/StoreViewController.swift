@@ -117,6 +117,10 @@ class StoreViewController: UIViewController {
             return
         }
         
+        if sender.titleLabel?.text == "Equipped" {
+            return
+        }
+        
         let trophies = userTrophyCount//Trophies
         //If not popup with "You do not have enough trophies"
         if cost > trophies {

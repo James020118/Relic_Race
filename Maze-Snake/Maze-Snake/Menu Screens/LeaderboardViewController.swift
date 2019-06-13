@@ -123,16 +123,23 @@ extension LeaderboardViewController {
         
         switch difficultySegmentControl.selectedSegmentIndex {
         case 0:
-            cell.textLabel?.text = allEasyTime[indexPath.row].name
+            cell.textLabel?.text = "\(indexPath.row + 1): " + allEasyTime[indexPath.row].name
             cell.detailTextLabel?.text = "\(allEasyTime[indexPath.row].time)"
         case 1:
-            cell.textLabel?.text = allHardTime[indexPath.row].name
+            cell.textLabel?.text = "\(indexPath.row + 1): " + allHardTime[indexPath.row].name
             cell.detailTextLabel?.text = "\(allHardTime[indexPath.row].time)"
         case 2:
-            cell.textLabel?.text = allImpossibleTime[indexPath.row].name
+            cell.textLabel?.text = "\(indexPath.row + 1): " + allImpossibleTime[indexPath.row].name
             cell.detailTextLabel?.text = "\(allImpossibleTime[indexPath.row].time)"
         default:
             break
+        }
+        
+        if indexPath.row < 3 {
+            cell.textLabel?.font = UIFont(name: "AvenirNext-Bold", size: 20)
+            cell.detailTextLabel?.font = UIFont(name: "AvenirNext-Bold", size: 20)
+            cell.textLabel?.textColor = UIColor.init(displayP3Red: 255, green: 215, blue: 0, alpha: 1)
+            cell.detailTextLabel?.textColor = UIColor.init(displayP3Red: 255, green: 215, blue: 0, alpha: 1)
         }
         
         return cell

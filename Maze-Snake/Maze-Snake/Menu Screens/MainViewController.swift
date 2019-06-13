@@ -44,7 +44,7 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         let currentUser = Auth.auth().currentUser!
-        welcomeLabel.text = "Welcome, \(currentUser.displayName!)"
+        welcomeLabel.text = "Welcome, \(currentUser.displayName!)!"
         
         let docRef = db.collection("users").document(currentUser.email!)
         docRef.getDocument { (document, error) in

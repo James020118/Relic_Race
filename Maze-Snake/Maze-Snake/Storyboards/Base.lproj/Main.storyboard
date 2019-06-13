@@ -878,7 +878,7 @@
                                         <rect key="frame" x="103" y="155" width="362" height="38"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="19"/>
                                         <state key="normal" title="Hard">
-                                            <color key="titleColor" red="0.99990183115005493" green="1" blue="0.99987989664077759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="1" green="0.60496825806672483" blue="0.1347153834147139" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="onDifficultyClick:" destination="t0l-Rr-Xtv" eventType="touchUpInside" id="so0-yU-MHA"/>
@@ -888,7 +888,7 @@
                                         <rect key="frame" x="103" y="109" width="362" height="38"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="19"/>
                                         <state key="normal" title="Easy">
-                                            <color key="titleColor" red="0.99990183115005493" green="1" blue="0.99987989664077759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                         </state>
                                         <connections>
                                             <action selector="onDifficultyClick:" destination="t0l-Rr-Xtv" eventType="touchUpInside" id="Jbu-bq-odr"/>
@@ -908,7 +908,7 @@
                                         <rect key="frame" x="103" y="201" width="362" height="38"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="19"/>
                                         <state key="normal" title="Impossible">
-                                            <color key="titleColor" red="0.99990183115005493" green="1" blue="0.99987989664077759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="onDifficultyClick:" destination="t0l-Rr-Xtv" eventType="touchUpInside" id="QMN-Od-4Og"/>
