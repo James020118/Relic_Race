@@ -47,14 +47,14 @@ class StoreViewController: UIViewController {
                     case "youngMan":
                         if skinName == self.currentlyEquipped {
                             self.skin1option.setTitle("Equipped", for: .normal)
-                            self.playerModel.image = #imageLiteral(resourceName: "youngMan.png")
+                            self.playerModel.image = #imageLiteral(resourceName: "Young Man Close Up.png")
                         } else {
                             self.skin1option.setTitle("Equip", for: .normal)
                         }
                     case "gingerMan":
                         if skinName == self.currentlyEquipped {
                             self.skin2Option.setTitle("Equipped", for: .normal)
-                            self.playerModel.image = #imageLiteral(resourceName: "gingerMan.png")
+                            self.playerModel.image = #imageLiteral(resourceName: "Ginger man close up.png")
                         } else {
                             self.skin2Option.setTitle("Equip", for: .normal)
                         }
@@ -106,9 +106,9 @@ class StoreViewController: UIViewController {
             case "oldMan":
                 playerModel.image = #imageLiteral(resourceName: "headass.png")
             case "youngMan":
-                playerModel.image = #imageLiteral(resourceName: "youngMan.png")
+                playerModel.image = #imageLiteral(resourceName: "Young Man Close Up.png")
             case "gingerMan":
-                playerModel.image = #imageLiteral(resourceName: "gingerMan.png")
+                playerModel.image = #imageLiteral(resourceName: "Ginger man close up.png")
             default:
                 playerModel.image = #imageLiteral(resourceName: "headass.png")
             }
@@ -143,9 +143,9 @@ class StoreViewController: UIViewController {
                 case "oldMan":
                     self.playerModel.image = #imageLiteral(resourceName: "headass.png")
                 case "youngMan":
-                    self.playerModel.image = #imageLiteral(resourceName: "youngMan.png")
+                    self.playerModel.image = #imageLiteral(resourceName: "Young Man Close Up.png")
                 case "gingerMan":
-                    self.playerModel.image = #imageLiteral(resourceName: "gingerMan.png")
+                    self.playerModel.image = #imageLiteral(resourceName: "Ginger man close up.png")
                 default:
                     self.playerModel.image = #imageLiteral(resourceName: "headass.png")
                 }

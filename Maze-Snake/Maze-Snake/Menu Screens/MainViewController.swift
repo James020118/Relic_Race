@@ -57,9 +57,9 @@ class MainViewController: UIViewController {
                 case "oldMan":
                     self.playerModelSmall.image = #imageLiteral(resourceName: "headass.png")
                 case "youngMan":
-                    self.playerModelSmall.image = #imageLiteral(resourceName: "youngMan.png")
+                    self.playerModelSmall.image = #imageLiteral(resourceName: "Young Man Close Up.png")
                 case "gingerMan":
-                    self.playerModelSmall.image = #imageLiteral(resourceName: "gingerMan.png")
+                    self.playerModelSmall.image = #imageLiteral(resourceName: "Ginger man close up.png")
                 default:
                     self.playerModelSmall.image = #imageLiteral(resourceName: "headass.png")
                 }

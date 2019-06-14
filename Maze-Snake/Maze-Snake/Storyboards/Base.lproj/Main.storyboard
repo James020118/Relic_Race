@@ -699,10 +699,10 @@
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headass" translatesAutoresizingMaskIntoConstraints="NO" id="GAO-AC-P9K">
                                                         <rect key="frame" x="0.0" y="0.0" width="90.5" height="123"/>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youngMan" translatesAutoresizingMaskIntoConstraints="NO" id="eWe-8s-wMe">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Young Man Close Up" translatesAutoresizingMaskIntoConstraints="NO" id="eWe-8s-wMe">
                                                         <rect key="frame" x="122.5" y="0.0" width="91" height="123"/>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gingerMan" translatesAutoresizingMaskIntoConstraints="NO" id="Tq1-q7-0bx">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ginger man close up" translatesAutoresizingMaskIntoConstraints="NO" id="Tq1-q7-0bx">
                                                         <rect key="frame" x="245.5" y="0.0" width="90.5" height="123"/>
                                                     </imageView>
                                                 </subviews>
@@ -1127,12 +1127,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Ginger man close up" width="724" height="850"/>
         <image name="Settings logo" width="80" height="80"/>
+        <image name="Young Man Close Up" width="698" height="836"/>
         <image name="backButton" width="80" height="80"/>
-        <image name="gingerMan" width="22" height="26"/>
         <image name="headass" width="1256" height="1534"/>
         <image name="lessDogShitBackground" width="2436" height="1125"/>
         <image name="phoneBackground" width="2436" height="1125"/>
-        <image name="youngMan" width="22" height="26"/>
     </resources>
 </document>
