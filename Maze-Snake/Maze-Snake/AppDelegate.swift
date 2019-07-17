@@ -9,6 +9,10 @@
 import UIKit
 import Firebase
 import FirebaseFirestore
+import GoogleMobileAds
+
+let REWARD_UNIT_ID = "ca-app-pub-3940256099942544/1712485313" //"ca-app-pub-8803340854984368~4579897393"
+let INTERSTITIAL_UNIT_ID = "ca-app-pub-3940256099942544/4411468910" //"ca-app-pub-8803340854984368~4579897393"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,13 +21,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     static var gameScreen: GameViewController?
     
+    var db: Firestore!
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
-        let db = Firestore.firestore()
+        db = Firestore.firestore()
         
-        print(db)
+        // Initialize the Google Mobile Ads SDK.
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        
+        GADRewardBasedVideoAd.sharedInstance().delegate = self
+        GADRewardBasedVideoAd.sharedInstance().load(GADRequest(), withAdUnitID: REWARD_UNIT_ID)
+        
         return true
     }
 
@@ -66,3 +77,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+//MARK:- GADRewardBasedVideoAdDelegate
+
+extension AppDelegate: GADRewardBasedVideoAdDelegate {
+    
+    func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd, didRewardUserWith reward: GADAdReward) {
+        let currentUser = Auth.auth().currentUser!
+        let docRef = db.collection("users").document(currentUser.email!)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let curRelics = document.data()!["currency"] as! Int
+                var uData = document.data()!
+                uData["currency"] = curRelics + 10
+                self.db.collection("users").document(currentUser.email!).setData(uData)
+            }
+        }
+    }
+    
+    func rewardBasedVideoAdDidClose(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
+        GADRewardBasedVideoAd.sharedInstance().load(GADRequest(), withAdUnitID: REWARD_UNIT_ID)
+    }
+    
+    func rewardBasedVideoAdDidReceive(_ rewardBasedVideoAd:GADRewardBasedVideoAd) {
+        print("Reward based video ad is received.")
+    }
+    
+    func rewardBasedVideoAdDidOpen(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
+        print("Opened reward based video ad.")
+    }
+    
+    func rewardBasedVideoAdDidStartPlaying(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
+        print("Reward based video ad started playing.")
+    }
+    
+    func rewardBasedVideoAdDidCompletePlaying(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
+        print("Reward based video ad has completed.")
+    }
+    
+    func rewardBasedVideoAdWillLeaveApplication(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
+        print("Reward based video ad will leave application.")
+    }
+    
+    func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd,
+                            didFailToLoadWithError error: Error) {
+        print("Reward based video ad failed to load.")
+    }
+}

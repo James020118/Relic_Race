@@ -68,17 +68,40 @@ class AIGameScene: GameScene {
     override func playerWin() {
         timer.invalidate()
         saveTime()
+        
+        //Present Ads
+        if let adVC = self.parentVC as? GameViewController {
+            if adVC.interstitial.isReady {
+                adVC.interstitial.present(fromRootViewController: adVC)
+            }
+        }
+        
         super.playerWin()
     }
     
     override func checkMonsterWin() {
         timer.invalidate()
+        
+        //Present Ads
+        if let adVC = self.parentVC as? GameViewController {
+            if adVC.interstitial.isReady {
+                adVC.interstitial.present(fromRootViewController: adVC)
+            }
+        }
+        
         super.checkMonsterWin()
     }
     
     override func checkOpponentWin() {
         if opponent.score >= 5 {
             timer.invalidate()
+            
+            //Present Ads
+            if let adVC = self.parentVC as? GameViewController {
+                if adVC.interstitial.isReady {
+                    adVC.interstitial.present(fromRootViewController: adVC)
+                }
+            }
         }
         super.checkOpponentWin()
     }

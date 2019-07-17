@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import GoogleMobileAds
 
 var joystick_On_The_Right = true
 var minimap_On_The_Left = true
@@ -85,15 +86,11 @@ class MainViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func onAdClick(_ sender: Any) {
+        let videoLoaded = GADRewardBasedVideoAd.sharedInstance().isReady
+        if videoLoaded {
+            GADRewardBasedVideoAd.sharedInstance().present(fromRootViewController: self)
+        }
     }
-    */
 
 }

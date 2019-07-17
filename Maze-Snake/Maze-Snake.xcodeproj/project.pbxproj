@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -65,6 +65,8 @@
 		619AFE5D22871E81000784A4 /* TextureSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619AFE5C22871E81000784A4 /* TextureSet.swift */; };
 		619FEA2C228CEE4600C28842 /* Monster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619FEA2B228CEE4600C28842 /* Monster.swift */; };
 		61A708E522AB0CD6007B5253 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A708E422AB0CD6007B5253 /* Toast.swift */; };
+		61B155B122C4EFC00031F35C /* MD5-Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B155B022C4EFC00031F35C /* MD5-Hash.swift */; };
+		61B155B322C4F0050031F35C /* Checksum-Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B155B222C4F0050031F35C /* Checksum-Packet.swift */; };
 		61B48313228397AF0045BF3A /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B48312228397AF0045BF3A /* Actor.swift */; };
 		61B48315228397EB0045BF3A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B48314228397EB0045BF3A /* Player.swift */; };
 		61D584F0229F4BA300C751C5 /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D584EF229F4BA300C751C5 /* SoundController.swift */; };
@@ -168,6 +170,8 @@
 		619AFE5C22871E81000784A4 /* TextureSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureSet.swift; sourceTree = "<group>"; };
 		619FEA2B228CEE4600C28842 /* Monster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monster.swift; sourceTree = "<group>"; };
 		61A708E422AB0CD6007B5253 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		61B155B022C4EFC00031F35C /* MD5-Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MD5-Hash.swift"; sourceTree = "<group>"; };
+		61B155B222C4F0050031F35C /* Checksum-Packet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Checksum-Packet.swift"; sourceTree = "<group>"; };
 		61B48312228397AF0045BF3A /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		61B48314228397EB0045BF3A /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		61D584EF229F4BA300C751C5 /* SoundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
@@ -341,6 +345,7 @@
 				619AFE5C22871E81000784A4 /* TextureSet.swift */,
 				2E07DAFC229DAA2F0092217F /* GameEncodingBuffer.swift */,
 				6117704E22A2B54100F67AB8 /* ScoringPacket.swift */,
+				61B155B222C4F0050031F35C /* Checksum-Packet.swift */,
 			);
 			path = "Data Structures";
 			sourceTree = "<group>";
@@ -361,6 +366,7 @@
 				61F7C6A9228EF5F20006597B /* GraphNodeEquality.swift */,
 				61DA9DD92298E27500129D34 /* BestFittingUIFont.swift */,
 				61DA9DDB2298E2BD00129D34 /* FitToBoundsLabel.swift */,
+				61B155B022C4EFC00031F35C /* MD5-Hash.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -728,30 +734,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Maze-Snake/Pods-Maze-Snake-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-Maze-Snake/Pods-Maze-Snake-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-Maze-Snake/Pods-Maze-Snake-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -829,7 +816,9 @@
 				2ECD0A50229870D200318C0B /* SettingsViewController.swift in Sources */,
 				44F2474322949F2300C69AA0 /* GameSceneExt.swift in Sources */,
 				6117704F22A2B54100F67AB8 /* ScoringPacket.swift in Sources */,
+				61B155B322C4F0050031F35C /* Checksum-Packet.swift in Sources */,
 				2E07DB01229DB2370092217F /* Opponent.swift in Sources */,
+				61B155B122C4EFC00031F35C /* MD5-Hash.swift in Sources */,
 				61DAA85A227CFBD1000FE4D0 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1007,13 +996,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+<<<<<<< HEAD
 				DEVELOPMENT_TEAM = 2XGL4K68PY;
+=======
+				DEVELOPMENT_TEAM = BD6S7RWHKM;
+>>>>>>> MobileAds
 				INFOPLIST_FILE = "Maze-Snake/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = "com.YBMW.Maze-Snake1";
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = "com.YBMW.Maze-Snake101";
+>>>>>>> MobileAds
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1026,13 +1023,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2XGL4K68PY;
+				DEVELOPMENT_TEAM = BD6S7RWHKM;
 				INFOPLIST_FILE = "Maze-Snake/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.YBMW.Maze-Snake1";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.YBMW.Maze-Snake101";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

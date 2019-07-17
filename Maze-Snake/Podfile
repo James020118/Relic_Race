@@ -9,6 +9,7 @@ target 'Maze-Snake' do
 pod 'Firebase/Core'
 pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
+pod 'Firebase/AdMob'
 
   target 'Maze-SnakeTests' do
     inherit! :search_paths
