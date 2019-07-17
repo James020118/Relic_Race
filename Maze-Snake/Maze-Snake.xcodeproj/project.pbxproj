@@ -996,21 +996,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-<<<<<<< HEAD
-				DEVELOPMENT_TEAM = 2XGL4K68PY;
-=======
 				DEVELOPMENT_TEAM = BD6S7RWHKM;
->>>>>>> MobileAds
 				INFOPLIST_FILE = "Maze-Snake/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<< HEAD
-				PRODUCT_BUNDLE_IDENTIFIER = "com.YBMW.Maze-Snake1";
-=======
 				PRODUCT_BUNDLE_IDENTIFIER = "com.YBMW.Maze-Snake101";
->>>>>>> MobileAds
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
