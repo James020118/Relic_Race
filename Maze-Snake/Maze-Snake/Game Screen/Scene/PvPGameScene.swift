@@ -13,6 +13,8 @@ import MultipeerConnectivity
 
 class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegate {
     
+    var checksumHash = ""
+    
     //Labels for initial prompt
     var hostSessionLabel = SKLabelNode()
     var joinSessionLabel = SKLabelNode()
@@ -68,6 +70,13 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
             do {
                 let encoder = JSONEncoder()
                 let data = try encoder.encode(buffer)
+                //Send over checksum
+                let checksum = ChecksumPacket(
+                    hash: NSData(data: data).MD5()
+                )
+                let checksumData = try encoder.encode(checksum)
+                try mcSession?.send(checksumData, toPeers: mcSession!.connectedPeers, with: .reliable)
+                //Send Graph data
                 print(data)
                 try mcSession?.send(data, toPeers: mcSession!.connectedPeers, with: .reliable)
             }catch{
@@ -86,7 +95,7 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
         super.update(currentTime)
         
         let dSent = currentTime - lastSent
-        if dSent >= 0.5 && startUpdateFlag {
+        if dSent >= 0.125 && startUpdateFlag {
             let sendPos = player1.gridPos
             do {
                 let encoder = JSONEncoder()

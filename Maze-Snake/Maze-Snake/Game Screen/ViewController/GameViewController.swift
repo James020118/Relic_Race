@@ -9,6 +9,7 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import GoogleMobileAds
 
 enum Difficulty {
     case Easy, Hard, Impossible
@@ -17,13 +18,15 @@ enum Difficulty {
 /*-----------------
  Viewcontroller to control the Game Screen
  -----------------*/
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, GADInterstitialDelegate {
 
     var soundController: SoundController!
     
     var aiGame: AIGameScene!
     
     var difficulty: Difficulty = .Easy
+    
+    var interstitial: GADInterstitial!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +63,20 @@ class GameViewController: UIViewController {
             view.shouldCullNonVisibleNodes = false
         }
         
+        //PRELOAD & CONFIGURE ADS
+        interstitial = createAndLoadInterstitial()
+        interstitial.delegate = self
+    }
+    
+    func createAndLoadInterstitial() -> GADInterstitial {
+        let interstitial = GADInterstitial(adUnitID: INTERSTITIAL_UNIT_ID)
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+    }
+    
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        interstitial = createAndLoadInterstitial()
     }
 
     override func viewWillAppear(_ animated: Bool) {

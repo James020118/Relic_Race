@@ -34,10 +34,23 @@ extension PvPGameScene {
         
         //------ If data is initial payload
         if !startUpdateFlag {
+            //Receive Checksum
+            do {
+                print(data)
+                let checksum = try JSONDecoder().decode(ChecksumPacket.self, from: data)
+                checksumHash = checksum.hash
+                return
+            }catch{ print("Payload is not checksum") }
+            
             //Get Maze Data
             do {
                 //Decode Data
                 print(data)
+                let receivingHsah = NSData(data: data).MD5()
+                if receivingHsah != checksumHash {
+                    fatalError()
+                }
+                
                 let buffer = try JSONDecoder().decode(GameEncodingBuffer.self, from: data)
                 premapSetup()
                 let maze = Maze(from: buffer)

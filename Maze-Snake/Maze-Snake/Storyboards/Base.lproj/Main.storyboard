@@ -432,7 +432,6 @@
                                 <rect key="frame" x="256" y="264" width="56" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="FZq-xc-APA"/>
-                                    <constraint firstAttribute="width" constant="56" id="wCo-5g-j2X"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5MA-HW-5Xf">
@@ -521,6 +520,20 @@
                                 <color key="textColor" red="0.99882620573043823" green="1" blue="0.33262071013450623" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="fill" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZZ-Hw-3J3">
+                                <rect key="frame" x="20" y="134" width="122" height="50"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.076145119863013699" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="TJr-Q0-5KY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="36"/>
+                                <state key="normal" title="+10" image="Trophyy">
+                                    <color key="titleColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onAdClick:" destination="YaY-QH-69n" eventType="touchUpInside" id="XcK-iH-0H2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -536,12 +549,14 @@
                             <constraint firstItem="5QD-iM-aeH" firstAttribute="leading" secondItem="CBn-Vd-JOD" secondAttribute="leading" id="D38-aR-4af"/>
                             <constraint firstItem="q1A-Jl-xkm" firstAttribute="top" secondItem="CBn-Vd-JOD" secondAttribute="top" constant="10" id="EPg-1r-nUT"/>
                             <constraint firstItem="CBn-Vd-JOD" firstAttribute="trailing" secondItem="2uw-W1-m4g" secondAttribute="trailing" constant="41" id="IdQ-34-uTd"/>
+                            <constraint firstItem="wZZ-Hw-3J3" firstAttribute="top" secondItem="1ck-14-TJG" secondAttribute="bottom" constant="17" id="Itx-nt-qRu"/>
                             <constraint firstItem="5QD-iM-aeH" firstAttribute="trailing" secondItem="CBn-Vd-JOD" secondAttribute="trailing" id="JEJ-pv-BVf"/>
                             <constraint firstItem="OxC-H7-q6i" firstAttribute="leading" secondItem="CBn-Vd-JOD" secondAttribute="leading" constant="256" id="JSk-rt-4tE"/>
                             <constraint firstItem="1ck-14-TJG" firstAttribute="leading" secondItem="CBn-Vd-JOD" secondAttribute="leading" constant="20" id="OKF-PY-P9R"/>
                             <constraint firstItem="5QD-iM-aeH" firstAttribute="top" secondItem="CBn-Vd-JOD" secondAttribute="top" id="Ofs-lf-zvN"/>
                             <constraint firstItem="B6l-f8-mcU" firstAttribute="leading" secondItem="CBn-Vd-JOD" secondAttribute="leading" constant="20" id="Psh-a4-UTM"/>
                             <constraint firstItem="kLu-jP-qnX" firstAttribute="leading" secondItem="CBn-Vd-JOD" secondAttribute="leading" constant="200" id="QkB-cM-jCL"/>
+                            <constraint firstItem="wZZ-Hw-3J3" firstAttribute="leading" secondItem="CBn-Vd-JOD" secondAttribute="leading" constant="20" id="U9J-u9-hat"/>
                             <constraint firstItem="CBn-Vd-JOD" firstAttribute="trailing" secondItem="1ck-14-TJG" secondAttribute="trailing" constant="20" id="VGv-Ms-8JM"/>
                             <constraint firstItem="5MA-HW-5Xf" firstAttribute="top" secondItem="CBn-Vd-JOD" secondAttribute="top" constant="10" id="Xbb-A7-10Z"/>
                             <constraint firstItem="2uw-W1-m4g" firstAttribute="top" secondItem="1ck-14-TJG" secondAttribute="bottom" constant="17" id="bxc-c8-XZ6"/>
@@ -567,7 +582,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ydb-mS-Zek" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-492.25352112676057" y="-406.875"/>
+            <point key="canvasLocation" x="-492.85714285714283" y="-407.24637681159425"/>
         </scene>
         <!--Leaderboard View Controller-->
         <scene sceneID="19j-zO-Wcq">
@@ -699,10 +714,10 @@
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headass" translatesAutoresizingMaskIntoConstraints="NO" id="GAO-AC-P9K">
                                                         <rect key="frame" x="0.0" y="0.0" width="90.5" height="123"/>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youngMan" translatesAutoresizingMaskIntoConstraints="NO" id="eWe-8s-wMe">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Young Man Close Up" translatesAutoresizingMaskIntoConstraints="NO" id="eWe-8s-wMe">
                                                         <rect key="frame" x="122.5" y="0.0" width="91" height="123"/>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gingerMan" translatesAutoresizingMaskIntoConstraints="NO" id="Tq1-q7-0bx">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ginger man close up" translatesAutoresizingMaskIntoConstraints="NO" id="Tq1-q7-0bx">
                                                         <rect key="frame" x="245.5" y="0.0" width="90.5" height="123"/>
                                                     </imageView>
                                                 </subviews>
@@ -1127,12 +1142,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Ginger man close up" width="1254" height="1480"/>
         <image name="Settings logo" width="80" height="80"/>
+        <image name="Trophyy" width="60" height="67"/>
+        <image name="Young Man Close Up" width="1254" height="1480"/>
         <image name="backButton" width="80" height="80"/>
-        <image name="gingerMan" width="22" height="26"/>
         <image name="headass" width="1256" height="1534"/>
         <image name="lessDogShitBackground" width="2436" height="1125"/>
         <image name="phoneBackground" width="2436" height="1125"/>
-        <image name="youngMan" width="22" height="26"/>
     </resources>
 </document>
