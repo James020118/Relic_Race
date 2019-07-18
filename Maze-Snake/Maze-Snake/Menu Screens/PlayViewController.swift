@@ -14,8 +14,16 @@ class PlayViewController: UIViewController {
     @IBOutlet weak var hardBtn: UIButton!
     @IBOutlet weak var impossibleBtn: UIButton!
     
+    //Game Loading Icon
+    var progressIndicator = UIActivityIndicatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        //Stop animating icon
+        self.progressIndicator.stopAnimating()
     }
     
     var aiClicked = false
@@ -32,6 +40,14 @@ class PlayViewController: UIViewController {
         guard let btn = sender as? UIButton else {
             return
         }
+        
+        //Show animating icon
+        progressIndicator.center = self.view.center
+        progressIndicator.startAnimating()
+        progressIndicator.hidesWhenStopped = true
+        progressIndicator.style = UIActivityIndicatorView.Style.whiteLarge
+        view.addSubview(progressIndicator)
+        
         switch btn {
         case easyBtn:
             difficulty = .Easy

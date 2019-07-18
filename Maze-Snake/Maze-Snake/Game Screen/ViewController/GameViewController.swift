@@ -43,24 +43,26 @@ class GameViewController: UIViewController, GADInterstitialDelegate {
             AI.TILE_TIME = 0.25
         }
         
-        //Spritekit GameScene creation
-        if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "AIGameScene") as? AIGameScene {
-                aiGame = scene
-                // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFit
-                //Store Instance
-                scene.parentVC = self
-                //Assgin Difficulty
-                scene.difficulty = difficulty
-                // Present the scene
-                view.presentScene(scene)
+        DispatchQueue.main.async {
+            //Spritekit GameScene creation
+            if let view = self.view as! SKView? {
+                // Load the SKScene from 'GameScene.sks'
+                if let scene = SKScene(fileNamed: "AIGameScene") as? AIGameScene {
+                    self.aiGame = scene
+                    // Set the scale mode to scale to fit the window
+                    scene.scaleMode = .aspectFit
+                    //Store Instance
+                    scene.parentVC = self
+                    //Assgin Difficulty
+                    scene.difficulty = self.difficulty
+                    // Present the scene
+                    view.presentScene(scene)
+                }
+                
+                //Optional Scene Settings
+                view.ignoresSiblingOrder = true
+                view.shouldCullNonVisibleNodes = false
             }
-            
-            //Optional Scene Settings
-            view.ignoresSiblingOrder = true
-            view.shouldCullNonVisibleNodes = false
         }
         
         //PRELOAD & CONFIGURE ADS
