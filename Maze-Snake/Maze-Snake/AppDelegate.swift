@@ -83,6 +83,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: GADRewardBasedVideoAdDelegate {
     
     func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd, didRewardUserWith reward: GADAdReward) {
+        if Auth.auth().currentUser!.isAnonymous {
+            return
+        }
         let currentUser = Auth.auth().currentUser!
         let docRef = db.collection("users").document(currentUser.email!)
         docRef.getDocument { (document, error) in

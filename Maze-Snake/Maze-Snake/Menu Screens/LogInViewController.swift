@@ -58,6 +58,18 @@ class LogInViewController: UIViewController {
         }
     }
     
+    @IBAction func signInAsGuest(_ sender: UIButton) {
+        Auth.auth().signInAnonymously { (user, error) in
+            if let error = error {
+                print("Sign in failed:", error)
+                
+            } else {
+                print ("Signed in with uid:", user?.additionalUserInfo!.providerID)
+            }
+        }
+    }
+    
+    
     /* Function that removes soft keyboard after use */
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)

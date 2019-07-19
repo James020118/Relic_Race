@@ -55,7 +55,7 @@ class SignUpViewController: UIViewController {
                 })
                 
                 //Create user file on database
-                self.db.collection("users").document(email).setData([
+               self.db.collection("users").document(email).setData([
                     "email": email,
                     "name": username,
                     "currency": 0,

@@ -30,6 +30,14 @@ class StoreViewController: UIViewController {
         
         db = Firestore.firestore()
         
+        if Auth.auth().currentUser!.isAnonymous {
+            skin1option.isEnabled = false
+            skin2Option.isEnabled = false
+            skin1option.setTitle("Disabled", for: UIControl.State.disabled)
+            skin2Option.setTitle("Disabled", for: UIControl.State.disabled)
+            return
+        }
+        
         let docRef = db.collection("users").document(currentUser.email!)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
@@ -84,6 +92,11 @@ class StoreViewController: UIViewController {
             skinBought = "gingerMan"
         default:
             skinBought = "oldMan"
+        }
+        
+        if Auth.auth().currentUser!.isAnonymous {
+            sender.setTitle("Equipped", for: .normal)
+            return
         }
         
         //Check if they have skin in online inventory

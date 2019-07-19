@@ -40,7 +40,9 @@ class AIGameScene: GameScene {
             self.info.timerLabel.text = "Time Spent: " + self.formattedTime()
         })
         
-        
+        if Auth.auth().currentUser!.isAnonymous {
+            return
+        }
         let docRef = db.collection("users").document(currentUser.email!)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
@@ -59,7 +61,7 @@ class AIGameScene: GameScene {
                 for num in nsImpossible {
                     self.impossibleTime.append(num.intValue)
                 }
-                self.currency = self.allUserData["currency"] as! Int
+                self.currency = self.allUserData["currency"] as? Int ?? 0
             }
         }
         
@@ -112,6 +114,9 @@ class AIGameScene: GameScene {
         currency += 1
         allUserData["currency"] = currency
         
+        if Auth.auth().currentUser!.isAnonymous {
+            return
+        }
         db.collection("users").document(currentUser.email!).setData(allUserData) { err in
             if let err = err {
                 print("Error adding currency to firestore: \(err)")
@@ -187,6 +192,9 @@ class AIGameScene: GameScene {
         allUserData["hardTime"] = hardTime
         allUserData["impossibleTime"] = impossibleTime
         
+        if Auth.auth().currentUser!.isAnonymous {
+            return
+        }
         db.collection("users").document(currentUser.email!).setData(allUserData) { err in
             if let err = err {
                 print("Error writing time to firestore: \(err)")

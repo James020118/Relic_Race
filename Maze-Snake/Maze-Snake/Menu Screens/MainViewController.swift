@@ -46,13 +46,18 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         let currentUser = Auth.auth().currentUser!
         welcomeLabel.text = "Welcome, \(currentUser.displayName!)!"
+        if Auth.auth().currentUser!.isAnonymous {
+            welcomeLabel.text = "Welcome, Guest!"
+            playerTexture = "oldMan"
+            return
+        }
         
         let docRef = db.collection("users").document(currentUser.email!)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                let currency = document.data()!["currency"] as! Int
+                let currency = document.data()!["currency"] as? Int ?? 0
                 self.currencyLabel.text = "Relics: \(currency)"
-                self.currentlyEquipped = document.data()!["currentlyEquipped"] as! String
+                self.currentlyEquipped = document.data()!["currentlyEquipped"] as? String ?? "oldMan"
                 
                 switch self.currentlyEquipped {
                 case "oldMan":
