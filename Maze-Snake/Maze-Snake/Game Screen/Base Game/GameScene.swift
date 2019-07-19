@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 
 //Speed of player
-let velocityMultiplier: CGFloat = 0.11
+let velocityMultiplier: CGFloat = 0.1
 //Contact Identifiers
 let playerCategory: UInt32 = 0x1 << 1
 let trophyCategory: UInt32 = 0x1 << 2

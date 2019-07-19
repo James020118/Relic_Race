@@ -36,11 +36,11 @@ class GameViewController: UIViewController, GADInterstitialDelegate {
         
         switch difficulty {
         case .Easy:
-            AI.TILE_TIME = 0.55
+            AI.TILE_TIME = 0.37
         case .Hard:
-            AI.TILE_TIME = 0.35
+            AI.TILE_TIME = 0.27
         case .Impossible:
-            AI.TILE_TIME = 0.25
+            AI.TILE_TIME = 0.19
         }
         
         DispatchQueue.main.async {
