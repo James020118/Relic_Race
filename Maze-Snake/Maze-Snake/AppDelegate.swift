@@ -90,7 +90,7 @@ extension AppDelegate: GADRewardBasedVideoAdDelegate {
         let docRef = db.collection("users").document(currentUser.email!)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                let curRelics = document.data()!["currency"] as! Int
+                let curRelics = document.data()!["currency"] as? Int ?? 0
                 var uData = document.data()!
                 uData["currency"] = curRelics + 10
                 self.db.collection("users").document(currentUser.email!).setData(uData)

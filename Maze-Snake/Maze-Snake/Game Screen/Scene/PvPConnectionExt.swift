@@ -48,7 +48,8 @@ extension PvPGameScene {
                 print(data)
                 let receivingHsah = NSData(data: data).MD5()
                 if receivingHsah != checksumHash {
-                    fatalError()
+                    parentVC.dismiss(animated: true, completion: nil)
+                    return
                 }
                 
                 let buffer = try JSONDecoder().decode(GameEncodingBuffer.self, from: data)
