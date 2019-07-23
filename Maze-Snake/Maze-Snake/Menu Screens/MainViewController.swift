@@ -53,7 +53,7 @@ class MainViewController: UIViewController {
         }
         
         let docRef = db.collection("users").document(currentUser.email!)
-        docRef.getDocument { (document, error) in
+        docRef.getDocument { [unowned self] (document, error) in
             if let document = document, document.exists {
                 let currency = document.data()!["currency"] as? Int ?? 0
                 self.currencyLabel.text = "Relics: \(currency)"
@@ -83,7 +83,7 @@ class MainViewController: UIViewController {
     
     @IBAction func signOutButtonPressed(_ sender: Any) {
         let alertController = UIAlertController(title: "Sign Out", message: "Are you sure you want to sign out?", preferredStyle: .actionSheet)
-        alertController.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { (_) in
+        alertController.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { [unowned self] (_) in
             try! Auth.auth().signOut()
             self.dismiss(animated: true, completion: nil)
         }))

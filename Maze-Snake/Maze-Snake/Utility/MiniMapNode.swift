@@ -114,7 +114,7 @@ class MiniMapNode: SKSpriteNode {
             return
         }
         
-        let gridPos = scene.tileManager.indexFrom(position: position)
+        let gridPos = scene.tileManager!.indexFrom(position: position)
         let newPos = tileManager.getTile(row: gridPos.row, column: gridPos.column).position
         property(newPos)
     }

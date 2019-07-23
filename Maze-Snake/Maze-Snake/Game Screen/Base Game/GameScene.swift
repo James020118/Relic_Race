@@ -30,9 +30,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Graph for Maze
     var mazeGraph: GKGridGraph<GKGridGraphNode>?
     //Manages grid-like tiles
-    var tileManager: TileManager!
+    var tileManager: TileManager?
     //Joystick to control player
-    var joystick = AnalogJoystick(diameter: 150)
+    weak var joystick: AnalogJoystick? = AnalogJoystick(diameter: 150)
     
     //Actors
     var player1: Player!
@@ -107,12 +107,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if node.name == "pause" {
             if isPausing {
                 info.removePauseGame()
-                joystick.disabled = false
+                joystick!.disabled = false
                 pauseCharacters(bool: false)
                 isPausing = false
             } else {
                 info.pauseGame(xCoord: player1.position.x, yCoord: player1.position.y)
-                joystick.disabled = true
+                joystick!.disabled = true
                 pauseCharacters(bool: true)
                 isPausing = true
             }
@@ -123,6 +123,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if node.name == "return" || node.name == "exit" {
+            deallocPhysicsBodies()
             removeAllChildren()
             parentVC.dismiss(animated: true, completion: nil)
         }
@@ -251,7 +252,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func tileSetup() {
         tileManager = TileManager(from: mazeGraph!, with: textureSet)
-        tileManager.addTilesTo(scene: self)
+        tileManager!.addTilesTo(scene: self)
     }
     
     func setupGame() {
@@ -263,7 +264,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player1.spawnCamera()
         trophySystemSetup()
         //Optimization
-        tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
+        tileManager!.viewOnScreenTiles(pos: player1.position, parent: self)
         //Spawn HUD
         spawnInfo()
         spawnPause()
@@ -272,6 +273,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         moveMinimap(toTheRight: !data.bool(forKey: "minimapPos"))
         moveJoystick(toTheRight: data.bool(forKey: "joystickPos"))
         startUpdateFlag = true
+    }
+    
+    func deallocPhysicsBodies() {
+        if tileManager != nil {
+            tileManager!.deAllocate()
+        }
+        for node in self.children {
+            node.physicsBody = nil
+        }
+        physicsBody = nil
     }
     
     /* Functions to override to change game generation behavior */
@@ -299,9 +310,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         trophy.setRandomPosition()
         minimap.updateTrophy(position: trophy.position)
         opponent.stop()
-        opponent.gridPos = tileManager.indexFrom(position: opponent.position)
+        opponent.gridPos = tileManager!.indexFrom(position: opponent.position)
         if let ai = opponent as? AI {
-            let trophyGridPos = tileManager.indexFrom(position: trophy.position)
+            let trophyGridPos = tileManager!.indexFrom(position: trophy.position)
             ai.moveShortestPath(to: trophyGridPos)
         }
         if music_Is_On {
@@ -318,8 +329,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         trophy.setRandomPosition()
         minimap.updateTrophy(position: trophy.position)
         opponent.stop()
-        let trophyGridPos = tileManager.indexFrom(position: trophy.position)
-        opponent.gridPos = tileManager.indexFrom(position: opponent.position)
+        let trophyGridPos = tileManager!.indexFrom(position: trophy.position)
+        opponent.gridPos = tileManager!.indexFrom(position: opponent.position)
         if let ai = opponent as? AI {
             ai.moveShortestPath(to: trophyGridPos)
         }
@@ -334,7 +345,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if music_Is_On {
             sfxController.playSound(named: "game-over")
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [unowned self] in
             self.info.roundWinDisplay(winner: "player", xCoord: self.player1.position.x, yCoord: self.player1.position.y)
         }
     }
@@ -345,7 +356,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if music_Is_On {
             sfxController.playSound(named: "game-over")
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [unowned self] in
             self.info.playerDiedDisplay(xCoord: self.player1.position.x, yCoord: self.player1.position.y)
         }
     }
@@ -357,7 +368,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if music_Is_On {
                 sfxController.playSound(named: "game-over")
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [unowned self] in
                 self.info.roundWinDisplay(winner: "opponent", xCoord: self.player1.position.x, yCoord: self.player1.position.y)
             }
         }

@@ -20,20 +20,20 @@ extension GameScene {
     //Joystick Init
     func spawnJoystick() {
         // initialize joystick
-        joystick.stick.name = "joystick"
-        joystick.stick.image = #imageLiteral(resourceName: "stick.png")
-        joystick.substrate.image = #imageLiteral(resourceName: "substrate.png")
-        joystick.substrate.diameter += 175
-        joystick.stick.diameter += 105
-        joystick.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
-        joystick.zPosition = 1
-        addChild(joystick)
+        joystick!.stick.name = "joystick"
+        joystick!.stick.image = #imageLiteral(resourceName: "stick.png")
+        joystick!.substrate.image = #imageLiteral(resourceName: "substrate.png")
+        joystick!.substrate.diameter += 175
+        joystick!.stick.diameter += 105
+        joystick!.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
+        joystick!.zPosition = 1
+        addChild(joystick!)
         
-        joystick.trackingHandler = { [unowned self] data in
+        joystick!.trackingHandler = { [unowned self] data in
             // track positions
             self.player1.position = CGPoint(x: self.player1.position.x + (data.velocity.x * velocityMultiplier), y: self.player1.position.y + (data.velocity.y * velocityMultiplier))
             self.player1.updateZoom()
-            self.joystick.position = CGPoint(x: self.player1.position.x + self.JOYSTICK_X_OFFSET, y: self.player1.position.y - self.JOYSTICK_Y_OFFSET)
+            self.joystick!.position = CGPoint(x: self.player1.position.x + self.JOYSTICK_X_OFFSET, y: self.player1.position.y - self.JOYSTICK_Y_OFFSET)
             self.minimap.position = CGPoint(x: self.player1.position.x - self.MINIMAP_OFFSET_X, y: self.player1.position.y + self.MINIMAP_OFFSET_Y)
             self.minimap.updatePlayer(position: self.player1.position)
             self.info.updateHealthPos(newX: self.player1.position.x + self.DISPLAY_OFFSET_X, newY: self.player1.position.y + self.DISPLAY_OFFSET_Y)
@@ -48,11 +48,11 @@ extension GameScene {
             }
             self.prevDir = direction
             //Optimization
-            self.tileManager.viewOnScreenTiles(pos: self.player1.position, parent: self)
-            self.player1.gridPos = self.tileManager.indexFrom(position: self.player1.position)
+            self.tileManager!.viewOnScreenTiles(pos: self.player1.position, parent: self)
+            self.player1.gridPos = self.tileManager!.indexFrom(position: self.player1.position)
         }
         
-        joystick.stopHandler = {
+        joystick!.stopHandler = { [unowned self] in
             self.prevPos = self.player1.position
             self.player1.animateWalk(in: .none)
         }
@@ -69,7 +69,7 @@ extension GameScene {
         trophy = Trophy(texture: SKTexture(image: #imageLiteral(resourceName: "Trophyy.png")), scene: self)
         minimap.updateTrophy(position: trophy.position)
         if let ai = opponent as? AI {
-            let trophyGridPos = tileManager.indexFrom(position: trophy.position)
+            let trophyGridPos = tileManager!.indexFrom(position: trophy.position)
             ai.moveShortestPath(to: trophyGridPos)
         }
     }
@@ -101,7 +101,7 @@ extension GameScene {
         case "gingerMan":
             names = ["gingerManWalkingDown", "gingerManWalkingLeft", "gingerManWalkingUp", "gingerManWalkingRight"]
         default:
-            print("ahahhaahaa")
+            names = ["walkingDown", "walkingLeft", "walkingUp", "walkingRight"]
         }
         
         //Walking down texture initializaiton
@@ -143,11 +143,11 @@ extension GameScene {
     
     //Reset player's position after the player runs into a monster (but without reset monster positions)
     func hittingMonster() {
-        player1.position = tileManager.tiles[Maze.MAX_ROWS-2][1].position
+        player1.position = tileManager!.tiles[Maze.MAX_ROWS-2][1].position
         player1.updateZoom()
         minimap.updatePlayer(position: player1.position)
         
-        joystick.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
+        joystick!.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
         minimap.position = CGPoint(x: player1.position.x - MINIMAP_OFFSET_X, y: player1.position.y + MINIMAP_OFFSET_Y)
         info.updateHealthPos(newX: player1.position.x + DISPLAY_OFFSET_X, newY: player1.position.y + DISPLAY_OFFSET_Y)
         info.updateScoreLabelPos(newX: player1.position.x - DISPLAY_OFFSET_X, newY: player1.position.y - DISPLAY_OFFSET_Y)
@@ -162,15 +162,15 @@ extension GameScene {
         
         info.removePlayerDiedDisplay()
         info.changeHealth(healthPoint: player1.player_Health)
-        joystick.disabled = false
+        joystick!.disabled = false
         
-        opponent.position = tileManager.tiles[1][Maze.MAX_COLUMNS-2].position
+        opponent.position = tileManager!.tiles[1][Maze.MAX_COLUMNS-2].position
         opponent.gridPos = GridPosition(column: Maze.MAX_COLUMNS-2, row: 1)
         
         trophy.setRandomPosition()
         minimap.updateTrophy(position: trophy.position)
         if let ai = opponent as? AI {
-            let trophyGridPos = tileManager.indexFrom(position: trophy.position)
+            let trophyGridPos = tileManager!.indexFrom(position: trophy.position)
             ai.moveShortestPath(to: trophyGridPos)
         }
         pause.isHidden = false
@@ -199,7 +199,7 @@ extension GameScene {
             DISPLAY_OFFSET_X = DISPLAY_OFFSET_X * -1
         }
         
-        joystick.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
+        joystick!.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
         minimap.position = CGPoint(x: player1.position.x - MINIMAP_OFFSET_X, y: player1.position.y + MINIMAP_OFFSET_Y)
         info.updateHealthPos(newX: player1.position.x + DISPLAY_OFFSET_X, newY: player1.position.y + DISPLAY_OFFSET_Y)
         info.updateScoreLabelPos(newX: player1.position.x - DISPLAY_OFFSET_X, newY: player1.position.y - DISPLAY_OFFSET_Y)
@@ -218,7 +218,7 @@ extension GameScene {
             if LABEL_OFFSET_X < 0 {
                 LABEL_OFFSET_X = LABEL_OFFSET_X * -1
             }
-            joystick.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
+            joystick!.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
             info.playerScoreLabel.position = CGPoint(x: player1.position.x - LABEL_OFFSET_X, y: player1.position.y - LABEL_OFFSET_Y)
             info.AIScoreLabel.position = CGPoint(x: player1.position.x - LABEL_OFFSET_X, y: player1.position.y - LABEL_OFFSET_Y - 75)
         } else {
@@ -231,7 +231,7 @@ extension GameScene {
             if LABEL_OFFSET_X > 0 {
                 LABEL_OFFSET_X = LABEL_OFFSET_X * -1
             }
-            joystick.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
+            joystick!.position = CGPoint(x: player1.position.x + JOYSTICK_X_OFFSET, y: player1.position.y - JOYSTICK_Y_OFFSET)
             info.playerScoreLabel.position = CGPoint(x: player1.position.x - LABEL_OFFSET_X, y: player1.position.y - LABEL_OFFSET_Y)
             info.AIScoreLabel.position = CGPoint(x: player1.position.x - LABEL_OFFSET_X, y: player1.position.y - LABEL_OFFSET_Y - 75)
         }

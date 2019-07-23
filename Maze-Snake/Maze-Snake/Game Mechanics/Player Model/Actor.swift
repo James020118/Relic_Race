@@ -8,7 +8,7 @@ class Actor: SKSpriteNode {
     var gridPos: GridPosition
     
     init(texture: SKTexture?, parent: GameScene, pos: GridPosition) {
-        let dim = parent.tileManager.getTile(row: 0, column: 0).size
+        let dim = parent.tileManager!.getTile(row: 0, column: 0).size
         let size = CGSize(width: dim.width - 20, height: dim.height - 20)
         self.gridPos = pos
         super.init(texture: texture, color: .clear, size: size)

@@ -50,8 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if music_Is_On {
             gameScreen.soundController.stop()
         }
-        gameScreen.aiGame.timer.invalidate()
-        gameScreen.aiGame.isPaused = true
+        gameScreen.aiGame!.timer.invalidate()
+        gameScreen.aiGame!.isPaused = true
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -62,11 +62,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let gameScreen = AppDelegate.gameScreen else {
             return
         }
-        gameScreen.aiGame.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
-            gameScreen.aiGame.time += 1
-            gameScreen.aiGame.info.timerLabel.text = "Time Spent: " + gameScreen.aiGame.formattedTime()
+        gameScreen.aiGame!.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
+            gameScreen.aiGame!.time += 1
+            gameScreen.aiGame!.info.timerLabel.text = "Time Spent: " + gameScreen.aiGame!.formattedTime()
         })
-        gameScreen.aiGame.isPaused = false
+        gameScreen.aiGame!.isPaused = false
         AppDelegate.gameScreen = nil
     }
 
@@ -88,7 +88,7 @@ extension AppDelegate: GADRewardBasedVideoAdDelegate {
         }
         let currentUser = Auth.auth().currentUser!
         let docRef = db.collection("users").document(currentUser.email!)
-        docRef.getDocument { (document, error) in
+        docRef.getDocument { [unowned self] (document, error) in
             if let document = document, document.exists {
                 let curRelics = document.data()!["currency"] as? Int ?? 0
                 var uData = document.data()!

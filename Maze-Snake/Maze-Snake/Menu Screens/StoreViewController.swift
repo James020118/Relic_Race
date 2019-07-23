@@ -39,7 +39,7 @@ class StoreViewController: UIViewController {
         }
         
         let docRef = db.collection("users").document(currentUser.email!)
-        docRef.getDocument { (document, error) in
+        docRef.getDocument { [unowned self] (document, error) in
             if let document = document, document.exists {
                 self.userData = document.data() ?? [:]
                 self.userTrophyCount = self.userData["currency"] as? Int ?? 0
@@ -147,7 +147,7 @@ class StoreViewController: UIViewController {
         //If so present a confirmation alert to buy
         if cost <= trophies {
             let alert = UIAlertController(title: "Confirm Purchase of \(cost) Relics for skin", message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Confirm", style: UIAlertAction.Style.default, handler: { (_) -> Void in
+            alert.addAction(UIAlertAction(title: "Confirm", style: UIAlertAction.Style.default, handler: { [unowned self] (_) -> Void in
                 //If press "yes" take away coins give them the skin and equip it
                 self.currentlyEquipped = skinBought
                 self.userData["currentlyEquipped"] = self.currentlyEquipped

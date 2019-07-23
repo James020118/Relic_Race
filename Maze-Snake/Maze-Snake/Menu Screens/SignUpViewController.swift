@@ -42,7 +42,7 @@ class SignUpViewController: UIViewController {
         guard let password = passwordTF.text else { return }
         
         //Authenticate the user
-        Auth.auth().createUser(withEmail: email, password: password) { user, error in
+        Auth.auth().createUser(withEmail: email, password: password) { [unowned self] (user, error) in
             if error == nil && user != nil {
                 print("Successfully created user!")
                 

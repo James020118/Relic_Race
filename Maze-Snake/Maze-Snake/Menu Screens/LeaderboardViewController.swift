@@ -37,7 +37,7 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
         db = Firestore.firestore()
         
         /* Load WORLDWIDE Scores */
-        db.collection("users").getDocuments() { (querySnapshot, error) in
+        db.collection("users").getDocuments() { [unowned self] (querySnapshot, error) in
             if let error = error {
                 print("Error getting all user data for leaderboard, \(error.localizedDescription)")
             } else {
@@ -100,7 +100,7 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
         
         /* Load LOCAL Scores */
         let docRef = Firestore.firestore().collection("users").document(Auth.auth().currentUser?.email ?? "")
-        docRef.getDocument { (document, error) in
+        docRef.getDocument { [unowned self] (document, error) in
             if let document = document, document.exists {
                 let easyNums: [NSNumber] = document["easyTime"] as? [NSNumber] ?? []
                 for num in easyNums {

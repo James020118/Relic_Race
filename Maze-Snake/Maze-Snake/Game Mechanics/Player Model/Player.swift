@@ -37,7 +37,7 @@ class Player: Actor {
         
         zPosition = 1
         // Player spawn point: Top left corner of the maze
-        position = scene.tileManager.tiles[Maze.MAX_ROWS-2][1].position
+        position = scene.tileManager!.tiles[Maze.MAX_ROWS-2][1].position
         
         // create physics body for the player
         physicsBody = SKPhysicsBody(circleOfRadius: frame.width / 2)

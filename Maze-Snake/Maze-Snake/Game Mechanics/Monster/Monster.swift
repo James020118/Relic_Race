@@ -167,7 +167,7 @@ class Monster: Actor {
         for node in path {
             //Once path of nodes is given, convert to grid position, then [action]
             let gridPos = GridPosition(from: node.gridPosition)
-            let newPos = scene.tileManager.getTile(row: gridPos.row, column: gridPos.column).position
+            let newPos = scene.tileManager!.getTile(row: gridPos.row, column: gridPos.column).position
             let action = SKAction.move(to: newPos, duration: Monster.TILE_TRAVEL_TIME)
             actions.append(action)
             //Store positions of each step in path

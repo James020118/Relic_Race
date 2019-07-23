@@ -14,7 +14,7 @@ import SpriteKit
 class InfoDisplay {
     
     //Parent scene
-    var parent: GameScene!
+    weak var parent: GameScene?
     
     //Node for displaying health
     private var healthPanel = SKSpriteNode()
@@ -48,7 +48,7 @@ class InfoDisplay {
         
         healthPanel.zPosition = 2
         
-        parent.addChild(healthPanel)
+        parent!.addChild(healthPanel)
     }
     
     //Change the health of the player when hitting the monster
@@ -82,7 +82,7 @@ class InfoDisplay {
         playerScoreLabel.fontColor = UIColor.green
         playerScoreLabel.zPosition = 2
         
-        parent.addChild(playerScoreLabel)
+        parent!.addChild(playerScoreLabel)
     }
     
     //Change player score
@@ -100,7 +100,7 @@ class InfoDisplay {
         AIScoreLabel.fontColor = UIColor.red
         AIScoreLabel.zPosition = 2
         
-        parent.addChild(AIScoreLabel)
+        parent!.addChild(AIScoreLabel)
     }
     
     //Change opponent score
@@ -121,8 +121,8 @@ class InfoDisplay {
         darkBackground.zPosition = 20
         darkBackground.alpha = 0
         darkBackground.position = CGPoint(x: x, y: y)
-        darkBackground.size = CGSize(width: parent.frame.width * 0.5, height: parent.frame.height * 0.5)
-        parent.addChild(darkBackground)
+        darkBackground.size = CGSize(width: parent!.frame.width * 0.5, height: parent!.frame.height * 0.5)
+        parent!.addChild(darkBackground)
         darkBackground.run(SKAction.fadeIn(withDuration: 0.5))
     }
     
@@ -169,9 +169,9 @@ class InfoDisplay {
             print("---")
         }
         
-        parent.addChild(messageLabel)
-        parent.addChild(exitLabel)
-        parent.addChild(timeDisplayLabel)
+        parent!.addChild(messageLabel)
+        parent!.addChild(exitLabel)
+        parent!.addChild(timeDisplayLabel)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.messageLabel.run(SKAction.fadeIn(withDuration: 0.5))
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -214,14 +214,14 @@ class InfoDisplay {
         settingsLabel.text = "Settings"
         settingsLabel.position = CGPoint(x: xCoord, y: yCoord - 250)
         
-        parent.addChild(pausedLabel1)
-        parent.addChild(returnLabel)
-        parent.addChild(settingsLabel)
+        parent!.addChild(pausedLabel1)
+        parent!.addChild(returnLabel)
+        parent!.addChild(settingsLabel)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.pausedLabel1.run(SKAction.repeatForever(SKAction.sequence([SKAction.fadeIn(withDuration: 1), SKAction.fadeOut(withDuration: 1)])))
         }
-        parent.pause.zPosition = 21
-        parent.pause.texture = SKTexture(imageNamed: "playButton")
+        parent!.pause.zPosition = 21
+        parent!.pause.texture = SKTexture(imageNamed: "playButton")
     }
     
     //Remove pause menu from the parent
@@ -231,8 +231,8 @@ class InfoDisplay {
         pausedLabel1.removeFromParent()
         returnLabel.removeFromParent()
         settingsLabel.removeFromParent()
-        parent.pause.zPosition = 2
-        parent.pause.texture = SKTexture(imageNamed: "pauseButton")
+        parent!.pause.zPosition = 2
+        parent!.pause.texture = SKTexture(imageNamed: "pauseButton")
     }
     
     //Called when the player's health reaches 0, gives player an option to try again
@@ -257,8 +257,8 @@ class InfoDisplay {
         message2.alpha = 0
         message2.name = "tryagain"
         
-        parent.addChild(message1)
-        parent.addChild(message2)
+        parent!.addChild(message1)
+        parent!.addChild(message2)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.message2.run(SKAction.fadeIn(withDuration: 0.5))
         }
@@ -290,7 +290,7 @@ class InfoDisplay {
         pausedLabel1.isHidden = true
         pausedLabel1.isHidden = true
         returnLabel.isHidden = true
-        parent.pause.isHidden = true
+        parent!.pause.isHidden = true
         settingsLabel.run(SKAction.moveTo(y: settingsLabel.position.y + LABEL_MOVE_OFFSET, duration: 0.5))
         
         back.zPosition = 21
@@ -395,16 +395,16 @@ class InfoDisplay {
         soundOnLabel.name = "sound_on"
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.parent.addChild(self.back)
-            self.parent.addChild(self.moveJoystick_Title)
-            self.parent.addChild(self.moveJoystick_Right)
-            self.parent.addChild(self.moveJoystck_Left)
-            self.parent.addChild(self.moveMap_Title)
-            self.parent.addChild(self.moveMap_Right)
-            self.parent.addChild(self.moveMap_Left)
-            self.parent.addChild(self.soundTitle)
-            self.parent.addChild(self.soundOnLabel)
-            self.parent.addChild(self.soundOffLabel)
+            self.parent!.addChild(self.back)
+            self.parent!.addChild(self.moveJoystick_Title)
+            self.parent!.addChild(self.moveJoystick_Right)
+            self.parent!.addChild(self.moveJoystck_Left)
+            self.parent!.addChild(self.moveMap_Title)
+            self.parent!.addChild(self.moveMap_Right)
+            self.parent!.addChild(self.moveMap_Left)
+            self.parent!.addChild(self.soundTitle)
+            self.parent!.addChild(self.soundOnLabel)
+            self.parent!.addChild(self.soundOffLabel)
         }
     }
     
@@ -425,24 +425,24 @@ class InfoDisplay {
             self.pausedLabel1.isHidden = false
             self.pausedLabel1.isHidden = false
             self.returnLabel.isHidden = false
-            self.parent.pause.isHidden = false
+            self.parent!.pause.isHidden = false
         }
     }
     
     //Stop all actions to get ready to reset the game
     func endGame() {
-        parent.joystick.disabled = true
-        parent.pause.isHidden = true
-        parent.player1.stop()
-        parent.opponent.stop()
+        parent!.joystick!.disabled = true
+        parent!.pause.isHidden = true
+        parent!.player1.stop()
+        parent!.opponent.stop()
         
-        for monster in parent.monsters {
+        for monster in parent!.monsters {
             monster.stop()
         }
         
-        parent.player1.player_Score = 0
-        parent.player1.player_Health = 3
-        parent.opponent.score = 0
+        parent!.player1.player_Score = 0
+        parent!.player1.player_Health = 3
+        parent!.opponent.score = 0
     }
     
     //Timer set-up for solo mode
@@ -450,12 +450,12 @@ class InfoDisplay {
     var timerLabel = SKLabelNode()
     func setUpTimerLabel() {
         timerLabel.zPosition = 2
-        timerLabel.position = CGPoint(x: parent.player1.position.x, y: parent.player1.position.y + TIMER_OFFSET_Y)
+        timerLabel.position = CGPoint(x: parent!.player1.position.x, y: parent!.player1.position.y + TIMER_OFFSET_Y)
         timerLabel.fontName = "AvenirNext-Bold"
         timerLabel.fontSize = 60
         timerLabel.fontColor = UIColor.white
         timerLabel.text = "0:00"
-        parent.addChild(timerLabel)
+        parent!.addChild(timerLabel)
     }
     
 }

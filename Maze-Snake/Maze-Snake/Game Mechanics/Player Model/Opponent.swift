@@ -17,7 +17,7 @@ class Opponent: Actor {
         super.init(texture: texture, parent: parent, pos: pos)
         zPosition = 1
         // AI spawn point: bottom right corner of the maze
-        position = parent.tileManager.tiles[1][Maze.MAX_COLUMNS-2].position
+        position = parent.tileManager!.tiles[1][Maze.MAX_COLUMNS-2].position
         gridPos = GridPosition(column: Maze.MAX_COLUMNS-2, row: 1)
         
         // create physics body for the player

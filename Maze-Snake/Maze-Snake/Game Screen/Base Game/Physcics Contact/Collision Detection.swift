@@ -36,7 +36,7 @@ extension GameScene {
         info.changeHealth(healthPoint: player1.player_Health)
         //Respawn
         hittingMonster()
-        tileManager.viewOnScreenTiles(pos: player1.position, parent: self)
+        tileManager!.viewOnScreenTiles(pos: player1.position, parent: self)
         if music_Is_On {
             sfxController.playSound(named: "death")
         }

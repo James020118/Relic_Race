@@ -26,7 +26,7 @@ class TileManager {
     //Constant used to control block size for camera zoom
     let ZOOM_CONSTANT: CGFloat = 0.085
     
-    var scene: SKNode!
+    weak var scene: SKNode?
     
     //Conveniance Init
     init(from graph: GKGridGraph<GKGridGraphNode>, with textures: TextureSet) {
@@ -69,8 +69,8 @@ class TileManager {
         coordinates from a position in the parent */
     func indexFrom(position: CGPoint) -> GridPosition {
         //Constants in equation
-        let WIDTH = scene.frame.width
-        let HEIGHT = scene.frame.height
+        let WIDTH = scene!.frame.width
+        let HEIGHT = scene!.frame.height
         let NODE_X = tiles.first!.first!.size.width/2
         let NODE_Y = tiles.first!.first!.size.height/2
         //Calculating x positions based on screen ratios
@@ -182,6 +182,12 @@ class TileManager {
 
     }
     
-    //TODO: Create bitmap to rasterize minimap
-    
+    func deAllocate() {
+        for column in tiles {
+            for tile in column {
+                tile.physicsBody = nil
+                tile.removeFromParent()
+            }
+        }
+    }
 }

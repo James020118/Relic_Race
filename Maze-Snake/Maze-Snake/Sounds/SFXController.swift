@@ -14,7 +14,7 @@ class SFXController {
     
     
     var audioNodes: [String : SKAudioNode] = [:]
-    let parent: GameScene
+    weak var parent: GameScene!
     
     
     init(from parent: GameScene) {
@@ -37,7 +37,7 @@ class SFXController {
             if sound == "footsteps" {
                 node.autoplayLooped = true
             }
-            parent.addChild(node)
+            parent!.addChild(node)
         }
         
     }

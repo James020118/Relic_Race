@@ -11,12 +11,12 @@ import SpriteKit
 
 class Trophy: SKSpriteNode {
     
-    let gameScene: GameScene
+    weak var gameScene: GameScene?
     
     init(texture: SKTexture, scene: GameScene) {
         gameScene = scene
-        let width: CGFloat = gameScene.size.width / CGFloat(Maze.MAX_COLUMNS)
-        let height: CGFloat = gameScene.size.height / CGFloat(Maze.MAX_ROWS)
+        let width: CGFloat = gameScene!.size.width / CGFloat(Maze.MAX_COLUMNS)
+        let height: CGFloat = gameScene!.size.height / CGFloat(Maze.MAX_ROWS)
         let size = CGSize(width: width, height: height)
         super.init(texture: texture, color: .blue, size: size)
         physicsBody = SKPhysicsBody(circleOfRadius: 50)
@@ -34,7 +34,7 @@ class Trophy: SKSpriteNode {
     }
     
     func spawn() {
-        gameScene.addChild(self)
+        gameScene!.addChild(self)
         zPosition = 6
         setRandomPosition()
     }
@@ -47,11 +47,11 @@ class Trophy: SKSpriteNode {
        2. have a distance greater than 8 times the width and height of the tile
     */
     func setRandomPosition() {
-        let tile = gameScene.tileManager.getRandomTile(condition: { tile in
-            let dx1 = abs(tile.position.x - gameScene.player1.position.x)
-            let dx2 = abs(tile.position.x - gameScene.opponent.position.x)
-            let dy1 = abs(tile.position.y - gameScene.player1.position.y)
-            let dy2 = abs(tile.position.y - gameScene.opponent.position.y)
+        let tile = gameScene!.tileManager!.getRandomTile(condition: { tile in
+            let dx1 = abs(tile.position.x - gameScene!.player1.position.x)
+            let dx2 = abs(tile.position.x - gameScene!.opponent.position.x)
+            let dy1 = abs(tile.position.y - gameScene!.player1.position.y)
+            let dy2 = abs(tile.position.y - gameScene!.opponent.position.y)
             return (abs(dx1 - dx2) < tile.frame.width * 7) && (abs(dy1 - dy2) < tile.frame.height * 7) && (dx1 > tile.frame.width * 8) && (dy1 > tile.frame.height * 8)
         })
         position = tile.position

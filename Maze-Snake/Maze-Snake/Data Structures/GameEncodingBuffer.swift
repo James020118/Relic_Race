@@ -49,7 +49,7 @@ struct GameEncodingBuffer: Codable {
             var actions = [SKAction]()
             for j in 0..<paths[i].count {
                 let point = paths[i][j]
-                let pos = parent.tileManager.getTile(row: point.row, column: point.column).position
+                let pos = parent.tileManager!.getTile(row: point.row, column: point.column).position
                 if j == 0 { curMonster.position = pos }
                 let action = SKAction.move(to: pos, duration: Monster.TILE_TRAVEL_TIME)
                 actions.append(action)

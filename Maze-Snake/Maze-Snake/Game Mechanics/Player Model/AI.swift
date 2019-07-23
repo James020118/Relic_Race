@@ -10,9 +10,9 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
+var TILE_TIME = 0.2
+
 class AI: Opponent {
-    
-    static var TILE_TIME = 0.2
     
     override init(texture: SKTexture?, parent: GameScene, pos: GridPosition) {
         super.init(texture: texture, parent: parent, pos: pos)
@@ -52,8 +52,8 @@ class AI: Opponent {
         
         var actions = [SKAction]()
         for index in path {
-            let newPos = gameScene.tileManager.getTile(row: index.row, column: index.column).position
-            let action = SKAction.move(to: newPos, duration: AI.TILE_TIME)
+            let newPos = gameScene.tileManager!.getTile(row: index.row, column: index.column).position
+            let action = SKAction.move(to: newPos, duration: TILE_TIME)
             actions.append(action)
         }
         

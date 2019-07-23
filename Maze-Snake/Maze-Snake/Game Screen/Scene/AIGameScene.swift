@@ -35,7 +35,7 @@ class AIGameScene: GameScene {
         db = Firestore.firestore()
         
         info.setUpTimerLabel()
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [unowned self] (_) in
             self.time += 1
             self.info.timerLabel.text = "Time Spent: " + self.formattedTime()
         })
@@ -44,7 +44,7 @@ class AIGameScene: GameScene {
             return
         }
         let docRef = db.collection("users").document(currentUser.email!)
-        docRef.getDocument { (document, error) in
+        docRef.getDocument { [unowned self] (document, error) in
             if let document = document, document.exists {
                 self.allUserData = document.data()!
                 print("Finally retrieved")
@@ -77,8 +77,18 @@ class AIGameScene: GameScene {
                 adVC.interstitial.present(fromRootViewController: adVC)
             }
         }
-        
         super.playerWin()
+        //Save relics gained
+        if Auth.auth().currentUser!.isAnonymous {
+            return
+        }
+        db.collection("users").document(currentUser.email!).setData(allUserData) { err in
+            if let err = err {
+                print("Error adding currency to firestore: \(err)")
+            } else {
+                print("Currency successfully increased!")
+            }
+        }
     }
     
     override func checkMonsterWin() {
@@ -88,6 +98,17 @@ class AIGameScene: GameScene {
         if let adVC = self.parentVC as? GameViewController {
             if adVC.interstitial.isReady {
                 adVC.interstitial.present(fromRootViewController: adVC)
+            }
+        }
+        //Save relics gained
+        if Auth.auth().currentUser!.isAnonymous {
+            return
+        }
+        db.collection("users").document(currentUser.email!).setData(allUserData) { err in
+            if let err = err {
+                print("Error adding currency to firestore: \(err)")
+            } else {
+                print("Currency successfully increased!")
             }
         }
         
@@ -104,7 +125,20 @@ class AIGameScene: GameScene {
                     adVC.interstitial.present(fromRootViewController: adVC)
                 }
             }
+            
+            //Save relics gained
+            if Auth.auth().currentUser!.isAnonymous {
+                return
+            }
+            db.collection("users").document(currentUser.email!).setData(allUserData) { err in
+                if let err = err {
+                    print("Error adding currency to firestore: \(err)")
+                } else {
+                    print("Currency successfully increased!")
+                }
+            }
         }
+        
         super.checkOpponentWin()
     }
     
@@ -113,17 +147,6 @@ class AIGameScene: GameScene {
         
         currency += 1
         allUserData["currency"] = currency
-        
-        if Auth.auth().currentUser!.isAnonymous {
-            return
-        }
-        db.collection("users").document(currentUser.email!).setData(allUserData) { err in
-            if let err = err {
-                print("Error adding currency to firestore: \(err)")
-            } else {
-                print("Currency successfully increased!")
-            }
-        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -134,7 +157,7 @@ class AIGameScene: GameScene {
         //Detect touch on pause node
         if node.name == "pause" {
             if isPausing {
-                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
+                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [unowned self] (_) in
                     self.time += 1
                     self.info.timerLabel.text = "Time Spent: " + self.formattedTime()
                 })
@@ -144,7 +167,7 @@ class AIGameScene: GameScene {
         }
         
         if node.name == "tryagain" {
-            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [unowned self] (_) in
                 self.time += 1
                 self.info.timerLabel.text = "Time Spent: " + self.formattedTime()
             })

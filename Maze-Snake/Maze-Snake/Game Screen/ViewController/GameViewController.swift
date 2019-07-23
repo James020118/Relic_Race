@@ -22,7 +22,7 @@ class GameViewController: UIViewController, GADInterstitialDelegate {
 
     var soundController: SoundController!
     
-    var aiGame: AIGameScene!
+    weak var aiGame: AIGameScene?
     
     var difficulty: Difficulty = .Easy
     
@@ -36,11 +36,11 @@ class GameViewController: UIViewController, GADInterstitialDelegate {
         
         switch difficulty {
         case .Easy:
-            AI.TILE_TIME = 0.37
+            TILE_TIME = 0.37
         case .Hard:
-            AI.TILE_TIME = 0.27
+            TILE_TIME = 0.27
         case .Impossible:
-            AI.TILE_TIME = 0.19
+            TILE_TIME = 0.19
         }
         
         DispatchQueue.main.async {
