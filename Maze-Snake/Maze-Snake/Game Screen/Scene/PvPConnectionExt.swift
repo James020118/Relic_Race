@@ -39,34 +39,7 @@ extension PvPGameScene {
                 print(data)
                 let checksum = try JSONDecoder().decode(ChecksumPacket.self, from: data)
                 checksumHash = checksum.hash
-                return
             }catch{ print("Payload is not checksum") }
-            
-            //Get Maze Data
-            do {
-                //Decode Data
-                print(data)
-                let receivingHsah = NSData(data: data).MD5()
-                if receivingHsah != checksumHash {
-                    parentVC.dismiss(animated: true, completion: nil)
-                    return
-                }
-                
-                let buffer = try JSONDecoder().decode(GameEncodingBuffer.self, from: data)
-                premapSetup()
-                let maze = Maze(from: buffer)
-                mazeGraph = maze.graph
-                graph = maze.graph
-                tileSetup()
-                sharedMonsters = buffer.getMonsters(from: self)
-            }catch{
-                parentVC.dismiss(animated: true, completion: nil)
-            }
-            //Init game
-            hostSessionLabel.removeFromParent()
-            joinSessionLabel.removeFromParent()
-            cancelLabel.removeFromParent()
-            setupGame()
             return
         }
         
@@ -75,7 +48,7 @@ extension PvPGameScene {
         do {
             //Decode Data
             let gridPos = try JSONDecoder().decode(GridPosition.self, from: data)
-            let newPos = tileManager.getTile(row: gridPos.row, column: gridPos.column).position
+            let newPos = tileManager!.getTile(row: gridPos.row, column: gridPos.column).position
             opponent.position = newPos
             return
         }catch{ print("Data is not player pos") }
@@ -86,7 +59,7 @@ extension PvPGameScene {
             //Decode Data
             let packet = try JSONDecoder().decode(ScoringPacket.self, from: data)
             let gridPos = packet.pos
-            let newPos = tileManager.getTile(row: gridPos.row, column: gridPos.column).position
+            let newPos = tileManager!.getTile(row: gridPos.row, column: gridPos.column).position
             trophy.position = newPos
             minimap.updateTrophy(position: newPos)
             let value = packet.score
@@ -124,6 +97,8 @@ extension PvPGameScene {
         case .notConnected:
             print("Not Connected: \(peerID.displayName)")
             mcSession?.disconnect()
+            deallocPhysicsBodies()
+            removeAllChildren()
             parentVC.dismiss(animated: true, completion: nil)
         @unknown default:
             print("Unknown state: \(peerID.displayName)")
@@ -140,7 +115,9 @@ extension PvPGameScene {
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        
+        stream.delegate = self
+        stream.schedule(in: RunLoop.main, forMode: RunLoop.Mode.default)
+        stream.open()
     }
     
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
@@ -150,7 +127,6 @@ extension PvPGameScene {
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         
     }
-    
     
     func pvpConnectionPrompt() {
         hostSessionLabel.zPosition = 1

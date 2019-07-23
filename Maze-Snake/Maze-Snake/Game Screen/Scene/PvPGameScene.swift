@@ -15,6 +15,10 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
     
     var checksumHash = ""
     
+    var outputStream:OutputStream?
+    
+    var streamedMap: Data? = Data()
+    
     //Labels for initial prompt
     var hostSessionLabel = SKLabelNode()
     var joinSessionLabel = SKLabelNode()
@@ -60,14 +64,17 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
         
         //Executed when user leaves session creation menu
         if node.name == "cancel" {
+            deallocPhysicsBodies()
             removeAllChildren()
             parentVC.dismiss(animated: true, completion: nil)
         }
         
         //Executed when two devices are connected and the user is proceedint to the game in pvp mode
         if node.name == "next" {
-            let buffer = makeGameData()
             do {
+                setupStream()
+                
+                let buffer = makeGameData()
                 let encoder = JSONEncoder()
                 let data = try encoder.encode(buffer)
                 //Send over checksum
@@ -76,16 +83,17 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
                 )
                 let checksumData = try encoder.encode(checksum)
                 try mcSession?.send(checksumData, toPeers: mcSession!.connectedPeers, with: .reliable)
-                //Send Graph data
-                print(data)
-                try mcSession?.send(data, toPeers: mcSession!.connectedPeers, with: .reliable)
-            }catch{
-                print("Oops!")
+                //Stream Map Data
+                let writtenData = data.withUnsafeBytes { outputStream?.write($0, maxLength: data.count) }
+                outputStream?.close()
+                
+                //Initialize the game
+                connectedLabel.removeFromParent()
+                nextLabel.removeFromParent()
+                setupGame()
+            }  catch let error as NSError {
+                print("Error sending over data = \(error)")
             }
-            //Initialize the game
-            connectedLabel.removeFromParent()
-            nextLabel.removeFromParent()
-            setupGame()
         }
         
     }
@@ -95,7 +103,7 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
         super.update(currentTime)
         
         let dSent = currentTime - lastSent
-        if dSent >= 0.125 && startUpdateFlag {
+        if dSent >= 0.4 && startUpdateFlag {
             let sendPos = player1.gridPos
             do {
                 let encoder = JSONEncoder()
@@ -130,7 +138,7 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
         super.playerToTrophyResponse()
         let packet = ScoringPacket(
             score: player1.player_Score,
-            pos: tileManager.indexFrom(position: trophy!.position)
+            pos: tileManager!.indexFrom(position: trophy!.position)
         )
         do {
             let encoder = JSONEncoder()
