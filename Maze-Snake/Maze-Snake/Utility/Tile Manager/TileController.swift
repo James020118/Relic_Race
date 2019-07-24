@@ -125,7 +125,7 @@ class TileManager {
     
     
     /* Function that retreives a random floor tile */
-    func getRandomTile(condition: (TileNode)-> Bool = { _ in return true }) -> TileNode {
+    func getRandomTile(condition: (TileNode)-> Bool = { (_) in return true }) -> TileNode {
         var spaces = [TileNode]()
         for rows in tiles {
             for tile in rows {

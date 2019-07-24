@@ -45,14 +45,14 @@ class LogInViewController: UIViewController {
         guard let email = emailTF.text else { return }
         guard let password = passwordTF.text else { return }
         
-        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] (user, error) in
             if error == nil && user != nil {
-                self.performSegue(withIdentifier: "logInToGame", sender: sender)
+                self?.performSegue(withIdentifier: "logInToGame", sender: sender)
             } else {
                 print("Error logging in: \(error!.localizedDescription)")
-                self.errorLabel.text = "Error: \(error!.localizedDescription)"
+                self?.errorLabel.text = "Error: \(error!.localizedDescription)"
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    self.errorLabel.text = ""
+                    self?.errorLabel.text = ""
                 }
             }
         }
@@ -64,7 +64,7 @@ class LogInViewController: UIViewController {
                 print("Sign in failed:", error)
                 
             } else {
-                print ("Signed in with uid:", user?.additionalUserInfo!.providerID)
+                print ("Signed in with uid:", user?.additionalUserInfo!.providerID ?? "NO ID")
             }
         }
     }

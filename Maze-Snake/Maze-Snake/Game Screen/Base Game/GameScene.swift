@@ -83,7 +83,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     )
     
     //Parent VC instance
-    var parentVC: UIViewController!
+    weak var parentVC: UIViewController!
     
     
     //MARK:- Lifecycle Functions
@@ -123,9 +123,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if node.name == "return" || node.name == "exit" {
-            deallocPhysicsBodies()
-            removeAllChildren()
-            parentVC.dismiss(animated: true, completion: nil)
+            leave()
         }
         
         if node.name == "settings" {

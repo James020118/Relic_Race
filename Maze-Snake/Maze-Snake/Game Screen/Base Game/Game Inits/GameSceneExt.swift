@@ -305,4 +305,11 @@ extension GameScene {
         }
     }
     
+    func leave() {
+        deallocPhysicsBodies()
+        removeAllChildren()
+        joystick = nil
+        parentVC.dismiss(animated: true, completion: nil)
+    }
+    
 }

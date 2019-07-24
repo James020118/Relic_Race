@@ -49,9 +49,7 @@ extension PvPGameScene: StreamDelegate {
                 print(streamedMap!)
                 let receivingHsah = NSData(data: streamedMap!).MD5()
                 if receivingHsah != checksumHash {
-                    deallocPhysicsBodies()
-                    removeAllChildren()
-                    parentVC.dismiss(animated: true, completion: nil)
+                    leave()
                     return
                 }
                 
@@ -63,15 +61,14 @@ extension PvPGameScene: StreamDelegate {
                 tileSetup()
                 sharedMonsters = buffer.getMonsters(from: self)
             }catch{
-                deallocPhysicsBodies()
-                removeAllChildren()
-                parentVC.dismiss(animated: true, completion: nil)
+                leave()
             }
             //Init game
             hostSessionLabel.removeFromParent()
             joinSessionLabel.removeFromParent()
             cancelLabel.removeFromParent()
             setupGame()
+            aStream.close()
             break
         default:
             break

@@ -97,9 +97,7 @@ extension PvPGameScene {
         case .notConnected:
             print("Not Connected: \(peerID.displayName)")
             mcSession?.disconnect()
-            deallocPhysicsBodies()
-            removeAllChildren()
-            parentVC.dismiss(animated: true, completion: nil)
+            leave()
         @unknown default:
             print("Unknown state: \(peerID.displayName)")
         }

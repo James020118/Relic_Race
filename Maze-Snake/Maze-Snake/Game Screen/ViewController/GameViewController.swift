@@ -82,7 +82,6 @@ class GameViewController: UIViewController, GADInterstitialDelegate {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        AppDelegate.gameScreen = self
         if music_Is_On {
            soundController.play(at: 0.15)
         }

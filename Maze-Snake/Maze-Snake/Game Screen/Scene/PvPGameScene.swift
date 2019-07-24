@@ -55,18 +55,18 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
         
         if node.name == "host" {
             startHosting()
+            hostSessionLabel.color = .black
         }
         
         //Executed when user decides to join an existing session in pvp mode
         if node.name == "join" {
             joinSession()
+            joinSessionLabel.color = .black
         }
         
         //Executed when user leaves session creation menu
         if node.name == "cancel" {
-            deallocPhysicsBodies()
-            removeAllChildren()
-            parentVC.dismiss(animated: true, completion: nil)
+            leave()
         }
         
         //Executed when two devices are connected and the user is proceedint to the game in pvp mode
@@ -103,7 +103,7 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
         super.update(currentTime)
         
         let dSent = currentTime - lastSent
-        if dSent >= 0.4 && startUpdateFlag {
+        if dSent >= 0.33 && startUpdateFlag {
             let sendPos = player1.gridPos
             do {
                 let encoder = JSONEncoder()

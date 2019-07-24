@@ -43,7 +43,7 @@ struct GameEncodingBuffer: Codable {
         
         var monsters = [Monster]()
         for i in 0..<paths.count {
-            var curMonster = Monster(texture: texture, parent: parent, number: 0)
+            let curMonster = Monster(texture: texture, parent: parent, number: 0)
             curMonster.name = "monster\(i)"
             curMonster.stop()
             var actions = [SKAction]()

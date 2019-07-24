@@ -19,8 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    static var gameScreen: GameViewController?
-    
     var db: Firestore!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -44,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        guard let gameScreen = AppDelegate.gameScreen else {
+        guard let gameScreen = application.topMostViewController() as? GameViewController else {
             return
         }
         if music_Is_On {
@@ -59,15 +57,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        guard let gameScreen = AppDelegate.gameScreen else {
+        guard let gameScreen = application.topMostViewController() as? GameViewController else {
             return
         }
+        gameScreen.aiGame!.timer.invalidate()
         gameScreen.aiGame!.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
             gameScreen.aiGame!.time += 1
             gameScreen.aiGame!.info.timerLabel.text = "Time Spent: " + gameScreen.aiGame!.formattedTime()
         })
         gameScreen.aiGame!.isPaused = false
-        AppDelegate.gameScreen = nil
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -125,5 +123,23 @@ extension AppDelegate: GADRewardBasedVideoAdDelegate {
     func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd,
                             didFailToLoadWithError error: Error) {
         print("Reward based video ad failed to load.")
+    }
+}
+
+
+//MARK:- Helper Extensions
+extension UIViewController {
+    func topMostViewController() -> UIViewController {
+        if self.presentedViewController == nil {
+            return self
+        }
+
+        return self.presentedViewController!.topMostViewController()
+    }
+}
+
+extension UIApplication {
+    func topMostViewController() -> UIViewController? {
+        return self.keyWindow?.rootViewController?.topMostViewController()
     }
 }
