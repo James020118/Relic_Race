@@ -19,6 +19,8 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
     
     var streamedMap: Data? = Data()
     
+    var done = false
+    
     //Labels for initial prompt
     var hostSessionLabel = SKLabelNode()
     var joinSessionLabel = SKLabelNode()
@@ -67,6 +69,10 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
         //Executed when user leaves session creation menu
         if node.name == "cancel" {
             leave()
+        }
+        
+        if node.name == "return" || node.name == "exit" {
+            done = true
         }
         
         //Executed when two devices are connected and the user is proceedint to the game in pvp mode

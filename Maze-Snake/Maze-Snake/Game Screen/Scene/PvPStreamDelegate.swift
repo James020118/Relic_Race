@@ -49,7 +49,10 @@ extension PvPGameScene: StreamDelegate {
                 print(streamedMap!)
                 let receivingHsah = NSData(data: streamedMap!).MD5()
                 if receivingHsah != checksumHash {
-                    leave()
+                    showConnectionErrorAlert(message: "Checksums did not match", vc: parentVC, completionHandler: { [unowned self] (_) in
+                        self.done = true
+                        self.leave()
+                    })
                     return
                 }
                 
@@ -61,7 +64,10 @@ extension PvPGameScene: StreamDelegate {
                 tileSetup()
                 sharedMonsters = buffer.getMonsters(from: self)
             }catch{
-                leave()
+                showConnectionErrorAlert(message: "Disconnected during setup", vc: parentVC, completionHandler: { [unowned self] (_) in
+                    self.done = true
+                    self.leave()
+                })
             }
             //Init game
             hostSessionLabel.removeFromParent()

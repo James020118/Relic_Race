@@ -125,21 +125,3 @@ extension AppDelegate: GADRewardBasedVideoAdDelegate {
         print("Reward based video ad failed to load.")
     }
 }
-
-
-//MARK:- Helper Extensions
-extension UIViewController {
-    func topMostViewController() -> UIViewController {
-        if self.presentedViewController == nil {
-            return self
-        }
-
-        return self.presentedViewController!.topMostViewController()
-    }
-}
-
-extension UIApplication {
-    func topMostViewController() -> UIViewController? {
-        return self.keyWindow?.rootViewController?.topMostViewController()
-    }
-}

@@ -97,7 +97,12 @@ extension PvPGameScene {
         case .notConnected:
             print("Not Connected: \(peerID.displayName)")
             mcSession?.disconnect()
-            leave()
+            if !done {
+                showConnectionErrorAlert(message: "Other Player Disconnected", vc: parentVC, completionHandler: { [unowned self] (_) in
+                    self.done = true
+                    self.leave()
+                })
+            }
         @unknown default:
             print("Unknown state: \(peerID.displayName)")
         }

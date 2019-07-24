@@ -84,6 +84,8 @@
 		61DE97DB2299712400EE28E3 /* Collision Detection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DE97DA2299712400EE28E3 /* Collision Detection.swift */; };
 		61E0D1FB228110B700A6DE5C /* GraphCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E0D1FA228110B700A6DE5C /* GraphCreation.swift */; };
 		61F7C6AA228EF5F20006597B /* GraphNodeEquality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F7C6A9228EF5F20006597B /* GraphNodeEquality.swift */; };
+		61F99A5D22E902BE00636270 /* Error Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F99A5C22E902BE00636270 /* Error Alert.swift */; };
+		61F99A5F22E9031200636270 /* View Controller Stack Shortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F99A5E22E9031200636270 /* View Controller Stack Shortcut.swift */; };
 		76AD79465BB11557E07076DD /* Pods_Maze_SnakeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CEF2C19BF1BDFD63C34591F /* Pods_Maze_SnakeTests.framework */; };
 		B09BD8479F66A13AD193249D /* Pods_Maze_Snake.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69A40D2655BDD286DF17249A /* Pods_Maze_Snake.framework */; };
 /* End PBXBuildFile section */
@@ -190,6 +192,8 @@
 		61DE97DA2299712400EE28E3 /* Collision Detection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collision Detection.swift"; sourceTree = "<group>"; };
 		61E0D1FA228110B700A6DE5C /* GraphCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCreation.swift; sourceTree = "<group>"; };
 		61F7C6A9228EF5F20006597B /* GraphNodeEquality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphNodeEquality.swift; sourceTree = "<group>"; };
+		61F99A5C22E902BE00636270 /* Error Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error Alert.swift"; sourceTree = "<group>"; };
+		61F99A5E22E9031200636270 /* View Controller Stack Shortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View Controller Stack Shortcut.swift"; sourceTree = "<group>"; };
 		69A40D2655BDD286DF17249A /* Pods_Maze_Snake.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Maze_Snake.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CEF2C19BF1BDFD63C34591F /* Pods_Maze_SnakeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Maze_SnakeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81222F015F1D4FAF48765096 /* Pods-Maze-Snake.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze-Snake.release.xcconfig"; path = "Target Support Files/Pods-Maze-Snake/Pods-Maze-Snake.release.xcconfig"; sourceTree = "<group>"; };
@@ -369,6 +373,8 @@
 				61DA9DD92298E27500129D34 /* BestFittingUIFont.swift */,
 				61DA9DDB2298E2BD00129D34 /* FitToBoundsLabel.swift */,
 				61B155B022C4EFC00031F35C /* MD5-Hash.swift */,
+				61F99A5C22E902BE00636270 /* Error Alert.swift */,
+				61F99A5E22E9031200636270 /* View Controller Stack Shortcut.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -793,6 +799,7 @@
 				2E07DAFF229DAFEF0092217F /* AIGameScene.swift in Sources */,
 				44ACC50A22906F8E0054C91A /* InfoDisplay.swift in Sources */,
 				61A708E522AB0CD6007B5253 /* Toast.swift in Sources */,
+				61F99A5F22E9031200636270 /* View Controller Stack Shortcut.swift in Sources */,
 				2EEEBAF122A83EBE005EEBF1 /* StoreViewController.swift in Sources */,
 				6111961F2284C4300075EEC9 /* MiniMapNode.swift in Sources */,
 				615D67FC2283BD0A00D0100A /* AI.swift in Sources */,
@@ -823,6 +830,7 @@
 				61B155B322C4F0050031F35C /* Checksum-Packet.swift in Sources */,
 				2E07DB01229DB2370092217F /* Opponent.swift in Sources */,
 				61B155B122C4EFC00031F35C /* MD5-Hash.swift in Sources */,
+				61F99A5D22E902BE00636270 /* Error Alert.swift in Sources */,
 				61DAA85A227CFBD1000FE4D0 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
