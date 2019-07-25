@@ -86,6 +86,7 @@
 		61F7C6AA228EF5F20006597B /* GraphNodeEquality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F7C6A9228EF5F20006597B /* GraphNodeEquality.swift */; };
 		61F99A5D22E902BE00636270 /* Error Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F99A5C22E902BE00636270 /* Error Alert.swift */; };
 		61F99A5F22E9031200636270 /* View Controller Stack Shortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F99A5E22E9031200636270 /* View Controller Stack Shortcut.swift */; };
+		61FEE28E22E9418900EB20C1 /* SKLabelButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FEE28D22E9418900EB20C1 /* SKLabelButtonNode.swift */; };
 		76AD79465BB11557E07076DD /* Pods_Maze_SnakeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CEF2C19BF1BDFD63C34591F /* Pods_Maze_SnakeTests.framework */; };
 		B09BD8479F66A13AD193249D /* Pods_Maze_Snake.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69A40D2655BDD286DF17249A /* Pods_Maze_Snake.framework */; };
 /* End PBXBuildFile section */
@@ -194,6 +195,7 @@
 		61F7C6A9228EF5F20006597B /* GraphNodeEquality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphNodeEquality.swift; sourceTree = "<group>"; };
 		61F99A5C22E902BE00636270 /* Error Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error Alert.swift"; sourceTree = "<group>"; };
 		61F99A5E22E9031200636270 /* View Controller Stack Shortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View Controller Stack Shortcut.swift"; sourceTree = "<group>"; };
+		61FEE28D22E9418900EB20C1 /* SKLabelButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKLabelButtonNode.swift; sourceTree = "<group>"; };
 		69A40D2655BDD286DF17249A /* Pods_Maze_Snake.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Maze_Snake.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CEF2C19BF1BDFD63C34591F /* Pods_Maze_SnakeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Maze_SnakeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81222F015F1D4FAF48765096 /* Pods-Maze-Snake.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze-Snake.release.xcconfig"; path = "Target Support Files/Pods-Maze-Snake/Pods-Maze-Snake.release.xcconfig"; sourceTree = "<group>"; };
@@ -398,6 +400,7 @@
 				2E9C4D012284AF4A009C9BFA /* AnalogStick.swift */,
 				6111961E2284C4300075EEC9 /* MiniMapNode.swift */,
 				61A708E422AB0CD6007B5253 /* Toast.swift */,
+				61FEE28D22E9418900EB20C1 /* SKLabelButtonNode.swift */,
 				44ACC50922906F8E0054C91A /* InfoDisplay.swift */,
 				61930BDD227DE97500550DD0 /* Tile Manager */,
 			);
@@ -783,6 +786,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61FEE28E22E9418900EB20C1 /* SKLabelButtonNode.swift in Sources */,
 				619FEA2C228CEE4600C28842 /* Monster.swift in Sources */,
 				44A0D10D229E1CC5001C9706 /* PvPConnectionExt.swift in Sources */,
 				61E0D1FB228110B700A6DE5C /* GraphCreation.swift in Sources */,

@@ -22,11 +22,11 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
     var done = false
     
     //Labels for initial prompt
-    var hostSessionLabel = SKLabelNode()
-    var joinSessionLabel = SKLabelNode()
-    var cancelLabel = SKLabelNode()
-    var connectedLabel = SKLabelNode()
-    var nextLabel = SKLabelNode()
+    var hostSessionLabel = SKLabelButtonNode()
+    var joinSessionLabel = SKLabelButtonNode()
+    var cancelLabel = SKLabelButtonNode()
+    var connectedLabel = SKLabelButtonNode()
+    var nextLabel = SKLabelButtonNode()
     
     //MPC Properties
     var peerID = MCPeerID(displayName: UIDevice.current.name)
@@ -57,13 +57,13 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
         
         if node.name == "host" {
             startHosting()
-            hostSessionLabel.color = .black
+            hostSessionLabel.fontColor = .gray
         }
         
         //Executed when user decides to join an existing session in pvp mode
         if node.name == "join" {
+            joinSessionLabel.fontColor = .gray
             joinSession()
-            joinSessionLabel.color = .black
         }
         
         //Executed when user leaves session creation menu
@@ -103,6 +103,14 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
         }
         
     }
+    
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        hostSessionLabel.touchesEnded(touches, with: event)
+        joinSessionLabel.touchesEnded(touches, with: event)
+    }
+    
+    
     
     var lastSent: TimeInterval = 0
     override func update(_ currentTime: TimeInterval) {

@@ -114,6 +114,7 @@ extension PvPGameScene {
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        joinSessionLabel.fontColor = .white
         browserViewController.dismiss(animated: true)
     }
     
@@ -139,6 +140,12 @@ extension PvPGameScene {
         hostSessionLabel.fontSize = 200
         hostSessionLabel.text = "Host a Session"
         hostSessionLabel.name = "host"
+        hostSessionLabel.onTouchesBegan = { [unowned self] (touches, event) in
+            self.hostSessionLabel.fontColor = UIColor.gray
+        }
+        hostSessionLabel.onTouchesEnded = { [unowned self] (touches, event) in
+            self.hostSessionLabel.fontColor = UIColor.white
+        }
         
         joinSessionLabel.zPosition = 1
         joinSessionLabel.fontName = "AvenirNext-Bold"
@@ -147,6 +154,12 @@ extension PvPGameScene {
         joinSessionLabel.fontSize = 200
         joinSessionLabel.text = "Join a Session"
         joinSessionLabel.name = "join"
+        joinSessionLabel.onTouchesBegan = { [unowned self] (touches, event) in
+            self.joinSessionLabel.fontColor = UIColor.gray
+        }
+        joinSessionLabel.onTouchesEnded = { [unowned self] (touches, event) in
+            self.joinSessionLabel.fontColor = UIColor.white
+        }
         
         cancelLabel.zPosition = 1
         cancelLabel.fontName = "AvenirNext-Bold"
@@ -155,6 +168,12 @@ extension PvPGameScene {
         cancelLabel.fontSize = 200
         cancelLabel.text = "Cancel"
         cancelLabel.name = "cancel"
+        cancelLabel.onTouchesBegan = { [unowned self] (touches, event) in
+            self.cancelLabel.fontColor = UIColor.gray
+        }
+        cancelLabel.onTouchesEnded = { [unowned self] (touches, event) in
+            self.cancelLabel.fontColor = UIColor.white
+        }
         
         addChild(hostSessionLabel)
         addChild(joinSessionLabel)
