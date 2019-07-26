@@ -65,7 +65,11 @@ class LogInViewController: UIViewController {
                 
             } else {
                 print ("Signed in with uid:", user?.additionalUserInfo!.providerID ?? "NO ID")
+                 self.performSegue(withIdentifier: "logInToGame", sender: self)
+                return
             }
+            
+             self.performSegue(withIdentifier: "logInToGame", sender: self)
         }
     }
     

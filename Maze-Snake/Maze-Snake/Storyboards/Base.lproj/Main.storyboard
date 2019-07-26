@@ -599,7 +599,10 @@
                     </view>
                     <connections>
                         <outlet property="currencyLabel" destination="2uw-W1-m4g" id="ppw-54-NOc"/>
+                        <outlet property="leaderboardButton" destination="B6l-f8-mcU" id="4xz-oy-8TB"/>
                         <outlet property="playerModelSmall" destination="OxC-H7-q6i" id="tl3-Ci-ozX"/>
+                        <outlet property="rewardsButton" destination="wZZ-Hw-3J3" id="Zr1-aG-5Wd"/>
+                        <outlet property="storeButton" destination="dy9-YU-Tit" id="uUl-Fi-V7w"/>
                         <outlet property="welcomeLabel" destination="1ck-14-TJG" id="N7f-9V-51D"/>
                     </connections>
                 </viewController>

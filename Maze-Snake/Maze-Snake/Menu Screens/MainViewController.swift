@@ -23,6 +23,9 @@ class MainViewController: UIViewController {
     @IBOutlet var welcomeLabel: UILabel!
     @IBOutlet var currencyLabel: UILabel!
     @IBOutlet var playerModelSmall: UIImageView!
+    @IBOutlet weak var storeButton: UIButton!
+    @IBOutlet weak var leaderboardButton: UIButton!
+    @IBOutlet weak var rewardsButton: UIButton!
     
     var currentlyEquipped = ""
     
@@ -44,7 +47,18 @@ class MainViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let currentUser = Auth.auth().currentUser!
+        guard let currentUser = Auth.auth().currentUser else{
+            welcomeLabel.text = "Welcome, Guest!"
+            playerTexture = "oldMan"
+            storeButton.isHidden = true
+            storeButton.isEnabled = false
+            leaderboardButton.isHidden = true
+            leaderboardButton.isEnabled = false
+            currencyLabel.isHidden = true
+            rewardsButton.isHidden = true
+            rewardsButton.isEnabled = false
+            return
+        }
         welcomeLabel.text = "Welcome, \(currentUser.displayName!)!"
         if Auth.auth().currentUser!.isAnonymous {
             welcomeLabel.text = "Welcome, Guest!"

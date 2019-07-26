@@ -13,7 +13,7 @@ import Firebase
 
 class AIGameScene: GameScene {
     var db: Firestore!
-    let currentUser = Auth.auth().currentUser!
+    var currentUser = Auth.auth().currentUser
     
     var allUserData = [String : Any]()
     
@@ -39,7 +39,9 @@ class AIGameScene: GameScene {
             self.time += 1
             self.info.timerLabel.text = "Time Spent: " + self.formattedTime()
         })
-        
+        guard let currentUser = currentUser else {
+            return
+        }
         if Auth.auth().currentUser!.isAnonymous {
             return
         }
@@ -79,6 +81,9 @@ class AIGameScene: GameScene {
         }
         super.playerWin()
         //Save relics gained
+        guard let currentUser = currentUser else {
+            return
+        }
         if Auth.auth().currentUser!.isAnonymous {
             return
         }
@@ -101,7 +106,12 @@ class AIGameScene: GameScene {
             }
         }
         //Save relics gained
+        guard let currentUser = currentUser else {
+            super.checkMonsterWin()
+            return
+        }
         if Auth.auth().currentUser!.isAnonymous {
+            super.checkMonsterWin()
             return
         }
         db.collection("users").document(currentUser.email!).setData(allUserData) { err in
@@ -127,7 +137,12 @@ class AIGameScene: GameScene {
             }
             
             //Save relics gained
+            guard let currentUser = currentUser else {
+                super.checkOpponentWin()
+                return
+            }
             if Auth.auth().currentUser!.isAnonymous {
+                super.checkOpponentWin()
                 return
             }
             db.collection("users").document(currentUser.email!).setData(allUserData) { err in
@@ -215,6 +230,9 @@ class AIGameScene: GameScene {
         allUserData["hardTime"] = hardTime
         allUserData["impossibleTime"] = impossibleTime
         
+        guard let currentUser = currentUser else {
+            return
+        }
         if Auth.auth().currentUser!.isAnonymous {
             return
         }
