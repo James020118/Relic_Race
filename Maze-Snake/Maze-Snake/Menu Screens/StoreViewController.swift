@@ -39,7 +39,10 @@ class StoreViewController: UIViewController {
         }
         
         let docRef = db.collection("users").document(currentUser.email!)
-        docRef.getDocument { [unowned self] (document, error) in
+        docRef.getDocument(source: .cache, completion: { [unowned self] (document, error) in
+            if error != nil {
+                return
+            }
             if let document = document, document.exists {
                 self.userData = document.data() ?? [:]
                 self.userTrophyCount = self.userData["currency"] as? Int ?? 0
@@ -73,7 +76,7 @@ class StoreViewController: UIViewController {
                     
                 }
             }
-        }
+        })
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {

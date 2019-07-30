@@ -44,15 +44,23 @@ class MainViewController: UIViewController {
             data.set(true, forKey: "minimapPos")
             data.set(true, forKey: "musicOn")
         }
+        
+        rewardsButton.layer.cornerRadius = 18
+        
+        guard let currentUser = Auth.auth().currentUser else{
+            return
+        }
+        db.enableNetwork(completion: { [unowned self] error in
+            self.requestData(from: currentUser, with: .server)
+            self.db.disableNetwork(completion: nil)
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
         guard let currentUser = Auth.auth().currentUser else{
             welcomeLabel.text = "Welcome, Guest!"
             playerTexture = "oldMan"
-            storeButton.isHidden = true
             storeButton.isEnabled = false
-            leaderboardButton.isHidden = true
             leaderboardButton.isEnabled = false
             currencyLabel.isHidden = true
             rewardsButton.isHidden = true
@@ -66,8 +74,15 @@ class MainViewController: UIViewController {
             return
         }
         
+        requestData(from: currentUser, with: .cache)
+    }
+    
+    func requestData(from currentUser: User, with source: FirestoreSource) {
         let docRef = db.collection("users").document(currentUser.email!)
-        docRef.getDocument { [unowned self] (document, error) in
+        docRef.getDocument(source: source, completion: { [unowned self] (document, error) in
+            if error != nil {
+                return
+            }
             if let document = document, document.exists {
                 let currency = document.data()!["currency"] as? Int ?? 0
                 self.currencyLabel.text = "Relics: \(currency)"
@@ -86,9 +101,7 @@ class MainViewController: UIViewController {
                 
                 playerTexture = self.currentlyEquipped
             }
-        }
-        
-
+        })
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

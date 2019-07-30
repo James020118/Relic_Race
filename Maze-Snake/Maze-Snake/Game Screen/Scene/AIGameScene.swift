@@ -45,8 +45,18 @@ class AIGameScene: GameScene {
         if Auth.auth().currentUser!.isAnonymous {
             return
         }
+        db.disableNetwork(completion: { [unowned self] error in
+            self.requestGameData(from: currentUser)
+        })
+        
+    }
+    
+    func requestGameData(from currentUser: User) {
         let docRef = db.collection("users").document(currentUser.email!)
-        docRef.getDocument { [unowned self] (document, error) in
+        docRef.getDocument(source: .cache, completion: { [unowned self] (document, error) in
+            if error != nil {
+                return
+            }
             if let document = document, document.exists {
                 self.allUserData = document.data()!
                 print("Finally retrieved")
@@ -65,8 +75,7 @@ class AIGameScene: GameScene {
                 }
                 self.currency = self.allUserData["currency"] as? Int ?? 0
             }
-        }
-        
+        })
     }
     
     override func playerWin() {
@@ -74,11 +83,8 @@ class AIGameScene: GameScene {
         saveTime()
         
         //Present Ads
-        if let adVC = self.parentVC as? GameViewController {
-            if adVC.interstitial.isReady {
-                adVC.interstitial.present(fromRootViewController: adVC)
-            }
-        }
+        presentAd()
+        
         super.playerWin()
         //Save relics gained
         guard let currentUser = currentUser else {
@@ -87,24 +93,15 @@ class AIGameScene: GameScene {
         if Auth.auth().currentUser!.isAnonymous {
             return
         }
-        db.collection("users").document(currentUser.email!).setData(allUserData) { err in
-            if let err = err {
-                print("Error adding currency to firestore: \(err)")
-            } else {
-                print("Currency successfully increased!")
-            }
-        }
+        storeToServer(with: currentUser)
     }
     
     override func checkMonsterWin() {
         timer.invalidate()
         
         //Present Ads
-        if let adVC = self.parentVC as? GameViewController {
-            if adVC.interstitial.isReady {
-                adVC.interstitial.present(fromRootViewController: adVC)
-            }
-        }
+        presentAd()
+        
         //Save relics gained
         guard let currentUser = currentUser else {
             super.checkMonsterWin()
@@ -114,13 +111,7 @@ class AIGameScene: GameScene {
             super.checkMonsterWin()
             return
         }
-        db.collection("users").document(currentUser.email!).setData(allUserData) { err in
-            if let err = err {
-                print("Error adding currency to firestore: \(err)")
-            } else {
-                print("Currency successfully increased!")
-            }
-        }
+        storeToServer(with: currentUser)
         
         super.checkMonsterWin()
     }
@@ -130,11 +121,7 @@ class AIGameScene: GameScene {
             timer.invalidate()
             
             //Present Ads
-            if let adVC = self.parentVC as? GameViewController {
-                if adVC.interstitial.isReady {
-                    adVC.interstitial.present(fromRootViewController: adVC)
-                }
-            }
+            presentAd()
             
             //Save relics gained
             guard let currentUser = currentUser else {
@@ -145,13 +132,7 @@ class AIGameScene: GameScene {
                 super.checkOpponentWin()
                 return
             }
-            db.collection("users").document(currentUser.email!).setData(allUserData) { err in
-                if let err = err {
-                    print("Error adding currency to firestore: \(err)")
-                } else {
-                    print("Currency successfully increased!")
-                }
-            }
+            storeToServer(with: currentUser)
         }
         
         super.checkOpponentWin()
@@ -186,6 +167,19 @@ class AIGameScene: GameScene {
                 self.time += 1
                 self.info.timerLabel.text = "Time Spent: " + self.formattedTime()
             })
+        }
+        
+        if node.name == "return" {
+            //Save relics gained
+            guard let currentUser = currentUser else {
+                super.touchesBegan(touches, with: event)
+                return
+            }
+            if Auth.auth().currentUser!.isAnonymous {
+                super.touchesBegan(touches, with: event)
+                return
+            }
+            storeToServer(with: currentUser)
         }
         
         super.touchesBegan(touches, with: event)
@@ -236,11 +230,20 @@ class AIGameScene: GameScene {
         if Auth.auth().currentUser!.isAnonymous {
             return
         }
-        db.collection("users").document(currentUser.email!).setData(allUserData) { err in
-            if let err = err {
-                print("Error writing time to firestore: \(err)")
-            } else {
-                print("Time successfully added!")
+        storeToServer(with: currentUser)
+    }
+    
+    func storeToServer(with currentUser: User) {
+        db.enableNetwork(completion: { [unowned self] error in
+            self.db.collection("users").document(currentUser.email!).setData(self.allUserData)
+            self.db.disableNetwork(completion: nil)
+        })
+    }
+    
+    func presentAd() {
+        if let adVC = self.parentVC as? GameViewController {
+            if adVC.interstitial.isReady {
+                adVC.interstitial.present(fromRootViewController: adVC)
             }
         }
     }

@@ -101,6 +101,9 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
         /* Load LOCAL Scores */
         let docRef = Firestore.firestore().collection("users").document(Auth.auth().currentUser?.email ?? "")
         docRef.getDocument { [unowned self] (document, error) in
+            if error != nil {
+                return
+            }
             if let document = document, document.exists {
                 let easyNums: [NSNumber] = document["easyTime"] as? [NSNumber] ?? []
                 for num in easyNums {
