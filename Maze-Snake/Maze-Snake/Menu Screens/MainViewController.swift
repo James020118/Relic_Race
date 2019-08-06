@@ -59,8 +59,6 @@ class MainViewController: UIViewController {
         guard let currentUser = Auth.auth().currentUser else{
             welcomeLabel.text = "Welcome, Guest!"
             playerTexture = "oldMan"
-            storeButton.isEnabled = false
-            leaderboardButton.isEnabled = false
             currencyLabel.isHidden = true
             rewardsButton.isHidden = true
             rewardsButton.isEnabled = false
@@ -127,6 +125,12 @@ class MainViewController: UIViewController {
         let videoLoaded = GADRewardBasedVideoAd.sharedInstance().isReady
         if videoLoaded {
             GADRewardBasedVideoAd.sharedInstance().present(fromRootViewController: self)
+        }else {
+            Toast().showAlert(
+                backgroundColor: UIColor.white,
+                textColor: UIColor.black,
+                message: "No Ad Loaded"
+            )
         }
     }
 

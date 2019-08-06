@@ -15,6 +15,7 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
     var db: Firestore!
     
     let LIMIT = 10
+    var failedLoad = false
     
     //Worldwide and Local Top Scores
     var allEasyTime = [[(name: String, time: Int)](), [(name: String, time: Int)]()]
@@ -40,6 +41,7 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
         db.collection("users").getDocuments() { [unowned self] (querySnapshot, error) in
             if let error = error {
                 print("Error getting all user data for leaderboard, \(error.localizedDescription)")
+                self.failedLoad = true
             } else {
                 for document in querySnapshot!.documents {
                     self.allUsers.append(document.data())
@@ -94,12 +96,15 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
             self.leaderboardTable.reloadData()
         }
         
-        if Auth.auth().currentUser!.isAnonymous {
+        guard let currentUser = Auth.auth().currentUser else {
+            return
+        }
+        if currentUser.isAnonymous {
             return
         }
         
         /* Load LOCAL Scores */
-        let docRef = Firestore.firestore().collection("users").document(Auth.auth().currentUser?.email ?? "")
+        let docRef = Firestore.firestore().collection("users").document(currentUser.email ?? "")
         docRef.getDocument { [unowned self] (document, error) in
             if error != nil {
                 return
@@ -156,6 +161,13 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
 extension LeaderboardViewController {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if Auth.auth().currentUser == nil && section == 0 {
+            return 1
+        }
+        if failedLoad && section == 1 {
+            return 1
+        }
+        
         switch difficultySegmentControl.selectedSegmentIndex {
         case 0:
             return allEasyTime[section].count
@@ -175,6 +187,17 @@ extension LeaderboardViewController {
         cell.textLabel?.textColor = UIColor.white
         cell.detailTextLabel?.font = UIFont(name: "AvenirNext-Regular", size: 20)
         cell.detailTextLabel?.textColor = UIColor.white
+        
+        if indexPath.section == 0 && Auth.auth().currentUser == nil {
+            cell.textLabel?.text = "Sign in to Use"
+            cell.detailTextLabel?.isHidden = true
+            return cell
+        }
+        if failedLoad && indexPath.section == 1 {
+            cell.textLabel?.text = "Failed to load data"
+            cell.detailTextLabel?.isHidden = true
+            return cell
+        }
         
         switch difficultySegmentControl.selectedSegmentIndex {
         case 0:

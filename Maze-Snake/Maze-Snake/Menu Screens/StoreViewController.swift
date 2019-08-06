@@ -11,8 +11,6 @@ import Firebase
 
 class StoreViewController: UIViewController {
     
-    let currentUser = Auth.auth().currentUser!
-    
     var db: Firestore!
     var userData = [String : Any]()
     
@@ -25,16 +23,27 @@ class StoreViewController: UIViewController {
     @IBOutlet var skin1option: UIButton!
     @IBOutlet var skin2Option: UIButton!
     
+    func setDisabledMode() {
+        skin1option.isEnabled = false
+        skin2Option.isEnabled = false
+        let disabledString = "Sign in to buy"
+        skin1option.setTitle(disabledString, for: UIControl.State.disabled)
+        skin2Option.setTitle(disabledString, for: UIControl.State.disabled)
+        skin1option.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        skin2Option.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         db = Firestore.firestore()
         
-        if Auth.auth().currentUser!.isAnonymous {
-            skin1option.isEnabled = false
-            skin2Option.isEnabled = false
-            skin1option.setTitle("Disabled", for: UIControl.State.disabled)
-            skin2Option.setTitle("Disabled", for: UIControl.State.disabled)
+        guard let currentUser = Auth.auth().currentUser else {
+            setDisabledMode()
+            return
+        }
+        if currentUser.isAnonymous {
+            setDisabledMode()
             return
         }
         
@@ -84,6 +93,10 @@ class StoreViewController: UIViewController {
     }
     
     @IBAction func onSkinClick(_ sender: UIButton) {
+        guard let currentUser = Auth.auth().currentUser else {
+            return
+        }
+        
         var skinBought = ""
         //Check if the player has enough trophies
         let cost = sender.tag * 50
@@ -97,7 +110,7 @@ class StoreViewController: UIViewController {
             skinBought = "oldMan"
         }
         
-        if Auth.auth().currentUser!.isAnonymous {
+        if currentUser.isAnonymous {
             sender.setTitle("Equipped", for: .normal)
             return
         }
@@ -183,7 +196,7 @@ class StoreViewController: UIViewController {
                 self.userData["currency"] = self.userTrophyCount
                 self.userData["skins"] = self.skins
                 
-                self.db.collection("users").document(self.currentUser.email!).setData(self.userData)
+                self.db.collection("users").document(currentUser.email!).setData(self.userData)
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
