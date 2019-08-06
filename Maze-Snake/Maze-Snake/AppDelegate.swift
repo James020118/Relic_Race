@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         db = Firestore.firestore()
-        db.disableNetwork(completion: nil)
         let settings = FirestoreSettings()
         settings.isPersistenceEnabled = true
         db.settings = settings
@@ -88,16 +87,20 @@ extension AppDelegate: GADRewardBasedVideoAdDelegate {
             return
         }
         let currentUser = Auth.auth().currentUser!
-        let docRef = db.collection("users").document(currentUser.email!)
-        docRef.getDocument(source: .cache, completion: { [unowned self] (document, error) in
-            if error != nil {
-                return
-            }
-            if let document = document, document.exists {
-                let curRelics = document.data()!["currency"] as? Int ?? 0
-                var uData = document.data()!
-                uData["currency"] = curRelics + 10
-                self.db.collection("users").document(currentUser.email!).setData(uData)
+        db.enableNetwork(completion: { (error) in
+            let docRef = self.db.collection("users").document(currentUser.email!)
+            docRef.getDocument { [unowned self] (document, error) in
+                if error != nil {
+                    self.db.disableNetwork(completion: nil)
+                    return
+                }
+                if let document = document, document.exists {
+                    let curRelics = document.data()!["currency"] as? Int ?? 0
+                    var uData = document.data()!
+                    uData["currency"] = curRelics + 10
+                    self.db.collection("users").document(currentUser.email!).setData(uData)
+                }
+                self.db.disableNetwork(completion: nil)
             }
         })
     }

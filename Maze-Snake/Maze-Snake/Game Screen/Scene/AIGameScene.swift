@@ -235,8 +235,12 @@ class AIGameScene: GameScene {
     
     func storeToServer(with currentUser: User) {
         db.enableNetwork(completion: { [unowned self] error in
-            self.db.collection("users").document(currentUser.email!).setData(self.allUserData)
-            self.db.disableNetwork(completion: nil)
+            self.db.collection("users").document(currentUser.email!).setData(self.allUserData, completion: { [unowned self] (error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+                self.db.disableNetwork(completion: nil)
+            })
         })
     }
     

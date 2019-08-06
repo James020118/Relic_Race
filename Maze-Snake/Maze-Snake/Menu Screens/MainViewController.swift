@@ -52,7 +52,6 @@ class MainViewController: UIViewController {
         }
         db.enableNetwork(completion: { [unowned self] error in
             self.requestData(from: currentUser, with: .server)
-            self.db.disableNetwork(completion: nil)
         })
     }
     
@@ -81,6 +80,9 @@ class MainViewController: UIViewController {
         let docRef = db.collection("users").document(currentUser.email!)
         docRef.getDocument(source: source, completion: { [unowned self] (document, error) in
             if error != nil {
+                if source == .server {
+                    self.db.disableNetwork(completion: nil)
+                }
                 return
             }
             if let document = document, document.exists {
@@ -100,6 +102,9 @@ class MainViewController: UIViewController {
                 }
                 
                 playerTexture = self.currentlyEquipped
+            }
+            if source == .server {
+                self.db.disableNetwork(completion: nil)
             }
         })
     }
