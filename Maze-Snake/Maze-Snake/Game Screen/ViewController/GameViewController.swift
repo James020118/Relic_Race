@@ -73,12 +73,10 @@ class GameViewController: UIViewController, GADInterstitialDelegate {
     func createAndLoadInterstitial() -> GADInterstitial {
         let interstitial = GADInterstitial(adUnitID: INTERSTITIAL_UNIT_ID)
         interstitial.delegate = self
-        interstitial.load(GADRequest())
+        if Bool.random() {
+            interstitial.load(GADRequest())
+        }
         return interstitial
-    }
-    
-    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-        interstitial = createAndLoadInterstitial()
     }
 
     override func viewWillAppear(_ animated: Bool) {
