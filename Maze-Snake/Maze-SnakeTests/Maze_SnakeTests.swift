@@ -77,4 +77,68 @@ class Maze_SnakeTests: XCTestCase {
         }
     }
 
+    func testCirclePOI() {
+        /* MARK:- Testing Results against results at: https://planetcalc.com/8098/ */
+        
+        //TEST # 1
+        let c11 = Circle(
+            x: 0,
+            y: 0,
+            r: 5
+        )
+        let c21 = Circle(
+            x: 10,
+            y: 0,
+            r: 5
+        )
+        let sols1 = intersectTwoCircles(c1: c11, c2: c21)
+        XCTAssert(sols1 == [CGPoint(x: 5.0, y: 0)], "POIs are not accurate")
+        
+        //TEST # 2
+        let c12 = Circle(
+            x: 0,
+            y: 0,
+            r: 5
+        )
+        let c22 = Circle(
+            x: 0,
+            y: 5,
+            r: 5
+        )
+        let sols2 = intersectTwoCircles(c1: c12, c2: c22)
+        XCTAssert(sols2 == [
+            CGPoint(x: 4.330127018922193, y: 2.5),
+            CGPoint(x: -4.330127018922193, y: 2.5),
+            ],           "POIs are not accurate")
+        
+        //TEST # 3
+        let c13 = Circle(
+            x: 0,
+            y: 0,
+            r: 1
+        )
+        let c23 = Circle(
+            x: 100,
+            y: 100,
+            r: 1
+        )
+        let sols3 = intersectTwoCircles(c1: c13, c2: c23)
+        XCTAssert(sols3 == [], "POIs are not accurate")
+        
+        //TEST # 4
+        let c14 = Circle(
+            x: 10,
+            y: 10,
+            r: 500
+        )
+        let c24 = Circle(
+            x: 490,
+            y: 400,
+            r: 500
+        )
+        let sols4 = intersectTwoCircles(c1: c14, c2: c24)
+        print(sols4)
+        XCTAssert(sols4 == [], "POIs are not accurate")
+    }
+    
 }

@@ -143,10 +143,6 @@ class TileManager {
     
     //MARK:- OPTIMIZATION
     
-    //TODO: Remove all game nodes from parent when game moves to pause/end screen
-    
-    //TODO: Reduce number of draw calls
-    
     //Remove offscreen nodes from parent and add those in-screen in
     //Removes over 600 nodes but doesn't reduce # of draw calls
     func viewOnScreenTiles(pos: CGPoint, parent: GameScene) {

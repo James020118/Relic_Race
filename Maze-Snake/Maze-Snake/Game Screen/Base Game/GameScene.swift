@@ -324,13 +324,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         opponent.incrementScore()
         info.changeAIScore(newScore: opponent.score)
         //Spawn New Trophy and appropriate response
-        trophy.setRandomPosition()
-        minimap.updateTrophy(position: trophy.position)
-        opponent.stop()
-        let trophyGridPos = tileManager!.indexFrom(position: trophy.position)
-        opponent.gridPos = tileManager!.indexFrom(position: opponent.position)
-        if let ai = opponent as? AI {
-            ai.moveShortestPath(to: trophyGridPos)
+        DispatchQueue.main.async {
+            self.trophy.setRandomPosition()
+            self.minimap.updateTrophy(position: self.trophy.position)
+            self.opponent.stop()
+            let trophyGridPos = self.tileManager!.indexFrom(position: self.trophy.position)
+            self.opponent.gridPos = self.tileManager!.indexFrom(position: self.opponent.position)
+            if let ai = self.opponent as? AI {
+                ai.moveShortestPath(to: trophyGridPos)
+            }
         }
         if music_Is_On {
            sfxController.playSound(named: "trophy-collect")

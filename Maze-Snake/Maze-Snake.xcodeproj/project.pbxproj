@@ -70,6 +70,7 @@
 		61B155B322C4F0050031F35C /* Checksum-Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B155B222C4F0050031F35C /* Checksum-Packet.swift */; };
 		61B48313228397AF0045BF3A /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B48312228397AF0045BF3A /* Actor.swift */; };
 		61B48315228397EB0045BF3A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B48314228397EB0045BF3A /* Player.swift */; };
+		61CC78E822FB8F9C0036FFF6 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CC78E722FB8F9C0036FFF6 /* Circle.swift */; };
 		61D584F0229F4BA300C751C5 /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D584EF229F4BA300C751C5 /* SoundController.swift */; };
 		61D584F8229F4EC900C751C5 /* background-music.wav in Resources */ = {isa = PBXBuildFile; fileRef = 61D584F2229F4EC800C751C5 /* background-music.wav */; };
 		61D584F9229F4EC900C751C5 /* end.wav in Resources */ = {isa = PBXBuildFile; fileRef = 61D584F3229F4EC800C751C5 /* end.wav */; };
@@ -179,6 +180,7 @@
 		61B155B222C4F0050031F35C /* Checksum-Packet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Checksum-Packet.swift"; sourceTree = "<group>"; };
 		61B48312228397AF0045BF3A /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		61B48314228397EB0045BF3A /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		61CC78E722FB8F9C0036FFF6 /* Circle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
 		61D584EF229F4BA300C751C5 /* SoundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
 		61D584F2229F4EC800C751C5 /* background-music.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "background-music.wav"; sourceTree = "<group>"; };
 		61D584F3229F4EC800C751C5 /* end.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = end.wav; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 				61FEE28D22E9418900EB20C1 /* SKLabelButtonNode.swift */,
 				44ACC50922906F8E0054C91A /* InfoDisplay.swift */,
 				61930BDD227DE97500550DD0 /* Tile Manager */,
+				61CC78E722FB8F9C0036FFF6 /* Circle.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -803,6 +806,7 @@
 				2E07DAFF229DAFEF0092217F /* AIGameScene.swift in Sources */,
 				44ACC50A22906F8E0054C91A /* InfoDisplay.swift in Sources */,
 				61A708E522AB0CD6007B5253 /* Toast.swift in Sources */,
+				61CC78E822FB8F9C0036FFF6 /* Circle.swift in Sources */,
 				61F99A5F22E9031200636270 /* View Controller Stack Shortcut.swift in Sources */,
 				2EEEBAF122A83EBE005EEBF1 /* StoreViewController.swift in Sources */,
 				6111961F2284C4300075EEC9 /* MiniMapNode.swift in Sources */,
