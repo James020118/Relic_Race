@@ -50,8 +50,8 @@ class Trophy: SKSpriteNode {
     /* Set trophy random position
      Use breath-first search twice to make a shortest path mapping of every vertex from both players
      Compare the 2 maps to find tiles that are:
-        1. Atleast 250 tiles away from each player
-        2. Have a similiar length: ± 30
+        1. Atleast 36 tiles away from each player
+        2. Have a similiar length: ± 7
      */
     func MSTBasedFairPosition() {
         //Get Player Pos
@@ -66,22 +66,6 @@ class Trophy: SKSpriteNode {
         let oppPos = oppPosGrid.row*Maze.MAX_COLUMNS + oppPosGrid.column
         let mappedDist2 = distances(from: oppPos, using: gameScene!.mazeGraph!)
         
-        for row in mappedDist1.reversed() {
-            var line = ""
-            for dist in row {
-                line += String(dist) + "\t"
-            }
-            print(line)
-        }
-        print("")
-        for row in mappedDist2.reversed() {
-            var line = ""
-            for dist in row {
-                line += String(dist) + "\t"
-            }
-            print(line)
-        }
-        
         var viableTile = [GridPosition]()
         //Compare each mapping to find ideal tile for trophy placement
         for y in 0..<mappedDist1.count {
@@ -91,9 +75,6 @@ class Trophy: SKSpriteNode {
                 let SIMILIAR_LENTH =  mappedDist2[y][x] + 7 >= mappedDist1[y][x] && mappedDist2[y][x] - 7 <= mappedDist1[y][x]
                 
                 if MIN_LENGTH_OT && MIN_LENGTH_PT && SIMILIAR_LENTH {
-                    print("")
-                    print(mappedDist2[y][x])
-                    print(mappedDist1[y][x])
                     viableTile.append(GridPosition(column: x, row: y))
                 }
             }
@@ -108,7 +89,9 @@ class Trophy: SKSpriteNode {
         position = tile.position
         
     }
-    //TODO:- Fix depthCounter
+    /*
+     Patrick's alogrithm that uses a breath-first search to efficiently ( O(|E| + |V|) ) to create a minimum spanning tree (or in other words, a mapping showing distances to every node from a source node)
+     */
     func distances(from src: Int, using graph: GKGridGraph<GKGridGraphNode>) -> [[Int]] {
         //Creating Queue
         var queue = Queue<GKGridGraphNode>()
