@@ -21,7 +21,7 @@ extension GameScene {
         playerToTrophyResponse()
         //Check Win
         if player1.player_Score == 5 {
-            playerWin()
+            onPlayerWin()
         }
     }
     
@@ -42,7 +42,7 @@ extension GameScene {
         }
         monsterCollisionFlag = -1
         if player1.player_Health == 0 {
-            checkMonsterWin()
+            onMonsterWin()
         }
     }
     

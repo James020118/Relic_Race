@@ -163,7 +163,7 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
         }
     }
     
-    override func checkMonsterWin() {
+    override func onMonsterWin() {
         do {
             var val: UInt8 = 1
             let data = Data(bytes: &val, count: MemoryLayout<UInt8>.size)
@@ -171,7 +171,7 @@ class PvPGameScene: GameScene, MCSessionDelegate, MCBrowserViewControllerDelegat
         }catch{
             print("Oops!")
         }
-        super.checkMonsterWin()
+        super.onMonsterWin()
     }
     
     

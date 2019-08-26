@@ -73,7 +73,7 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
                     for num in nsImpossible {
                         impossibleScores.append((name: name, time: num.intValue))
                     }
-                    self.allImpossibleTime[1] += hardScores
+                    self.allImpossibleTime[1] += impossibleScores
                 }
                 //Sort all scores
                 self.allEasyTime[1].sort(by: { $0.time < $1.time })

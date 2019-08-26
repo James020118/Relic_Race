@@ -52,3 +52,34 @@ struct Circle {
     let y: CGFloat
     let r: CGFloat
 }
+
+
+// Find the points of intersection.
+func FindLineCircleIntersections(cx: CGFloat, cy: CGFloat, radius: CGFloat, point1: CGPoint, point2: CGPoint) -> [CGPoint] {
+    
+    let dx = point2.x - point1.x;
+    let dy = point2.y - point1.y;
+    
+    let A = dx * dx + dy * dy;
+    let B = 2 * (dx * (point1.x - cx) + dy * (point1.y - cy));
+    let C = (point1.x - cx) * (point1.x - cx) +
+    (point1.y - cy) * (point1.y - cy) -
+    radius * radius;
+    
+    let det = B * B - 4 * A * C;
+    if ((A <= 0.0000001) || (det < 0)) {
+        return [];
+    }else if (det == 0) {
+        // One solution.
+        let t = -B / (2 * A);
+        return [CGPoint(x: point1.x + t * dx, y: point1.y + t * dy)];
+    }else {
+        // Two solutions
+    
+        var t = CGFloat((-B + sqrt(det)) / (2 * A));
+        let intersection1 = CGPoint(x: point1.x + t * dx, y: point1.y + t * dy);
+        t = CGFloat((-B - sqrt(det)) / (2 * A));
+        let intersection2 = CGPoint(x: point1.x + t * dx, y: point1.y + t * dy);
+        return [intersection1, intersection2];
+    }
+}

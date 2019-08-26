@@ -11,8 +11,8 @@ import Firebase
 import FirebaseFirestore
 import GoogleMobileAds
 
-let REWARD_UNIT_ID = "ca-app-pub-3940256099942544/1712485313" //"ca-app-pub-8803340854984368~4579897393"
-let INTERSTITIAL_UNIT_ID = "ca-app-pub-3940256099942544/4411468910" //"ca-app-pub-8803340854984368~4579897393"
+let REWARD_UNIT_ID = "ca-app-pub-8803340854984368/9924557569"
+let INTERSTITIAL_UNIT_ID = "ca-app-pub-8803340854984368/3195497686"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -132,5 +132,7 @@ extension AppDelegate: GADRewardBasedVideoAdDelegate {
     func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd,
                             didFailToLoadWithError error: Error) {
         print("Reward based video ad failed to load.")
+        print(error)
+        print(error.localizedDescription)
     }
 }

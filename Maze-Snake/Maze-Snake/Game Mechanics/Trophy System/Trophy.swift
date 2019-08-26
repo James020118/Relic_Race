@@ -8,6 +8,7 @@
 
 import Foundation
 import SpriteKit
+import GameKit
 
 class Trophy: SKSpriteNode {
     
@@ -41,7 +42,103 @@ class Trophy: SKSpriteNode {
     
     /* Function that controls where the trophies are placed in-game */
     func setRandomPosition() {
-        graphBasedRandomPositioning()
+       MSTBasedFairPosition()
+    }
+    
+    
+    //MARK:- Minimum Spanning Tree
+    /* Set trophy random position
+     Use breath-first search twice to make a shortest path mapping of every vertex from both players
+     Compare the 2 maps to find tiles that are:
+        1. Atleast 250 tiles away from each player
+        2. Have a similiar length: ± 30
+     */
+    func MSTBasedFairPosition() {
+        //Get Player Pos
+        let playerPosGrid = gameScene!.tileManager!.indexFrom(position: gameScene!.player1!.position)
+        //Convert 2-D mapping to 1-D
+        let playerPos = playerPosGrid.row*Maze.MAX_COLUMNS + playerPosGrid.column
+        //Get map of all distances
+        let mappedDist1 = distances(from: playerPos, using: gameScene!.mazeGraph!)
+        
+        //Repeat for opponent
+        let oppPosGrid = gameScene!.tileManager!.indexFrom(position: gameScene!.opponent!.position)
+        let oppPos = oppPosGrid.row*Maze.MAX_COLUMNS + oppPosGrid.column
+        let mappedDist2 = distances(from: oppPos, using: gameScene!.mazeGraph!)
+        
+        for row in mappedDist1.reversed() {
+            var line = ""
+            for dist in row {
+                line += String(dist) + "\t"
+            }
+            print(line)
+        }
+        print("")
+        for row in mappedDist2.reversed() {
+            var line = ""
+            for dist in row {
+                line += String(dist) + "\t"
+            }
+            print(line)
+        }
+        
+        var viableTile = [GridPosition]()
+        //Compare each mapping to find ideal tile for trophy placement
+        for y in 0..<mappedDist1.count {
+            for x in 0..<mappedDist1[y].count {
+                let MIN_LENGTH_OT = mappedDist2[y][x] > 36
+                let MIN_LENGTH_PT = mappedDist1[y][x] > 36
+                let SIMILIAR_LENTH =  mappedDist2[y][x] + 7 >= mappedDist1[y][x] && mappedDist2[y][x] - 7 <= mappedDist1[y][x]
+                
+                if MIN_LENGTH_OT && MIN_LENGTH_PT && SIMILIAR_LENTH {
+                    print("")
+                    print(mappedDist2[y][x])
+                    print(mappedDist1[y][x])
+                    viableTile.append(GridPosition(column: x, row: y))
+                }
+            }
+        }
+        if viableTile.isEmpty {
+            CircleBasedRandomPositioning()
+            return
+        }
+        
+        let randPos = viableTile.randomElement()!
+        let tile = gameScene!.tileManager!.getTile(row: randPos.row, column: randPos.column)
+        position = tile.position
+        
+    }
+    //TODO:- Fix depthCounter
+    func distances(from src: Int, using graph: GKGridGraph<GKGridGraphNode>) -> [[Int]] {
+        //Creating Queue
+        var queue = Queue<GKGridGraphNode>()
+        let srcNode = graph.nodes![src] as! GKGridGraphNode
+        let srcPos = GridPosition(from: srcNode.gridPosition)
+        queue.enqueue(srcNode)
+
+        //Visited Array for Breath-first search
+        var visited = [[Bool]](repeating: [Bool](repeating: false, count: Maze.MAX_COLUMNS), count: Maze.MAX_ROWS)
+        visited[srcPos.row][srcPos.column] = true
+        
+        //Array to track final distances
+        var dist = [[Int]](repeating: [Int](repeating: -1, count: Maze.MAX_COLUMNS), count: Maze.MAX_ROWS)
+        dist[srcPos.row][srcPos.column] = 0
+        
+        //Search
+        while let rootNode = queue.dequeue() {
+            for neighbour in rootNode.connectedNodes {
+                let neighbourNode = neighbour as! GKGridGraphNode
+                let neighbourPos = GridPosition(from: neighbourNode.gridPosition)
+                if !visited[neighbourPos.row][neighbourPos.column] {
+                    queue.enqueue(neighbourNode)
+                    let rootPos = GridPosition(from: rootNode.gridPosition)
+                    dist[neighbourPos.row][neighbourPos.column] = dist[rootPos.row][rootPos.column] + 1
+                    visited[neighbourPos.row][neighbourPos.column] = true
+                }
+            }
+        }
+        
+        return dist
     }
     
     
@@ -64,6 +161,7 @@ class Trophy: SKSpriteNode {
         })
         position = tile.position
     }
+    
     
     //MARK:- Pathfinding-distance fairness
     /* Set trophy random position
@@ -91,6 +189,7 @@ class Trophy: SKSpriteNode {
         position = tile.position
     }
     
+    
     //MARK:-Circle-based
     /* Set trophy random position
      Draw Circles b/w opponent & player positions.
@@ -100,16 +199,16 @@ class Trophy: SKSpriteNode {
     func CircleBasedRandomPositioning() {
         let dx = abs(gameScene!.opponent.position.x - gameScene!.player1.position.x)
         let dy = abs(gameScene!.opponent.position.y - gameScene!.player1.position.y)
-        let radius = dx > dy ? dx : dy
+        let diameter = dx > dy ? dx : dy
         let circle1 = Circle(
             x: gameScene!.player1.position.x,
             y: gameScene!.player1.position.y,
-            r: radius
+            r: diameter/2
         )
         let circle2 = Circle(
             x: gameScene!.opponent.position.x,
             y: gameScene!.opponent.position.y,
-            r: radius
+            r: diameter/2
         )
         
         let solutions = intersectTwoCircles(c1: circle1, c2: circle2)
@@ -233,28 +332,67 @@ class Trophy: SKSpriteNode {
         }
         
         //Find x intercepts w/ screen
-        let topIntVal = (gameScene!.frame.width/2 - b) / m
-        let bottomIntVal = (-gameScene!.frame.width/2 - b) / m
+        let topIntVal = ((gameScene!.frame.height/2 - gameScene!.tileManager!.getTile(row: 0, column: 0).frame.height) - b) / m
+        let bottomIntVal = ((-gameScene!.frame.height/2 + gameScene!.tileManager!.getTile(row: 0, column: 0).frame.height) - b) / m
         
         var bottomLimit: CGFloat = 0
         var upperLimit: CGFloat = 0
-        let LIMIT_BOTTOM = -gameScene!.frame.width/2 + gameScene!.tileManager!.getTile(row: 0, column: 0).frame.width
-        let LIMIT_TOP = gameScene!.frame.width/2 - gameScene!.tileManager!.getTile(row: 0, column: 0).frame.width
+        let LIMIT_LEFT = -gameScene!.frame.width/2 + gameScene!.tileManager!.getTile(row: 0, column: 0).frame.width
+        let LIMIT_RIGHT = gameScene!.frame.width/2 - gameScene!.tileManager!.getTile(row: 0, column: 0).frame.width
         //Define upper & lower limits for random # generation
         if m > 0 {
-            bottomLimit = LIMIT_BOTTOM > bottomIntVal ? LIMIT_BOTTOM : bottomIntVal
-            upperLimit = LIMIT_TOP > topIntVal ? topIntVal : LIMIT_TOP
+            bottomLimit = LIMIT_LEFT > bottomIntVal ? LIMIT_LEFT : bottomIntVal
+            upperLimit = LIMIT_RIGHT > topIntVal ? topIntVal : LIMIT_RIGHT
         }else if m < 0 {
-            bottomLimit = LIMIT_BOTTOM > topIntVal ? LIMIT_BOTTOM : topIntVal
-            upperLimit = LIMIT_TOP > bottomIntVal ? bottomIntVal : LIMIT_TOP
+            bottomLimit = LIMIT_LEFT > topIntVal ? LIMIT_LEFT : topIntVal
+            upperLimit = LIMIT_RIGHT > bottomIntVal ? bottomIntVal : LIMIT_RIGHT
+        }
+        //Exclude points near players
+        let closenessRadius: CGFloat = 500.0
+        let playerCloseCircle = Circle(
+            x: gameScene!.player1!.position.x,
+            y: gameScene!.player1!.position.y,
+            r: closenessRadius
+        )
+        let oppCloseCircle = Circle(
+            x: gameScene!.opponent!.position.x,
+            y: gameScene!.opponent!.position.y,
+            r: closenessRadius
+        )
+        let lineFunction: ((_ x: CGFloat) -> CGFloat) = { x in
+            return m*x + b
+        }
+        //Find intersection b/w line and circle
+        let playerIntersections = FindLineCircleIntersections(
+            cx: playerCloseCircle.x,
+            cy: playerCloseCircle.y,
+            radius: playerCloseCircle.r,
+            point1: CGPoint(x: LIMIT_LEFT, y: lineFunction(LIMIT_LEFT)),
+            point2: CGPoint(x: LIMIT_RIGHT, y: lineFunction(LIMIT_RIGHT))
+        )
+        //Exclude Range of found points from possibilities
+        if playerIntersections.count == 2 {
+            
         }
         
+        
+        //Generate rand points from line
         newPos.x = CGFloat.random(in: bottomLimit..<upperLimit)
         newPos.y = m * newPos.x + b
         
         return newPos
     }
     
-    
-    
+}
+
+extension CGFloat {
+    func random(in ranges: [Range<CGFloat>]) -> CGFloat {
+        var randomFloats = [CGFloat]()
+        for range in ranges {
+            let rand = CGFloat.random(in: range)
+            randomFloats.append(rand)
+        }
+        
+        return randomFloats.randomElement() ?? 0
+    }
 }

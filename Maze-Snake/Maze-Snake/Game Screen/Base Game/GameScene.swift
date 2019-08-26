@@ -324,15 +324,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         opponent.incrementScore()
         info.changeAIScore(newScore: opponent.score)
         //Spawn New Trophy and appropriate response
-        DispatchQueue.main.async {
-            self.trophy.setRandomPosition()
-            self.minimap.updateTrophy(position: self.trophy.position)
-            self.opponent.stop()
-            let trophyGridPos = self.tileManager!.indexFrom(position: self.trophy.position)
-            self.opponent.gridPos = self.tileManager!.indexFrom(position: self.opponent.position)
-            if let ai = self.opponent as? AI {
-                ai.moveShortestPath(to: trophyGridPos)
-            }
+        self.trophy.setRandomPosition()
+        self.minimap.updateTrophy(position: self.trophy.position)
+        self.opponent.stop()
+        let trophyGridPos = self.tileManager!.indexFrom(position: self.trophy.position)
+        self.opponent.gridPos = self.tileManager!.indexFrom(position: self.opponent.position)
+        if let ai = self.opponent as? AI {
+            ai.moveShortestPath(to: trophyGridPos)
         }
         if music_Is_On {
            sfxController.playSound(named: "trophy-collect")
@@ -340,7 +338,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         opponentCollisionFlag = false
     }
     
-    func playerWin() {
+    func onPlayerWin() {
         info.endGame()
         if music_Is_On {
             sfxController.playSound(named: "game-over")
@@ -350,7 +348,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func checkMonsterWin() {
+    func onMonsterWin() {
         //Check loss
         info.endGame()
         if music_Is_On {

@@ -78,14 +78,14 @@ class AIGameScene: GameScene {
         })
     }
     
-    override func playerWin() {
+    override func onPlayerWin() {
         timer.invalidate()
         saveTime()
         
         //Present Ads
         presentAd()
         
-        super.playerWin()
+        super.onPlayerWin()
         //Save relics gained
         guard let currentUser = currentUser else {
             return
@@ -96,7 +96,7 @@ class AIGameScene: GameScene {
         storeToServer(with: currentUser)
     }
     
-    override func checkMonsterWin() {
+    override func onMonsterWin() {
         timer.invalidate()
         
         //Present Ads
@@ -104,16 +104,16 @@ class AIGameScene: GameScene {
         
         //Save relics gained
         guard let currentUser = currentUser else {
-            super.checkMonsterWin()
+            super.onMonsterWin()
             return
         }
         if Auth.auth().currentUser!.isAnonymous {
-            super.checkMonsterWin()
+            super.onMonsterWin()
             return
         }
         storeToServer(with: currentUser)
         
-        super.checkMonsterWin()
+        super.onMonsterWin()
     }
     
     override func checkOpponentWin() {
