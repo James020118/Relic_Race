@@ -45,15 +45,13 @@ class AIGameScene: GameScene {
         if Auth.auth().currentUser!.isAnonymous {
             return
         }
-        db.disableNetwork(completion: { [unowned self] error in
-            self.requestGameData(from: currentUser)
-        })
+        requestGameData(from: currentUser)
         
     }
     
     func requestGameData(from currentUser: User) {
         let docRef = db.collection("users").document(currentUser.email!)
-        docRef.getDocument(source: .cache, completion: { [unowned self] (document, error) in
+        docRef.getDocument { [unowned self] (document, error) in
             if error != nil {
                 return
             }
@@ -75,7 +73,7 @@ class AIGameScene: GameScene {
                 }
                 self.currency = self.allUserData["currency"] as? Int ?? 0
             }
-        })
+        }
     }
     
     override func onPlayerWin() {
@@ -234,15 +232,12 @@ class AIGameScene: GameScene {
     }
     
     func storeToServer(with currentUser: User) {
-        db.enableNetwork(completion: { [unowned self] error in
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let db = appDelegate.db!
-            db.collection("users").document(currentUser.email!).setData(self.allUserData, completion: { [unowned self] (error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                }
-                db.disableNetwork(completion: nil)
-            })
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let db = appDelegate.db!
+        db.collection("users").document(currentUser.email!).setData(self.allUserData, completion: { (error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
         })
     }
     

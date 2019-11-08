@@ -32,7 +32,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Manages grid-like tiles
     var tileManager: TileManager?
     //Joystick to control player
-    weak var joystick: AnalogJoystick? = AnalogJoystick(diameter: 150)
+    var joystick: AnalogJoystick? = AnalogJoystick(diameter: 150)
     
     //Actors
     var player1: Player!

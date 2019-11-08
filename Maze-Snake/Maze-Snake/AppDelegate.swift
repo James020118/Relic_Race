@@ -87,22 +87,18 @@ extension AppDelegate: GADRewardBasedVideoAdDelegate {
             return
         }
         let currentUser = Auth.auth().currentUser!
-        db.enableNetwork(completion: { (error) in
-            let docRef = self.db.collection("users").document(currentUser.email!)
-            docRef.getDocument { [unowned self] (document, error) in
-                if error != nil {
-                    self.db.disableNetwork(completion: nil)
-                    return
-                }
-                if let document = document, document.exists {
-                    let curRelics = document.data()!["currency"] as? Int ?? 0
-                    var uData = document.data()!
-                    uData["currency"] = curRelics + 10
-                    self.db.collection("users").document(currentUser.email!).setData(uData)
-                }
-                self.db.disableNetwork(completion: nil)
+        let docRef = self.db.collection("users").document(currentUser.email!)
+        docRef.getDocument { [unowned self] (document, error) in
+            if error != nil {
+                return
             }
-        })
+            if let document = document, document.exists {
+                let curRelics = document.data()!["currency"] as? Int ?? 0
+                var uData = document.data()!
+                uData["currency"] = curRelics + 10
+                self.db.collection("users").document(currentUser.email!).setData(uData)
+            }
+        }
     }
     
     func rewardBasedVideoAdDidClose(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {

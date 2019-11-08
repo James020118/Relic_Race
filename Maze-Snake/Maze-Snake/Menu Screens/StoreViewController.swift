@@ -48,7 +48,7 @@ class StoreViewController: UIViewController {
         }
         
         let docRef = db.collection("users").document(currentUser.email!)
-        docRef.getDocument(source: .cache, completion: { [unowned self] (document, error) in
+        docRef.getDocument { [unowned self] (document, error) in
             if error != nil {
                 return
             }
@@ -85,7 +85,7 @@ class StoreViewController: UIViewController {
                     
                 }
             }
-        })
+        }
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {

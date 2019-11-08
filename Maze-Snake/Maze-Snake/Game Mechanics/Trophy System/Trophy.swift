@@ -337,7 +337,7 @@ class Trophy: SKSpriteNode {
             y: gameScene!.player1!.position.y,
             r: closenessRadius
         )
-        let oppCloseCircle = Circle(
+        _ = Circle(
             x: gameScene!.opponent!.position.x,
             y: gameScene!.opponent!.position.y,
             r: closenessRadius

@@ -50,9 +50,7 @@ class MainViewController: UIViewController {
         guard let currentUser = Auth.auth().currentUser else{
             return
         }
-        db.enableNetwork(completion: { [unowned self] error in
-            self.requestData(from: currentUser, with: .server)
-        })
+        requestData(from: currentUser)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,16 +69,13 @@ class MainViewController: UIViewController {
             return
         }
         
-        requestData(from: currentUser, with: .cache)
+        requestData(from: currentUser)
     }
     
-    func requestData(from currentUser: User, with source: FirestoreSource) {
+    func requestData(from currentUser: User) {
         let docRef = db.collection("users").document(currentUser.email!)
-        docRef.getDocument(source: source, completion: { [unowned self] (document, error) in
+        docRef.getDocument { [unowned self] (document, error) in
             if error != nil {
-                if source == .server {
-                    self.db.disableNetwork(completion: nil)
-                }
                 return
             }
             if let document = document, document.exists {
@@ -101,10 +96,7 @@ class MainViewController: UIViewController {
                 
                 playerTexture = self.currentlyEquipped
             }
-            if source == .server {
-                self.db.disableNetwork(completion: nil)
-            }
-        })
+        }
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

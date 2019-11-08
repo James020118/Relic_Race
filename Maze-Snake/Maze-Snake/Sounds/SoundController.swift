@@ -11,7 +11,7 @@ import SpriteKit
 import AVKit
 
 class SoundController {
-    var musicPlayer = AVAudioPlayer()
+    var musicPlayer: AVAudioPlayer!
     
     /* Function that prepares song to be played */
     func prepareMusicandSession(){
