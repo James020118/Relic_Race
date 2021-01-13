@@ -1,7 +1,9 @@
 # Relic Race
 A maze racing game where you compete with AI or real player to grab the trophy!
 
-Available on App Store.
+The game was developed with Swift, with the login system hosted with Google Firebase.
+
+Available on App Store!
 
 Developed by:
 * Patrick Biel
